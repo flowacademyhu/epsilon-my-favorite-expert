@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../Messenger/messenger" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../elsoSpringGyak/elsoSpringOnallogyak/shoppingList" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../elsoSpringGyak/elsoSpringOtthon/demo" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../elsoSpringGyak/spring_gyak/todo_list" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../goTwoPlayer/go-client" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../goTwoPlayer/go-game" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../messenger2/messenger/messenger" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../spring/badges/badge" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../spring/gyakorlas/gyak" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../spring/vatera/vatera" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../spring_carsharing/carsharing" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../springtest/foodorder_for_test/foodorder" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../tesztgyak/gyakk" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$/../../../trash/gyak" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="67" />
+    <option name="y" value="25" />
+    <option name="width" value="874" />
+    <option name="height" value="735" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="hu.flowacademy.epsilon.myfavoriteexpert.MyFavoriteExpertApplication" />
+      <module name="my-favorite-expert" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
