@@ -10,14 +10,4 @@ import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } fro
 })
 export class AppComponent {
   title = 'my-favorite-expert';
-  constructor(private authService: AuthService) { }
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  }
-  signOut(): void {
-    this.authService.signOut();
-  }
 }

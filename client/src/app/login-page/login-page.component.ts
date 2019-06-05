@@ -14,10 +14,11 @@ export class LoginPageComponent implements OnInit {
   private loggedIn: boolean;
  
   constructor(private authService: AuthService) { }
- 
+
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
+      this.authService.authState.subscribe((user) => {
       this.user = user;
+      this.loggedIn = (user != null);
     });
   }
   signInWithGoogle(): void {
