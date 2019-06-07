@@ -1,7 +1,11 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.config;
 
 
-import hu.flowacademy.epsilon.myfavoriteexpert.security.OAuth2AuthenticationSuccessHandler;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.CustomUserDetailsService;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.RestAuthenticationEntryPoint;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.TokenAuthenticationFilter;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.CustomOAuth2UserService;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.OAuth2AuthenticationFailureHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +21,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-/*@Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-  }
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        .anyRequest().permitAll()
-        .and().formLogin().permitAll()
-        .and().csrf().disable();
-  }
-
-
-}*/
 
 @Configuration
 @EnableWebSecurity
@@ -49,6 +32,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+  @Autowired
+  private CustomUserDetailsService customUserDetailsService;
+
+  @Autowired
+  private CustomOAuth2UserService customOAuth2UserService;
 
   @Autowired
   private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
@@ -59,7 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
-
+  @Bean
+  public TokenAuthenticationFilter tokenAuthenticationFilter() {
+    return new TokenAuthenticationFilter();
+  }
 
   /*
     By default, Spring OAuth2 uses HttpSessionOAuth2AuthorizationRequestRepository to save
@@ -72,8 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+  public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+    authenticationManagerBuilder
+            .userDetailsService(customUserDetailsService)
+            .passwordEncoder(passwordEncoder());
   }
 
   @Bean
@@ -90,10 +83,53 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-            .anyRequest().permitAll()
-            .and().formLogin().permitAll()
-            .and().csrf().disable();
+    http
+            .cors()
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .csrf()
+            .disable()
+            .formLogin()
+            .disable()
+            .httpBasic()
+            .disable()
+            .exceptionHandling()
+            .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+            .and()
+            .authorizeRequests()
+            .antMatchers("/",
+                    "/error",
+                    "/favicon.ico",
+                    "/**/*.png",
+                    "/**/*.gif",
+                    "/**/*.svg",
+                    "/**/*.jpg",
+                    "/**/*.html",
+                    "/**/*.css",
+                    "/**/*.js")
+            .permitAll()
+            .antMatchers("/auth/**", "/oauth2/**")
+            .permitAll()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .oauth2Login()
+            .authorizationEndpoint()
+            .baseUri("/oauth2/authorize")
+            .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+            .and()
+            .redirectionEndpoint()
+            .baseUri("/oauth2/callback/*")
+            .and()
+            .userInfoEndpoint()
+            .userService(customOAuth2UserService)
+            .and()
+            .successHandler(oAuth2AuthenticationSuccessHandler)
+            .failureHandler(oAuth2AuthenticationFailureHandler);
 
+    // Add our custom Token based authentication filter
+    http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 }

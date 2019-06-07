@@ -1,15 +1,14 @@
-package hu.flowacademy.epsilon.myfavoriteexpert.security;
+package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.config.AppProperties;
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.BadRequestException;
-import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.TokenProvider;
 import hu.flowacademy.epsilon.myfavoriteexpert.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +18,7 @@ import java.net.URI;
 import java.util.Optional;
 
 import static hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+
 
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {

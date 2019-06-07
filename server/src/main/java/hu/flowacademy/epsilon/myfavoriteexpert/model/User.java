@@ -1,20 +1,45 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.model;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.Instant;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Email
+    @Column(nullable = false)
     private String email;
 
     private String imageUrl;
 
+    @Column(nullable = false)
     private Boolean emailVerified = false;
 
+    @JsonIgnore
     private String password;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private AuthProvider provider;
+
+    @Column(columnDefinition="TEXT")
+    private String accessToken;
+
+    @Column
+    private Instant expiresAt;
 
     private String providerId;
 
@@ -80,5 +105,21 @@ public class User {
 
     public void setProviderId(String providerId) {
         this.providerId = providerId;
+    }
+
+    public void setAccessToken(String tokenValue) {
+        this.accessToken = tokenValue;
+    }
+
+    public void setExpiresAt(Instant expiresAt) {
+        this.expiresAt = expiresAt;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public Instant getExpiresAt() {
+        return expiresAt;
     }
 }
