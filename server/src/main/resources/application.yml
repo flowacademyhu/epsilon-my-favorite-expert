@@ -1,1 +1,28 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 479343752100-7td1rtgusp0fpp57vm0463e1n3mkjhfa.apps.googleusercontent.com
+            clientSecret: MQDg1DrGXDnuJ2EP9MPlKYMl
+            redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+        provider:
+          google:
+            authorizationUri: https://accounts.google.com/o/oauth2/auth
+            tokenUri: https://oauth2.googleapis.com/token
+            auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
 
+app:
+  auth:
+    tokenSecret: 2019MYFAVORITEEXPERT
+    tokenExpirationMsec: 864000000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:4200/oauth2/redirect
+#      - http://localhost:3000/oauth2/redirect
+#      - myandroidapp://oauth2/redirect
+#      - myiosapp://oauth2/redirect
