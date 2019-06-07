@@ -6,7 +6,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
