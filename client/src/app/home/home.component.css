@@ -1,17 +1,17 @@
 .masthead {
     height: 100vh;
     min-height: 500px;
-    background-image: url('src/assets/image/background3.jpg');
+    background-image: url('src/assets/image/background6.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Marko One', serif;
     color: #fff;
     font-weight: bold
     }
     
     .navbar{
-    font-family: 'Playfair Display', serif;
+    font-family: 'Marko One', serif;
     font-weight: bold;
     background-color: #fff
     }
