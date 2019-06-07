@@ -2,7 +2,9 @@ package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.OAuth2AuthenticationProcessingException;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.AuthProvider;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Token;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.TokenRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.OAuth2UserInfo;
@@ -20,12 +22,16 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
+
+    @Autowired
+    private TokenRepository tokenRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -79,6 +85,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
                 OAuth2AccessToken::getExpiresAt).orElse(null));
 
+        // Ezt itt mi mokoltuk
+        Token token = new Token();
+        token.setUserid(oAuth2UserInfo.getId());
+        token.setCreatedat(Instant.now());
+        token.setExpriredat(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
+                OAuth2AccessToken::getExpiresAt).orElse(null));
+        token.setAccesstoken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
+        token.setIsdeleted(false);
+
+        tokenRepository.save(token);
         return userRepository.save(user);
     }
 
