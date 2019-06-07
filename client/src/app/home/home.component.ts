@@ -6,10 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./home.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  toggleNavbar = true;
   constructor(private translate: TranslateService) { 
     translate.setDefaultLang('en');
   }
+  
   switchLanguage(language: string) {
     this.translate.use(language);
 }
