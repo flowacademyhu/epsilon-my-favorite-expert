@@ -31,6 +31,11 @@
   <div class="col-12 text-center">
     <h1 translate></h1>
   <p class="lead">Welcome</p>
+  <ul>
+    <li *ngFor="let data of receivedData">
+      {{data.name}} {{data.mesterseg}} {{data.email}}
+    </li>
+  </ul>
   </div>
   </div>
   </div>

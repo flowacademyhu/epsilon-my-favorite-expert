@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-loggedin',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loggedin.component.css']
 })
 export class LoggedinComponent implements OnInit {
-
-  constructor() { }
+  receivedData: any;
+  constructor(private dataservice: DataService) { }
 
   ngOnInit() {
+    this.receivedData = this.dataservice.getData();
   }
-
 }
