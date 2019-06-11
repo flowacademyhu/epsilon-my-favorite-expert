@@ -2,5 +2,7 @@
   "Title": "Az én szakim",
   "Intro": "Megbizható szerelőt keresel? Jó helyen jársz!",
   "Connect": "Kapcsolat",
-  "Login": "Bejelentkezés"
+  "Login": "Bejelentkezés",
+  "Logout": "Kiejelntkezés",
+  "Profile" : "Profil"
 }

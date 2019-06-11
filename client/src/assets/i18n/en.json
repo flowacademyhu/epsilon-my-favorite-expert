@@ -2,5 +2,7 @@
   "Title": "My Favorit Expert",
   "Intro": "Are you looking for a responsible handyman? You are in the right place",
   "Connect": "Connect",
-  "Login": "Login"
+  "Login": "Login",
+  "Logout": "Logout",
+  "Profile" : "Profile"
 }
