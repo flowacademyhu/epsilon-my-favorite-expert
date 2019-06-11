@@ -1,0 +1,4 @@
+package hu.flowacademy.epsilon.myfavoriteexpert.model;
+
+public class Address {
+}
