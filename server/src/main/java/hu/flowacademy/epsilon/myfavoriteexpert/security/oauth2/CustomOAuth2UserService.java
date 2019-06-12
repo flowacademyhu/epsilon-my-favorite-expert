@@ -1,14 +1,16 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.OAuth2AuthenticationProcessingException;
-import hu.flowacademy.epsilon.myfavoriteexpert.model.AuthProvider;
-import hu.flowacademy.epsilon.myfavoriteexpert.model.Token;
-import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.*;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.TokenRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
+import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.GoogleOAuth2UserInfo;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.OAuth2UserInfo;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.OAuth2UserInfoFactory;
+import hu.flowacademy.epsilon.myfavoriteexpert.service.UserElasticService;
+import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
+
+    @Autowired
+    private UserElasticService userElasticService;
 
     @Autowired
     private TokenRepository tokenRepository;
@@ -94,6 +101,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         token.setAccesstoken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
         token.setIsdeleted(false);
 
+        //ezt itt elasticsearchbe mockoljuk bele
+        Address address = new Address();
+        UserElastic userElastic = new UserElastic();
+        userElastic.setAddress(address);
+        userElastic.setProviders(oAuth2UserInfo);
+        userElastic.setName(oAuth2UserInfo.getName());
+        userElastic.setId(UUID.randomUUID());
+        userElastic.setFollowers(new ArrayList<>());
+        userElastic.setFollowed_by(new ArrayList<>());
+        userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
+        userElastic.setCreated_at(Instant.now());
+        userElastic.setExpire_at(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
+                OAuth2AccessToken::getExpiresAt).orElse(null));
+        userElastic.setUpdated_at(new ArrayList<>());
+        userElastic.setIs_deleted(false);
+
+        userElasticService.save(userElastic);
         tokenRepository.save(token);
         return userRepository.save(user);
     }
