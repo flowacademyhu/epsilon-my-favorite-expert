@@ -11,6 +11,8 @@ import { LoggedinComponent } from './components/loggedin/loggedin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { ExpertComponent } from './components/expert/expert.component';
+import { AddExpertComponent } from './components/add-expert/add-expert.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { ExpertComponent } from './components/expert/expert.component';
     LoggedinComponent,
     ProfileComponent,
     ListingComponent,
-    ExpertComponent
+    ExpertComponent,
+    AddExpertComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ExpertComponent } from './components/expert/expert.component';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-})
+}),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
