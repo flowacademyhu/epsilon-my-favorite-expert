@@ -123,11 +123,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userElastic.setFollowers(new ArrayList<>());
         userElastic.setFollowed_by(new ArrayList<>());
         userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
-        userElastic.setCreated_at(LocalDateTime.now().now());
-        Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null);
-        userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.UTC));
-          userElastic.setUpdated_at(new ArrayList<>());
+     //   userElastic.setCreated_at(LocalDateTime.now().now());
+     //   Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
+     //           OAuth2AccessToken::getExpiresAt).orElse(null);
+     //   userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.UTC));
+     //     userElastic.setUpdated_at(new ArrayList<>());
         userElastic.setIs_deleted(false);
 
         userElasticService.save(userElastic);
