@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Map;
 
-@JsonDeserialize(as = GoogleOAuth2UserInfo.class)
 public abstract class OAuth2UserInfo {
     protected Map<String, Object> attributes;
 
