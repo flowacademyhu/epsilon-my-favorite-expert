@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 
 @Component({
@@ -7,10 +7,9 @@ import { DataService } from 'src/app/data.service';
   styleUrls: ['./loggedin.component.css']
 })
 export class LoggedinComponent implements OnInit {
-  receivedData: any;
-  constructor(private dataservice: DataService) { }
+  
+  constructor() { }
 
   ngOnInit() {
-    this.receivedData = this.dataservice.getData();
   }
 }

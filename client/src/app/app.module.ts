@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoggedinComponent } from './components/loggedin/loggedin.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ListingComponent } from './components/listing/listing.component';
+import { ExpertComponent } from './components/expert/expert.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     AppComponent,
     LoginComponent,
     LoggedinComponent,
-    ProfileComponent
+    ProfileComponent,
+    ListingComponent,
+    ExpertComponent
   ],
   imports: [
     BrowserModule,

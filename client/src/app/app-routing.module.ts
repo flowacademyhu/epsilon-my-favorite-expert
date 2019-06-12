@@ -5,8 +5,8 @@ import { LoggedinComponent } from './components/loggedin/loggedin.component';
 
 
 const routes: Routes = [
-  {path:'',component:LoginComponent},
-  {path:'oauth2/redirect', component:LoggedinComponent}];
+  {path: '',component: LoginComponent},
+  {path: 'oauth2/redirect', component: LoggedinComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
