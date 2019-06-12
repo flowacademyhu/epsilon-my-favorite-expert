@@ -15,8 +15,8 @@ public class UserElasticController {
     @Autowired
     private UserElasticService userElasticService;
 
-    GetMapping("/get")
-    public ResponseEntity<UserElastic> getAll() {
+    @GetMapping("/getall")
+    public ResponseEntity<Iterable<UserElastic>> getAll() {
         return ResponseEntity.ok(userElasticService.find());
     }
 
