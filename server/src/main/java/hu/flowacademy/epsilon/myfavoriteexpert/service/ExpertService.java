@@ -6,6 +6,8 @@ import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,7 @@ public class ExpertService {
 
     public Expert save(Expert expert) {
         expert.setId(UUID.randomUUID());
+        expert.setCreated_at(Instant.now());
         return expertRepository.save(expert);
 
     }
