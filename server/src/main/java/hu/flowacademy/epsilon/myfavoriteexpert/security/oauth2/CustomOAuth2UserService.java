@@ -107,7 +107,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userElastic.setAddress(address);
         userElastic.setProviders(oAuth2UserInfo);
         userElastic.setName(oAuth2UserInfo.getName());
-       // userElastic.setId(UUID.randomUUID());
+        userElastic.setId(UUID.randomUUID());
         userElastic.setFollowers(new ArrayList<>());
         userElastic.setFollowed_by(new ArrayList<>());
         userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
