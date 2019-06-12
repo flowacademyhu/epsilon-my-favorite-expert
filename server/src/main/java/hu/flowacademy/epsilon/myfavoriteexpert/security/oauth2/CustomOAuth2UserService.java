@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -123,12 +124,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userElastic.setFollowers(new ArrayList<>());
         userElastic.setFollowed_by(new ArrayList<>());
         userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
-     //   userElastic.setCreated_at(LocalDateTime.now().now());
-     //   Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-     //           OAuth2AccessToken::getExpiresAt).orElse(null);
-     //   userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.UTC));
-     //     userElastic.setUpdated_at(new ArrayList<>());
-        userElastic.setIs_deleted(false);
+        userElastic.setCreated_at(LocalDateTime.now());
+        Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
+                OAuth2AccessToken::getExpiresAt).orElse(null);
+        userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.of("+02:00")));
+          userElastic.setUpdated_at(LocalDateTime.now());
+
+        //TEST
+       // userElastic.setFollowers(List.of(UUID.randomUUID(),UUID.randomUUID()));
+
 
         userElasticService.save(userElastic);
         tokenRepository.save(token);
