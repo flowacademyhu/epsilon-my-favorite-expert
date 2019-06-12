@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Ilist } from './components/Ilist';
 
 @Injectable({
   providedIn: 'root'

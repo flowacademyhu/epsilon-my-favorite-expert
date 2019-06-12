@@ -24,6 +24,4 @@ export class AddExpertComponent implements OnInit {
 onSubmit(): void {
   console.log(this.expertForm.value);
 }
-
-
 }
