@@ -4,11 +4,13 @@ import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Service
 public class UserElasticService {
@@ -20,8 +22,8 @@ public class UserElasticService {
         return userElasticRepository.save(userElastic);
     }
 
-    public Iterable<UserElastic> find() {
-        return userElasticRepository.findAll();
+    public List<UserElastic> find() {
+        return userElasticRepository.findAll(Pageable.unpaged()).getContent();
     }
 
     public UserElastic findByid(String accestoken) {
@@ -41,13 +43,16 @@ public class UserElasticService {
     }
 
     public UUID getIdFromAccesToken(String accestoken) {
-        UUID userId = null;
-        Iterable<UserElastic> users = userElasticRepository.findAll();
-        for (var user: users) {
-            if (user.getAccess_token().equals(accestoken)) {
-                userId = user.getId();
-            }
-        }
-        return userId;
+//        UUID userId = null;
+//        Iterable<UserElastic> users = userElasticRepository.findAll();
+//        for (var user: users) {
+//            if (user.getAccess_token().equals(accestoken)) {
+//                userId = user.getId();
+//            }
+//        }
+//        return userId;
+        return userElasticRepository.findAll(Pageable.unpaged()).get()
+                .filter(userElastic -> accestoken.equals(userElastic.getAccess_token()))
+                .findFirst().map(UserElastic::getId).orElse(null);
     }
 }
