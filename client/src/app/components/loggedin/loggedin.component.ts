@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ExpertService } from 'src/app/expert.service';
+import { ExpertService } from 'src/app/shared/services/expert.service';
 
 @Component({
   selector: 'app-loggedin',
@@ -18,6 +18,7 @@ export class LoggedinComponent implements OnInit {
     });
   */
 token: any;
+expertlist: any[];
 
   constructor(private route: ActivatedRoute, private userservice: UserService,
     private expertservice: ExpertService) {

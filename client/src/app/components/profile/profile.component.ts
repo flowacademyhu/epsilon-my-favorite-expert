@@ -8,10 +8,19 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
+  user: any;
+
   constructor(private userservice: UserService) { }
 
   ngOnInit() {
-    this.userservice.getSMT
+    this.userservice.getByToken().subscribe(
+      (data: any) => {
+        this.user = data;
+        console.log(this.user)
+      }
+      
+    )
+  
   }
 
 }
