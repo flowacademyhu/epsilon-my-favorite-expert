@@ -63,13 +63,13 @@ public class UserElastic {
             experts.add(expertid);
         }
     }
-//    public List<UUID> deleteExpert(UUID expertid) {
-//        for(Expert expert: this.experts) {
-//            if (UUID.fromString(expert.getId()).equals(UUID.fromString(expertid))) {
-//                experts.remove(expertid);
-//            }
-//        } return experts;
-//    }
+    public void deleteExpert(UUID expertid) {
+        for (var expert : experts) {
+            if (expertid.toString().equals(expert)) {
+                experts.remove(expertid);
+            }
+        }
+    }
 
 
     public UserElastic() {

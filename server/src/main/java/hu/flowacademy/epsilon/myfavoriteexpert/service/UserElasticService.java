@@ -45,25 +45,12 @@ public class UserElasticService {
         return userElasticRepository.save(user);
     }
 
-//    public UserElastic deleteExpert(String accestoken, UUID expertid) {
-//        UserElastic user = userElasticRepository.findById(getIdFromAccesToken(accestoken)).orElseThrow(RuntimeException::new);
-//        if( user == null) {
-//            throw new RuntimeException("User not found, invalid accestoken");
-//        } else {
-//            user.deleteExpert(expertid);
-//        }
-//        return  userElasticRepository.save(user);
-//    }
+    public UserElastic deleteExpert(UserElastic user, UUID expertid) {
+            user.deleteExpert(expertid);
+        return userElasticRepository.save(user);
+    }
 
     public UUID getIdFromAccesToken(String accestoken) {
-//        UUID userId = null;
-//        Iterable<UserElastic> users = userElasticRepository.findAll();
-//        for (var user: users) {
-//            if (user.getAccess_token().equals(accestoken)) {
-//                userId = user.getId();
-//            }
-//        }
-//        return userId;
         return userElasticRepository.findAll(Pageable.unpaged()).get()
                 .filter(userElastic -> accestoken.equals(userElastic.getAccess_token()))
                 .findFirst().map(UserElastic::getId).orElse(null);

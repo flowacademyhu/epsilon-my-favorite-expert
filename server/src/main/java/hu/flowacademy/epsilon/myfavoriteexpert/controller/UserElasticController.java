@@ -31,42 +31,37 @@ public class UserElasticController {
         return ResponseEntity.ok(userElasticService.find());
     }
 
-<<<<<<< HEAD
 
     @GetMapping("/get")
     public ResponseEntity<UserElastic> getById(@RequestHeader(value = "Authorization") String accestoken) {
+        if (accestoken==null) {
+            System.out.println("URES A TOKEN");
+        }
+        System.out.println(accestoken);
         return ResponseEntity.ok(userElasticService.findByid(accestoken));
     }
 
     @PostMapping("/save-address")
     public ResponseEntity<UserElastic> saveAddress(@RequestHeader(value = "Authorization") String accestoken, @RequestBody Address address) {
         return ResponseEntity.ok(userElasticService.saveAddress(accestoken,address));
-=======
-    @GetMapping("/get/{accestoken}")
-    public ResponseEntity<UserElastic> getById(@PathVariable String accestoken) {
-        return ResponseEntity.ok(userElasticService.findByid(accestoken));
     }
 
-    @PostMapping("/save-address/{accestoken}")
-    public ResponseEntity<UserElastic> saveAddress(@PathVariable String accestoken, @RequestBody Address address) {
-        return ResponseEntity.ok(userElasticService.saveAddress(accestoken, address));
-    }
-
-    @PutMapping("/add-expert/{accestoken}/{expertid}")
-    public ResponseEntity<UserElastic> addExpertToUser(@PathVariable String accestoken, @PathVariable UUID expertid) {
+    @PutMapping("/add-expert/{expertid}")
+    public ResponseEntity<UserElastic> addExpertToUser(@RequestHeader(value = "Authorization") String accestoken, @PathVariable UUID expertid) {
         UserElastic userElastic = userElasticService.findByid(accestoken);
         if (userElastic != null) {
             userElastic.addExpert(expertid);
         }
         return ResponseEntity.ok(userElasticService.save(userElastic));
->>>>>>> feature/T11/expert
     }
-//    @PutMapping("/delete-expert/{accestoken}/{expertid}")
-//    public ResponseEntity<UserElastic> deleteExpertFromUser(@PathVariable String accestoken, @PathVariable UUID expertid) {
-//        UserElastic userElastic = userElasticService.findByid(accestoken);
-//        if (userElastic != null) {
-//            userElastic.deleteExpert(expertid);
-//        }
-//        return ResponseEntity.ok(userElasticService.save(userElastic));
-//    }
+
+    @PutMapping("/delete-expert/{expertid}")
+    public ResponseEntity<UserElastic> deleteExpertFromUser(@RequestHeader(value = "Authorization") String accestoken, @PathVariable UUID expertid) {
+        UserElastic user = userElasticService.findByid(accestoken);
+        if (user == null) {
+            throw new RuntimeException("User not found with this accestoken");
+        } else {
+            return ResponseEntity.ok(userElasticService.deleteExpert(user,expertid));
+        }
+    }
 }
