@@ -21,7 +21,7 @@ public class ExpertService {
 
     public Expert save(Expert expert) {
         expert.setId(UUID.randomUUID());
-        expert.setCreated_at(Instant.now());
+        expert.setCreated_at(LocalDateTime.now());
         return expertRepository.save(expert);
 
     }
