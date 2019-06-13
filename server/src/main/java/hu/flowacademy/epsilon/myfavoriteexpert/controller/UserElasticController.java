@@ -25,12 +25,13 @@ public class UserElasticController {
     }
 
 
-    @GetMapping("/get/{accestoken}")
-    public ResponseEntity<UserElastic> getById(@PathVariable String accestoken) {
+    @GetMapping("/get")
+    public ResponseEntity<UserElastic> getById(@RequestHeader(value = "Authorization") String accestoken) {
         return ResponseEntity.ok(userElasticService.findByid(accestoken));
     }
-    @PostMapping("/save-address/{accestoken}")
-    public ResponseEntity<UserElastic> saveAddress(@PathVariable String accestoken, @RequestBody Address address) {
+
+    @PostMapping("/save-address")
+    public ResponseEntity<UserElastic> saveAddress(@RequestHeader(value = "Authorization") String accestoken, @RequestBody Address address) {
         return ResponseEntity.ok(userElasticService.saveAddress(accestoken,address));
     }
 }

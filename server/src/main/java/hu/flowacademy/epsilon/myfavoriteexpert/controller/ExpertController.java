@@ -23,19 +23,19 @@ public class ExpertController {
         expertService.save(expert);
     }
 
-    @GetMapping("/expert/get/{id}")
-    public Optional<Expert> findOneItem(@PathVariable UUID id) {
+    @GetMapping("/expert/get")
+    public Optional<Expert> findOneItem(@RequestHeader(value = "Authorization") UUID id) {
         return expertService.findById(id);
     }
 
     @GetMapping("expert/list")
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Iterable<Expert>> listTodoItems() {
         return ResponseEntity.ok(expertService.list());
     }
 
     @DeleteMapping("/expert/delete/{id}")
     public void delete(@PathVariable UUID id) {
+        //TODO kitorolni a userektol akinel van ilyen ID
         expertService.delete(id);
     }
 
@@ -44,8 +44,8 @@ public class ExpertController {
         expertService.addProfession(id, profession);
     }
 
-    @GetMapping("favorite/{accestoken}")
-    public List<Expert> getFavoriteExperts(@PathVariable String accestoken) {
+    @GetMapping("favorite")
+    public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
         return expertService.getFavoriteExperts(accestoken);
     }
 }
