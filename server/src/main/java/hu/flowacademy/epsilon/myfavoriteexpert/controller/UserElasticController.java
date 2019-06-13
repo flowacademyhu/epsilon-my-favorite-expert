@@ -20,12 +20,12 @@ public class UserElasticController {
     }
 
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<UserElastic> getById(@PathVariable String id) {
-        return ResponseEntity.ok(userElasticService.findByid(id));
+    @GetMapping("/get/{accestoken}")
+    public ResponseEntity<UserElastic> getById(@PathVariable String accestoken) {
+        return ResponseEntity.ok(userElasticService.findByid(accestoken));
     }
-    @PostMapping("/save-address/{id}")
-    public ResponseEntity<UserElastic> saveAddress(@PathVariable String id, @RequestBody Address address) {
-        return ResponseEntity.ok(userElasticService.saveAddress(id,address));
+    @PostMapping("/save-address/{accestoken}")
+    public ResponseEntity<UserElastic> saveAddress(@PathVariable String accestoken, @RequestBody Address address) {
+        return ResponseEntity.ok(userElasticService.saveAddress(accestoken,address));
     }
 }

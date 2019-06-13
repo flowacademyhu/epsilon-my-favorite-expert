@@ -24,12 +24,13 @@ public class UserElasticService {
         return userElasticRepository.findAll();
     }
 
-    public UserElastic findByid(String id) {
-        return userElasticRepository.findById(UUID.fromString(id)).orElseThrow(RuntimeException::new);
+    public UserElastic findByid(String accestoken) {
+
+        return userElasticRepository.findById(getIdFromAccesToken(accestoken)).orElseThrow(RuntimeException::new);
     }
 
-    public UserElastic saveAddress(String id, Address address) {
-        UserElastic user = findByid(id);
+    public UserElastic saveAddress(String accestoken, Address address) {
+        UserElastic user = userElasticRepository.findById(getIdFromAccesToken(accestoken)).orElseThrow(RuntimeException::new);
         if (user == null) {
             throw new RuntimeException("User not found, id is invalid");
         } else {
@@ -37,5 +38,16 @@ public class UserElasticService {
             user.setUpdated_at(LocalDateTime.now());
         }
         return userElasticRepository.save(user);
+    }
+
+    public UUID getIdFromAccesToken(String accestoken) {
+        UUID userId = null;
+        Iterable<UserElastic> users = userElasticRepository.findAll();
+        for (var user: users) {
+            if (user.getAccess_token().equals(accestoken)) {
+                userId = user.getId();
+            }
+        }
+        return userId;
     }
 }
