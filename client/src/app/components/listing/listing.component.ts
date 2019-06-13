@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-listing',
@@ -10,10 +9,9 @@ export class ListingComponent implements OnInit {
   @Input()
   data: any;
   receivedFile: any[];
-  constructor(private dataservice: DataService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.receivedFile = this.dataservice.getData();
   }
 
 }
