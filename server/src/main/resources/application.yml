@@ -1,5 +1,13 @@
-
 spring:
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: localhost:9300
+      rest:
+        uris: localhost:9200
   datasource:
     url: jdbc:postgresql://localhost:5432/my_favorite_expert
     username: expert
