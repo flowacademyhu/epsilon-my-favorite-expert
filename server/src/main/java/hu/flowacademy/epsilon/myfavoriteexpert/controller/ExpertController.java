@@ -35,7 +35,6 @@ public class ExpertController {
 
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable UUID id) {
-        //TODO kitorolni a userektol akinel van ilyen ID
         expertService.delete(id);
     }
 
@@ -44,8 +43,8 @@ public class ExpertController {
         expertService.addProfession(id, profession);
     }
 
-    @GetMapping("favorite")
-    public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
+    @GetMapping("favorite/{accestoken}")
+    public List<Expert> getFavoriteExperts(@PathVariable String accestoken) {
         return expertService.getFavoriteExperts(accestoken);
     }
 }

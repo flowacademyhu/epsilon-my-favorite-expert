@@ -40,9 +40,8 @@ public class UserElasticController {
         System.out.println(accestoken);
         return ResponseEntity.ok(userElasticService.findByid(accestoken));
     }
-
-    @PostMapping("/save-address")
-    public ResponseEntity<UserElastic> saveAddress(@RequestHeader(value = "Authorization") String accestoken, @RequestBody Address address) {
+    @PostMapping("/save-address/{accestoken}")
+    public ResponseEntity<UserElastic> saveAddress(@PathVariable String accestoken, @RequestBody Address address) {
         return ResponseEntity.ok(userElasticService.saveAddress(accestoken,address));
     }
 
