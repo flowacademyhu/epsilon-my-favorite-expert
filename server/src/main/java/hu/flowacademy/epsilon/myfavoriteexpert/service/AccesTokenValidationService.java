@@ -22,13 +22,16 @@ public class AccesTokenValidationService extends HandlerInterceptorAdapter {
     private UserElasticService userElasticService;
 
     public void validateAccesToken(String accestoken) {
+        if (accestoken == null) {
+            throw new RuntimeException("ACCESTOKENISNULL");
+        }
         var userId = userElasticService.getIdFromAccesToken(accestoken);
         if (userId == null) {
             throw new RuntimeException("Invalid access token!!!");
         }
         UserElastic user=userElasticService.findByid(accestoken);
 
-        if (user.getExpire_at().isAfter(LocalDateTime.now())) {
+        if (user.getExpire_at().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Accestoken expired");
         }
         user.setExpire_at(user.getExpire_at().plusHours(1));

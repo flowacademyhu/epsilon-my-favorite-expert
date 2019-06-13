@@ -43,8 +43,8 @@ public class ExpertController {
         expertService.addProfession(id, profession);
     }
 
-    @GetMapping("favorite/{accestoken}")
-    public List<Expert> getFavoriteExperts(@PathVariable String accestoken) {
+    @GetMapping("favorite")
+    public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
         return expertService.getFavoriteExperts(accestoken);
     }
 }

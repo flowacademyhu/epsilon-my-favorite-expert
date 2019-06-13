@@ -35,13 +35,13 @@ public class UserElasticController {
     @GetMapping("/get")
     public ResponseEntity<UserElastic> getById(@RequestHeader(value = "Authorization") String accestoken) {
         if (accestoken==null) {
-            System.out.println("URES A TOKEN");
+            throw new RuntimeException("URES A TOKEN");
         }
         System.out.println(accestoken);
         return ResponseEntity.ok(userElasticService.findByid(accestoken));
     }
-    @PostMapping("/save-address/{accestoken}")
-    public ResponseEntity<UserElastic> saveAddress(@PathVariable String accestoken, @RequestBody Address address) {
+    @PostMapping("/save-address")
+    public ResponseEntity<UserElastic> saveAddress(@RequestHeader(value = "Authorization") String accestoken, @RequestBody Address address) {
         return ResponseEntity.ok(userElasticService.saveAddress(accestoken,address));
     }
 

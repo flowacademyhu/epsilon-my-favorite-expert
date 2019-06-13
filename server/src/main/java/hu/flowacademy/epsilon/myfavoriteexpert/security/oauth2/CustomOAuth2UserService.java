@@ -123,7 +123,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userElastic.setId(UUID.randomUUID());
         userElastic.setFollowers(new ArrayList<>());
         userElastic.setFollowed_by(new ArrayList<>());
-        userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(OAuth2AccessToken::getTokenValue).orElse(null));
+        //EZ KELL MAJD
+        //userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(OAuth2AccessToken::getTokenValue).orElse(null));
+        userElastic.setAccess_token("ASD");
         userElastic.setCreated_at(LocalDateTime.now());
         Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
                 OAuth2AccessToken::getExpiresAt).orElse(null);

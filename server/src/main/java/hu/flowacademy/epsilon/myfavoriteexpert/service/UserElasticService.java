@@ -51,8 +51,17 @@ public class UserElasticService {
     }
 
     public UUID getIdFromAccesToken(String accestoken) {
-        return userElasticRepository.findAll(Pageable.unpaged()).get()
-                .filter(userElastic -> accestoken.equals(userElastic.getAccess_token()))
-                .findFirst().map(UserElastic::getId).orElse(null);
+
+        UUID userId = null;
+        Iterable<UserElastic> users = userElasticRepository.findAll();
+        for (var user: users) {
+            if (user.getAccess_token().equals(accestoken)) {
+                userId = user.getId();
+            }
+        }
+        return userId;
+//        return userElasticRepository.findAll(Pageable.unpaged()).get()
+//                .filter(userElastic -> accestoken.equals(userElastic.getAccess_token()))
+//                .findFirst().map(UserElastic::getId).orElse(null);
     }
 }
