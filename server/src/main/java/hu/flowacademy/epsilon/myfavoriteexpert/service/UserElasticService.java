@@ -16,6 +16,9 @@ import java.util.stream.Stream;
 public class UserElasticService {
 
     @Autowired
+    private AccesTokenValidationService accesTokenValidationService;
+
+    @Autowired
     private UserElasticRepository userElasticRepository;
 
     public UserElastic save(UserElastic userElastic) {

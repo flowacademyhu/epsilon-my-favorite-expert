@@ -19,6 +19,9 @@ import java.util.UUID;
 public class ExpertService {
 
     @Autowired
+    private AccesTokenValidationService accesTokenValidationService;
+
+    @Autowired
     private ExpertRepository expertRepository;
 
     @Autowired

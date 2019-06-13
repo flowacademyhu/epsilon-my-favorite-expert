@@ -2,31 +2,42 @@ package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
-public class AccesTokenValidationService {
+public class AccesTokenValidationService extends HandlerInterceptorAdapter {
 
-    @Autowired
-    private UserElasticRepository userElasticRepository;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Autowired
     private UserElasticService userElasticService;
 
-    public String validateAccesToken(String accestoken) {
-        Optional<UserElastic> user=userElasticRepository.findById(userElasticService.getIdFromAccesToken(accestoken));
-        if (!user.isPresent()) {
-            throw new RuntimeException("User doesn't exist");
+    public void validateAccesToken(String accestoken) {
+        var userId = userElasticService.getIdFromAccesToken(accestoken);
+        if (userId == null) {
+            throw new RuntimeException("Invalid access token!!!");
         }
-        if (user.get().getExpire_at().isAfter(LocalDateTime.now())) {
+        UserElastic user=userElasticService.findByid(accestoken);
+
+        if (user.getExpire_at().isAfter(LocalDateTime.now())) {
             throw new RuntimeException("Accestoken expired");
         }
-        user.get().setExpire_at(user.get().getExpire_at().plusHours(1));
-        userElasticRepository.save(user.get());
-        return accestoken;
+        user.setExpire_at(user.getExpire_at().plusHours(1));
+        userElasticService.save(user);
+    }
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        validateAccesToken(request.getHeader("Authorization"));
+        return super.preHandle(request, response, handler);
     }
 }

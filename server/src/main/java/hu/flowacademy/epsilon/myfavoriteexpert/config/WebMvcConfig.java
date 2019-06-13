@@ -1,13 +1,24 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.config;
 
+import hu.flowacademy.epsilon.myfavoriteexpert.service.AccesTokenValidationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
   private final long MAX_AGE_SECS = 3600;
+
+  @Autowired
+  private AccesTokenValidationService accesTokenValidationService;
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(accesTokenValidationService).addPathPatterns("/auth/**");
+  }
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
