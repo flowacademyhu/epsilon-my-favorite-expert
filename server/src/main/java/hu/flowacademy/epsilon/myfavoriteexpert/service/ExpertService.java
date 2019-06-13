@@ -37,7 +37,7 @@ public class ExpertService {
     public void delete(UUID id) {
         Optional<Expert> expert = expertRepository.findById(id);
         if (expert.isPresent()) {
-            expert.get().setIs_deleted(true);
+            expert.get().setDeleted_at(LocalDateTime.now());
             expertRepository.save(expert.get());
         } else {
             throw new RuntimeException("expert does not exist!");

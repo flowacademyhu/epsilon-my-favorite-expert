@@ -1,6 +1,10 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Id;
@@ -23,9 +27,13 @@ public class Expert {
 
     private String number;
 
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime created_at;
 
-    private boolean is_deleted;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime deleted_at;
 
     public Expert() {
     }
@@ -78,11 +86,11 @@ public class Expert {
         this.created_at = created_at;
     }
 
-    public boolean isIs_deleted() {
-        return is_deleted;
+    public LocalDateTime getDeleted_at() {
+        return deleted_at;
     }
 
-    public void setIs_deleted(boolean is_deleted) {
-        this.is_deleted = is_deleted;
+    public void setDeleted_at(LocalDateTime deleted_at) {
+        this.deleted_at = deleted_at;
     }
 }
