@@ -12,6 +12,11 @@
     opacity: 0.9;
     
     }
+
+    .transparent{
+        background: transparent;
+    }
+    
     
     .navbar{
     font-family: 'Fredoka One', cursive;

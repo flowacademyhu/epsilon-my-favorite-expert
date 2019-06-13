@@ -15,6 +15,6 @@ export class ExpertService {
       'Content-Type' : 'application/json',
     });
     const defaults = {headers: headers};
-      return this.http.get('http://localhost:8080/oauth2/redirect');
+      return this.http.get('http://localhost:8080/auth/expert/list'), defaults;
   }
 }
