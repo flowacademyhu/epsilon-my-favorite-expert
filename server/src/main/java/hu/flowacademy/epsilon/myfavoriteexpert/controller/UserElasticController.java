@@ -2,10 +2,14 @@ package hu.flowacademy.epsilon.myfavoriteexpert.controller;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.UserElasticService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/auth/user")
@@ -14,8 +18,9 @@ public class UserElasticController {
     @Autowired
     private UserElasticService userElasticService;
 
+
     @GetMapping("/getall")
-    public ResponseEntity<Iterable<UserElastic>> getAll() {
+    public ResponseEntity<List<UserElastic>> getAll() {
         return ResponseEntity.ok(userElasticService.find());
     }
 
