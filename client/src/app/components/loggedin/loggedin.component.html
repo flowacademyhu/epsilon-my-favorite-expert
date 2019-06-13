@@ -1,38 +1,53 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top">
-  <div class="container">
-  <a class="navbar-brand" href="#"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarResponsive">
-  <ul class="navbar-nav ml-auto">
-  <li class="nav-item active">
-  <a class="nav-link" href="#">{{'Connect' | translate:user}}
-  <span class="sr-only">(current)</span>
-  </a>
-  <li class="nav-item">
-  <a class="nav-link" href="#">{{'Logout' | translate:user}}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">{{'Profile' | translate:user}}</a>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+    <a class="navbar-brand" href="#">{{'Title' | translate:user}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+    <a class="nav-link" href="#">{{'Connect' | translate:user}}
+    <span class="sr-only">(current)</span>
+    </a>
+    <li class="nav-item">
+    <a class="nav-link" href="#">{{'Logout' | translate:user}}</a>
     </li>
-  <button (click)="switchLanguage('en')" class="btn btn-primary" type="button">en</button>
-  <button (click)="switchLanguage('hu')" class="btn btn-primary" type="button">hu</button>
-  </ul>
-  </div>
-  </div>
-  </nav>
+    <li class="nav-item">
+        <a class="nav-link" href="#">{{'Profile' | translate:user}}</a>
+    </li>
+    <li class="nav-item">
+    <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
+    </li>
+    <li class="nav-item">
+    <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
+    </li>
+    </ul>
+    </div>
+    </div>
+    </nav>
+    
+    <!-- Full Page Image Header with Vertically Centered Content -->
+    <header class="masthead {
+      background: rgba(0, 0, 0, 0.5);
+    }">
+    <div class="container h-100">
+    <div class="row h-100 align-items-center">
+    <div class="col-12 text-center">
+ 
   
-  <!-- Full Page Image Header with Vertically Centered Content -->
-  <header class="masthead">
-  <div class="container h-100">
-  <div class="row h-100 align-items-center">
-  <div class="col-12 text-center">
-    <h1 translate></h1>
-  <p class="lead">Welcome</p>
   </div>
-  </div>
-  </div>
-  </header>
+    </div>
+    </div>
+    </header>
+    
+    <!-- Page Content -->
+    <section class="py-5">
+    <div class="container">
+    <h2 class="font-weight-light"></h2>
+    <p></p>
+    </div>
+    </section>
+  
   
