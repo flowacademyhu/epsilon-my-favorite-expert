@@ -10,35 +10,13 @@ import { ExpertService } from 'src/app/shared/services/expert.service';
 })
 export class LoggedinComponent implements OnInit {
 
-  /* constructor(private route: ActivatedRoute, private experservice: ExpertService) { 
-    console.log('called constructor');
-    this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
-      console.log(this.token);
-    });
-  */
-token: any;
-expertlist: any[];
-
-  constructor(private route: ActivatedRoute, private userservice: UserService,
-    private expertservice: ExpertService) {
-    console.log('called constructor');
-    this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
-      console.log(this.token);
-   });
-  }
+  constructor(
+    private activateRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
-      console.log(this.token);
+    this.activateRoute.queryParams.subscribe(params => {
+      localStorage.setItem('token', params['token']);
     });
-    this.userservice.saveToken(this.token);
   }
-  get() {
-    this.expertservice.getSMT(this.token).subscribe((valami: string) => {
-      console.log(valami);
-    });
-}
 }

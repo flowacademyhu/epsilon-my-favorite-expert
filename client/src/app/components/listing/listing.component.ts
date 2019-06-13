@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ExpertService } from 'src/app/shared/services/expert.service';
+import { Expert } from 'src/app/models/expert.model';
 
 @Component({
   selector: 'app-listing',
@@ -6,12 +8,29 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent implements OnInit {
-  @Input()
-  data: any;
-  receivedFile: any[];
-  constructor() { }
+  experts: any[];
+  constructor(private expertService: ExpertService) { }
 
   ngOnInit() {
+    this.expertService.listAllExperts().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
+      });
+  }
+
+  getFavoriteExperts() {
+    this.expertService.getFavoriteExperts().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
+      }
+    );
+  }
+  getAllExperts() {
+    this.expertService.listAllExperts().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
+      }
+    );
   }
 
 }

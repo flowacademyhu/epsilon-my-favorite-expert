@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ExpertService } from 'src/app/shared/services/expert.service';
+import { Expert } from 'src/app/models/expert.model';
+import { Address } from 'src/app/models/address.model';
 
 @Component({
   selector: 'app-add-expert',
@@ -7,21 +10,31 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./add-expert.component.css']
 })
 export class AddExpertComponent implements OnInit {
-  expertForm: FormGroup;
-
-  constructor() { }
+  //expertForm: FormGroup;
+  expert: Expert;
+  profession: string;
+ 
+  constructor(private expertService: ExpertService) {
+    this.expert = new Expert();
+    this.expert.profession = new Array();
+    this.expert.address = new Address();
+   }
 
   ngOnInit() {
-    this.expertForm = new FormGroup({
-      fullname: new FormControl(),
-      phone: new FormControl(),
-      country: new FormControl(),
-      city: new FormControl(),
-      street: new FormControl(),
-      number: new FormControl()
-    });
+    // this.expertForm = new FormGroup({
+   
+
+    // });
   }
-onSubmit(): void {
-  console.log(this.expertForm.value);
+// onSubmit(): void {
+//   console.log(this.expertForm.value);
+//   this.expertService.addExpert(this.expertForm.value);
+// }
+
+addExpert() {
+    this.expert.profession.push(this.profession);
+  this.expertService.addExpert(this.expert).subscribe((data: any) => {
+    console.log(data);
+  });
 }
 }

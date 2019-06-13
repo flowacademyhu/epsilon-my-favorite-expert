@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -14,6 +14,9 @@ import { ExpertComponent } from './components/listing/expert/expert.component';
 import { AddExpertComponent } from './components/add-expert/add-expert.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/listing/user/user.component';
+import { RequestinterceptorService } from './requestinterceptor.service';
+import { FormsModule } from '@angular/forms';
+import { AddAddressComponent } from './add-address/add-address.component';
 
 
 @NgModule({
@@ -25,13 +28,15 @@ import { UserComponent } from './components/listing/user/user.component';
     ListingComponent,
     ExpertComponent,
     AddExpertComponent,
-    UserComponent
+    UserComponent,
+    AddAddressComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -39,8 +44,9 @@ import { UserComponent } from './components/listing/user/user.component';
         deps: [HttpClient]
       }
 })
-  ],
-  providers: [HttpClientModule],
+  ],  
+  providers: [HttpClientModule,
+    {provide: HTTP_INTERCEPTORS, useClass: RequestinterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

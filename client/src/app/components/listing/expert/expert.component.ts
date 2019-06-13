@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Expert } from 'src/app/models/expert.model';
 
 @Component({
   selector: 'app-expert',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ExpertComponent implements OnInit {
   @Input()
-  index: any;
+  expert: Expert;
   constructor() { }
 
   ngOnInit() {

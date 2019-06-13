@@ -1,2 +1,24 @@
-{{index.mesterseg}}
-{{index.name}}
+
+  <div class="card col-12">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Palomena_prasina_-_top_%28aka%29.jpg/260px-Palomena_prasina_-_top_%28aka%29.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{expert.name}}</h5>
+        <p class="card-text">
+            <li class="list-group-item"> {{expert.phone}} </li>
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        
+          
+          <li class="list-group-item"> {{expert.address.country}}</li>
+          <li class="list-group-item"> {{expert.address.city}} </li>
+          <li class="list-group-item"> {{expert.address.street}} </li>
+          <li class="list-group-item"> {{expert.address.number}} </li>
+          
+
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Expert profile</a>
+       
+      </div>
+    </div>
