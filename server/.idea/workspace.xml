@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24e99d0e-c403-493c-b27a-5c2c8b5790fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/exception/RuntimeExeptionAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/components/loggedin/loggedin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/components/loggedin/loggedin.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/components/loggedin/loggedin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/components/loggedin/loggedin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/components/profile/profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/components/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/components/profile/profile.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/shared/services/expert.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/shared/services/expert.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/shared/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/shared/services/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/security/oauth2/CustomOAuth2UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/security/oauth2/CustomOAuth2UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/security/oauth2/OAuth2AuthenticationSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/security/oauth2/OAuth2AuthenticationSuccessHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/AccesTokenValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/AccesTokenValidationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/UserElasticService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/UserElasticService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/model/Expert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/model/Expert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,23 +29,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/UserElasticService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="127">
+              <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding>
                 <element signature="e#793#794#0" expanded="true" />
                 <element signature="e#855#856#0" expanded="true" />
                 <element signature="e#894#895#0" expanded="true" />
                 <element signature="e#979#980#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/exception/ResourceNotFoundException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -61,7 +50,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/AccesTokenValidationService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -73,11 +62,52 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/model/Expert.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+              <folding>
+                <element signature="e#1391#1392#0" expanded="true" />
+                <element signature="e#1419#1420#0" expanded="true" />
+                <element signature="e#1461#1462#0" expanded="true" />
+                <element signature="e#1495#1496#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/exception/ExpertExeption.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+              <folding>
+                <element signature="e#875#876#0" expanded="true" />
+                <element signature="e#924#925#0" expanded="true" />
+                <element signature="e#1003#1004#0" expanded="true" />
+                <element signature="e#1065#1066#0" expanded="true" />
+                <element signature="e#1149#1150#0" expanded="true" />
+                <element signature="e#1189#1190#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
             </state>
           </provider>
         </entry>
@@ -104,31 +134,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.7.RELEASE/spring-aop-5.1.7.RELEASE.jar!/org/springframework/aop/framework/JdkDynamicAopProxy.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="114" selection-start-line="114" selection-end-line="114" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/5.1.7.RELEASE/spring-aop-5.1.7.RELEASE.jar!/org/springframework/aop/framework/AdvisedSupport.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="435" selection-start-line="435" selection-end-line="435" />
-              <folding>
-                <element signature="e#14684#14685#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
+            <state relative-caret-position="165">
+              <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -156,17 +165,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java" />
         <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/security/oauth2/CustomOAuth2UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/security/oauth2/OAuth2AuthenticationSuccessHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java" />
         <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/UserElasticService.java" />
         <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/exception/RuntimeExeptionAdvice.java" />
         <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/AccesTokenValidationService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/model/Expert.java" />
+        <option value="$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
     <option name="y" value="25" />
     <option name="width" value="650" />
@@ -237,6 +248,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="myfavoriteexpert" type="462c0819:PsiDirectoryNode" />
               <item name="exception" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="myfavoriteexpert" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="server" type="b2602c69:ProjectViewProjectNode" />
@@ -386,10 +406,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1299" height="743" extended-state="7" />
+    <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30247405" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30247405" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -398,8 +418,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3306189" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39739415" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3306189" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39739415" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -417,26 +437,35 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java</url>
+          <line>35</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java</url>
+          <line>36</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/repository/UserElasticRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
-          <folding>
-            <element signature="e#875#876#0" expanded="true" />
-            <element signature="e#924#925#0" expanded="true" />
-            <element signature="e#1003#1004#0" expanded="true" />
-            <element signature="e#1065#1066#0" expanded="true" />
-            <element signature="e#1149#1150#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -574,26 +603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/UserElasticService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
-          <folding>
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-            <element signature="e#894#895#0" expanded="true" />
-            <element signature="e#979#980#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/exception/ResourceNotFoundException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -638,6 +647,61 @@
           <caret line="42" column="59" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/UserElasticController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/UserElasticService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+          <folding>
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#894#895#0" expanded="true" />
+            <element signature="e#979#980#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/service/ExpertService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/controller/ExpertController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+          <folding>
+            <element signature="e#875#876#0" expanded="true" />
+            <element signature="e#924#925#0" expanded="true" />
+            <element signature="e#1003#1004#0" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+            <element signature="e#1149#1150#0" expanded="true" />
+            <element signature="e#1189#1190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/hu/flowacademy/epsilon/myfavoriteexpert/model/Expert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#1391#1392#0" expanded="true" />
+            <element signature="e#1419#1420#0" expanded="true" />
+            <element signature="e#1461#1462#0" expanded="true" />
+            <element signature="e#1495#1496#0" expanded="true" />
           </folding>
         </state>
       </provider>

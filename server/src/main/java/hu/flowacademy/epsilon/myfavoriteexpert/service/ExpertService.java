@@ -31,9 +31,14 @@ public class ExpertService {
     @Autowired
     private UserElasticService userElasticService;
 
-    public Expert save(Expert expert) {
-        expert.setId(UUID.randomUUID());
+    public Expert save(String accestoken,Expert expert) {
+        var expertid = UUID.randomUUID();
+        expert.setId(expertid);
         expert.setCreated_at(LocalDateTime.now());
+
+        UserElastic user = userElasticService.findByid(accestoken);
+        user.addExpert(expertid);
+        userElasticService.save(user);
         return expertRepository.save(expert);
 
     }

@@ -24,9 +24,11 @@ public class Expert {
 
     private List<String> profession;
 
+    private String phone;
+
     private Address address;
 
-    private String number;
+
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -47,6 +49,13 @@ public class Expert {
         }
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public List<String> getProfession() {
         return profession;
@@ -80,13 +89,7 @@ public class Expert {
         this.address = address;
     }
 
-    public String getNumber() {
-        return number;
-    }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public LocalDateTime getCreated_at() {
         return created_at;

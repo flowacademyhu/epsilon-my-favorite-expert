@@ -12,15 +12,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/auth/expert")
+@RequestMapping("/auth/expert")
 public class ExpertController {
 
     @Autowired
     private ExpertService expertService;
 
-    @PostMapping(path = "/add")
-    public Expert addExpert(@RequestBody Expert expert) {
-        return expertService.save(expert);
+    @PostMapping("/add")
+    public Expert addExpert(@RequestHeader(value = "Authorization") String accestoken ,@RequestBody Expert expert) {
+        return expertService.save(accestoken,expert);
     }
 
     @GetMapping("/get/{id}")
@@ -43,9 +43,10 @@ public class ExpertController {
         expertService.addProfession(id, profession);
     }
 
-    @GetMapping("favorite")
+    @GetMapping("/favorite")
     public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
         return expertService.getFavoriteExperts(accestoken);
     }
+
 }
 
