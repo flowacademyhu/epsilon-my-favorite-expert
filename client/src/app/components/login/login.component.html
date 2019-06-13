@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
   <a class="navbar-brand" href="#">{{'Title' | translate:user}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,24 +14,28 @@
   <li class="nav-item">
   <a class="nav-link" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect">{{'Login' | translate:user}}</a>
   </li>
-  <button (click)="switchLanguage('en')" class="btn btn-primary" type="button">en</button>
-  <button (click)="switchLanguage('hu')" class="btn btn-primary" type="button">hu</button>
+  <li class="nav-item">
+  <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
+  </li>
+  <li class="nav-item">
+  <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
+  </li>
   </ul>
   </div>
   </div>
   </nav>
   
   <!-- Full Page Image Header with Vertically Centered Content -->
-  <header class="masthead">
+  <div class="masthead">
   <div class="container h-100">
   <div class="row h-100 align-items-center">
   <div class="col-12 text-center">
-    <h1 translate>Title</h1>
-  <p class="lead">{{ 'Intro' | translate:user }}</p>
+        
+
+</div>
   </div>
   </div>
-  </div>
-  </header>
+</div>
   
   <!-- Page Content -->
   <section class="py-5">
