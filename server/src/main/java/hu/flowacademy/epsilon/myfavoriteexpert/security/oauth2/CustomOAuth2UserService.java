@@ -25,7 +25,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -105,17 +108,31 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Address address = new Address();
         UserElastic userElastic = new UserElastic();
         userElastic.setAddress(address);
-        userElastic.setProviders(oAuth2UserInfo);
         userElastic.setName(oAuth2UserInfo.getName());
+        //Provider setup
+        Provider provider = new Provider();
+        if (AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()).toString().equalsIgnoreCase("google")) {
+            provider.setProvider_type("google");
+        }
+        provider.setEmail(oAuth2UserInfo.getEmail());
+        provider.setName(oAuth2UserInfo.getName());
+        provider.setProfile_picture(oAuth2UserInfo.getImageUrl());
+        provider.setProvider_id(oAuth2UserInfo.getId());
+        userElastic.setProviders(provider);
+
         userElastic.setId(UUID.randomUUID());
         userElastic.setFollowers(new ArrayList<>());
         userElastic.setFollowed_by(new ArrayList<>());
         userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
-        userElastic.setCreated_at(Instant.now());
-        userElastic.setExpire_at(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null));
-        userElastic.setUpdated_at(new ArrayList<>());
-        userElastic.setIs_deleted(false);
+        userElastic.setCreated_at(LocalDateTime.now());
+        Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
+                OAuth2AccessToken::getExpiresAt).orElse(null);
+        userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.of("+02:00")));
+          userElastic.setUpdated_at(LocalDateTime.now());
+
+        //TEST
+       // userElastic.setFollowers(List.of(UUID.randomUUID(),UUID.randomUUID()));
+
 
         userElasticService.save(userElastic);
         tokenRepository.save(token);

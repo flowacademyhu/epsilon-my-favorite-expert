@@ -1,5 +1,9 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
@@ -27,4 +31,6 @@ public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
     public String getImageUrl() {
         return (String) attributes.get("picture");
     }
+
+
 }

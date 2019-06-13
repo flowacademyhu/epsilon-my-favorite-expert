@@ -5,6 +5,8 @@ import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserElasticService {
 
@@ -13,5 +15,9 @@ public class UserElasticService {
 
     public UserElastic save(UserElastic userElastic) {
         return userElasticRepository.save(userElastic);
+    }
+
+    public Iterable<UserElastic> find() {
+        return userElasticRepository.findAll();
     }
 }
