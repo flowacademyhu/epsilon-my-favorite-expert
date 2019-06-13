@@ -6,6 +6,7 @@ import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -41,8 +42,9 @@ public class ExpertService {
         return expertRepository.findById(id);
     }
 
-    public Iterable<Expert> list() {
-        return expertRepository.findAll();
+
+    public List<Expert> find() {
+        return expertRepository.findAll(Pageable.unpaged()).getContent();
     }
 
     public void delete(UUID id) {
@@ -58,8 +60,7 @@ public class ExpertService {
     public void addProfession(UUID id, String profession) {
         Optional<Expert> expert = expertRepository.findById(id);
         if(expert.isPresent()) {
-            expert.get().setProfession(List.of(profession));
-            expertRepository.save(expert.get());
+            expert.get().addProfession(profession);
         }
     }
 
@@ -74,6 +75,8 @@ public class ExpertService {
         }
         return favoriteExperts;
     }
+
+
 
 
 
