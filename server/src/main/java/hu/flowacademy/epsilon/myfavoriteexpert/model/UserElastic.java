@@ -56,6 +56,20 @@ public class UserElastic {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime deleted_at;
 
+    public void addExpert(UUID expertid) {
+        if (experts == null) {
+            experts = new ArrayList<>();
+        } else {
+            experts.add(expertid);
+        }
+    }
+//    public List<UUID> deleteExpert(UUID expertid) {
+//        for(Expert expert: this.experts) {
+//            if (UUID.fromString(expert.getId()).equals(UUID.fromString(expertid))) {
+//                experts.remove(expertid);
+//            }
+//        } return experts;
+//    }
 
 
     public UserElastic() {

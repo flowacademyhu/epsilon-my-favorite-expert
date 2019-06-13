@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.Instant;
 import java.util.UUID;
@@ -37,6 +38,15 @@ public class Expert {
 
     public Expert() {
     }
+
+    public void addProfession(String job) {
+        if (profession == null) {
+            profession = new ArrayList<>();
+        } else {
+            profession.add(job);
+        }
+    }
+
 
     public List<String> getProfession() {
         return profession;
