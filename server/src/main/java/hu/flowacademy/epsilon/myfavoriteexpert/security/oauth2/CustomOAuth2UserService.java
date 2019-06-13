@@ -130,6 +130,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.of("+02:00")));
           userElastic.setUpdated_at(LocalDateTime.now());
 
+
         //TEST
        // userElastic.setFollowers(List.of(UUID.randomUUID(),UUID.randomUUID()));
 
