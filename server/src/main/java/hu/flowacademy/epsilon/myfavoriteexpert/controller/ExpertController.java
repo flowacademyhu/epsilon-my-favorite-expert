@@ -43,5 +43,10 @@ public class ExpertController {
     public void addProfession(@PathVariable UUID id, @RequestBody String profession) {
         expertService.addProfession(id, profession);
     }
+
+    @GetMapping("favorite/{accestoken}")
+    public List<Expert> getFavoriteExperts(@PathVariable String accestoken) {
+        return expertService.getFavoriteExperts(accestoken);
+    }
 }
 

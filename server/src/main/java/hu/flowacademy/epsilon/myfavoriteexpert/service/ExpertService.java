@@ -2,7 +2,9 @@ package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,12 @@ public class ExpertService {
 
     @Autowired
     private ExpertRepository expertRepository;
+
+    @Autowired
+    private UserElasticRepository userElasticRepository;
+
+    @Autowired
+    private UserElasticService userElasticService;
 
     public Expert save(Expert expert) {
         expert.setId(UUID.randomUUID());
@@ -50,6 +58,18 @@ public class ExpertService {
             expert.get().setProfession(List.of(profession));
             expertRepository.save(expert.get());
         }
+    }
+
+    public List<Expert> getFavoriteExperts(String accestoken) {
+        UserElastic user = userElasticService.findByid(accestoken);
+        List<Expert> favoriteExperts = new ArrayList();
+        for (var expertid: user.getExperts()) {
+            Optional<Expert> expert = expertRepository.findById(expertid);
+            if (expert.isPresent()) {
+                favoriteExperts.add(expert.get());
+            }
+        }
+        return favoriteExperts;
     }
 
 
