@@ -4,6 +4,7 @@ package hu.flowacademy.epsilon.myfavoriteexpert.model;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.time.Instant;
 import java.util.UUID;
@@ -22,7 +23,7 @@ public class Expert {
 
     private String number;
 
-    private Instant created_at;
+    private LocalDateTime created_at;
 
     private boolean is_deleted;
 
@@ -69,11 +70,11 @@ public class Expert {
         this.number = number;
     }
 
-    public Instant getCreated_at() {
+    public LocalDateTime getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Instant created_at) {
+    public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
     }
 
