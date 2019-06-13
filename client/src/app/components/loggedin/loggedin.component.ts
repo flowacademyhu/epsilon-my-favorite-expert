@@ -12,6 +12,7 @@ export class LoggedinComponent implements OnInit {
 
 token: any;
 
+
   constructor(private route: ActivatedRoute, private userservice: UserService) {
     
    }
@@ -22,6 +23,7 @@ token: any;
       console.log(this.token);
     });
     this.userservice.saveToken(this.token);
+   
   }
 
 }

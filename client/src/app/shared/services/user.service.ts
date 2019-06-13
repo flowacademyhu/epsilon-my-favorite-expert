@@ -8,7 +8,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  token: any;
+  token = '';
 
   getToken(){
     return this.token;
@@ -16,6 +16,11 @@ export class UserService {
 
   saveToken(token){
     this.token = token;
+    console.log("servicetoken: " + this.token);
+  }
+
+  getByToken(){
+    return this.http.get(`http://localhost:8080/auth/user/get/` + this.token);
   }
 
   getSMT(token: string) {
