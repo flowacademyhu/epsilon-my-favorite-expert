@@ -80,7 +80,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
-//        user.setAccessToken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
         user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
                 OAuth2AccessToken::getExpiresAt)
                 .map(instant -> LocalDateTime.ofInstant(instant, ZoneOffset.ofHours(2)))
