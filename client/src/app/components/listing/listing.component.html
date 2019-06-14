@@ -1,0 +1,7 @@
+<button (click)="getFavoriteExperts()">Favorite experts</button>
+<button (click)="getAllExperts()">All experts</button>
+<div class="flex">
+<div  *ngFor="let expert of experts">
+  <app-expert  [expert]="expert"></app-expert>
+</div>
+</div>
