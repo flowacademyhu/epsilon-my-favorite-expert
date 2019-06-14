@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 import { ExpertService } from 'src/app/shared/services/expert.service';
 import { Expert } from 'src/app/models/expert.model';
 import { Address } from 'src/app/models/address.model';
@@ -33,7 +32,7 @@ export class AddExpertComponent implements OnInit {
 
 addExpert() {
     this.expert.profession.push(this.profession);
-  this.expertService.addExpert(this.expert).subscribe((data: any) => {
+    this.expertService.addExpert(this.expert).subscribe((data: any) => {
     console.log(data);
   });
 }
