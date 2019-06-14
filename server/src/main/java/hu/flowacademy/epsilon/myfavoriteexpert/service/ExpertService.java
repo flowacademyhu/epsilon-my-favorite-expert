@@ -1,14 +1,13 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
-import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
-import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +23,19 @@ public class ExpertService {
     private ExpertRepository expertRepository;
 
     @Autowired
-    private UserElasticRepository userElasticRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserElasticService userElasticService;
+    private UserService userService;
 
     public Expert save(String accestoken,Expert expert) {
         var expertid = UUID.randomUUID();
         expert.setId(expertid);
         expert.setCreated_at(LocalDateTime.now());
 
-        UserElastic user = userElasticService.findByid(accestoken);
+        User user = userService.findByid(accestoken);
         user.addExpert(expertid);
-        userElasticService.save(user);
+        userService.save(user);
         return expertRepository.save(expert);
 
     }
@@ -68,7 +67,7 @@ public class ExpertService {
     }
 
     public List<Expert> getFavoriteExperts(String accestoken) {
-        UserElastic user = userElasticService.findByid(accestoken);
+        User user = userService.findByid(accestoken);
         List<Expert> favoriteExperts = new ArrayList();
         for (var expertid: user.getExperts()) {
             Optional<Expert> expert = expertRepository.findById(expertid);

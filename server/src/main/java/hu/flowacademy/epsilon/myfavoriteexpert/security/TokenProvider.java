@@ -31,7 +31,7 @@ public class TokenProvider {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Optional<User> user = userRepository.findFirstByEmail(userPrincipal.getEmail());
-        if (user.isPresent()) {
+        if (user.isPresent() && user.get().getAccessToken()!=null) {
             return user.get().getAccessToken();
         }
 
