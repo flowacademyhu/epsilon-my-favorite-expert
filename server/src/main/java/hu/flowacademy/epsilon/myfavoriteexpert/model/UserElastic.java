@@ -65,7 +65,7 @@ public class UserElastic {
     }
     public void deleteExpert(UUID expertid) {
         for (var expert : experts) {
-            if (expertid.toString().equals(expert)) {
+            if (expertid.toString().equals(expert.toString())) {
                 experts.remove(expertid);
             }
         }
