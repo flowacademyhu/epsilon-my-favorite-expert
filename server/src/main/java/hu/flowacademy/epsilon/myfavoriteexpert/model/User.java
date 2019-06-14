@@ -1,53 +1,45 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import hu.flowacademy.epsilon.myfavoriteexpert.serializer.LocalDateTimeDeserializer;
+import hu.flowacademy.epsilon.myfavoriteexpert.serializer.LocalDateTimeSerializer;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-import java.time.Instant;
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email")
-})
+@Document(indexName = "user_index", type = "default")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Email
-    @Column(nullable = false)
     private String email;
 
     private String imageUrl;
 
-    @Column(nullable = false)
     private Boolean emailVerified = false;
 
-    @JsonIgnore
     private String password;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @Column(columnDefinition="TEXT")
     private String accessToken;
 
-    @Column
-    private Instant expiresAt;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime expiresAt;
 
     private String providerId;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -111,7 +103,7 @@ public class User {
         this.accessToken = tokenValue;
     }
 
-    public void setExpiresAt(Instant expiresAt) {
+    public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
     }
 
@@ -119,7 +111,7 @@ public class User {
         return accessToken;
     }
 
-    public Instant getExpiresAt() {
+    public LocalDateTime getExpiresAt() {
         return expiresAt;
     }
 }

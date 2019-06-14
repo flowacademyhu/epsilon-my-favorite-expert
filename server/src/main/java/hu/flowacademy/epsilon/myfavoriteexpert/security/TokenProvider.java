@@ -1,6 +1,8 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.security;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.config.AppProperties;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TokenProvider {
@@ -16,31 +20,50 @@ public class TokenProvider {
 
     private AppProperties appProperties;
 
-    public TokenProvider(AppProperties appProperties) {
+    private UserRepository userRepository;
+
+    public TokenProvider(AppProperties appProperties, UserRepository userRepository) {
         this.appProperties = appProperties;
+        this.userRepository = userRepository;
     }
 
     public String createToken(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
+        Optional<User> user = userRepository.findFirstByEmail(userPrincipal.getEmail());
+        if (user.isPresent()) {
+            return user.get().getAccessToken();
+        }
+
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
 
-        return Jwts.builder()
-                .setSubject(Long.toString(userPrincipal.getId()))
+        String compact = Jwts.builder()
+                .setSubject(Optional.ofNullable(userPrincipal.getId()).map(UUID::toString).orElse(""))
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
                 .compact();
+
+        updateUser(userPrincipal.getId(), compact);
+
+        return compact;
     }
 
-    public Long getUserIdFromToken(String token) {
+    private void updateUser(UUID id, String compact) {
+        userRepository.findById(id).ifPresent(user -> {
+            user.setAccessToken(compact);
+            userRepository.save(user);
+        });
+    }
+
+    public String getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(appProperties.getAuth().getTokenSecret())
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return claims.getSubject();
     }
 
     public boolean validateToken(String authToken) {
