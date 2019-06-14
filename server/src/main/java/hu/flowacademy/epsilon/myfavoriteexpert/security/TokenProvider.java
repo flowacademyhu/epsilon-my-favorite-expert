@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class TokenProvider {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Optional<User> user = userRepository.findFirstByEmail(userPrincipal.getEmail());
-        if (user.isPresent() && user.get().getAccessToken()!=null) {
+        if (user.isPresent() && !StringUtils.isEmpty(user.get().getAccessToken())) {
             return user.get().getAccessToken();
         }
 
