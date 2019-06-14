@@ -1,23 +1,14 @@
 
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/my_favorite_expert
-    username: expert
-    password: expert
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: create
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-    properties:
-      hibernate:
-        #                dialect: org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  data:
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: localhost:9300
+      rest:
+        uris: localhost:9200
   security:
     oauth2:
       client:
