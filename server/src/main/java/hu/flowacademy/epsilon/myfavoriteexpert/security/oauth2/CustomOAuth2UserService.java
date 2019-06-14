@@ -2,9 +2,7 @@ package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.OAuth2AuthenticationProcessingException;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.AuthProvider;
-import hu.flowacademy.epsilon.myfavoriteexpert.model.Token;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
-import hu.flowacademy.epsilon.myfavoriteexpert.repository.TokenRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.OAuth2UserInfo;
@@ -23,15 +21,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
-
-    @Autowired
-    private TokenRepository tokenRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -56,7 +54,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<User> userOptional = userRepository.findFirstByEmail(oAuth2UserInfo.getEmail());
         User user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
@@ -76,25 +74,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
         User user = new User();
 
+        user.setId(UUID.randomUUID());
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
-        user.setAccessToken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
         user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null));
+                OAuth2AccessToken::getExpiresAt)
+                .map(instant -> LocalDateTime.ofInstant(instant, ZoneOffset.ofHours(2)))
+                .orElse(null));
 
-        // Ezt itt mi mokoltuk
-        Token token = new Token();
-        token.setUserid(oAuth2UserInfo.getId());
-        token.setCreatedat(Instant.now());
-        token.setExpriredat(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null));
-        token.setAccesstoken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
-        token.setIsdeleted(false);
-
-        tokenRepository.save(token);
         return userRepository.save(user);
     }
 
