@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Address } from 'src/app/models/address.model';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,15 @@ export class ProfileComponent implements OnInit {
   user: User;
   
 
-  constructor(private userservice: UserService) { }
+  constructor(private userservice: UserService) { 
+    this.user = new User();
+    this.user.address = new Address();
+  }
   
   isAddressBlank():boolean {
+    if (this.user.address == undefined) {
+      return true;
+    }
     return this.user.address.country==undefined ||
     this.user.address.city==undefined||
     this.user.address.street==undefined||
@@ -26,6 +33,7 @@ export class ProfileComponent implements OnInit {
       (data: any) => {
         this.user = data;
         console.log(this.user);
+        
         // this.user.address.country='hungary';
         // this.user.address.city = 'Szeged';
         // this.user.address.number = 'Git falva';
