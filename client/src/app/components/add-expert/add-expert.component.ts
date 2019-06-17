@@ -30,9 +30,11 @@ addExpert() {
     this.expertService.addExpert(this.expert).subscribe((data: any) => {
     console.log(data);
     this.expert.name = '';
-    this.expert.address = null;
+    this.expert.address = new Address();
     this.expert.created_at = '';
     this.expert.deleted_at = '';
+    this.expert.phone = '';
+    this.profession = '';
     this.expert.phone = '';
   });
 }
