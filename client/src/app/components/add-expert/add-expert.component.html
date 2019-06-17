@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+  <a class="navbar-brand" href="#">{{'Title' | translate:user}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="nav-link" routerLink='../../profile'>{{'Profile' | translate:user}}</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink='../../add'>{{'Add expert' | translate:user}}</a>
+      </li>   
+  <li class="nav-item active">
+  <a class="nav-link" href="#">{{'Connect' | translate:user}}
+  <span class="sr-only">(current)</span>
+  </a>
+  <li class="nav-item">
+  <a class="nav-link" href="#">{{'Logout' | translate:user}}</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="#">{{'Profile' | translate:user}}</a>
+  </li>
+  <li class="nav-item">
+  <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
+  </li>
+  <li class="nav-item">
+  <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
+  </li>
+  </ul>
+  </div>
+  </div>
+  </nav>
+<!-- Full Page Image Header with Vertically Centered Content -->
+<header class="masthead">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-12 text-center">
+  <div class="row justify-content-center align-items-center">
+    <form>
+      <h5>Expert name:</h5>
+      <input class="form-control"
+        type="text"
+        name="name"
+        [(ngModel)]="expert.name"
+      />
+      <h5>Country:</h5>
+      <input
+        class="form-control"
+        type="text"
+        name="country"
+        [(ngModel)]="expert.address.country"
+      />
+      <h5>City:</h5>
+      <input
+        class="form-control"
+        type="text"
+        name="city"
+        [(ngModel)]="expert.address.city" 
+      />
+      <h5>Street:</h5>
+      <input
+        class="form-control"
+        type="text"
+        name="street"
+        [(ngModel)]="expert.address.street"
+      />
+      <h5>Number:</h5>
+      <input
+        class="form-control"
+        type="text"
+        name="number"
+        [(ngModel)]="expert.address.number"
+      />
+      <h5>Profession:</h5>
+      <input
+        class="form-control"
+        type="text"
+        name="profession"
+        [(ngModel)]="profession"
+      />
+      <h5>Phone:</h5>
+      <input
+        class="form-control"
+        type="text"
+        name="phone"
+        [(ngModel)]="expert.phone"
+      />
+      <button type="button" name="save" class="btn btn-light" (click)="addExpert()">Add expert</button>
+    </form> 
+  </div> 
+</div>
+</div>
+</div>
+
+</header>

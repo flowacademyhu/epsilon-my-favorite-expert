@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Document(indexName = "user_index", type = "default")
@@ -29,11 +31,48 @@ public class User {
 
     private String accessToken;
 
+    private Address address;
+
+    private Provider providers;
+
+    private List<UUID> followers;
+
+    private List<UUID> followed_by;
+
+    private List<UUID> experts;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime createdAt;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime updatedAt;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime deletedAt;
+
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime expiresAt;
 
     private String providerId;
+
+    public void addExpert(UUID expertid) {
+        if (experts == null) {
+            experts = new ArrayList<>();
+        } else {
+            experts.add(expertid);
+        }
+    }
+    public void deleteExpert(UUID expertid) {
+        for (var expert : experts) {
+            if (expertid.toString().equals(expert.toString())) {
+                experts.remove(expertid);
+            }
+        }
+    }
 
     public UUID getId() {
         return id;
@@ -114,4 +153,70 @@ public class User {
     public LocalDateTime getExpiresAt() {
         return expiresAt;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Provider getProviders() {
+        return providers;
+    }
+
+    public void setProviders(Provider providers) {
+        this.providers = providers;
+    }
+
+    public List<UUID> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<UUID> followers) {
+        this.followers = followers;
+    }
+
+    public List<UUID> getFollowed_by() {
+        return followed_by;
+    }
+
+    public void setFollowed_by(List<UUID> followed_by) {
+        this.followed_by = followed_by;
+    }
+
+    public List<UUID> getExperts() {
+        return experts;
+    }
+
+    public void setExperts(List<UUID> experts) {
+        this.experts = experts;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+
 }
