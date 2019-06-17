@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg transparent navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
   <a class="navbar-brand" href="#">{{'Title' | translate:user}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,12 +6,21 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="nav-link" routerLink='../../profile'>Profil</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink='../../add'>Add expert</a>
+      </li>   
   <li class="nav-item active">
   <a class="nav-link" href="#">{{'Connect' | translate:user}}
   <span class="sr-only">(current)</span>
   </a>
   <li class="nav-item">
-  <a class="nav-link" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect">{{'Login' | translate:user}}</a>
+  <a class="nav-link" href="#">{{'Logout' | translate:user}}</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="#">{{'Profile' | translate:user}}</a>
   </li>
   <li class="nav-item">
   <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
@@ -24,22 +33,10 @@
   </div>
   </nav>
   
-  <!-- Full Page Image Header with Vertically Centered Content -->
-  <div class="masthead">
-  <div class="container h-100">
-  <div class="row h-100 align-items-center">
-  <div class="col-12 text-center">
-        
-
+<button (click)="getFavoriteExperts()">Favorite experts</button>
+<button (click)="getAllExperts()">All experts</button>
+<div class="flex">
+<div  *ngFor="let expert of experts">
+  <app-expert  [expert]="expert"></app-expert>
 </div>
-  </div>
-  </div>
 </div>
-  
-  <!-- Page Content -->
-  <section class="py-5">
-  <div class="container">
-  <h2 class="font-weight-light"></h2>
-  <p></p>
-  </div>
-  </section>

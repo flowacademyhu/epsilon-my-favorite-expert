@@ -1,7 +1,9 @@
 {
-  "Title": "My Favorit Expert",
+  "Title": "Favorite Expert",
   "Intro": "Are you looking for a responsible handyman? You are in the right place",
   "Connect": "Connect",
   "Login": "Login",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "Profile" : "Profile",
+  "Add expert": "Add expert"
 }
