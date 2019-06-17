@@ -24,8 +24,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
             .maxAge(MAX_AGE_SECS);
   }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/T10/T11
 }
