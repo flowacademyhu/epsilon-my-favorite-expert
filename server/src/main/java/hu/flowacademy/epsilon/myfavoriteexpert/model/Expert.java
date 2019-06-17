@@ -1,14 +1,14 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.model;
 
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.Instant;
 import java.util.UUID;
@@ -23,9 +23,11 @@ public class Expert {
 
     private List<String> profession;
 
+    private String phone;
+
     private Address address;
 
-    private String number;
+
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -36,6 +38,22 @@ public class Expert {
     private LocalDateTime deleted_at;
 
     public Expert() {
+    }
+
+    public void addProfession(String job) {
+        if (profession == null) {
+            profession = new ArrayList<>();
+        } else {
+            profession.add(job);
+        }
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<String> getProfession() {
@@ -70,13 +88,7 @@ public class Expert {
         this.address = address;
     }
 
-    public String getNumber() {
-        return number;
-    }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
     public LocalDateTime getCreated_at() {
         return created_at;

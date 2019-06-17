@@ -1,7 +1,6 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.controller;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
-import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,36 +11,40 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/auth")
+@RequestMapping("/auth/expert")
 public class ExpertController {
 
     @Autowired
     private ExpertService expertService;
 
-    @PostMapping(path = "/expert/add")
-    public void addExpert(@RequestBody Expert expert) {
-        expertService.save(expert);
+    @PostMapping("/add")
+    public Expert addExpert(@RequestHeader(value = "Authorization") String accestoken ,@RequestBody Expert expert) {
+        return expertService.save(accestoken,expert);
     }
 
-    @GetMapping("/expert/get/{id}")
-    public Optional<Expert> findOneItem(@PathVariable UUID id) {
+    @GetMapping("/get/{id}")
+    public Optional<Expert> getOne(@PathVariable UUID id) {
         return expertService.findById(id);
     }
 
-    @GetMapping("expert/list")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Iterable<Expert>> listTodoItems() {
-        return ResponseEntity.ok(expertService.list());
+    @GetMapping("/getall")
+    public ResponseEntity<List<Expert>> getAll() {
+        return ResponseEntity.ok(expertService.find());
     }
 
-    @DeleteMapping("/expert/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable UUID id) {
         expertService.delete(id);
     }
 
-    @PutMapping("/expert/add-profession/{id}")
+    @PutMapping("/add-profession/{id}")
     public void addProfession(@PathVariable UUID id, @RequestBody String profession) {
         expertService.addProfession(id, profession);
     }
-}
 
+    @GetMapping("/favorite")
+    public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
+        return expertService.getFavoriteExperts(accestoken);
+    }
+
+}

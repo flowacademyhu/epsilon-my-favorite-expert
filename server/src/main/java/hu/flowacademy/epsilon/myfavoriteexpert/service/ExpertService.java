@@ -1,12 +1,13 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
-
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,25 @@ import java.util.UUID;
 @Service
 public class ExpertService {
 
+
+
     @Autowired
     private ExpertRepository expertRepository;
 
-    public Expert save(Expert expert) {
-        expert.setId(UUID.randomUUID());
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
+    public Expert save(String accestoken,Expert expert) {
+        var expertid = UUID.randomUUID();
+        expert.setId(expertid);
         expert.setCreated_at(LocalDateTime.now());
+
+        User user = userService.findByid(accestoken);
+        user.addExpert(expertid);
+        userService.save(user);
         return expertRepository.save(expert);
 
     }
@@ -30,8 +44,9 @@ public class ExpertService {
         return expertRepository.findById(id);
     }
 
-    public Iterable<Expert> list() {
-        return expertRepository.findAll();
+
+    public List<Expert> find() {
+        return expertRepository.findAll(Pageable.unpaged()).getContent();
     }
 
     public void delete(UUID id) {
@@ -47,10 +62,25 @@ public class ExpertService {
     public void addProfession(UUID id, String profession) {
         Optional<Expert> expert = expertRepository.findById(id);
         if(expert.isPresent()) {
-            expert.get().setProfession(List.of(profession));
-            expertRepository.save(expert.get());
+            expert.get().addProfession(profession);
         }
     }
+
+    public List<Expert> getFavoriteExperts(String accestoken) {
+        User user = userService.findByid(accestoken);
+        List<Expert> favoriteExperts = new ArrayList();
+        if (user.getExperts() == null)
+            return List.of();
+        for (var expertid: user.getExperts()) {
+            Optional<Expert> expert = expertRepository.findById(expertid);
+            if (expert.isPresent()) {
+                favoriteExperts.add(expert.get());
+            }
+        }
+        return favoriteExperts;
+    }
+
+
 
 
 

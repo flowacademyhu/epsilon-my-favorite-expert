@@ -1,16 +1,13 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.OAuth2AuthenticationProcessingException;
-import hu.flowacademy.epsilon.myfavoriteexpert.model.*;
-import hu.flowacademy.epsilon.myfavoriteexpert.repository.TokenRepository;
-import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.AuthProvider;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Provider;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
-import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.GoogleOAuth2UserInfo;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.OAuth2UserInfo;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user.OAuth2UserInfoFactory;
-import hu.flowacademy.epsilon.myfavoriteexpert.service.UserElasticService;
-import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +24,6 @@ import org.springframework.util.StringUtils;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,12 +31,6 @@ import java.util.UUID;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     Logger logger = LoggerFactory.getLogger(CustomOAuth2UserService.class);
-
-    @Autowired
-    private UserElasticService userElasticService;
-
-    @Autowired
-    private TokenRepository tokenRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -66,7 +55,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<User> userOptional = userRepository.findFirstByEmail(oAuth2UserInfo.getEmail());
         User user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
@@ -86,31 +75,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
         User user = new User();
 
+        user.setId(UUID.randomUUID());
         user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
         user.setProviderId(oAuth2UserInfo.getId());
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
-        user.setAccessToken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
-        user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null));
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
 
-        // Ezt itt mi mokoltuk
-        Token token = new Token();
-        token.setUserid(oAuth2UserInfo.getId());
-        token.setCreatedat(Instant.now());
-        token.setExpriredat(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null));
-        token.setAccesstoken(Optional.ofNullable(oAuth2UserRequest.getAdditionalParameters().get("id_token")).map(Object::toString).orElse(null));
-        token.setIsdeleted(false);
 
-        //ezt itt elasticsearchbe mockoljuk bele
-        Address address = new Address();
-        UserElastic userElastic = new UserElastic();
-        userElastic.setAddress(address);
-        userElastic.setName(oAuth2UserInfo.getName());
-        //Provider setup
-        Provider provider = new Provider();
+       /* Provider provider = new Provider();
         if (AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()).toString().equalsIgnoreCase("google")) {
             provider.setProvider_type("google");
         }
@@ -118,25 +93,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         provider.setName(oAuth2UserInfo.getName());
         provider.setProfile_picture(oAuth2UserInfo.getImageUrl());
         provider.setProvider_id(oAuth2UserInfo.getId());
-        userElastic.setProviders(provider);
+        user.setProviders(provider);*/
+        user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
+                OAuth2AccessToken::getExpiresAt)
+                .map(instant -> LocalDateTime.ofInstant(instant, ZoneOffset.ofHours(2)))
+                .orElse(null));
 
-        userElastic.setId(UUID.randomUUID());
-        userElastic.setFollowers(new ArrayList<>());
-        userElastic.setFollowed_by(new ArrayList<>());
-        userElastic.setAccess_token(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(OAuth2AccessToken::getTokenValue).orElse(null));
-        userElastic.setCreated_at(LocalDateTime.now());
-        Instant instant=Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
-                OAuth2AccessToken::getExpiresAt).orElse(null);
-        userElastic.setExpire_at(LocalDateTime.ofInstant(instant, ZoneOffset.of("+02:00")));
-          userElastic.setUpdated_at(LocalDateTime.now());
-
-
-        //TEST
-       // userElastic.setFollowers(List.of(UUID.randomUUID(),UUID.randomUUID()));
-
-
-        userElasticService.save(userElastic);
-        tokenRepository.save(token);
         return userRepository.save(user);
     }
 
