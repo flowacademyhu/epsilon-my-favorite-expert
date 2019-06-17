@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private userservice: UserService) { }
   
-  isAddressBlank() {
+  isAddressBlank():boolean {
     return this.user.address.country==undefined ||
     this.user.address.city==undefined||
     this.user.address.street==undefined||

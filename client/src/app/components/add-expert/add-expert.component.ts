@@ -1,40 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 import { ExpertService } from 'src/app/shared/services/expert.service';
 import { Expert } from 'src/app/models/expert.model';
 import { Address } from 'src/app/models/address.model';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-expert',
   templateUrl: './add-expert.component.html',
   styleUrls: ['./add-expert.component.css']
 })
 export class AddExpertComponent implements OnInit {
-  //expertForm: FormGroup;
   expert: Expert;
   profession: string;
- 
-  constructor(private expertService: ExpertService) {
+
+  constructor(private expertService: ExpertService, private translate: TranslateService) {
+    translate.setDefaultLang('en');
     this.expert = new Expert();
     this.expert.profession = new Array();
     this.expert.address = new Address();
    }
 
+   switchLanguage(language: string) {
+    this.translate.use(language);
+}
   ngOnInit() {
-    // this.expertForm = new FormGroup({
-   
-
-    // });
   }
-// onSubmit(): void {
-//   console.log(this.expertForm.value);
-//   this.expertService.addExpert(this.expertForm.value);
-// }
 
 addExpert() {
     this.expert.profession.push(this.profession);
-  this.expertService.addExpert(this.expert).subscribe((data: any) => {
+    this.expertService.addExpert(this.expert).subscribe((data: any) => {
     console.log(data);
+    this.expert.name = '';
+    this.expert.address = null;
+    this.expert.created_at = '';
+    this.expert.deleted_at = '';
+    this.expert.phone = '';
   });
 }
 }

@@ -8,5 +8,4 @@ created_at: string;
 deleted_at: string;
 profession: string[];
 phone: string;
-
 }

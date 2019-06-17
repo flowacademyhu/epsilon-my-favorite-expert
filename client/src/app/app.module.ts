@@ -44,7 +44,7 @@ import { AddAddressComponent } from './add-address/add-address.component';
         deps: [HttpClient]
       }
 })
-  ],  
+  ],
   providers: [HttpClientModule,
     {provide: HTTP_INTERCEPTORS, useClass: RequestinterceptorService, multi: true}],
   bootstrap: [AppComponent]

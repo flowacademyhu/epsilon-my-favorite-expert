@@ -10,13 +10,11 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getCurrentUser(){
+  getCurrentUser() {
     return this.http.get(`${BASE_URI}/get`);
   }
   addAddress(address: Address) {
     return this.http.post(`${BASE_URI}/save-address`,address);
   }
-
-
 }
 

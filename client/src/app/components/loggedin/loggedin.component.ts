@@ -16,7 +16,11 @@ export class LoggedinComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {
-      localStorage.setItem('token', params['token']);
+      if (params == null) {
+        console.log()
+      } else {
+        localStorage.setItem('token', params['token']);
+      }
     });
   }
 }
