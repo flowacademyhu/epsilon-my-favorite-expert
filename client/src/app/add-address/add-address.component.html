@@ -1,0 +1,33 @@
+<form>   
+    Country:<br />
+    <input
+      type="text"
+      name="country"
+      [(ngModel)]="address.country"
+      
+      
+    /><br />
+    
+    City:<br />
+    <input
+      type="text"
+      name="city"
+      [(ngModel)]="address.city"
+      
+    /><br />
+    Street:<br />
+    <input
+      type="text"
+      name="street"
+      [(ngModel)]="address.street"
+      
+    /><br />
+    Number:<br />
+    <input
+      type="text"
+      name="number"
+      [(ngModel)]="address.number"
+      
+    /><br />  
+     <button type="button" name="save" (click)="addAddress()" >Add Address</button>
+  </form>
