@@ -19,13 +19,24 @@ export class ExpertComponent implements OnInit {
   }
 
   removeFromFavorite() {
-    this.userService.removeFromFavorite(this.expert);
-    this.isFavoriteExpert == false;
+    this.isFavoriteExpert = !this.isFavoriteExpert;
+    this.userService.removeFromFavorite(this.expert).subscribe((data: any) => {
+      console.log("megtortent");
+    });
+    
+  }
+  isFavorite() {
+    return this.isFavoriteExpert;
   }
 
   addToFavorite() {
-    this.userService.addToFavorite(this.expert);
-    this.isFavoriteExpert == true;
+    this.isFavoriteExpert = !this.isFavoriteExpert;
+    this.userService.addToFavorite(this.expert).subscribe(
+      (data: any) => {
+        console.log("megtortent ez is");
+      }
+    );
+    
 
   }
 }

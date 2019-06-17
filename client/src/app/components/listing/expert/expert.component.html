@@ -48,14 +48,14 @@
               </div>
               <div class="details">
                 <div class="nameBlock">
-                  <div *ngIf="isFavoriteExpert; else removeFromFavorite">
+                  <div *ngIf="isFavorite()">
                   <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
                   <button (click)="removeFromFavorite()" class="round-shape name">Remove From Favorite</button>
                   </div>
-                  <ng-template #removeFromFavorite>
+                  <div *ngIf="!isFavorite()">
                   <button (click)="addToFavorite()" class="round-shape name">Add to Favorite</button>
                   
-                  </ng-template>
+                </div>
                   
                   <div class="divider">
                     <div class="stick stick1"></div>
