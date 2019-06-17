@@ -4,6 +4,8 @@ import { User } from 'src/app/models/user.model';
 import { Address } from 'src/app/models/address.model';
 import { Expert } from 'src/app/models/expert.model';
 import { ExpertService } from 'src/app/shared/services/expert.service';
+import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -16,8 +18,8 @@ export class ProfileComponent implements OnInit {
   favoriteExperts: Expert[];
   
 
-  constructor(private userservice: UserService,private expertService: ExpertService) {
-
+  constructor(private userservice: UserService, private expertService: ExpertService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>  false;
     this.user = new User();
     this.user.address = new Address();
    }
@@ -33,18 +35,19 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userservice.getCurrentUser().subscribe(
-      (data: any) => {
-        this.user = data;
-        console.log(this.user);
-      }
-    );
-    this.expertService.getFavoriteExperts().subscribe(
-      (data: any) => {
-        this.favoriteExperts = data;
-      }
-    );
+    this.router.events.subscribe((asd) => {
+      this.loadData();
+    })
+    this.loadData();
 
+  }
+
+  loadData() {
+    forkJoin(this.userservice.getCurrentUser(), this.expertService.getFavoriteExperts())
+    .subscribe(([currentUser, experts]) => {
+      this.user = currentUser;
+      this.favoriteExperts = experts;
+    });
   }
  
 
