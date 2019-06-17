@@ -1,53 +1,84 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import hu.flowacademy.epsilon.myfavoriteexpert.serializer.LocalDateTimeDeserializer;
+import hu.flowacademy.epsilon.myfavoriteexpert.serializer.LocalDateTimeSerializer;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-import java.time.Instant;
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-@Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email")
-})
+@Document(indexName = "user_index", type = "default")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Email
-    @Column(nullable = false)
     private String email;
 
     private String imageUrl;
 
-    @Column(nullable = false)
     private Boolean emailVerified = false;
 
-    @JsonIgnore
     private String password;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    @Column(columnDefinition="TEXT")
     private String accessToken;
 
-    @Column
-    private Instant expiresAt;
+    private Address address;
+
+    private Provider providers;
+
+    private List<UUID> followers;
+
+    private List<UUID> followed_by;
+
+    private List<UUID> experts;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime createdAt;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime updatedAt;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime deletedAt;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime expiresAt;
 
     private String providerId;
 
-    public Long getId() {
+    public void addExpert(UUID expertid) {
+        if (experts == null) {
+            experts = new ArrayList<>();
+        } else {
+            experts.add(expertid);
+        }
+    }
+    public void deleteExpert(UUID expertid) {
+        for (var expert : experts) {
+            if (expertid.toString().equals(expert.toString())) {
+                experts.remove(expertid);
+            }
+        }
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -111,7 +142,7 @@ public class User {
         this.accessToken = tokenValue;
     }
 
-    public void setExpiresAt(Instant expiresAt) {
+    public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
     }
 
@@ -119,7 +150,73 @@ public class User {
         return accessToken;
     }
 
-    public Instant getExpiresAt() {
+    public LocalDateTime getExpiresAt() {
         return expiresAt;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Provider getProviders() {
+        return providers;
+    }
+
+    public void setProviders(Provider providers) {
+        this.providers = providers;
+    }
+
+    public List<UUID> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<UUID> followers) {
+        this.followers = followers;
+    }
+
+    public List<UUID> getFollowed_by() {
+        return followed_by;
+    }
+
+    public void setFollowed_by(List<UUID> followed_by) {
+        this.followed_by = followed_by;
+    }
+
+    public List<UUID> getExperts() {
+        return experts;
+    }
+
+    public void setExperts(List<UUID> experts) {
+        this.experts = experts;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+
 }

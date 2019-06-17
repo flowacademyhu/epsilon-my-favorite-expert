@@ -11,6 +11,14 @@ services:
       - 9300:9300
     environment: 
       - discovery.type=single-node
+  kibana:
+    image: kibana:6.8.0
+    networks: 
+      searchnetwork:
+        aliases:
+          - kibana.favoritexpert.com
+    ports: 
+      - 5601:5601
 
 networks:
   searchnetwork: {}

@@ -1,7 +1,5 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2.user;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import java.util.Map;
 
 public abstract class OAuth2UserInfo {
