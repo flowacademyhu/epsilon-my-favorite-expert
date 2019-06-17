@@ -24,7 +24,10 @@ export class AddExpertComponent implements OnInit {
 }
   ngOnInit() {
   }
-
+addProfession() {
+  this.expert.profession.push(this.profession);
+  this.profession = '';
+}
 addExpert() {
     this.expert.profession.push(this.profession);
     this.expertService.addExpert(this.expert).subscribe((data: any) => {
@@ -35,6 +38,7 @@ addExpert() {
     this.expert.deleted_at = '';
     this.expert.phone = '';
     this.profession = '';
+    this.expert.profession = new Array();
     this.expert.phone = '';
   });
 }
