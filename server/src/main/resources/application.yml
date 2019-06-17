@@ -1,3 +1,4 @@
+
 spring:
   jackson:
     serialization:
@@ -8,24 +9,6 @@ spring:
       cluster-nodes: localhost:9300
       rest:
         uris: localhost:9200
-  datasource:
-    url: jdbc:postgresql://localhost:5432/my_favorite_expert
-    username: expert
-    password: expert
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: create
-      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-    properties:
-      hibernate:
-        #                dialect: org.hibernate.dialect.PostgreSQLDialect
-        jdbc:
-          lob:
-            non_contextual_creation: true
   security:
     oauth2:
       client:

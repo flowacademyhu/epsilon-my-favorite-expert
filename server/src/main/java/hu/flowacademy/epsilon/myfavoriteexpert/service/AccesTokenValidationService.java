@@ -1,7 +1,7 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
-import hu.flowacademy.epsilon.myfavoriteexpert.model.UserElastic;
-import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserElasticRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +19,23 @@ public class AccesTokenValidationService extends HandlerInterceptorAdapter {
 
 
     @Autowired
-    private UserElasticService userElasticService;
+    private UserService userService;
 
     public void validateAccesToken(String accestoken) {
         if (accestoken == null) {
             throw new RuntimeException("ACCESTOKENISNULL");
         }
-        var userId = userElasticService.getIdFromAccesToken(accestoken);
+        var userId = userService.getIdFromAccesToken(accestoken);
         if (userId == null) {
             throw new RuntimeException("Invalid access token!!!");
         }
-        UserElastic user=userElasticService.findByid(accestoken);
+        User user=userService.findByid(accestoken);
 
-        if (user.getExpire_at().isBefore(LocalDateTime.now())) {
+        if (user.getExpiresAt().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Accestoken expired");
         }
-        user.setExpire_at(user.getExpire_at().plusHours(1));
-        userElasticService.save(user);
+        user.setExpiresAt(user.getExpiresAt().plusHours(1));
+        userService.save(user);
     }
 
     @Override

@@ -2,7 +2,6 @@ package hu.flowacademy.epsilon.myfavoriteexpert.controller;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
-import hu.flowacademy.epsilon.myfavoriteexpert.service.UserElasticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,4 +48,3 @@ public class ExpertController {
     }
 
 }
-
