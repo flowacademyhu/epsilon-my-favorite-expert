@@ -62,6 +62,7 @@ public class User {
     public void addExpert(UUID expertid) {
         if (experts == null) {
             experts = new ArrayList<>();
+            experts.add(expertid);
         } else {
             experts.add(expertid);
         }
