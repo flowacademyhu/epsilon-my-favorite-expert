@@ -12,7 +12,7 @@ export class AddExpertComponent implements OnInit {
   expert: Expert;
   profession: string;
 
-  constructor(private expertService: ExpertService, private translate: TranslateService) {
+  constructor(private translate: TranslateService, private expertService: ExpertService) {
     translate.setDefaultLang('en');
     this.expert = new Expert();
     this.expert.profession = new Array();
