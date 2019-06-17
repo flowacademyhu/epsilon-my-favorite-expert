@@ -20,7 +20,7 @@ export class ExpertService {
   //     return this.http.get('http://localhost:8080/auth/expert/list');
   // }
   addExpert(expert: Expert) {
-    console.log("expert:" + expert.name + expert.address+expert.phone+expert.profession);
+    console.log('expert:' + expert.name + expert.address+expert.phone+expert.profession);
       return this.http.post(`${BASE_URI}/add`, expert);
   }
 
