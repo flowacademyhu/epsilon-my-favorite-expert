@@ -61,13 +61,13 @@
               <div class="dgCard">
                 <div class="strip-block">
                   <div class="profile-logo">
-                    <img alt="" src="/assets/image/tool1.jpg" />
+                    <img alt="/assets/image/tool1.jpg" [src]="user.imageUrl" />
                   </div>
                   <div class="strip"></div>
                   <div class="short-details">
                     <h4 class="tagLine">{{ user.name }}</h4>
                     <blockquote class="quote">
-                      {{ user.providers.email }}
+                      {{ user.email }}
                     </blockquote>
                   </div>
                 </div>
@@ -99,8 +99,18 @@
                 </div>
                 <div class="details">
                   <div class="nameBlock">
-                    <a href="#" class="round-shape name"> Favorite experts </a>
+                    <a routerLink="../list-experts" class="round-shape name"> Favorite experts </a>
                     <div class="divider">
+                      
+                        
+                            <div *ngFor="let expert of favoriteExperts">
+                              <a href="#">
+                            <blockquote class="quote">
+                            <span>{{ expert.name }} - {{expert.profession[0]}}</span>
+                          </blockquote>
+                              </a>
+                            </div>
+                        
                       <div class="stick stick1"></div>
                       <div class="stick stick2"></div>
                     </div>
