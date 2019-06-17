@@ -7,6 +7,7 @@ import { Expert } from 'src/app/models/expert.model';
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.css']
 })
+
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
@@ -50,6 +51,15 @@ export class ListingComponent implements OnInit {
     }
     console.log('false');
     return false;
+  }
+  addToFavorite(expert : Expert) {
+    this.favoriteExpert.push(expert);
+    this.isFavoriteExpert(expert);
+  }
+  removeFromFavorite(expert : Expert) {
+    this.favoriteExpert = this.favoriteExpert.filter(obj => obj !== expert);
+    this.isFavoriteExpert(expert);
+
   }
 
 }
