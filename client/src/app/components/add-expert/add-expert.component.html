@@ -29,48 +29,49 @@
 <div class="col-12 text-center">
   <div class="row justify-content-center align-items-center">
     <form>
-      <h5>Expert name:</h5>
+      <h5>{{ "Expert name" | translate: user }}:</h5>
       <input class="form-control"
         type="text"
         name="name"
         [(ngModel)]="expert.name"
       />
-      <h5>Country:</h5>
+      <h5>{{ "Country" | translate: user }}:</h5>
       <input
         class="form-control"
         type="text"
         name="country"
         [(ngModel)]="expert.address.country"
       />
-      <h5>City:</h5>
+      <h5>{{ "City" | translate: user }}:</h5>
       <input
         class="form-control"
         type="text"
         name="city"
         [(ngModel)]="expert.address.city" 
       />
-      <h5>Street:</h5>
+      <h5>{{ "Street" | translate: user }}:</h5>
       <input
         class="form-control"
         type="text"
         name="street"
         [(ngModel)]="expert.address.street"
       />
-      <h5>Number:</h5>
+      <h5>{{ "Number" | translate: user }}:</h5>
       <input
         class="form-control"
         type="text"
         name="number"
         [(ngModel)]="expert.address.number"
       />
-      <h5>Profession:</h5>
+      <h5>{{ "Profession" | translate: user }}:</h5>
       <input
         class="form-control"
         type="text"
         name="profession"
         [(ngModel)]="profession"
       />
-      <button type="button" name="saveProfession" class="btn btn-light" (click)="addProfession()">Add profession</button>
+      <button type="button" name="saveProfession" class="btn btn-light" 
+      (click)="addProfession()">{{ "Add profession" | translate: user }}</button>
       <div *ngIf="expert.profession.length > 0">
       <div *ngFor="let prof of expert.profession">
         <p id="paragraph">
@@ -78,14 +79,14 @@
         </p>
       </div>
     </div>
-      <h5>Phone:</h5>
+      <h5>{{ "Phone" | translate: user }}:</h5>
       <input
         class="form-control"
         type="text"
         name="phone"
         [(ngModel)]="expert.phone"
       />
-      <button type="button" name="save" class="btn btn-light" (click)="addExpert()">Add expert</button>
+      <button type="button" name="save" class="btn btn-light" (click)="addExpert()">{{ "Add expert" | translate: user }}</button>
     </form> 
     
   </div> 
