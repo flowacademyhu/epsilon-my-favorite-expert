@@ -12,7 +12,7 @@ export class AddExpertComponent implements OnInit {
   expert: Expert;
   profession: string;
 
-  constructor(private expertService: ExpertService, private translate: TranslateService) {
+  constructor(private translate: TranslateService, private expertService: ExpertService) {
     translate.setDefaultLang('en');
     this.expert = new Expert();
     this.expert.profession = new Array();
@@ -24,15 +24,21 @@ export class AddExpertComponent implements OnInit {
 }
   ngOnInit() {
   }
-
+addProfession() {
+  this.expert.profession.push(this.profession);
+  this.profession = '';
+}
 addExpert() {
     this.expert.profession.push(this.profession);
     this.expertService.addExpert(this.expert).subscribe((data: any) => {
     console.log(data);
     this.expert.name = '';
-    this.expert.address = null;
+    this.expert.address = new Address();
     this.expert.created_at = '';
     this.expert.deleted_at = '';
+    this.expert.phone = '';
+    this.profession = '';
+    this.expert.profession = new Array();
     this.expert.phone = '';
   });
 }

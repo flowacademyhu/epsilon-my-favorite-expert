@@ -9,6 +9,9 @@ import { Expert } from 'src/app/models/expert.model';
 export class ExpertComponent implements OnInit {
   @Input()
   expert: Expert;
+
+  @Input()
+  isFavoriteExpert: boolean;
   constructor() { }
 
   ngOnInit() {

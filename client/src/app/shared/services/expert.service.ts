@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Expert } from 'src/app/models/expert.model';
+import { Observable } from 'rxjs';
 
 const BASE_URI = 'http://localhost:8080/auth/expert';
 @Injectable({
@@ -27,8 +28,8 @@ export class ExpertService {
   listAllExperts() {
     return this.http.get(`${BASE_URI}/getall`);
   }
-  getFavoriteExperts() {
-    return this.http.get(`${BASE_URI}/favorite`);
+  getFavoriteExperts(): Observable<Expert[]> {
+    return this.http.get<Expert[]>(`${BASE_URI}/favorite`);
   }
 }
 

@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="#">{{ "Title" | translate: user }}</a>
+    <a class="navbar-brand">{{ "Title" | translate: user }}</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -13,10 +13,17 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#"
+          <a class="nav-link" routerLink="../list-experts">
+            Favorite experts
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link"
             >{{ "Connect" | translate: user }}
             <span class="sr-only">(current)</span>
           </a>
@@ -61,23 +68,27 @@
               <div class="dgCard">
                 <div class="strip-block">
                   <div class="profile-logo">
-                    <img alt="" src="/assets/image/tool1.jpg" />
+                    <img alt="/assets/image/tool1.jpg" [src]="user.imageUrl" />
                   </div>
                   <div class="strip"></div>
                   <div class="short-details">
                     <h4 class="tagLine">{{ user.name }}</h4>
                     <blockquote class="quote">
-                      {{ user.providers.email }}
+                      {{ user.email }}
                     </blockquote>
                   </div>
                 </div>
                 <div class="details">
                   <div *ngIf="isAddressBlank(); else Address">
-                    <a routerLink='../add-address' class="round-shape name"> Add address </a>
+                    <a routerLink="../add-address" class="round-shape name">
+                      Add address
+                    </a>
                   </div>
-                  <ng-template #Address >
+                  <ng-template #Address>
                     <div class="nameBlock">
-                      <a href="#" class="round-shape name"> Address </a>
+                      <a routerLink="../add-address" class="round-shape name">
+                        Address
+                      </a>
                       <div class="divider">
                         <blockquote class="quote">
                           {{ user.address.country }}
@@ -94,13 +105,25 @@
                       </div>
                     </div>
                   </ng-template>
-
-
                 </div>
                 <div class="details">
                   <div class="nameBlock">
-                    <a href="#" class="round-shape name"> Favorite experts </a>
+                    <a routerLink="../list-experts" class="round-shape name">
+                      Favorite experts
+                    </a>
                     <div class="divider">
+                      <!-- <div *ngFor="let expert of favoriteExperts">
+                        <a class="expert" href="#">
+                          <blockquote class="quote">
+                            <p
+                              ><u>{{ expert.name }}</u></p> 
+                              <div *ngFor="let prof of expert.profession">
+                              <span>--{{ prof }}</span>
+                              </div>
+                            </blockquote>
+                        </a>
+                      </div> -->
+
                       <div class="stick stick1"></div>
                       <div class="stick stick2"></div>
                     </div>

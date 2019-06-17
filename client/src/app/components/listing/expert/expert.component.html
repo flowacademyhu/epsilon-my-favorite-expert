@@ -1,40 +1,39 @@
-   
-    <div class="bestSnippArea1077 d-flex">
-      <div class="col-sm-6 col-4">
-        <div class="bsBox">
-         <div class="dgCard ">
-            <div class="strip-block">
-              <div class="profile-logo">
-                <img alt="" src="/assets/image/tool1.jpg" />
-              </div>
-              <div class="strip"></div>
-              <div class="short-details">
-                <blockquote class="logoName">{{ expert.name }}
-                </blockquote>
-                <blockquote class="quote">
-                  {{ expert.phone }}
-                </blockquote>
-                <div class="divider">
-                  <blockquote class="quote">
-                    {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
-                  </blockquote>
-                  <blockquote *ngFor="let prof of expert.profession" class="quote">
-                    {{ prof }}
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-            <div class="details">
-              <div class="nameBlock">
-                <a href="#" class="round-shape name"> Add to favorite </a>
-                <div class="divider">
-                  <div class="stick stick1"></div>
-                  <div class="stick stick2"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-</div>
-</div>
-</div>
 
+    <div class="bestSnippArea1077 d-flex">
+        <div class="col-sm-3 col-4">
+          <div class="bsBox">
+           <div class="dgCard ">
+              <div class="strip-block">
+                <div class="profile-logo">
+                  <img alt="" src="/assets/image/tool1.jpg" />
+                </div>
+                <div class="strip"></div>
+                <div class="short-details">
+                  <blockquote class="logoName">{{ expert.name }}
+                  </blockquote>
+                  <blockquote class="quote">
+                    {{ expert.phone }}
+                  </blockquote>
+                  <div class="divider">
+                    <blockquote class="quote">
+                      {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
+                    </blockquote>
+                    <blockquote *ngFor="let prof of expert.profession" class="quote">
+                      {{ prof }}
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+              <div class="details">
+                <div class="nameBlock">
+                  <a href="#" class="round-shape name"> Add to favorite </a>
+                  <div class="divider">
+                    <div class="stick stick1"></div>
+                    <div class="stick stick2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  </div>
+  </div>
+  </div>    
