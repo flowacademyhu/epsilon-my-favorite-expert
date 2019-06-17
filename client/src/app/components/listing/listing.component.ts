@@ -8,14 +8,12 @@ import { Expert } from 'src/app/models/expert.model';
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent implements OnInit {
-  experts: any[];
+  experts: Expert[] = [];
+  favoriteExpert: Expert[] = [];
   constructor(private expertService: ExpertService) { }
 
   ngOnInit() {
-    this.expertService.listAllExperts().subscribe(
-      (data: Expert[]) => {
-        this.experts = data;
-      });
+    this.loadData();
   }
 
   getFavoriteExperts() {
@@ -31,6 +29,27 @@ export class ListingComponent implements OnInit {
         this.experts = data;
       }
     );
+  }
+  loadData() {
+    this.expertService.listAllExperts().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
+      });
+      this.expertService.getFavoriteExperts().subscribe(
+        (data: Expert[]) => {
+          this.favoriteExpert = data;
+        });
+  }
+
+  isFavoriteExpert(expert: Expert): boolean {
+    for (let i = 0; i < this.favoriteExpert.length; i++) {
+      if (expert.id === this.favoriteExpert[i].id) {
+      console.log(true);
+        return true;
+      }
+    }
+    console.log('false');
+    return false;
   }
 
 }
