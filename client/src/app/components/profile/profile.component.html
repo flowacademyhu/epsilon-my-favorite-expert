@@ -115,11 +115,12 @@
                       <div *ngFor="let expert of favoriteExperts">
                         <a href="#">
                           <blockquote class="quote">
-                            <span
-                              >{{ expert.name }} -
-                              {{ expert.profession[0] }}</span
-                            >
-                          </blockquote>
+                            <p
+                              ><u>{{ expert.name }}</u></p> 
+                              <div *ngFor="let prof of expert.profession">
+                              <span>--{{ prof }}</span>
+                              </div>
+                            </blockquote>
                         </a>
                       </div>
 

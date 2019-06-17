@@ -23,21 +23,21 @@ export class ProfileComponent implements OnInit {
     this.user = new User();
     this.user.address = new Address();
    }
-  
+
   isAddressBlank():boolean {
-    if (this.user.address == undefined) {
+    if (this.user.address === undefined) {
       return true;
     }
-    return this.user.address.country==undefined ||
-    this.user.address.city==undefined||
-    this.user.address.street==undefined||
-    this.user.address.number==undefined;
+    return this.user.address.country === undefined ||
+    this.user.address.city === undefined||
+    this.user.address.street === undefined||
+    this.user.address.number === undefined;
   }
 
   ngOnInit() {
-    this.router.events.subscribe((asd) => {
+    this.router.events.subscribe((emptydata) => {
       this.loadData();
-    })
+    });
     this.loadData();
 
   }
