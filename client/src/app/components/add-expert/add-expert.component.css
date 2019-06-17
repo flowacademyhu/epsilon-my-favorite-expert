@@ -1,5 +1,4 @@
 .masthead {
-  height: 100vh;
   min-height: 500px;
   background-image: url('src/assets/image/background4.jpg');
   background-size: cover;
@@ -48,4 +47,13 @@
 
   .py-5{
       background-color: orange;
+  }
+.div {
+    height: 50px;
+    width: 50px;
+    text-align: center;
+  }
+  #paragraph {
+    font-size: 30px;
+    line-height: 50px;
   }

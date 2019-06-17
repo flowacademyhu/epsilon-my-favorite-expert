@@ -70,6 +70,14 @@
         name="profession"
         [(ngModel)]="profession"
       />
+      <button type="button" name="saveProfession" class="btn btn-light" (click)="addProfession()">Add profession</button>
+      <div *ngIf="expert.profession.length > 0">
+      <div *ngFor="let prof of expert.profession">
+        <p id="paragraph">
+         - {{prof}}
+        </p>
+      </div>
+    </div>
       <h5>Phone:</h5>
       <input
         class="form-control"
@@ -79,6 +87,7 @@
       />
       <button type="button" name="save" class="btn btn-light" (click)="addExpert()">Add expert</button>
     </form> 
+    
   </div> 
 </div>
 </div>
