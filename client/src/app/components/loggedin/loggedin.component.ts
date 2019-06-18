@@ -11,16 +11,11 @@ import { ExpertService } from 'src/app/shared/services/expert.service';
 export class LoggedinComponent implements OnInit {
 
   constructor(
-    private activateRoute: ActivatedRoute
+   
   ) { }
 
   ngOnInit() {
-    this.activateRoute.queryParams.subscribe(params => {
-      if (params == null) {
-        console.log()
-      } else {
-        localStorage.setItem('token', params['token']);
-      }
-    });
+   
+    
   }
 }
