@@ -25,6 +25,7 @@ export class ListingComponent implements OnInit {
     );
   }
   getAllExperts() {
+    window.location.reload();
     this.expertService.listAllExperts().subscribe(
       (data: Expert[]) => {
         this.experts = data;
