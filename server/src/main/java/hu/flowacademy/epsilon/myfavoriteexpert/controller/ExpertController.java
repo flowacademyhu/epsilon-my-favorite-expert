@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/auth/expert")
+@RequestMapping("/expert")
 public class ExpertController {
 
     @Autowired

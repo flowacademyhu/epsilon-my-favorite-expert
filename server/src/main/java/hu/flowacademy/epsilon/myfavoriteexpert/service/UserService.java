@@ -1,5 +1,6 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
+import hu.flowacademy.epsilon.myfavoriteexpert.exception.UserNotAuthenticatedExeption;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
@@ -23,16 +24,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<UserPrincipal> getCurrentUser() {
+    public UserPrincipal getCurrentUser() {
         return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
                 .map(Authentication::getPrincipal)
-                .map(user -> (UserPrincipal) user);
-//                .orElseThrow(UserNotAuthenticated::new);
-        // @TODO Forbidden:
+                .map(user -> (UserPrincipal) user)
+                .orElseThrow(UserNotAuthenticatedExeption::new);
     }
 
     public UUID getCurrentUserId() {
-        return getCurrentUser().map(UserPrincipal::getId).orElse(null);
+        return getCurrentUser().getId();
     }
 
     public User save(User user) {
