@@ -18,8 +18,8 @@ public class ExpertController {
     private ExpertService expertService;
 
     @PostMapping("/add")
-    public Expert addExpert(@RequestHeader(value = "Authorization") String accestoken ,@RequestBody Expert expert) {
-        return expertService.save(accestoken,expert);
+    public Expert addExpert(@RequestBody Expert expert) {
+        return expertService.save(expert);
     }
 
     @GetMapping("/get/{id}")
@@ -43,8 +43,8 @@ public class ExpertController {
     }
 
     @GetMapping("/favorite")
-    public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
-        return expertService.getFavoriteExperts(accestoken);
+    public List<Expert> getFavoriteExperts() {
+        return expertService.getFavoriteExperts();
     }
 
 }

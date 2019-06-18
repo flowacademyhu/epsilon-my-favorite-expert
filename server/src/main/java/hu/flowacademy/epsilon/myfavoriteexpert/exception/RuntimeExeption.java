@@ -14,7 +14,7 @@ public class RuntimeExeption {
     @ResponseBody
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String errorHandler(ValidationException e) {
+    public String errorHandler(RuntimeException e) {
 
         return e.getMessage();
     }
