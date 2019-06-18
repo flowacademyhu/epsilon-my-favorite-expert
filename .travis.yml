@@ -3,4 +3,5 @@ language: java
 services:
   - elasticsearch
 script:
-  - "./server/mvnw clean test"
+  - "cd ./server"
+  - "./mvnw clean test"
