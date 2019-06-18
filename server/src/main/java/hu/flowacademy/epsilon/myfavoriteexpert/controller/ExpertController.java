@@ -28,8 +28,8 @@ public class ExpertController {
     }
 
     @GetMapping("/getall")
-    public ResponseEntity<List<Expert>> getAll() {
-        return ResponseEntity.ok(expertService.find());
+    public List<Expert> getAll() {
+        return expertService.find();
     }
 
     @DeleteMapping("/delete/{id}")

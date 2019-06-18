@@ -43,13 +43,13 @@ public class UserService {
         return userRepository.findAll(Pageable.unpaged()).getContent();
     }
 
-    public User findByid(String accestoken) {
+    public User findByid() {
 
-        return userRepository.findById(getIdFromAccesToken(accestoken)).orElseThrow(RuntimeException::new);
+        return userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
     }
 
-    public User saveAddress(String accestoken, Address address) {
-        User user = userRepository.findById(getIdFromAccesToken(accestoken)).orElseThrow(RuntimeException::new);
+    public User saveAddress(Address address) {
+        User user = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
         if (user == null) {
             throw new RuntimeException("User not found, id is invalid");
         } else {
@@ -62,17 +62,5 @@ public class UserService {
     public User deleteExpert(User user, UUID expertid) {
         user.deleteExpert(expertid);
         return userRepository.save(user);
-    }
-
-    public UUID getIdFromAccesToken(String accestoken) {
-
-        UUID userId = null;
-        Iterable<User> users = userRepository.findAll();
-        for (var user: users) {
-            if (user.getAccessToken().equals(accestoken)) {
-                userId = user.getId();
-            }
-        }
-        return userId;
     }
 }

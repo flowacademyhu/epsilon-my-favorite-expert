@@ -6,15 +6,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.validation.ValidationException;
 
 @ControllerAdvice
-public class RuntimeExeption {
+public class UserNotAuthenticatedAdvice {
 
     @ResponseBody
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String errorHandler(ValidationException e) {
+    @ExceptionHandler(UserNotAuthenticatedExeption.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String errorHandler(UserNotAuthenticatedExeption e) {
 
         return e.getMessage();
     }
