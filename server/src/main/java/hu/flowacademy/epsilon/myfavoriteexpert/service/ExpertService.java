@@ -70,17 +70,6 @@ public class ExpertService {
     }
 
     public List<Expert> getFavoriteExperts() {
-//        User user = userService.findByid(accestoken);
-//        List<Expert> favoriteExperts = new ArrayList();
-//        if (user.getExperts() == null)
-//            return List.of();
-//        for (var expertid: user.getExperts()) {
-//            Optional<Expert> expert = expertRepository.findById(expertid);
-//            if (expert.isPresent()) {
-//                favoriteExperts.add(expert.get());
-//            }
-//        }
-//        return favoriteExperts;
         return userService.findByid()
                 .getExperts()
                 .stream()
