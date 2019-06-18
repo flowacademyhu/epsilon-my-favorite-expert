@@ -26,7 +26,6 @@ export class ListingComponent implements OnInit {
       (expert: Expert) => {
         this.favoriteExpert = this.favoriteExpert.filter(obj => obj !== expert);
         console.log('favoriteExpert removed');
-
       }
     );
   }
@@ -39,12 +38,7 @@ export class ListingComponent implements OnInit {
     );
   }
   getAllExperts() {
-    window.location.reload();
-    this.expertService.listAllExperts().subscribe(
-      (data: Expert[]) => {
-        this.experts = data;
-      }
-    );
+    this.loadData();
   }
   loadData() {
     this.expertService.listAllExperts().subscribe(

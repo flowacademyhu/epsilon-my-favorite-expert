@@ -21,32 +21,8 @@ export class ExpertComponent implements OnInit {
   ngOnInit() {
   }
 
-  // removeFromFavorite() {
-  //   this.isFavoriteExpert = !this.isFavoriteExpert;
-  //   this.listing.removeFromFavorite(this.expert);
-    
-    
-  //   this.userService.removeFromFavorite(this.expert).subscribe((data: any) => {
-  //     console.log("megtortent");
-  //   });
-  //}
-  // isFavorite() {
-  //   return this.isFavoriteExpert;
-  // }
-
-  // addToFavorite() {
-  //   this.isFavoriteExpert = !this.isFavoriteExpert;
-  //   this.listing.addToFavorite(this.expert);
-  //   this.userService.addToFavorite(this.expert).subscribe(
-  //     (data: any) => {
-  //       console.log("megtortent ez is");
-  //     }
-  //   );
-
-  // }
   removeFromFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
-   // this.communicationService.addExpertSubject.next(this.expert);
    this.communicationService.removeFromFavorite(this.expert);
    this.userService.removeFromFavorite(this.expert).subscribe((data: any) => {
         console.log('sikeresen torolve');
@@ -55,7 +31,6 @@ export class ExpertComponent implements OnInit {
   }
   addToFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
-   // this.communicationService.removeExpertSubject.next(this.expert);
    this.communicationService.addToFavorite(this.expert);
      this.userService.addToFavorite(this.expert).subscribe(
       (data: any) => {
