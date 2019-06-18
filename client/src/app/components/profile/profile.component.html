@@ -86,7 +86,7 @@
                   </div>
                   <ng-template #Address>
                     <div class="nameBlock">
-                      <a routerLink="../add-address" class="round-shape name">
+                      <a routerLink="../add-address" (click)="saveAddressLocalStorage()" class="round-shape name">
                         Address
                       </a>
                       <div class="divider">
