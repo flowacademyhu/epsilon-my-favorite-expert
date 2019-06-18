@@ -1,0 +1,6 @@
+jdk: openjdk11
+language: java
+services:
+  - elasticsearch
+script:
+  - "./server/mvnw clean test"
