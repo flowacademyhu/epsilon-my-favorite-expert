@@ -62,15 +62,19 @@ public class User {
     public void addExpert(UUID expertid) {
         if (experts == null) {
             experts = new ArrayList<>();
+            experts.add(expertid);
         } else {
             experts.add(expertid);
         }
     }
     public void deleteExpert(UUID expertid) {
-        for (var expert : experts) {
-            if (expertid.toString().equals(expert.toString())) {
-                experts.remove(expertid);
-            }
+//        for (var expert : experts) {
+//            if (expertid.toString().equals(expert.toString())) {
+//                experts.remove(expertid);
+//            }
+//        }
+        if (experts.contains(expertid)) {
+            experts.remove(expertid);
         }
     }
 

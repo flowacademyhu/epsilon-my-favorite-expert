@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Address } from 'src/app/models/address.model';
+import { Expert } from 'src/app/models/expert.model';
+import { ExpertService } from 'src/app/shared/services/expert.service';
+import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -10,28 +15,40 @@ import { User } from 'src/app/models/user.model';
 export class ProfileComponent implements OnInit {
 
   user: User;
+  favoriteExperts: Expert[];
   
 
-  constructor(private userservice: UserService) { }
-  
+  constructor(private userservice: UserService, private expertService: ExpertService, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () =>  false;
+    this.user = new User();
+    this.user.address = new Address();
+   }
+
   isAddressBlank():boolean {
-    return this.user.address.country==undefined ||
-    this.user.address.city==undefined||
-    this.user.address.street==undefined||
-    this.user.address.number==undefined;
+    if (this.user.address == undefined) {
+      return true;
+    }
+    return this.user.address.country == undefined ||
+    this.user.address.city == undefined||
+    this.user.address.street == undefined||
+    this.user.address.number == undefined;
   }
 
   ngOnInit() {
-    this.userservice.getCurrentUser().subscribe(
-      (data: any) => {
-        this.user = data;
-        console.log(this.user);
-        // this.user.address.country='hungary';
-        // this.user.address.city = 'Szeged';
-        // this.user.address.number = 'Git falva';
-        // this.user.address.street = 'UjSzeged';
-      }
-    );
+    this.router.events.subscribe((emptydata) => {
+      this.loadData();
+    });
+    this.loadData();
+
   }
+
+  loadData() {
+    forkJoin(this.userservice.getCurrentUser(), this.expertService.getFavoriteExperts())
+    .subscribe(([currentUser, experts]) => {
+      this.user = currentUser;
+      this.favoriteExperts = experts;
+    });
+  }
+ 
 
 }

@@ -1,5 +1,5 @@
 .masthead {
-  height: 100vh;
+  
   min-height: 500px;
   background-image: url('src/assets/image/background4.jpg');
   background-size: cover;
@@ -31,17 +31,8 @@
   font-weight: bold
   }
 
-  .card-body{
-      background-color: orange;
-  }
 
-  .card{
-      border-color: black;
-      font-size: 20px;
-      box-shadow: 0 20px 10px 5px black;
-      color: white;
-  }
-
+ 
   .btn{
      margin-right: 15px
   }

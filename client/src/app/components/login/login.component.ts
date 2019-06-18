@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
   constructor(private translate: TranslateService) {
     translate.setDefaultLang('en');
    }

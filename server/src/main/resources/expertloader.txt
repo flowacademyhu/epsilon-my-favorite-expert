@@ -1,0 +1,10 @@
+Csúri László;gázvezeték szerelő;+36303304880;Magyarország; Szeged;Fő utca; 4
+Nagy Márton;szobafestő;+36202233145;Magyarország; Szeged;Béke utca; 19
+Kiss Béla;ács;+36209642634;Magyarország; Szeged;Felszabadulás utca; 26
+Kovács András;mindenes;+36708352167;Magyarország; Szeged;Szőlő utca; 75
+Tülkös József Márton;kárpitos;+36705623491;Magyarország; Szeged;Kossuth utca; 31
+Szabó Imre;hentes;+36304382763;Magyarország; Szeged;Mars tér; 2
+Sass Ádám;közjegyző;+367083526743;Magyarország; Szeged;Széchenyi tér; 7
+Kiss Tünde;tolmács;+36306743826;Magyarország; Szeged;Tímár utca; 21
+Orosz Nóra;fodrász;+36703526732;Magyarország; Szeged;Nemestakács utca; 3
+Nagy Izabella;kozmetikus;+36205374982;Magyarország; Szeged;Bécsi körút; 6
