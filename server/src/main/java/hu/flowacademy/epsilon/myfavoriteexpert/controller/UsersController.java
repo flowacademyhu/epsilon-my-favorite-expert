@@ -1,6 +1,7 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.controller;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.UserService;
@@ -27,8 +28,16 @@ public class UsersController {
 
         return ResponseEntity.ok(userService.find());
     }
-
-
+    @GetMapping("/getbyname")
+    public List<User> getByName( @RequestBody String name) {
+        return userService.findUserByName(name);
+    }
+//
+//    @GetMapping("/getfriendsexperts")
+//    public List<Expert> getExpertsOfFriend(@RequestBody String name) {
+//        List<User> users = userService.findUserByName(name);
+//        return userService.findByid()
+//    }
     @GetMapping("/get")
     public ResponseEntity<User> getById(@RequestHeader(value = "Authorization") String accestoken) {
         if (accestoken==null) {
