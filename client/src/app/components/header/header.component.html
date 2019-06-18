@@ -1,36 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-light navbar-fixed-top">
-  <div class="container">
-     <a class="navbar-brand" href="#"><img src="" width="65px">{{'Title' | translate:user}}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarResponsive">
-  <ul class="navbar-nav ml-auto navbar-right">
-  <li class="nav-item">
-  <a class="nav-link" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect" *ngIf = "!isLoggedin()">{{'Login' | translate:user}}</a>
-  </li>
-  
-  <li class="nav-item" *ngIf = "isLoggedin()">
-    <a class="nav-link" href="http://localhost:4200/profile">{{'Profile' | translate:user}}</a>
-    </li>
-    <li class="nav-item" *ngIf = "isLoggedin()">
-      <a class="nav-link" href="http://localhost:4200/add">{{'Add expert' | translate:user}}</a>
-      </li>
-      <li class="nav-item" *ngIf = "isLoggedin()">
-        <a class="nav-link" href="http://localhost:4200/list-experts">{{'List expert' | translate:user}}</a>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">{{'Title' | translate:user}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item active">
+              <a class="nav-link" *ngIf = "!isLoggedin()" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect" >{{'Login' | translate:user}} <span class="sr-only">(current)</span></a>
+            </li>
+        <li class="nav-item active">
+          <a class="nav-link" *ngIf = "isLoggedin()" routerLink="/profile" routerLinkActive="active">{{'Profile' | translate:user}} <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item" *ngIf = "isLoggedin()">
-          <a class="nav-link" href="#">{{'Logout' | translate:user}}</a>
-          </li>
-        
-  <li class="nav-item">
-  <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
-  </li>
-  <li class="nav-item">
-  <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
-  </li>
-  </ul>
-  </div>
-  </div>
-  </nav>
-  
+        <li class="nav-item">
+          <a class="nav-link" *ngIf = "isLoggedin()" routerLink="/add" routerLinkActive="active">{{'Add expert' | translate:user}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf = "isLoggedin()" routerLink="/list-experts" routerLinkActive="active">{{'List expert' | translate:user}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" *ngIf = "isLoggedin()" href="#">{{'Logout' | translate:user}}</a>
+        </li>
+        <li class="nav-item">
+            <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
+        </li>
+         <li class="nav-item">
+            <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
+        </li>
+      </ul>
