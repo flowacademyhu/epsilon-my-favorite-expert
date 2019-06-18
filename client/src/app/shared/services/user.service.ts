@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Expert } from 'src/app/models/expert.model';
 
-const BASE_URI = 'http://localhost:8080/auth/user';
+const BASE_URI = 'http://localhost:8080/user';
 @Injectable({
   providedIn: 'root'
 })

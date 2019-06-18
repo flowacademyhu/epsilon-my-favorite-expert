@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Expert } from 'src/app/models/expert.model';
 import { Observable } from 'rxjs';
 
-const BASE_URI = 'http://localhost:8080/auth/expert';
+const BASE_URI = 'http://localhost:8080/expert';
 @Injectable({
   providedIn: 'root'
 })
