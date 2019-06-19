@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-let headerDisplay: any = localStorage.getItem('token');
+import { TranslateService } from '@ngx-translate/core';
+import { AppStateService } from 'src/app/shared/services/app-state.service';
 
 @Component({
   selector: 'app-header',
@@ -10,21 +10,17 @@ let headerDisplay: any = localStorage.getItem('token');
 
 
 export class HeaderComponent implements OnInit {
+  state: any;
+  constructor(private translate: TranslateService, private appState: AppStateService) {
+    this.state = this.appState;
+    translate.setDefaultLang('en');
+   }
 
-  isLoggedin() {
-    if (headerDisplay !== null) {
-      return true;
-      
-    } else {
-      return false;
-    }
- }
-
-  constructor() { }
+   switchLanguage(language: string) {
+    this.translate.use(language);
+  }
 
   ngOnInit() {
   }
-
- 
 
 }

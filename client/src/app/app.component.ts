@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppStateService } from './shared/services/app-state.service';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +9,23 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'my-favorite-expert';
-
+  tokenParam: String;
   constructor(
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private authService: AuthService,
+    private appStateService: AppStateService
   ) { }
 
   ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {
-      if (params == null) {
-        console.log()
-      } else {
-        localStorage.setItem('token', params['token']);
+      this.tokenParam = params['token'];
+      if (this.tokenParam != null) {
+      localStorage.setItem('token', params['token']);
+      this.authService.getLoggedInUser().subscribe(
+        user => {
+         this.appStateService.user = user;
+        }
+      );
       }
     });
   }
