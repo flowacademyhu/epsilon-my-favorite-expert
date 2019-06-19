@@ -4,10 +4,15 @@ matrix:
       sudo: false
       jdk: openjdk11
       services:
-      - elasticsearch
+      - docker
       before_script:
-      - "curl --connect-timeout 15 http://localhost:9200"
-      - "sleep 10"
+      - "cd ./server"
+      - sudo rm /usr/local/bin/docker-compose
+      - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+      - chmod +x docker-compose
+      - sudo mv docker-compose /usr/local/bin
+      - docker-compose up -d
+      - slepp 15
       script:
       - "cd ./server"
       - "./mvnw clean test"
