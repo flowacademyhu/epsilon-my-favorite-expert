@@ -10,7 +10,6 @@ matrix:
       - docker-compose up -d
       - sleep 15
       script:
-      - "cd ./server"
       - "./mvnw clean test"
     - language: node_js
       node_js: "8.15"
