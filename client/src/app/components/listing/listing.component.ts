@@ -52,12 +52,7 @@ export class ListingComponent implements OnInit {
   }
 
   isFavoriteExpert(expert: Expert): boolean {
-    for (let i = 0; i < this.favoriteExpert.length; i++) {
-      if (expert.id === this.favoriteExpert[i].id) {
-        return true;
-      }
-    }
-    return false;
+    return !!this.favoriteExpert.find(exp => exp.id === expert.id);
   }
   addToFavorite(expert : Expert) {
     this.favoriteExpert.push(expert);
