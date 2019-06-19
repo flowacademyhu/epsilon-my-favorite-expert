@@ -5,7 +5,7 @@ matrix:
       services:
       - elasticsearch
       before_script:
-      - "cat /var/log/elasticsearch/elasticsearch.log"
+      - "elasticsearch -v"
       - "sleep 10"
       script:
       - "cd ./server"

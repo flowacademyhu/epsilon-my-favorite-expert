@@ -23,4 +23,8 @@ export class LoggedinComponent implements OnInit {
       }
     });
   }
+
+  switchLanguage(lang: string) {
+
+  }
 }
