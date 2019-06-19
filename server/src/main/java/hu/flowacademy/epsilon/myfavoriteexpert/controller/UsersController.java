@@ -55,4 +55,16 @@ public class UsersController {
             return ResponseEntity.ok(userService.deleteExpert(user,expertid));
         }
     }
+    @PutMapping("/add-language")
+    public ResponseEntity<User> setLanguage(@RequestBody String language) {
+        User user = userService.findByid();
+        user.setLanguage(language);
+        return ResponseEntity.ok(userService.save(user));
+    }
+    @GetMapping("/get-language")
+    public String getLanguage() {
+        User user = userService.findByid();
+        return user.getLanguage();
+    }
+
 }
