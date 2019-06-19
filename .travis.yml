@@ -1,7 +1,16 @@
-jdk: openjdk11
-language: java
-services:
-  - elasticsearch
-script:
-  - "cd ./server"
-  - "./mvnw clean test"
+matrix:
+  include:
+    - language: java
+      jdk: openjdk11
+      services:
+      - elasticsearch
+      script:
+      - "cd ./server"
+      - "./mvnw clean test"
+    - language: node_js
+      node_js: "8.15"
+      script:
+      - "cd ./client"
+      - "npm install -g @angular/cli && npm install"
+      - "ng build --aot"
+
