@@ -14,7 +14,8 @@ const routes: Routes = [
   {path: 'add', component: AddExpertComponent, canActivate: [LoggedinGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [LoggedinGuard]},
   {path: 'list-experts', component: ListingComponent},
-  {path: 'add-address', component: AddAddressComponent, canActivate: [LoggedinGuard]}
+  {path: 'add-address', component: AddAddressComponent, canActivate: [LoggedinGuard]},
+  {path: '**', component: LoginComponent}
 ];
 
 @NgModule({
