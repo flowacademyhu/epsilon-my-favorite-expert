@@ -4,9 +4,12 @@ import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -75,9 +78,10 @@ public class ExpertService {
                 .collect(Collectors.toList());
     }
 
-    public List<Expert> findExpertTest() {
-        Pageable pageable = PageRequest.of(0, 3);
-        return expertRepository.findExpertTest(pageable).getContent();
+    public List<Expert> findExpertTest(String searchParams) {
+        Pageable pageable = PageRequest.of(0,10);
+        searchParams.replaceAll("_"," ");
+        return expertRepository.findExpertTest(searchParams,pageable).getContent();
     }
 
 
