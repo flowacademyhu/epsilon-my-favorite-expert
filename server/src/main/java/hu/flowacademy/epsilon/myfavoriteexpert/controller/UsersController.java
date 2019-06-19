@@ -66,5 +66,11 @@ public class UsersController {
         User user = userService.findByid();
         return user.getLanguage();
     }
+//    @GetMapping("/othersfavorites")
+//    public List<UUID> getOthersFavouriteExperts(@PathVariable ) {
+//        User user = userService.findByid();
+//        List<UUID> expert = user.getExperts();
+//        return expert;
+//    }
 
 }
