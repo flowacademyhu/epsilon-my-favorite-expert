@@ -1,6 +1,9 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.repository;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +12,9 @@ import java.util.UUID;
 
 @Repository
 public interface ExpertRepository  extends ElasticsearchRepository<Expert, UUID> {
+
+    @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"Nagy Izabella\",\"type\": \"best_fields\", \"fields\": [\"name\",\"address.city\",\"address.country\",\"phone\"],\"fuzziness\" : \"auto\"} }}}")
+    Page<Expert> findExpertTest(Pageable pageable);
+
 
 }

@@ -47,4 +47,9 @@ public class ExpertController {
         return expertService.getFavoriteExperts();
     }
 
+    @GetMapping("/test")
+    public List<Expert> findExpertTest() {
+        return expertService.findExpertTest();
+    }
+
 }

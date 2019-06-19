@@ -5,6 +5,7 @@ import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +73,11 @@ public class ExpertService {
                 .stream()
                 .map(expertid -> expertRepository.findById(expertid).get())
                 .collect(Collectors.toList());
+    }
+
+    public List<Expert> findExpertTest() {
+        Pageable pageable = PageRequest.of(0, 3);
+        return expertRepository.findExpertTest(pageable).getContent();
     }
 
 
