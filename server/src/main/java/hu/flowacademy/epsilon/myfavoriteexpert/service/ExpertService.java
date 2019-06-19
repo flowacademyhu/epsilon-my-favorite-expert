@@ -63,7 +63,8 @@ public class ExpertService {
     public void addProfession(UUID id, String profession) {
         expertRepository.findById(id).ifPresent(expert -> {
             expert.addProfession(profession);
-            expertRepository.save(expert);});
+            expertRepository.save(expert);
+        });
     }
 
     public List<Expert> getFavoriteExperts() {
