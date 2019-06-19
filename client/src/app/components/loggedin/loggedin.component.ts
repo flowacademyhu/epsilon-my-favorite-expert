@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-loggedin',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggedinComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService
+  ) { }
 
   ngOnInit() {
+  }
+
+  switchLanguage(lang: string) {
+    this.translate.use(lang).subscribe(change => {
+      console.log(`Lang changed to: ${lang} ${change}`);
+    });
   }
 
 }
