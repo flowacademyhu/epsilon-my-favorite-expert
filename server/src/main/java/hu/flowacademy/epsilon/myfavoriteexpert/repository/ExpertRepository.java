@@ -13,8 +13,10 @@ import java.util.UUID;
 @Repository
 public interface ExpertRepository  extends ElasticsearchRepository<Expert, UUID> {
 
-    @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"Nagy Izabella\",\"type\": \"best_fields\", \"fields\": [\"name\",\"address.city\",\"address.country\",\"phone\"],\"fuzziness\" : \"auto\"} }}}")
+    @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"Szeged\",\"type\": \"best_fields\", \"fields\": [\"name\",\"address.city\",\"address.country\",\"phone\"],\"fuzziness\" : \"auto\"} }}}")
     Page<Expert> findExpertTest(Pageable pageable);
-
+//JSONArray
+    //@Query("{\"bool\": {\"must\": {\"terms\": {\"your_field_name\":?0}}}}")
+    //List<ParsedContent> searchInBody(JSONArray keyword);
 
 }
