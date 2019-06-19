@@ -49,6 +49,14 @@ export class ProfileComponent implements OnInit {
       this.favoriteExperts = experts;
     });
   }
+
+  saveAddressLocalStorage() {
+    localStorage.setItem('country', this.user.address.country);
+    localStorage.setItem('city', this.user.address.city);
+    localStorage.setItem('street', this.user.address.street);
+    localStorage.setItem('number', this.user.address.number);
+
+  }
  
 
 }

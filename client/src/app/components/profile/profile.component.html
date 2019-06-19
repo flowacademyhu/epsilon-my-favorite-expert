@@ -14,7 +14,7 @@
               <div class="dgCard">
                 <div class="strip-block">
                   <div class="profile-logo">
-                    <img alt="/assets/image/tool1.jpg" [src]="user.imageUrl" />
+                    <img alt="profile picture" [src]="user.imageUrl" />
                   </div>
                   <div class="strip"></div>
                   <div class="short-details">
@@ -32,7 +32,7 @@
                   </div>
                   <ng-template #Address>
                     <div class="nameBlock">
-                      <a routerLink="../add-address" class="round-shape name">
+                      <a routerLink="../add-address" (click)="saveAddressLocalStorage()" class="round-shape name">
                         Address
                       </a>
                       <div class="divider">

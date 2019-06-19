@@ -1,5 +1,5 @@
 
-    <div class="bestSnippArea1077 d-flex">
+    <div class="bestSnippArea1077 d-flex" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">
         <div class="col-sm-3 col-4">
           <div class="bsBox">
            <div class="dgCard ">
@@ -26,11 +26,11 @@
               </div>
               <div class="details">
                 <div class="nameBlock">
-                  <div *ngIf="isFavorite()">
+                  <div *ngIf="isFavoriteExpert">
                   <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
                   <button (click)="removeFromFavorite()" class="round-shape name">Remove From Favorite</button>
                   </div>
-                  <div *ngIf="!isFavorite()">
+                  <div *ngIf="!isFavoriteExpert">
                   <button (click)="addToFavorite()" class="round-shape name">Add to Favorite</button>
                   
                 </div>

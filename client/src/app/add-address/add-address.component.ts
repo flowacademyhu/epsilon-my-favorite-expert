@@ -18,11 +18,7 @@ export class AddAddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.address.country='';
-    this.address.city='';
-    this.address.number='';
-    this.address.street='';
-
+    this.fillAddressFields();
   }
 
   addAddress(){
@@ -30,6 +26,27 @@ export class AddAddressComponent implements OnInit {
       console.log(data);
     });
     this.router.navigate(['profile']);
+  }
+  fillAddressFields() {
+    const tempAddress = new Address();
+    tempAddress.country = localStorage.getItem('country');
+    tempAddress.city = localStorage.getItem('city');
+    tempAddress.street = localStorage.getItem('street');
+    tempAddress.number = localStorage.getItem('number');
+    if (!this.isAddressBlank(tempAddress)) {
+      this.address = tempAddress;
+    }
+
+  }
+
+  isAddressBlank(address: Address):boolean {
+    if (this.address == undefined) {
+      return true;
+    }
+    return this.address.country == undefined ||
+    this.address.city == undefined||
+    this.address.street == undefined||
+    this.address.number == undefined;
   }
 
 

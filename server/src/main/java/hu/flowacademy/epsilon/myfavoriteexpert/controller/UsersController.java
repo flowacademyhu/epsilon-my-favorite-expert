@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/auth/user")
+@RequestMapping(path = "/user")
 public class UsersController {
 
     @Autowired
@@ -23,28 +23,23 @@ public class UsersController {
 
 
     @GetMapping("/getall")
-    public ResponseEntity<List<User>> getAll() {
-
-        return ResponseEntity.ok(userService.find());
+    public List<User> getAll() {
+        return userService.find();
     }
 
 
     @GetMapping("/get")
-    public ResponseEntity<User> getById(@RequestHeader(value = "Authorization") String accestoken) {
-        if (accestoken==null) {
-            throw new RuntimeException("URES A TOKEN");
-        }
-        System.out.println(accestoken);
-        return ResponseEntity.ok(userService.findByid(accestoken));
+    public ResponseEntity<User> getById() {
+        return ResponseEntity.ok(userService.findByid());
     }
     @PostMapping("/save-address")
-    public ResponseEntity<User> saveAddress(@RequestHeader(value = "Authorization") String accestoken, @RequestBody Address address) {
-        return ResponseEntity.ok(userService.saveAddress(accestoken,address));
+    public ResponseEntity<User> saveAddress(@RequestBody Address address) {
+        return ResponseEntity.ok(userService.saveAddress(address));
     }
 
     @PutMapping("/add-expert/{expertid}")
-    public ResponseEntity<User> addExpertToUser(@RequestHeader(value = "Authorization") String accestoken, @PathVariable UUID expertid) {
-        User user = userService.findByid(accestoken);
+    public ResponseEntity<User> addExpertToUser(@PathVariable UUID expertid) {
+        User user = userService.findByid();
         if (user != null) {
             user.addExpert(expertid);
         }
@@ -52,8 +47,8 @@ public class UsersController {
     }
 
     @PutMapping("/delete-expert/{expertid}")
-    public ResponseEntity<User> deleteExpertFromUser(@RequestHeader(value = "Authorization") String accestoken, @PathVariable UUID expertid) {
-        User user = userService.findByid(accestoken);
+    public ResponseEntity<User> deleteExpertFromUser(@PathVariable UUID expertid) {
+        User user = userService.findByid();
         if (user == null) {
             throw new RuntimeException("User not found with this accestoken");
         } else {

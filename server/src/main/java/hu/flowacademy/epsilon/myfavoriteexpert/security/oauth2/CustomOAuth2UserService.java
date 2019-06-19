@@ -84,16 +84,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
 
-
-       /* Provider provider = new Provider();
-        if (AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()).toString().equalsIgnoreCase("google")) {
-            provider.setProvider_type("google");
-        }
-        provider.setEmail(oAuth2UserInfo.getEmail());
-        provider.setName(oAuth2UserInfo.getName());
-        provider.setProfile_picture(oAuth2UserInfo.getImageUrl());
-        provider.setProvider_id(oAuth2UserInfo.getId());
-        user.setProviders(provider);*/
         user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
                 OAuth2AccessToken::getExpiresAt)
                 .map(instant -> LocalDateTime.ofInstant(instant, ZoneOffset.ofHours(2)))
