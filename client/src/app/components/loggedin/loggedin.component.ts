@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
+import { ExpertService } from 'src/app/shared/services/expert.service';
 
 @Component({
   selector: 'app-loggedin',
@@ -9,16 +11,16 @@ import { TranslateService } from '@ngx-translate/core';
 export class LoggedinComponent implements OnInit {
 
   constructor(
-    private translate: TranslateService
+    private activateRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-  }
-
-  switchLanguage(lang: string) {
-    this.translate.use(lang).subscribe(change => {
-      console.log(`Lang changed to: ${lang} ${change}`);
+    this.activateRoute.queryParams.subscribe(params => {
+      if (params == null) {
+        console.log();
+      } else {
+        localStorage.setItem('token', params['token']);
+      }
     });
   }
-
 }
