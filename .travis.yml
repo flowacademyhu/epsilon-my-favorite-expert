@@ -1,6 +1,7 @@
 matrix:
   include:
     - language: java
+      sudo: false
       jdk: openjdk11
       services:
       - elasticsearch
