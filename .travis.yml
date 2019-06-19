@@ -4,6 +4,9 @@ matrix:
       jdk: openjdk11
       services:
       - elasticsearch
+      before_script:
+      - "cat /var/log/elasticsearch/elasticsearch.log"
+      - "sleep 10"
       script:
       - "cd ./server"
       - "./mvnw clean test"
