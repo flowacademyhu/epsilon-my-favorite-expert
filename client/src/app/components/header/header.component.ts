@@ -22,5 +22,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  logout() {
+    this.state.user = null;
+    this.appState.user.accessToken = null;
+  }
 }
