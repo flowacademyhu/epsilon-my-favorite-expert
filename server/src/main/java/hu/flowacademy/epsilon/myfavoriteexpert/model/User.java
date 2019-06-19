@@ -79,8 +79,4 @@ public class User {
             experts.remove(expertid);
         }
     }
-
-
-
-
 }
