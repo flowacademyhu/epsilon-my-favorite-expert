@@ -2,6 +2,7 @@ package hu.flowacademy.epsilon.myfavoriteexpert.security.oauth2;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.OAuth2AuthenticationProcessingException;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.AuthProvider;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Provider;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
@@ -80,6 +81,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setName(oAuth2UserInfo.getName());
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
+
         user.setExpiresAt(Optional.ofNullable(oAuth2UserRequest.getAccessToken()).map(
                 OAuth2AccessToken::getExpiresAt)
                 .map(instant -> LocalDateTime.ofInstant(instant, ZoneOffset.ofHours(2)))
