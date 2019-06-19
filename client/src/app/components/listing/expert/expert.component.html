@@ -1,0 +1,69 @@
+    <!-- <div class="card col-12">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Palomena_prasina_-_top_%28aka%29.jpg/260px-Palomena_prasina_-_top_%28aka%29.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{expert.name}}</h5>
+        <p class="card-text">
+            <li class="list-group-item"> {{expert.phone}} </li>
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        
+          
+          <li class="list-group-item"> {{expert.address.country}}</li>
+          <li class="list-group-item"> {{expert.address.city}} </li>
+          <li class="list-group-item"> {{expert.address.street}} </li>
+          <li class="list-group-item"> {{expert.address.number}} </li>
+          
+
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Expert profile</a>
+      </div>
+    </div> -->
+
+    <div class="bestSnippArea1077 d-flex" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">
+        <div class="col-sm-3 col-4">
+          <div class="bsBox">
+           <div class="dgCard ">
+              <div class="strip-block">
+                <div class="profile-logo">
+                  <img alt="" src="/assets/image/tool1.jpg" />
+                </div>
+                <div class="strip"></div>
+                <div class="short-details">
+                  <blockquote class="logoName">{{ expert.name }}
+                  </blockquote>
+                  <blockquote class="quote">
+                    {{ expert.phone }}
+                  </blockquote>
+                  <div class="divider">
+                    <blockquote class="quote">
+                      {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
+                    </blockquote>
+                    <blockquote *ngFor="let prof of expert.profession" class="quote">
+                      {{ prof }}
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+              <div class="details">
+                <div class="nameBlock">
+                  <div *ngIf="isFavoriteExpert">
+                  <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
+                  <button (click)="removeFromFavorite()" class="round-shape name">Remove From Favorite</button>
+                  </div>
+                  <div *ngIf="!isFavoriteExpert">
+                  <button (click)="addToFavorite()" class="round-shape name">Add to Favorite</button>
+                  
+                </div>
+                  
+                  <div class="divider">
+                    <div class="stick stick1"></div>
+                    <div class="stick stick2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  </div>
+  </div>
+  </div>    

@@ -100,6 +100,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/",
+                    "/swagger-resources/**",
+                    "/webjars/**",
+                    "/swagger-ui.html",
+                    "/v2/api-docs",
                     "/error",
                     "/favicon.ico",
                     "/**/*.png",
