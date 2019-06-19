@@ -6,7 +6,7 @@ matrix:
       services:
       - elasticsearch
       before_script:
-      - "elasticsearch -v"
+      - "curl --connect-timeout=15 http://localhost:9200"
       - "sleep 10"
       script:
       - "cd ./server"
