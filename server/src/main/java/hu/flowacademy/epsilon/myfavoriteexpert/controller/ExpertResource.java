@@ -23,7 +23,7 @@ public class ExpertResource {
     }
 
     @GetMapping("/{id}")
-    public Optional<Expert> getOne(@PathVariable UUID id) {
+    public Expert getOne(@PathVariable UUID id) {
         return expertService.findById(id);
     }
 

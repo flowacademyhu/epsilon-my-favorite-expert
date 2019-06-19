@@ -41,8 +41,13 @@ public class ExpertService {
 
     }
 
-    public Optional<Expert> findById(UUID id) {
-        return expertRepository.findById(id);
+    public Expert findById(UUID id) {
+        Optional<Expert> expert = expertRepository.findById(id);
+        if (expert.isPresent()) {
+            return expert.get();
+        } else {
+            return null;
+        }
     }
 
 

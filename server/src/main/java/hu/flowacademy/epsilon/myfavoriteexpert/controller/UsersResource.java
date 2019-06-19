@@ -50,7 +50,7 @@ public class UsersResource {
         return ResponseEntity.ok(userService.save(user));
     }
 
-    @DeleteMapping("user/{expertid}")
+    @DeleteMapping("userazt/{expertid}")
     public ResponseEntity<User> deleteExpertFromUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
         if (user == null) {
