@@ -81,6 +81,7 @@ public class ExpertService {
     public List<Expert> findExpertTest(String searchParams) {
         Pageable pageable = PageRequest.of(0,10);
         searchParams.replaceAll("_"," ");
+        GeoCodingService.getGeoCoding();
         return expertRepository.findExpertTest(searchParams,pageable).getContent();
     }
 
