@@ -142,7 +142,7 @@ export class UsersResourceService {
             'application/json'
         ];
 
-        return this.httpClient.delete<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
+        return this.httpClient.delete<User>(`${this.basePath}/userazt/${encodeURIComponent(String(expertid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
