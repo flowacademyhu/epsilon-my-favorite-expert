@@ -40,12 +40,22 @@ public class ExpertService {
         var expertid = UUID.randomUUID();
         expert.setId(expertid);
         expert.setCreatedAt(LocalDateTime.now());
+        expert.setLocation(geoCodingService.getGeoCoding(expert.getAddress()));
 
         User user = userService.findByid();
         user.addExpert(expertid);
+
         userService.save(user);
         return expertRepository.save(expert);
 
+    }
+
+    public void saveInitExpert(Expert expert) {
+        var expertId = UUID.randomUUID();
+        expert.setId(expertId);
+        expert.setCreatedAt(LocalDateTime.now());
+        expert.setLocation(geoCodingService.getGeoCoding(expert.getAddress()));
+        expertRepository.save(expert);
     }
 
     public Optional<Expert> findById(UUID id) {
@@ -84,20 +94,6 @@ public class ExpertService {
     public List<Expert> findExpertTest(String searchParams) {
         Pageable pageable = PageRequest.of(0,10);
         searchParams.replaceAll("_"," ");
-        //PROBA
-        Address address = new Address();
-        address.setCountry("Hungary");
-        address.setCity("Szeged");
-        address.setStreet("Vedres utca");
-
-        Address address2 = new Address();
-        address.setCountry("Hungary");
-        address2.setCity("Szeged");
-        address2.setStreet("Tópart");
-        Location location2 = geoCodingService.getGeoCoding(address2);
-        Location location=geoCodingService.getGeoCoding(address);
-        log.info("distance"+ geoCodingService.distance(location,location2).toString());
-        //PROBA VEGE
         return expertRepository.findExpertTest(searchParams,pageable).getContent();
     }
 

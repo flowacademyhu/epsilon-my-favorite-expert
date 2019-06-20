@@ -3,6 +3,7 @@ package hu.flowacademy.epsilon.myfavoriteexpert.utils;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class InitExpertLoader implements CommandLineRunner {
 
     @Autowired
-    private ExpertRepository expertRepository;
+    private ExpertService expertService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -46,7 +47,7 @@ public class InitExpertLoader implements CommandLineRunner {
                 expert.setAddress(address);
 
 
-                expertRepository.save(expert);
+                expertService.saveInitExpert(expert);
             });
 
         }
