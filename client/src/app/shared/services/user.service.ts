@@ -25,5 +25,8 @@ export class UserService {
   removeFromFavorite(expert: Expert) {
     return this.http.put(`${BASE_URI}/delete-expert/${expert.id}`, expert);
   }
+  getUser(): Observable<any> {
+    return this.http.get(`${BASE_URI}/get`);
+  }
 }
 

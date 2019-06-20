@@ -39,7 +39,6 @@ addExpert() {
     this.expert.phone = '';
     this.profession = '';
     this.expert.profession = new Array();
-    this.expert.phone = '';
   });
 }
 }

@@ -16,7 +16,6 @@ export class ProfileComponent implements OnInit {
 
   user: User;
   favoriteExperts: Expert[];
-  
 
   constructor(private userservice: UserService, private expertService: ExpertService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () =>  false;

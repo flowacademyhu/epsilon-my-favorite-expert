@@ -17,6 +17,7 @@ import { UserComponent } from './components/listing/user/user.component';
 import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AddAddressComponent } from './add-address/add-address.component';
     ExpertComponent,
     AddExpertComponent,
     UserComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

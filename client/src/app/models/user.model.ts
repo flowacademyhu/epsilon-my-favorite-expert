@@ -1,8 +1,8 @@
 import { Address } from './address.model';
 
 export class User {
-  accessToken : string;
-  address:Address;
+accessToken: string;
+address: Address;
 createdAt: string;
 deletedAt: string;
 experts: string[];

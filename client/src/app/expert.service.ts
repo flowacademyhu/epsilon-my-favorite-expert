@@ -17,5 +17,5 @@ export class ExpertService {
     const defaults = {headers: headers};
       return this.http.get(`http://localhost:8080/auth/expert/getall`, defaults);
   }
-  
+
 }
