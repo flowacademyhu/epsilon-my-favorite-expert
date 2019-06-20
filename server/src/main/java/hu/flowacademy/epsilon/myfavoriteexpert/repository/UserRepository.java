@@ -20,7 +20,7 @@ public interface UserRepository extends ElasticsearchCrudRepository<User, UUID> 
     @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"?0\",\"type\": \"best_fields\", \"fields\": [\"name\"],\"fuzziness\" : \"auto\"} }}}")
     Page<User> findBestMatchesUser(String params, Pageable pageable);
 
-    @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"?0\",\"type\": \"best_fields\", \"fields\": [\"name\",\"address.city^5\",\"address.country^10\",\"address.street\",\"address.number\",\"phone\",\"profession^7\"],\"fuzziness\" : \"auto\"} }}}")
+    @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"?0\",\"type\": \"best_fields\", \"fields\": [\"name\",\"address.city^5\",\"address.country^10\",\"address.street\",\"address.number\",\"phone\",\"profession^17\"],\"fuzziness\" : \"auto\"} }}}")
     Page<User> findExpertsByUser(String params,Pageable pageable);
 
 }

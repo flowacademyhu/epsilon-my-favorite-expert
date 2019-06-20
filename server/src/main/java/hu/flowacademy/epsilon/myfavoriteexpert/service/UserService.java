@@ -86,12 +86,12 @@ public class UserService {
     }
     public List<User> findBestMatchedUserByName(String searchParams) {
         Pageable pageable = PageRequest.of(0,1);
-        searchParams.replaceAll("_"," ");
+        searchParams = searchParams.replaceAll("_"," ");
         return userRepository.findBestMatchesUser(searchParams,pageable).getContent();
     }
     public List<Expert> findExpertsByUser(String searchParams) {
         Pageable pageable = PageRequest.of(0,1);
-        searchParams.replaceAll("_"," ");
+        searchParams = searchParams.replaceAll("_"," ");
         List<Expert> expert = userRepository.findExpertsByUser(searchParams,pageable)
                 .getContent()
                 .get(0)
