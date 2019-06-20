@@ -49,5 +49,8 @@ export class AddAddressComponent implements OnInit {
     this.address.number == undefined;
   }
 
+  switchLanguage(lang: string) {
+
+  }
 
 }
