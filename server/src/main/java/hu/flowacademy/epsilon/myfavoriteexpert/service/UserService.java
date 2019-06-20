@@ -2,6 +2,7 @@ package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.UserNotAuthenticatedExeption;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -34,11 +36,18 @@ public class UserService {
         searchParams.replaceAll("_"," ");
         return userRepository.findBestMatchesUser(searchParams,pageable).getContent();
     }
-    public List<UUID> findExpertsByUser(String searchParams) {
+    public List<Expert> findExpertsByUser(String searchParams) {
         Pageable pageable = PageRequest.of(0,1);
         searchParams.replaceAll("_"," ");
-        List<UUID> expertid =  userRepository.findExpertsByUser(searchParams,pageable).getContent().get(0).getExperts();
-        return expertRepository.findAllById();
+//        List<UUID> expertid =  userRepository.findExpertsByUser(searchParams,pageable).getContent().get(0).getExperts();
+        List<Expert> expert = userRepository.findExpertsByUser(searchParams,pageable)
+                .getContent()
+                .get(0)
+                .getExperts()
+                .stream()
+                .map(expertId -> expertRepository.findById(expertId).orElse(null))
+                .collect(Collectors.toList());
+        return expert;
     }
 
     public UserPrincipal getCurrentUser() {

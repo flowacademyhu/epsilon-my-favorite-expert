@@ -1,6 +1,7 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.controller;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.UserService;
@@ -74,7 +75,7 @@ public class UsersController {
         return userService.findBestMatchedUserByName(searchparams);
     }
     @GetMapping("/expertsbyuser")
-    public List<UUID> findExpertsByUsers(@RequestParam String searchparams) {
+    public List<Expert> findExpertsByUsers(@RequestParam String searchparams) {
         return userService.findExpertsByUser(searchparams);
     }
 
