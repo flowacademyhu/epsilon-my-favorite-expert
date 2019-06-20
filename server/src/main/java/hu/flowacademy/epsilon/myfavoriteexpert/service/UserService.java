@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -92,13 +93,17 @@ public class UserService {
     public List<Expert> findExpertsByUser(String searchParams) {
         Pageable pageable = PageRequest.of(0,1);
         searchParams = searchParams.replaceAll("_"," ");
-        List<Expert> expert = userRepository.findExpertsByUser(searchParams,pageable)
-                .getContent()
-                .get(0)
-                .getExperts()
-                .stream()
-                .map(expertId -> expertRepository.findById(expertId).orElse(null))
-                .collect(Collectors.toList());
-        return expert;
+        List<User> users = userRepository.findExpertsByUser(searchParams,pageable)
+                .getContent();
+        List<Expert> experts = new ArrayList<>();
+        if (users.size() > 0) {
+
+                 experts = users.get(0)
+                    .getExperts()
+                    .stream()
+                    .map(expertId -> expertRepository.findById(expertId).orElse(null))
+                    .collect(Collectors.toList());
+        }
+        return experts;
     }
 }
