@@ -46,6 +46,8 @@ public class UsersController {
         return ResponseEntity.ok(userService.save(user));
     }
 
+
+
     @PutMapping("/delete-expert/{expertid}")
     public ResponseEntity<User> deleteExpertFromUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
@@ -66,11 +68,15 @@ public class UsersController {
         User user = userService.findByid();
         return user.getLanguage();
     }
-//    @GetMapping("/othersfavorites")
-//    public List<UUID> getOthersFavouriteExperts(@PathVariable ) {
-//        User user = userService.findByid();
-//        List<UUID> expert = user.getExperts();
-//        return expert;
-//    }
+
+    @GetMapping("/userbyelastic")
+    public List<User> findUserViaElastic(@RequestParam String searchparams) {
+        return userService.findBestMatchedUserByName(searchparams);
+    }
+    @GetMapping("/expertsbyuser")
+    public List<UUID> findExpertsByUsers(@RequestParam String searchparams) {
+        return userService.findExpertsByUser(searchparams);
+    }
+
 
 }

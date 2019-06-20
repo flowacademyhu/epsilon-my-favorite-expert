@@ -3,9 +3,11 @@ package hu.flowacademy.epsilon.myfavoriteexpert.service;
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.UserNotAuthenticatedExeption;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,21 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ExpertRepository expertRepository;
+
+    public List<User> findBestMatchedUserByName(String searchParams) {
+        Pageable pageable = PageRequest.of(0,1);
+        searchParams.replaceAll("_"," ");
+        return userRepository.findBestMatchesUser(searchParams,pageable).getContent();
+    }
+    public List<UUID> findExpertsByUser(String searchParams) {
+        Pageable pageable = PageRequest.of(0,1);
+        searchParams.replaceAll("_"," ");
+        List<UUID> expertid =  userRepository.findExpertsByUser(searchParams,pageable).getContent().get(0).getExperts();
+        return expertRepository.findAllById();
+    }
 
     public UserPrincipal getCurrentUser() {
         return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
