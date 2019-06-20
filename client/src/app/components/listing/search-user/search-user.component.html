@@ -1,0 +1,19 @@
+
+<div>
+    <button (click)="listAllUsers()">Search</button>
+    <button (click)="search()" (click)="getAllUsers()">All users</button>
+</div>
+<div class="flex" *ngIf="listOrSearch===false">
+    <form class="form-inline waves-light" mdbWavesEffect>
+        <div class="md-form mt-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        </div>
+    </form>
+</div>
+<div class="flex" *ngIf="listOrSearch===true">
+    <p>List of users:</p>
+  <div *ngFor="let user of users">
+    <app-user [user]="user"></app-user>
+  </div>
+</div>
+

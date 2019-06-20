@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserComponent implements OnInit {
   @Input()
-  index: any;
+  user: any;
   constructor() { }
 
   ngOnInit() {

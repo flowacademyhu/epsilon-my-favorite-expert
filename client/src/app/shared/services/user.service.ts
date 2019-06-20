@@ -28,5 +28,8 @@ export class UserService {
   getUser(): Observable<any> {
     return this.http.get(`${BASE_URI}/get`);
   }
+  listAllUsers() {
+    return this.http.get(`${BASE_URI}/getall`);
+  }
 }
 

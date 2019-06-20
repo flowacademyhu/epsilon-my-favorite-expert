@@ -7,7 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { LoggedinGuard } from './shared/guard/loggedinguard.service';
-import { SearchUserComponent } from './components/search-user/search-user.component';
+import { SearchUserComponent } from './components/listing/search-user/search-user.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},

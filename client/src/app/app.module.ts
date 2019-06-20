@@ -18,7 +18,7 @@ import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SearchUserComponent } from './components/search-user/search-user.component';
+import { SearchUserComponent } from './components/listing/search-user/search-user.component';
 
 
 @NgModule({
