@@ -7,6 +7,7 @@ import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -22,9 +23,13 @@ public class InitExpertLoader implements CommandLineRunner {
     @Autowired
     private ExpertService expertService;
 
+    @Autowired
+    private ExpertRepository expertRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
+        if (expertRepository.findAll(Pageable.unpaged()).getContent().isEmpty()) {
         InputStream input = new ClassPathResource(
                 "expertloader.txt").getInputStream();
         try (BufferedReader reader = new BufferedReader(
@@ -49,6 +54,7 @@ public class InitExpertLoader implements CommandLineRunner {
 
                 expertService.saveInitExpert(expert);
             });
+        }
 
         }
     }

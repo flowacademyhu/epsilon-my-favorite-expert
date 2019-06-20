@@ -32,9 +32,12 @@ public class UsersController {
     public ResponseEntity<User> getById() {
         return ResponseEntity.ok(userService.findByid());
     }
+
+
     @PostMapping("/save-address")
     public ResponseEntity<User> saveAddress(@RequestBody Address address) {
-        return ResponseEntity.ok(userService.saveAddress(address));
+        User user = userService.saveAddress(address);
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/add-expert/{expertid}")

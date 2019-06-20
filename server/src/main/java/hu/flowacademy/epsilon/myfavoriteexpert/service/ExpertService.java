@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class ExpertService {
+
 
     @Autowired
     private GeoCodingService geoCodingService;
@@ -46,6 +48,7 @@ public class ExpertService {
         user.addExpert(expertid);
 
         userService.save(user);
+        expert= setExpertDistance(expert);
         return expertRepository.save(expert);
 
     }
@@ -58,13 +61,19 @@ public class ExpertService {
         expertRepository.save(expert);
     }
 
-    public Optional<Expert> findById(UUID id) {
-        return expertRepository.findById(id);
+    public Expert findById(UUID id) {
+        Expert expert = expertRepository.findById(id).orElse(null);
+        if (expert != null) {
+            return setExpertDistance(expert);
+        }
+        throw new RuntimeException("expert does not exist!");
     }
 
 
     public List<Expert> find() {
-        return expertRepository.findAll(Pageable.unpaged()).getContent();
+        var experts = expertRepository.findAll(Pageable.unpaged()).getContent();
+        experts =  setExpertDistance(experts);
+        return experts;
     }
 
     public void delete(UUID id) {
@@ -84,17 +93,37 @@ public class ExpertService {
     }
 
     public List<Expert> getFavoriteExperts() {
-        return userService.findByid()
+        var experts = userService.findByid()
                 .getExperts()
                 .stream()
                 .map(expertid -> expertRepository.findById(expertid).get())
                 .collect(Collectors.toList());
+        return setExpertDistance(experts);
     }
 
-    public List<Expert> findExpertTest(String searchParams) {
+    public List<Expert> findExpertByParams(String searchParams) {
         Pageable pageable = PageRequest.of(0,10);
-        searchParams.replaceAll("_"," ");
-        return expertRepository.findExpertTest(searchParams,pageable).getContent();
+        searchParams = searchParams.replaceAll("_"," ");
+        var experts = expertRepository.findExpertTest(searchParams,pageable).getContent();
+        experts = setExpertDistance(experts);
+        return experts;
+    }
+
+    public List<Expert> setExpertDistance(List<Expert> experts) {
+        User user = userService.findByid();
+        if (user != null && user.getLocationByAddress() != null) {
+            experts.stream().forEach(expert -> expert.setDistanceMeter(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation())));
+          // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
+        }
+        return experts;
+    }
+
+    public Expert setExpertDistance(Expert expert) {
+        User user = userService.findByid();
+        if (user != null && user.getLocationByAddress() != null) {
+            expert.setDistanceMeter(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()));
+        }
+        return expert;
     }
 
 

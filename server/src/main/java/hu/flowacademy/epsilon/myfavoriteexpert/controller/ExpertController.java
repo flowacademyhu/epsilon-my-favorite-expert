@@ -23,7 +23,7 @@ public class ExpertController {
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Expert> getOne(@PathVariable UUID id) {
+    public Expert getOne(@PathVariable UUID id) {
         return expertService.findById(id);
     }
 
@@ -49,7 +49,7 @@ public class ExpertController {
 
     @GetMapping("/customsearch")
     public List<Expert> findExpertTest(@RequestParam String searchparams) {
-        return expertService.findExpertTest(searchparams);
+        return expertService.findExpertByParams(searchparams);
     }
 
 }
