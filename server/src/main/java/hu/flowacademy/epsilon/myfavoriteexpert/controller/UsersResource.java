@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/user")
-public class UsersController {
+@RequestMapping
+public class UsersResource {
 
     @Autowired
     private UserService userService;
@@ -22,22 +22,26 @@ public class UsersController {
     private ExpertService expertService;
 
 
-    @GetMapping("/getall")
+    @GetMapping("/users")
     public List<User> getAll() {
         return userService.find();
     }
 
 
-    @GetMapping("/get")
+    @GetMapping("/user")
     public ResponseEntity<User> getById() {
         return ResponseEntity.ok(userService.findByid());
     }
-    @PostMapping("/save-address")
+    @PostMapping("user/address")
     public ResponseEntity<User> saveAddress(@RequestBody Address address) {
         return ResponseEntity.ok(userService.saveAddress(address));
     }
+    @PostMapping("user/language")
+    public ResponseEntity<User> saveLanguage(@RequestBody String language) {
+        return ResponseEntity.ok(userService.saveLanguage(language));
+    }
 
-    @PutMapping("/add-expert/{expertid}")
+    @PutMapping("user/{expertid}")
     public ResponseEntity<User> addExpertToUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
         if (user != null) {
@@ -46,7 +50,7 @@ public class UsersController {
         return ResponseEntity.ok(userService.save(user));
     }
 
-    @PutMapping("/delete-expert/{expertid}")
+    @DeleteMapping("userazt/{expertid}")
     public ResponseEntity<User> deleteExpertFromUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
         if (user == null) {
