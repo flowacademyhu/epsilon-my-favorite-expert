@@ -1,9 +1,9 @@
 export * from './authController.service';
 import { AuthControllerService } from './authController.service';
-export * from './expertResource.service';
-import { ExpertResourceService } from './expertResource.service';
+export * from './expertController.service';
+import { ExpertControllerService } from './expertController.service';
 export * from './userController.service';
 import { UserControllerService } from './userController.service';
-export * from './usersResource.service';
-import { UsersResourceService } from './usersResource.service';
-export const APIS = [AuthControllerService, ExpertResourceService, UserControllerService, UsersResourceService];
+export * from './usersController.service';
+import { UsersControllerService } from './usersController.service';
+export const APIS = [AuthControllerService, ExpertControllerService, UserControllerService, UsersControllerService];
