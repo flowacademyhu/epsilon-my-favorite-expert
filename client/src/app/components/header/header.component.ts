@@ -15,7 +15,6 @@ export class HeaderComponent implements OnInit {
     this.state = this.appState;
     translate.setDefaultLang('en');
    }
-
    switchLanguage(language: string) {
     this.translate.use(language);
   }

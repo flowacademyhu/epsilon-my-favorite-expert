@@ -17,7 +17,7 @@ export class UserService {
     return this.http.get<User>(`${BASE_URI}/get`);
   }
   addAddress(address: Address) {
-    return this.http.post(`${BASE_URI}/save-address`,address);
+    return this.http.post(`${BASE_URI}/save-address`, address);
   }
   addToFavorite(expert: Expert) {
     return this.http.put(`${BASE_URI}/add-expert/${expert.id}`, expert);

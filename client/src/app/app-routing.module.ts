@@ -7,6 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { LoggedinGuard } from './shared/guard/loggedinguard.service';
+import { SearchUserComponent } from './components/search-user/search-user.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -14,8 +15,8 @@ const routes: Routes = [
   {path:  'add', component: AddExpertComponent, canActivate: [LoggedinGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [LoggedinGuard]},
   {path: 'list-experts', component: ListingComponent},
-  {path: 'add-address', component: AddAddressComponent, canActivate: [LoggedinGuard]}
-  
+  {path: 'add-address', component: AddAddressComponent, canActivate: [LoggedinGuard]},
+  {path: 'search-user', component: SearchUserComponent, canActivate: [LoggedinGuard]}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

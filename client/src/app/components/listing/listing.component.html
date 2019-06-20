@@ -7,7 +7,7 @@
         </li>
 </div>
   <div class="flex">
-    <div  *ngFor="let expert of experts">
+    <div *ngFor="let expert of experts">
       <app-expert  [expert]="expert" [isFavoriteExpert]="isFavoriteExpert(expert)"></app-expert>
     </div>
   </div>
