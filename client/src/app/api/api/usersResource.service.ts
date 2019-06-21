@@ -18,15 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { Expert } from '../model/expert';
-import { OptionalExpert } from '../model/optionalExpert';
+import { Address } from '../model/address';
+import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class ExpertControllerService {
+export class UsersResourceService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -58,19 +58,19 @@ export class ExpertControllerService {
 
 
     /**
-     * addExpert
+     * addExpertToUser
      * 
-     * @param expert expert
+     * @param expertid expertid
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addExpertUsingPOST(expert: Expert, observe?: 'body', reportProgress?: boolean): Observable<Expert>;
-    public addExpertUsingPOST(expert: Expert, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Expert>>;
-    public addExpertUsingPOST(expert: Expert, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Expert>>;
-    public addExpertUsingPOST(expert: Expert, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addExpertToUserUsingPUT(expertid: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public addExpertToUserUsingPUT(expertid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public addExpertToUserUsingPUT(expertid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public addExpertToUserUsingPUT(expertid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (expert === null || expert === undefined) {
-            throw new Error('Required parameter expert was null or undefined when calling addExpertUsingPOST.');
+        if (expertid === null || expertid === undefined) {
+            throw new Error('Required parameter expertid was null or undefined when calling addExpertToUserUsingPUT.');
         }
 
         let headers = this.defaultHeaders;
@@ -93,13 +93,9 @@ export class ExpertControllerService {
         const consumes: string[] = [
             'application/json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
-        return this.httpClient.post<Expert>(`${this.basePath}/expert/add`,
-            expert,
+        return this.httpClient.put<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
+            null,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -110,76 +106,19 @@ export class ExpertControllerService {
     }
 
     /**
-     * addProfession
+     * deleteExpertFromUser
      * 
-     * @param id id
-     * @param profession profession
+     * @param expertid expertid
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addProfessionUsingPUT(id: string, profession: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public addProfessionUsingPUT(id: string, profession: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public addProfessionUsingPUT(id: string, profession: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public addProfessionUsingPUT(id: string, profession: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling addProfessionUsingPUT.');
-        }
-
-        if (profession === null || profession === undefined) {
-            throw new Error('Required parameter profession was null or undefined when calling addProfessionUsingPUT.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (JWT) required
-        if (this.configuration.apiKeys["Authorization"]) {
-            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.put<any>(`${this.basePath}/expert/add-profession/${encodeURIComponent(String(id))}`,
-            profession,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * delete
-     * 
-     * @param id id
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public deleteUsingDELETE(id: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deleteUsingDELETE(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deleteUsingDELETE(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public deleteUsingDELETE(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteUsingDELETE.');
+        if (expertid === null || expertid === undefined) {
+            throw new Error('Required parameter expertid was null or undefined when calling deleteExpertFromUserUsingDELETE.');
         }
 
         let headers = this.defaultHeaders;
@@ -203,7 +142,7 @@ export class ExpertControllerService {
             'application/json'
         ];
 
-        return this.httpClient.delete<any>(`${this.basePath}/expert/delete/${encodeURIComponent(String(id))}`,
+        return this.httpClient.delete<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -219,10 +158,10 @@ export class ExpertControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
-    public getAllUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
-    public getAllUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
-    public getAllUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllUsingGET1(observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public getAllUsingGET1(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public getAllUsingGET1(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public getAllUsingGET1(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -245,7 +184,7 @@ export class ExpertControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Array<Expert>>(`${this.basePath}/expert/getall`,
+        return this.httpClient.get<Array<User>>(`${this.basePath}/users`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -256,15 +195,15 @@ export class ExpertControllerService {
     }
 
     /**
-     * getFavoriteExperts
+     * getById
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getFavoriteExpertsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
-    public getFavoriteExpertsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
-    public getFavoriteExpertsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
-    public getFavoriteExpertsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getByIdUsingGET(observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public getByIdUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public getByIdUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public getByIdUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -287,7 +226,7 @@ export class ExpertControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Array<Expert>>(`${this.basePath}/expert/favorite`,
+        return this.httpClient.get<User>(`${this.basePath}/user`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -298,19 +237,19 @@ export class ExpertControllerService {
     }
 
     /**
-     * getOne
+     * saveAddress
      * 
-     * @param id id
+     * @param address address
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOneUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<OptionalExpert>;
-    public getOneUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OptionalExpert>>;
-    public getOneUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OptionalExpert>>;
-    public getOneUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveAddressUsingPOST(address: Address, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public saveAddressUsingPOST(address: Address, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public saveAddressUsingPOST(address: Address, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public saveAddressUsingPOST(address: Address, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getOneUsingGET.');
+        if (address === null || address === undefined) {
+            throw new Error('Required parameter address was null or undefined when calling saveAddressUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -333,8 +272,65 @@ export class ExpertControllerService {
         const consumes: string[] = [
             'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
-        return this.httpClient.get<OptionalExpert>(`${this.basePath}/expert/get/${encodeURIComponent(String(id))}`,
+        return this.httpClient.post<User>(`${this.basePath}/user/address`,
+            address,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * saveLanguage
+     * 
+     * @param language language
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveLanguageUsingPOST(language: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public saveLanguageUsingPOST(language: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public saveLanguageUsingPOST(language: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public saveLanguageUsingPOST(language: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (language === null || language === undefined) {
+            throw new Error('Required parameter language was null or undefined when calling saveLanguageUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<User>(`${this.basePath}/user/language`,
+            language,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
