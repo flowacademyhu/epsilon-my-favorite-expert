@@ -11,15 +11,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/auth/expert")
+@RequestMapping("/expert")
 public class ExpertController {
 
     @Autowired
     private ExpertService expertService;
 
     @PostMapping("/add")
-    public Expert addExpert(@RequestHeader(value = "Authorization") String accestoken ,@RequestBody Expert expert) {
-        return expertService.save(accestoken,expert);
+    public Expert addExpert(@RequestBody Expert expert) {
+        return expertService.save(expert);
     }
 
     @GetMapping("/get/{id}")
@@ -28,8 +28,8 @@ public class ExpertController {
     }
 
     @GetMapping("/getall")
-    public ResponseEntity<List<Expert>> getAll() {
-        return ResponseEntity.ok(expertService.find());
+    public List<Expert> getAll() {
+        return expertService.find();
     }
 
     @DeleteMapping("/delete/{id}")
@@ -43,8 +43,8 @@ public class ExpertController {
     }
 
     @GetMapping("/favorite")
-    public List<Expert> getFavoriteExperts(@RequestHeader(value = "Authorization") String accestoken) {
-        return expertService.getFavoriteExperts(accestoken);
+    public List<Expert> getFavoriteExperts() {
+        return expertService.getFavoriteExperts();
     }
 
 }

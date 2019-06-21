@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ExpertService {
@@ -28,12 +29,12 @@ public class ExpertService {
     @Autowired
     private UserService userService;
 
-    public Expert save(String accestoken,Expert expert) {
+    public Expert save(Expert expert) {
         var expertid = UUID.randomUUID();
         expert.setId(expertid);
-        expert.setCreated_at(LocalDateTime.now());
+        expert.setCreatedAt(LocalDateTime.now());
 
-        User user = userService.findByid(accestoken);
+        User user = userService.findByid();
         user.addExpert(expertid);
         userService.save(user);
         return expertRepository.save(expert);
@@ -52,7 +53,7 @@ public class ExpertService {
     public void delete(UUID id) {
         Optional<Expert> expert = expertRepository.findById(id);
         if (expert.isPresent()) {
-            expert.get().setDeleted_at(LocalDateTime.now());
+            expert.get().setDeletedAt(LocalDateTime.now());
             expertRepository.save(expert.get());
         } else {
             throw new RuntimeException("expert does not exist!");
@@ -60,24 +61,17 @@ public class ExpertService {
     }
 
     public void addProfession(UUID id, String profession) {
-        Optional<Expert> expert = expertRepository.findById(id);
-        if(expert.isPresent()) {
-            expert.get().addProfession(profession);
-        }
+        expertRepository.findById(id).ifPresent(expert -> {
+            expert.addProfession(profession);
+            expertRepository.save(expert);});
     }
 
-    public List<Expert> getFavoriteExperts(String accestoken) {
-        User user = userService.findByid(accestoken);
-        List<Expert> favoriteExperts = new ArrayList();
-        if (user.getExperts() == null)
-            return List.of();
-        for (var expertid: user.getExperts()) {
-            Optional<Expert> expert = expertRepository.findById(expertid);
-            if (expert.isPresent()) {
-                favoriteExperts.add(expert.get());
-            }
-        }
-        return favoriteExperts;
+    public List<Expert> getFavoriteExperts() {
+        return userService.findByid()
+                .getExperts()
+                .stream()
+                .map(expertid -> expertRepository.findById(expertid).get())
+                .collect(Collectors.toList());
     }
 
 

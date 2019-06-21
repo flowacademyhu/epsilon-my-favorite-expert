@@ -12,9 +12,20 @@ import { AppStateService } from 'src/app/shared/services/app-state.service';
 export class LoggedinComponent implements OnInit {
 
   state: any;
-  constructor(private appState: AppStateService) {
+  constructor(private appState: AppStateService, private activatedRoute: ActivatedRoute) {
     this.state = this.appState;
    }
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params == null) {
+        console.log();
+      } else {
+        localStorage.setItem('token', params['token']);
+      }
+    });
+  }
+
+  switchLanguage(lang: string) {
+
   }
 }

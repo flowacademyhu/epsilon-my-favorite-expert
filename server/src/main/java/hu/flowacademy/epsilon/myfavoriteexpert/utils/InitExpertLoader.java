@@ -33,7 +33,7 @@ public class InitExpertLoader implements CommandLineRunner {
                 Expert expert = new Expert();
                 Address address = new Address();
                 expert.setId(UUID.randomUUID());
-                expert.setCreated_at(LocalDateTime.now());
+                expert.setCreatedAt(LocalDateTime.now());
                 expert.setName(attr[0]);
                 var list = new ArrayList<String>();
                 list.add(attr[1]);
