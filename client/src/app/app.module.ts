@@ -19,8 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchUserComponent } from './components/listing/search-user/search-user.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -48,9 +46,6 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
         deps: [HttpClient]
       }
 }),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
     ReactiveFormsModule
   ],
   providers: [HttpClientModule,

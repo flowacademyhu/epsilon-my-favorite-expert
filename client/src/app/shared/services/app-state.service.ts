@@ -6,13 +6,12 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class AppStateService {
-
   private readonly _user = new BehaviorSubject<User>(null);
-
   readonly user$ = this._user.asObservable();
 
-  constructor() { }
-
+  constructor() {
+    console.log('meghivodtam');
+   }
   get user(): User {
     return this._user.getValue();
   }
