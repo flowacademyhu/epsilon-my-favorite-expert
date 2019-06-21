@@ -82,7 +82,11 @@ public class UserService {
         User user = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
         if (user == null) {
             throw new RuntimeException("User not found, id is invalid");
-        } else {
+        }
+        else if(user.getDeletedAt() != null ) {
+            throw new RuntimeException("User not found, id is invalid");
+        }
+        else {
             if(language.equalsIgnoreCase(Language.HU.toString())){
                 user.setLanguage("HU");
             }
