@@ -19,14 +19,13 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { Expert } from '../model/expert';
-import { OptionalExpert } from '../model/optionalExpert';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class ExpertControllerService {
+export class ExpertResourceService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -98,7 +97,7 @@ export class ExpertControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<Expert>(`${this.basePath}/expert/add`,
+        return this.httpClient.post<Expert>(`${this.basePath}/expert`,
             expert,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -155,7 +154,7 @@ export class ExpertControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<any>(`${this.basePath}/expert/add-profession/${encodeURIComponent(String(id))}`,
+        return this.httpClient.put<any>(`${this.basePath}/expert/${encodeURIComponent(String(id))}`,
             profession,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -203,7 +202,7 @@ export class ExpertControllerService {
             'application/json'
         ];
 
-        return this.httpClient.delete<any>(`${this.basePath}/expert/delete/${encodeURIComponent(String(id))}`,
+        return this.httpClient.delete<any>(`${this.basePath}/expert/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -245,7 +244,7 @@ export class ExpertControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Array<Expert>>(`${this.basePath}/expert/getall`,
+        return this.httpClient.get<Array<Expert>>(`${this.basePath}/expert`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -304,9 +303,9 @@ export class ExpertControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOneUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<OptionalExpert>;
-    public getOneUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OptionalExpert>>;
-    public getOneUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OptionalExpert>>;
+    public getOneUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<Expert>;
+    public getOneUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Expert>>;
+    public getOneUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Expert>>;
     public getOneUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -334,7 +333,7 @@ export class ExpertControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<OptionalExpert>(`${this.basePath}/expert/get/${encodeURIComponent(String(id))}`,
+        return this.httpClient.get<Expert>(`${this.basePath}/expert/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertService } from 'src/app/shared/services/expert.service';
-import { Expert } from 'src/app/models/expert.model';
+import { ExpertResourceService, Expert } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
-  constructor(private expertService: ExpertService, private communicationService: CommunicationService) { }
+  constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
 
   ngOnInit() {
     this.loadData();
@@ -31,7 +30,7 @@ export class ListingComponent implements OnInit {
   }
 
   getFavoriteExperts() {
-    this.expertService.getFavoriteExperts().subscribe(
+    this.expertService.getFavoriteExpertsUsingGET().subscribe(
       (data: Expert[]) => {
         this.experts = data;
       }
@@ -41,11 +40,11 @@ export class ListingComponent implements OnInit {
     this.loadData();
   }
   loadData() {
-    this.expertService.listAllExperts().subscribe(
+    this.expertService.getAllUsingGET().subscribe(
       (data: Expert[]) => {
         this.experts = data;
       });
-      this.expertService.getFavoriteExperts().subscribe(
+      this.expertService.getFavoriteExpertsUsingGET().subscribe(
         (data: Expert[]) => {
           this.favoriteExpert = data;
         });

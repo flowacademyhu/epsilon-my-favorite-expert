@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Expert } from 'src/app/models/expert.model';
-import { UserService } from 'src/app/shared/services/user.service';
-import { ListingComponent } from '../listing.component';
-import { Observable, observable } from 'rxjs';
+import { Expert } from '../../../api/model/expert';
+import { UsersResourceService } from '../../../api/api/usersResource.service';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
 
 @Component({
@@ -16,7 +14,7 @@ export class ExpertComponent implements OnInit {
 
   @Input()
   isFavoriteExpert: boolean;
-  constructor(private userService: UserService,private communicationService: CommunicationService) { }
+  constructor(private userService: UsersResourceService,private communicationService: CommunicationService) { }
 
   ngOnInit() {
   }
@@ -24,7 +22,7 @@ export class ExpertComponent implements OnInit {
   removeFromFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.removeFromFavorite(this.expert);
-   this.userService.removeFromFavorite(this.expert).subscribe((data: any) => {
+   this.userService.deleteExpertFromUserUsingDELETE(this.expert.id).subscribe((data: any) => {
         console.log('sikeresen torolve');
       });
 
@@ -32,7 +30,7 @@ export class ExpertComponent implements OnInit {
   addToFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.addToFavorite(this.expert);
-     this.userService.addToFavorite(this.expert).subscribe(
+     this.userService.addExpertToUserUsingPUT(this.expert.id).subscribe(
       (data: any) => {
         console.log('sikeresen hozzaadva a kedvencekhez');
       }

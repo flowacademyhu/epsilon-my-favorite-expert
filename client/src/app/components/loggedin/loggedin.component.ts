@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/shared/services/user.service';
-import { ExpertService } from 'src/app/shared/services/expert.service';
+import { ExpertResourceService, UserControllerService } from 'src/app/api';
 
 @Component({
   selector: 'app-loggedin',

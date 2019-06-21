@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { AuthControllerService } from './api/authController.service';
-import { ExpertControllerService } from './api/expertController.service';
+import { ExpertResourceService } from './api/expertResource.service';
 import { UserControllerService } from './api/userController.service';
-import { UsersControllerService } from './api/usersController.service';
+import { UsersResourceService } from './api/usersResource.service';
 
 @NgModule({
   imports:      [],
@@ -14,9 +14,9 @@ import { UsersControllerService } from './api/usersController.service';
   exports:      [],
   providers: [
     AuthControllerService,
-    ExpertControllerService,
+    ExpertResourceService,
     UserControllerService,
-    UsersControllerService ]
+    UsersResourceService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {

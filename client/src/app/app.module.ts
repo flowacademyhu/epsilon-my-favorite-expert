@@ -17,6 +17,8 @@ import { UserComponent } from './components/listing/user/user.component';
 import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
+import { ApiModule, Configuration, ConfigurationParameters } from './api';
+
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { AddAddressComponent } from './add-address/add-address.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ApiModule.forRoot(getConfig),
     FormsModule,
     TranslateModule.forRoot({
       loader: {
@@ -53,3 +56,11 @@ export class AppModule { }
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+export function getConfig(): Configuration {
+  return new Configuration(<ConfigurationParameters>{
+    apiKeys: {},
+    withCredentials: true,
+    basePath: 'http://localhost:8080'}
+    );
+ }
