@@ -11,7 +11,7 @@
  */
 
 
-export interface OptionalExpert { 
-    empty?: boolean;
-    present?: boolean;
+export interface Location { 
+    lat?: number;
+    lon?: number;
 }

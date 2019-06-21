@@ -46,6 +46,8 @@ public class User {
 
     private  String language;
 
+    private Location locationByAddress;
+
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt;

@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { Address } from '../model/address';
+import { Expert } from '../model/expert';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -26,7 +27,7 @@ import { Configuration }                                     from '../configurat
 
 
 @Injectable()
-export class UsersControllerService {
+export class UsersResourceService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -94,7 +95,7 @@ export class UsersControllerService {
             'application/json'
         ];
 
-        return this.httpClient.put<User>(`${this.basePath}/user/add-expert/${encodeURIComponent(String(expertid))}`,
+        return this.httpClient.put<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
             null,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -112,13 +113,13 @@ export class UsersControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteExpertFromUserUsingPUT(expertid: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public deleteExpertFromUserUsingPUT(expertid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public deleteExpertFromUserUsingPUT(expertid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-    public deleteExpertFromUserUsingPUT(expertid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public deleteExpertFromUserUsingDELETE(expertid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (expertid === null || expertid === undefined) {
-            throw new Error('Required parameter expertid was null or undefined when calling deleteExpertFromUserUsingPUT.');
+            throw new Error('Required parameter expertid was null or undefined when calling deleteExpertFromUserUsingDELETE.');
         }
 
         let headers = this.defaultHeaders;
@@ -142,8 +143,7 @@ export class UsersControllerService {
             'application/json'
         ];
 
-        return this.httpClient.put<User>(`${this.basePath}/user/delete-expert/${encodeURIComponent(String(expertid))}`,
-            null,
+        return this.httpClient.delete<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -160,9 +160,9 @@ export class UsersControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<string>>;
-    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<string>>>;
-    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<string>>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
     public findExpertsByUsersUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (searchparams === null || searchparams === undefined) {
@@ -195,60 +195,7 @@ export class UsersControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Array<string>>(`${this.basePath}/user/expertsbyuser`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * findUserViaElastic
-     * 
-     * @param searchparams searchparams
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public findUserViaElasticUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
-    public findUserViaElasticUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
-    public findUserViaElasticUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
-    public findUserViaElasticUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (searchparams === null || searchparams === undefined) {
-            throw new Error('Required parameter searchparams was null or undefined when calling findUserViaElasticUsingGET.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (searchparams !== undefined && searchparams !== null) {
-            queryParameters = queryParameters.set('searchparams', <any>searchparams);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (JWT) required
-        if (this.configuration.apiKeys["Authorization"]) {
-            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-
-        return this.httpClient.get<Array<User>>(`${this.basePath}/user/userbyelastic`,
+        return this.httpClient.get<Array<Expert>>(`${this.basePath}/user/expert`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -291,7 +238,7 @@ export class UsersControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Array<User>>(`${this.basePath}/user/getall`,
+        return this.httpClient.get<Array<User>>(`${this.basePath}/users`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -333,49 +280,7 @@ export class UsersControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<User>(`${this.basePath}/user/get`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * getLanguage
-     * 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getLanguageUsingGET(observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public getLanguageUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public getLanguageUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public getLanguageUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // authentication (JWT) required
-        if (this.configuration.apiKeys["Authorization"]) {
-            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-
-        return this.httpClient.get<string>(`${this.basePath}/user/get-language`,
+        return this.httpClient.get<User>(`${this.basePath}/user`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -426,7 +331,7 @@ export class UsersControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<User>(`${this.basePath}/user/save-address`,
+        return this.httpClient.post<User>(`${this.basePath}/user/address`,
             address,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -438,19 +343,19 @@ export class UsersControllerService {
     }
 
     /**
-     * setLanguage
+     * saveLanguage
      * 
      * @param language language
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public setLanguageUsingPUT(language: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public setLanguageUsingPUT(language: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public setLanguageUsingPUT(language: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-    public setLanguageUsingPUT(language: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveLanguageUsingPOST(language: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public saveLanguageUsingPOST(language: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public saveLanguageUsingPOST(language: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public saveLanguageUsingPOST(language: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (language === null || language === undefined) {
-            throw new Error('Required parameter language was null or undefined when calling setLanguageUsingPUT.');
+            throw new Error('Required parameter language was null or undefined when calling saveLanguageUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -478,9 +383,62 @@ export class UsersControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<User>(`${this.basePath}/user/add-language`,
+        return this.httpClient.post<User>(`${this.basePath}/user/language`,
             language,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * SearchUserWithQuery
+     * 
+     * @param searchparams searchparams
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (searchparams === null || searchparams === undefined) {
+            throw new Error('Required parameter searchparams was null or undefined when calling searchUserWithQueryUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (searchparams !== undefined && searchparams !== null) {
+            queryParameters = queryParameters.set('searchparams', <any>searchparams);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<User>>(`${this.basePath}/user/search`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
