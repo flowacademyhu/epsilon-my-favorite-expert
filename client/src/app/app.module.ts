@@ -19,7 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchUserComponent } from './components/listing/search-user/search-user.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,6 @@ import { SearchUserComponent } from './components/listing/search-user/search-use
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
     FormsModule,
     TranslateModule.forRoot({
       loader: {
@@ -47,7 +47,11 @@ import { SearchUserComponent } from './components/listing/search-user/search-use
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-})
+}),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    ReactiveFormsModule
   ],
   providers: [HttpClientModule,
     {provide: HTTP_INTERCEPTORS, useClass: RequestinterceptorService, multi: true}],
