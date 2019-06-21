@@ -78,11 +78,40 @@ export class ListingComponent implements OnInit {
   keyWordtextChanged() {
     this.inputCharacterChanges++;
     console.log(this.inputCharacterChanges);
-    if (this.inputCharacterChanges % 3 === 0) {
+    if (this.inputCharacterChanges % 3 === 0 || this.experts.length === 0) {
     this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
       this.experts = data;
     });
   }
+  }
+
+  sortByNameASC() {
+    this.experts.sort((a,b) => {
+      if(a.name < b.name) { return -1; }
+    if(a.name > b.name) { return 1; }
+    return 0;
+    });
+  }
+  sortByNameDESC() {
+    this.experts.sort((a,b) => {
+      if(a.name < b.name) { return 1; }
+    if(a.name > b.name) { return -1; }
+    return 0;
+    });
+  }
+  sortByDistanceASC() {
+    this.experts.sort((a,b) => {
+      if(a.distanceMeter < b.distanceMeter) { return -1; }
+    if(a.distanceMeter > b.distanceMeter) { return 1; }
+    return 0;
+    });
+  }
+  sortByDistanceDESC() {
+    this.experts.sort((a,b) => {
+      if(a.distanceMeter < b.distanceMeter) { return 1; }
+    if(a.distanceMeter > b.distanceMeter) { return -1; }
+    return 0;
+    });
   }
 
 }

@@ -6,8 +6,21 @@
     <button (click)="getAllExperts()">All experts</button>
   </li>
   <li>
-    <button (click)="switchToMap()">SWITCH</button>
+    <button (click)="switchToMap()">SWITCH_MAP</button>
   </li>
+  <li>
+    <button (click)="sortByNameASC()">A-Z</button>
+  </li>
+  <li>
+    <button (click)="sortByNameDESC()">Z-A</button>
+  </li>
+  <li>
+    <button (click)="sortByDistanceASC()">DISTANCE A_Z</button>
+  </li>
+  <li>
+    <button (click)="sortByDistanceDESC()">DISTANCE Z-A</button>
+  </li>
+  
 </ul>
 
 <input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()">
