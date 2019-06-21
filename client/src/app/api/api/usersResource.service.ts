@@ -154,6 +154,7 @@ export class UsersResourceService {
     }
 
     /**
+<<<<<<< HEAD:client/src/app/api/api/usersResource.service.ts
      * findExpertsByUsers
      * 
      * @param searchparams searchparams
@@ -207,6 +208,8 @@ export class UsersResourceService {
     }
 
     /**
+=======
+>>>>>>> feature/T32/swagger:client/src/app/api/api/usersResource.service.ts
      * getAll
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -281,6 +284,7 @@ export class UsersResourceService {
         ];
 
         return this.httpClient.get<User>(`${this.basePath}/user`,
+<<<<<<< HEAD:client/src/app/api/api/usersResource.service.ts
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -333,6 +337,8 @@ export class UsersResourceService {
 
         return this.httpClient.post<User>(`${this.basePath}/user/address`,
             address,
+=======
+>>>>>>> feature/T32/swagger:client/src/app/api/api/usersResource.service.ts
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -383,8 +389,13 @@ export class UsersResourceService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
+<<<<<<< HEAD:client/src/app/api/api/usersResource.service.ts
         return this.httpClient.post<User>(`${this.basePath}/user/language`,
             language,
+=======
+        return this.httpClient.post<User>(`${this.basePath}/user/address`,
+            address,
+>>>>>>> feature/T32/swagger:client/src/app/api/api/usersResource.service.ts
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -395,12 +406,17 @@ export class UsersResourceService {
     }
 
     /**
+<<<<<<< HEAD:client/src/app/api/api/usersResource.service.ts
      * SearchUserWithQuery
+=======
+     * saveLanguage
+>>>>>>> feature/T32/swagger:client/src/app/api/api/usersResource.service.ts
      * 
      * @param searchparams searchparams
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+<<<<<<< HEAD:client/src/app/api/api/usersResource.service.ts
     public searchUserWithQueryUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
     public searchUserWithQueryUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
     public searchUserWithQueryUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
@@ -413,6 +429,15 @@ export class UsersResourceService {
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (searchparams !== undefined && searchparams !== null) {
             queryParameters = queryParameters.set('searchparams', <any>searchparams);
+=======
+    public saveLanguageUsingPOST(language: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public saveLanguageUsingPOST(language: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public saveLanguageUsingPOST(language: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public saveLanguageUsingPOST(language: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (language === null || language === undefined) {
+            throw new Error('Required parameter language was null or undefined when calling saveLanguageUsingPOST.');
+>>>>>>> feature/T32/swagger:client/src/app/api/api/usersResource.service.ts
         }
 
         let headers = this.defaultHeaders;
@@ -436,7 +461,12 @@ export class UsersResourceService {
             'application/json'
         ];
 
+<<<<<<< HEAD:client/src/app/api/api/usersResource.service.ts
         return this.httpClient.get<Array<User>>(`${this.basePath}/user/search`,
+=======
+        return this.httpClient.post<User>(`${this.basePath}/user/language`,
+            language,
+>>>>>>> feature/T32/swagger:client/src/app/api/api/usersResource.service.ts
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
