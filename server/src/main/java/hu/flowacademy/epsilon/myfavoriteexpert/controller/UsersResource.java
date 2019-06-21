@@ -36,7 +36,8 @@ public class UsersResource {
 
     @PostMapping("user/address")
     public ResponseEntity<User> saveAddress(@RequestBody Address address) {
-        return ResponseEntity.ok(userService.saveAddress(address));
+        User user = userService.saveAddress(address);
+        return ResponseEntity.ok(user);
     }
     @PostMapping("user/language")
     public ResponseEntity<User> saveLanguage(@RequestBody String language) {

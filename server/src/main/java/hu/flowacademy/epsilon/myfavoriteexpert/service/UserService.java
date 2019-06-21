@@ -8,6 +8,7 @@ import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
+import hu.flowacademy.epsilon.myfavoriteexpert.service.geocoding.GeoCodingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private GeoCodingService geoCodingService;
+
 
     @Autowired
     private UserRepository userRepository;
@@ -60,8 +65,11 @@ public class UserService {
         if (user == null) {
             throw new RuntimeException("User not found, id is invalid");
         } else {
-            user.setAddress(address);
-            user.setUpdatedAt(LocalDateTime.now());
+            if (address != null) {
+                user.setAddress(address);
+                user.setUpdatedAt(LocalDateTime.now());
+                user.setLocationByAddress(geoCodingService.getGeoCoding(address));
+            }
         }
         return userRepository.save(user);
     }
