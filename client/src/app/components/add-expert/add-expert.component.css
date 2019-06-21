@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  font-family: 'Fredoka One', cursive;
+  font-family: Poppins,sans-serif;
   font-size: 5px;
   color: #fff;
   background-color: black;
@@ -18,7 +18,7 @@
   
   
   .navbar{
-  font-family: 'Fredoka One', cursive;
+  font-family: Poppins,sans-serif;
   background-color:orange;
   font-size: 20px;
   height: 80px;
