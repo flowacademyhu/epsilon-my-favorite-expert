@@ -11,7 +11,9 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
-  isMapView : boolean = false;
+  isMapView = false;
+  keyWords = '';
+  inputCharacterChanges = 0;
 
   constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
 
@@ -71,6 +73,16 @@ export class ListingComponent implements OnInit {
 
   switchToMap() {
     this.isMapView = !this.isMapView;
+  }
+
+  keyWordtextChanged() {
+    this.inputCharacterChanges++;
+    console.log(this.inputCharacterChanges);
+    if (this.inputCharacterChanges % 3 === 0) {
+    this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
+      this.experts = data;
+    });
+  }
   }
 
 }

@@ -9,6 +9,9 @@
     <button (click)="switchToMap()">SWITCH</button>
   </li>
 </ul>
+
+<input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()">
+
 <div *ngIf="isMapView; else expertList">
   <app-map [experts]="experts"></app-map>
 </div>
@@ -26,3 +29,4 @@
       </div>
     </div></div
 ></ng-template>
+

@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
 
   user: User;
   favoriteExperts: Expert[];
-  
 
   constructor(private usersservice: UserControllerService, private expertService: ExpertResourceService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () =>  false;
@@ -24,13 +23,13 @@ export class ProfileComponent implements OnInit {
    }
 
   isAddressBlank():boolean {
-    if (this.user.address == undefined) {
+    if (this.user.address === undefined) {
       return true;
     }
-    return this.user.address.country == undefined ||
-    this.user.address.city == undefined||
-    this.user.address.street == undefined||
-    this.user.address.number == undefined;
+    return this.user.address.country === undefined ||
+    this.user.address.city === undefined||
+    this.user.address.street === undefined||
+    this.user.address.number === undefined;
   }
 
   ngOnInit() {
