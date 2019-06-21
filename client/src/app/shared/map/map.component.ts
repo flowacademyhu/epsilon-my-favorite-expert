@@ -15,6 +15,7 @@ import Text from 'ol/style/Text';
 import Fill from 'ol/style/Fill';
 import {  ILocation } from '../../ilocation';
 import { Expert } from 'src/app/api';
+import { GeolocationService } from '../services/geolocation.service';
 
 
 @Component({
@@ -35,33 +36,37 @@ export class MapComponent implements OnInit {
   markers = new Array<OlFeature>();
   locations: ILocation[] = [];
 
-  constructor() { }
+  constructor(private locationService: GeolocationService) { }
 
   ngOnInit() {
-    // let testA: ILocation;
-    // testA = {
-    // lon : 19.13991,
-    // lat :  47.49801
-    // }
-    // let testB : ILocation;
-    // testB = {
-    //   lat : 47.448011,
-    //   lon : 19.16991
-    //   }
 
-    // this.locations.push(testB);
-    // this.locations.push(testA);
+    this.fillLocations();
+    this.locations.forEach((loc) => this.createMarkerExpert(loc));
+    this.initializeMap();
+
+  }
+
+  ngOnChanges() {
+    this.fillLocations();
+    this.locations.forEach((loc) => this.createMarkerExpert(loc));
+    this.initializeMap();
+    console.log("ASD");
+  }
+
+  fillLocations() {
     this.experts.forEach(expert => {
       let location: ILocation;
       location = {
         lat: expert.location.lat,
-        lon: expert.location.lon
+        lon: expert.location.lon,
+        profession: expert.profession,
+        name: expert.name
       };
       this.locations.push(location);
     });
-    this.locations.forEach((loc) => this.createMarkerExpert(loc));
-    this.initializeMap();
+
   }
+
 
   createMarkerExpert(location: ILocation) {
     const marker = new OlFeature({
@@ -74,10 +79,9 @@ export class MapComponent implements OnInit {
         src: 'assets/image/vectorpoint.svg',
         imgSize: [40, 40]
       })),
-      
   text: new Text({
-    text: 'EZ EGY TALALAT',
-    offsetY: -10,
+    text: location.name + ': ' + location.profession.join(','),
+    offsetY: -20,
     fill: new Fill({
         color: '#A52A2A'
     })
@@ -106,12 +110,17 @@ export class MapComponent implements OnInit {
         });
 
         /* View and map */
-
-    this.view = new OlView({
+    if (localStorage.getItem('locationLat') == null || localStorage.getItem('locationLon') == null ) {
+      this.view = new OlView({
             center: fromLonLat([19.03991, 47.49801]),
-            zoom: 12
+            zoom: 15
         });
-
+      } else {
+        this.view = new OlView({
+          center: fromLonLat([+localStorage.getItem('locationLon'), +localStorage.getItem('locationLat')]),
+          zoom: 15
+      });
+      }
     this.map = new OlMap({
             target: 'map',
             // Added both layers
@@ -120,5 +129,6 @@ export class MapComponent implements OnInit {
         });
 
   }
+
 
 }
