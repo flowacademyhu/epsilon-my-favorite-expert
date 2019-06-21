@@ -58,5 +58,8 @@ export class ProfileComponent implements OnInit {
 
   }
  
+  switchLanguage(lang: string) {
+
+  }
 
 }
