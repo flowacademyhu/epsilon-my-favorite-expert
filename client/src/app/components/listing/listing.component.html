@@ -1,11 +1,28 @@
-<div class="masthead">
+<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <button (click)="getFavoriteExperts()">Favorite experts</button>
+  </li>
+  <li class="nav-item">
+    <button (click)="getAllExperts()">All experts</button>
+  </li>
+  <li>
+    <button (click)="switchToMap()">SWITCH</button>
+  </li>
+</ul>
+<div *ngIf="isMapView; else expertList">
+  <app-map [experts]="experts"></app-map>
+</div>
+<ng-template #expertList>
+  <div class="masthead">
     <div class="overlay">
-      <div id="f1_container">
-  </div>
-  <div class="flex">
-    <div  *ngFor="let expert of experts">
-      <app-expert  [expert]="expert" [isFavoriteExpert]="isFavoriteExpert(expert)"></app-expert>
-    </div>
-    </div>
-  </div>
-  
+      <div id="f1_container"></div>
+      <div class="flex">
+        <div *ngFor="let expert of experts">
+          <app-expert
+            [expert]="expert"
+            [isFavoriteExpert]="isFavoriteExpert(expert)"
+          ></app-expert>
+        </div>
+      </div>
+    </div></div
+></ng-template>

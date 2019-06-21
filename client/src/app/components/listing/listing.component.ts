@@ -11,6 +11,8 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
+  isMapView : boolean = false;
+
   constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
 
   ngOnInit() {
@@ -65,6 +67,10 @@ export class ListingComponent implements OnInit {
 
   switchLanguage(lang: string) {
 
+  }
+
+  switchToMap() {
+    this.isMapView = !this.isMapView;
   }
 
 }
