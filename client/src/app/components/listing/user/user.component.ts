@@ -13,26 +13,30 @@ export class UserComponent implements OnInit {
 
   experts: Expert[] = [];
 
-  favoriteExpert: Expert[] = [];
-
   showFavorites = false;
 
   constructor(private expertService: ExpertService) { }
 
   ngOnInit() {
+    this.loadData();
   }
   getAllExperts() {
     this.loadData();
     if (this.showFavorites === false){
         this.showFavorites = true;
+        this.expertService.getFavoriteExperts().subscribe(
+          (data: Expert[]) => {
+            this.experts = data;
+          }
+        );
     } else {
       this.showFavorites = false;
     }
   }
   loadData() {
-      this.expertService.getFavoriteExperts().subscribe(
-        (data: Expert[]) => {
-          this.favoriteExpert = data;
-        });
+    this.expertService.listAllExperts().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
+      });
   }
 }

@@ -16,6 +16,7 @@ export class SearchUserComponent implements OnInit {
   }
 
   getAllUsers() {
+    console.log('itt a baj!');
     this.loadData();
   }
   loadData() {

@@ -10,19 +10,19 @@
   <a class="nav-link" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect" *ngIf="!(state.user$ | async)">{{'Login' | translate:user}}</a>
   </li>
   
-  <li class="nav-item" *ngIf="(state.user$ | async)">
+  <li class="nav-item" *ngIf="!(state.user$ | async)">
     <a class="nav-link" [routerLink]="'/profile'">{{'Profile' | translate}}</a>
     </li>
-  <li class="nav-item" *ngIf="(state.user$ | async)">
+  <li class="nav-item" *ngIf="!(state.user$ | async)">
     <a class="nav-link" [routerLink]="'/add'">{{'Add expert' | translate}}</a>
   </li>
-  <li class="nav-item" *ngIf="(state.user$ | async)">
+  <li class="nav-item" *ngIf="!(state.user$ | async)">
     <a class="nav-link" [routerLink]="'/list-experts'">{{'List expert' | translate}}</a>
   </li>
-  <li class="nav-item" *ngIf="(state.user$ | async)">
+  <li class="nav-item" *ngIf="!(state.user$ | async)">
     <a class="nav-link" [routerLink]="'/search-user'">{{'Search user' | translate}}</a>
   </li>
-  <li class="nav-item" *ngIf="(state.user$ | async)">
+  <li class="nav-item" *ngIf="!(state.user$ | async)">
     <a class="nav-link" [routerLink]="''" (click)="logout()">{{'Logout' | translate}}</a>
   </li>
         

@@ -10,12 +10,8 @@ import { AppStateService } from 'src/app/shared/services/app-state.service';
 
 
 export class HeaderComponent implements OnInit {
-  state: any;
-  loggedin = true;
+  state: any = this. appState;
   constructor(private translate: TranslateService, private appState: AppStateService) {
-    if (this.state !== null) {
-      this.state = this.appState;
-    }
     translate.setDefaultLang('en');
    }
    switchLanguage(language: string) {
