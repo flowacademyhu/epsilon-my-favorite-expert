@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.geocoding.Location;
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import org.springframework.data.annotation.Id;
@@ -34,6 +35,7 @@ public class Expert {
 
     private Location location;
 
+    @Transient
     private Double distanceMeter;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
