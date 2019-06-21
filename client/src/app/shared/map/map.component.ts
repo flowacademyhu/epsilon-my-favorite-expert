@@ -36,7 +36,7 @@ export class MapComponent implements OnInit {
   markers = new Array<OlFeature>();
   locations: ILocation[] = [];
 
-  constructor(private locationService: GeolocationService) { }
+  constructor() { }
 
   ngOnInit() {
 
@@ -47,7 +47,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.ngOnInit();
+    
     
   }
 
