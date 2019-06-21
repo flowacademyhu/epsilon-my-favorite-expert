@@ -1,4 +1,12 @@
-{{user.name}}
-{{user.address}}
-{{user.email}}
-{{user.createdAt}}
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{user.name}}</li>
+    <li class="list-group-item">{{user.email}}</li>
+    <button (click) = "getAllExperts()">Favorite experts</button>
+    <div *ngIf="showFavorites===true">
+      <div *ngFor="let fav of favoriteExpert">
+        {{fav.name}}
+      </div>
+    </div>
+  </ul>
+</div>
