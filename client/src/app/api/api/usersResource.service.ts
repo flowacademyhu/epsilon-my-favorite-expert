@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { Address } from '../model/address';
+import { Expert } from '../model/expert';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -142,8 +143,61 @@ export class UsersResourceService {
             'application/json'
         ];
 
-        return this.httpClient.delete<User>(`${this.basePath}/userazt/${encodeURIComponent(String(expertid))}`,
+        return this.httpClient.delete<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findExpertsByUsers
+     * 
+     * @param searchparams searchparams
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (searchparams === null || searchparams === undefined) {
+            throw new Error('Required parameter searchparams was null or undefined when calling findExpertsByUsersUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (searchparams !== undefined && searchparams !== null) {
+            queryParameters = queryParameters.set('searchparams', <any>searchparams);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<Expert>>(`${this.basePath}/user/expert`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -332,6 +386,59 @@ export class UsersResourceService {
         return this.httpClient.post<User>(`${this.basePath}/user/language`,
             language,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * SearchUserWithQuery
+     * 
+     * @param searchparams searchparams
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (searchparams === null || searchparams === undefined) {
+            throw new Error('Required parameter searchparams was null or undefined when calling searchUserWithQueryUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (searchparams !== undefined && searchparams !== null) {
+            queryParameters = queryParameters.set('searchparams', <any>searchparams);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<User>>(`${this.basePath}/user/search`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import hu.flowacademy.epsilon.myfavoriteexpert.serializer.LocalDateTimeDeserializer;
 import hu.flowacademy.epsilon.myfavoriteexpert.serializer.LocalDateTimeSerializer;
+import hu.flowacademy.epsilon.myfavoriteexpert.service.geocoding.Location;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -45,13 +46,7 @@ public class User {
 
     private  String language;
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+    private Location locationByAddress;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)

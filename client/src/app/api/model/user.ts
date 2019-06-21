@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { Address } from './address';
+import { Location } from './location';
 import { Provider } from './provider';
 
 
@@ -27,6 +28,7 @@ export interface User {
     id?: string;
     imageUrl?: string;
     language?: string;
+    locationByAddress?: Location;
     name?: string;
     password?: string;
     provider?: User.ProviderEnum;
