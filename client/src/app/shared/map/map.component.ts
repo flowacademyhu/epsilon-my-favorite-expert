@@ -47,10 +47,8 @@ export class MapComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.fillLocations();
-    this.locations.forEach((loc) => this.createMarkerExpert(loc));
-    this.initializeMap();
-    console.log("ASD");
+    this.ngOnInit();
+    
   }
 
   fillLocations() {
