@@ -15,5 +15,6 @@ providers: {provider_id: string, provider_type: string, email: string, name: str
 updated_at: string;
 
 email: string;
+imageUrl: string;
 }
 

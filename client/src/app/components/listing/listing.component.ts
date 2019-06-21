@@ -64,4 +64,8 @@ export class ListingComponent implements OnInit {
 
   }
 
+  switchLanguage(lang: string) {
+
+  }
+
 }
