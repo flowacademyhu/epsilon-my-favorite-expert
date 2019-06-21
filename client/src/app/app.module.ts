@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
 
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ApiModule, Configuration, ConfigurationParameters } from './api';
     ExpertComponent,
     AddExpertComponent,
     UserComponent,
-    AddAddressComponent
+    AddAddressComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
