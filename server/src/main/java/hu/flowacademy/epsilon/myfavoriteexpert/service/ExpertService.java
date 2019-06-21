@@ -41,8 +41,13 @@ public class ExpertService {
 
     }
 
-    public Optional<Expert> findById(UUID id) {
-        return expertRepository.findById(id);
+    public Expert findById(UUID id) {
+        Optional<Expert> expert = expertRepository.findById(id);
+        if (expert.isPresent()) {
+            return expert.get();
+        } else {
+            return null;
+        }
     }
 
 
@@ -63,7 +68,8 @@ public class ExpertService {
     public void addProfession(UUID id, String profession) {
         expertRepository.findById(id).ifPresent(expert -> {
             expert.addProfession(profession);
-            expertRepository.save(expert);});
+            expertRepository.save(expert);
+        });
     }
 
     public List<Expert> getFavoriteExperts() {

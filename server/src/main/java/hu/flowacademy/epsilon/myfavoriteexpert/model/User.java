@@ -43,6 +43,8 @@ public class User {
 
     private List<UUID> experts = new ArrayList<>();
 
+    private  String language;
+
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt;
@@ -69,8 +71,4 @@ public class User {
             experts.remove(expertid);
         }
     }
-
-
-
-
 }
