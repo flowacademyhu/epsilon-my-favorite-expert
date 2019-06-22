@@ -2,7 +2,7 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{user.name}}</li>
     <li class="list-group-item">{{user.email}}</li>
-    <button (click) = "getAllExperts()">Favorite experts</button>
+    <button>Favorite experts</button>
     <div *ngIf="showFavorites===true">
       <div *ngFor="let fav of experts">
         {{fav.name}}

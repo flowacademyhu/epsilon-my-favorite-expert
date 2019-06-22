@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertService } from 'src/app/shared/services/expert.service';
-import { Expert } from 'src/app/models/expert.model';
+import { ExpertResourceService, Expert } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
 
 @Component({
@@ -12,7 +11,11 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
-  constructor(private expertService: ExpertService, private communicationService: CommunicationService) { }
+  isMapView = false;
+  keyWords = '';
+  inputCharacterChanges = 0;
+
+  constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
 
   ngOnInit() {
     this.loadData();
@@ -31,7 +34,7 @@ export class ListingComponent implements OnInit {
   }
 
   getFavoriteExperts() {
-    this.expertService.getFavoriteExperts().subscribe(
+    this.expertService.getFavoriteExpertsUsingGET().subscribe(
       (data: Expert[]) => {
         this.experts = data;
       }
@@ -41,11 +44,11 @@ export class ListingComponent implements OnInit {
     this.loadData();
   }
   loadData() {
-    this.expertService.listAllExperts().subscribe(
+    this.expertService.getAllUsingGET().subscribe(
       (data: Expert[]) => {
         this.experts = data;
       });
-      this.expertService.getFavoriteExperts().subscribe(
+      this.expertService.getFavoriteExpertsUsingGET().subscribe(
         (data: Expert[]) => {
           this.favoriteExpert = data;
         });
@@ -66,6 +69,49 @@ export class ListingComponent implements OnInit {
 
   switchLanguage(lang: string) {
 
+  }
+
+  switchToMap() {
+    this.isMapView = !this.isMapView;
+  }
+
+  keyWordtextChanged() {
+    this.inputCharacterChanges++;
+    console.log(this.inputCharacterChanges);
+    if (this.inputCharacterChanges % 3 === 0 || this.experts.length === 0) {
+    this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
+      this.experts = data;
+    });
+  }
+  }
+
+  sortByNameASC() {
+    this.experts.sort((a,b) => {
+      if(a.name < b.name) { return -1; }
+    if(a.name > b.name) { return 1; }
+    return 0;
+    });
+  }
+  sortByNameDESC() {
+    this.experts.sort((a,b) => {
+      if(a.name < b.name) { return 1; }
+    if(a.name > b.name) { return -1; }
+    return 0;
+    });
+  }
+  sortByDistanceASC() {
+    this.experts.sort((a,b) => {
+      if(a.distanceMeter < b.distanceMeter) { return -1; }
+    if(a.distanceMeter > b.distanceMeter) { return 1; }
+    return 0;
+    });
+  }
+  sortByDistanceDESC() {
+    this.experts.sort((a,b) => {
+      if(a.distanceMeter < b.distanceMeter) { return 1; }
+    if(a.distanceMeter > b.distanceMeter) { return -1; }
+    return 0;
+    });
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/shared/services/user.service';
+import { User } from '../../../api/model/user';
 
 @Component({
   selector: 'app-search-user',
@@ -10,21 +9,11 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class SearchUserComponent implements OnInit {
   users: User[] = [];
   listOrSearch = false;
-  constructor(private userService: UserService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  getAllUsers() {
-    console.log('itt a baj!');
-    this.loadData();
-  }
-  loadData() {
-    this.userService.listAllUsers().subscribe(
-      (data: User[]) => {
-        this.users = data;
-      });
-  }
   listAllUsers() {
     this.listOrSearch = false;
   }

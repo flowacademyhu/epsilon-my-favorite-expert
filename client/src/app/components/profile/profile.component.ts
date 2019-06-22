@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
-import { User } from 'src/app/models/user.model';
-import { Address } from 'src/app/models/address.model';
-import { Expert } from 'src/app/models/expert.model';
-import { ExpertService } from 'src/app/shared/services/expert.service';
+import { User } from '../../api/model/user';
+import { Address } from '../../api/model/address';
+import { Expert } from '../../api/model/expert';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { UserControllerService, ExpertResourceService } from 'src/app/api';
 
 @Component({
   selector: 'app-profile',
@@ -17,20 +16,20 @@ export class ProfileComponent implements OnInit {
   user: User;
   favoriteExperts: Expert[];
 
-  constructor(private userservice: UserService, private expertService: ExpertService, private router: Router) {
+  constructor(private usersservice: UserControllerService, private expertService: ExpertResourceService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () =>  false;
-    this.user = new User();
-    this.user.address = new Address();
+    this.user = <User>{};
+    this.user.address = <Address>{};
    }
 
   isAddressBlank():boolean {
-    if (this.user.address == undefined) {
+    if (this.user.address === undefined) {
       return true;
     }
-    return this.user.address.country == undefined ||
-    this.user.address.city == undefined||
-    this.user.address.street == undefined||
-    this.user.address.number == undefined;
+    return this.user.address.country === undefined ||
+    this.user.address.city === undefined||
+    this.user.address.street === undefined||
+    this.user.address.number === undefined;
   }
 
   ngOnInit() {
@@ -42,7 +41,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadData() {
-    forkJoin(this.userservice.getCurrentUser(), this.expertService.getFavoriteExperts())
+    forkJoin(this.usersservice.getCurrentUserUsingGET(), this.expertService.getFavoriteExpertsUsingGET())
     .subscribe(([currentUser, experts]) => {
       this.user = currentUser;
       this.favoriteExperts = experts;

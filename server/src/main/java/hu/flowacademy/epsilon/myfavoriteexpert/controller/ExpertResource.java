@@ -12,32 +12,32 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/expert")
-public class ExpertController {
+public class ExpertResource {
 
     @Autowired
     private ExpertService expertService;
 
-    @PostMapping("/add")
+    @PostMapping
     public Expert addExpert(@RequestBody Expert expert) {
         return expertService.save(expert);
     }
 
-    @GetMapping("/get/{id}")
-    public Optional<Expert> getOne(@PathVariable UUID id) {
+    @GetMapping("/{id}")
+    public Expert getOne(@PathVariable UUID id) {
         return expertService.findById(id);
     }
 
-    @GetMapping("/getall")
+    @GetMapping
     public List<Expert> getAll() {
         return expertService.find();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable UUID id) {
         expertService.delete(id);
     }
 
-    @PutMapping("/add-profession/{id}")
+    @PutMapping("/{id}")
     public void addProfession(@PathVariable UUID id, @RequestBody String profession) {
         expertService.addProfession(id, profession);
     }
@@ -45,6 +45,11 @@ public class ExpertController {
     @GetMapping("/favorite")
     public List<Expert> getFavoriteExperts() {
         return expertService.getFavoriteExperts();
+    }
+
+    @GetMapping("/customsearch")
+    public List<Expert> findExpertTest(@RequestParam String searchparams) {
+        return expertService.findExpertByParams(searchparams);
     }
 
 }

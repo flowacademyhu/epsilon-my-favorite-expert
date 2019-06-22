@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertService } from 'src/app/shared/services/expert.service';
-import { Expert } from 'src/app/models/expert.model';
+import { Expert } from '../../../api/model/expert';
 
 @Component({
   selector: 'app-user',
@@ -15,28 +14,12 @@ export class UserComponent implements OnInit {
 
   showFavorites = false;
 
-  constructor(private expertService: ExpertService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.loadData();
+   
   }
-  getAllExperts() {
-    this.loadData();
-    if (this.showFavorites === false){
-        this.showFavorites = true;
-        this.expertService.getFavoriteExperts().subscribe(
-          (data: Expert[]) => {
-            this.experts = data;
-          }
-        );
-    } else {
-      this.showFavorites = false;
-    }
+ 
   }
-  loadData() {
-    this.expertService.listAllExperts().subscribe(
-      (data: Expert[]) => {
-        this.experts = data;
-      });
-  }
-}
+  
+

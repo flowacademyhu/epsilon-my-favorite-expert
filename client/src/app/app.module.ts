@@ -17,8 +17,12 @@ import { UserComponent } from './components/listing/user/user.component';
 import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './add-address/add-address.component';
+import { ApiModule, Configuration, ConfigurationParameters } from './api';
+
 import { HeaderComponent } from './components/header/header.component';
 import { SearchUserComponent } from './components/listing/search-user/search-user.component';
+import { MapComponent } from './shared/map/map.component';
+
 
 @NgModule({
   declarations: [
@@ -32,12 +36,15 @@ import { SearchUserComponent } from './components/listing/search-user/search-use
     UserComponent,
     AddAddressComponent,
     HeaderComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    ApiModule.forRoot(getConfig),
     FormsModule,
     TranslateModule.forRoot({
       loader: {
@@ -56,3 +63,11 @@ export class AppModule { }
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+export function getConfig(): Configuration {
+  return new Configuration(<ConfigurationParameters>{
+    apiKeys: {},
+    withCredentials: true,
+    basePath: 'http://localhost:8080'}
+    );
+ }
