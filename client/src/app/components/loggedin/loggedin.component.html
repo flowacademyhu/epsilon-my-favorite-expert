@@ -1,22 +1,29 @@
-    <!-- Full Page Image Header with Vertically Centered Content -->
-    <header class="masthead {
-      background: rgba(0, 0, 0, 0.5);
-    }">
-    <div class="container h-100">
-    <div class="row h-100 align-items-center">
-    <div class="col-12 text-center">
- 
-  <!-- Full Page Image Header with Vertically Centered Content -->
-  <header class="masthead">
-  <div class="container h-100">
-  <div class="row h-100 align-items-center">
-  <div class="col-12 text-center">
-    <h1 translate></h1>
-  <p class="lead">Welcome</p>
-  <ul>
-      
-  </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5><img class="card-img" alt="profile picture" [src]="user.imageUrl" /></h5>
+          <h5>{{user.name}}</h5>
+        </div>
+        <div class="card-body">
+          <h6>{{user.email}}</h6>
+          <h6>{{user.address.country}}, {{user.address.city}} {{user.address.street}} {{user.address.number}}</h6>
+        </div>
+      </div>
+    </div>
   </div>
+  
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <div class="card">
+        <div class="card-header">
+          {{expert.name}}
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-  </header>
+</div>

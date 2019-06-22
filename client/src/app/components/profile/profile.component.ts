@@ -5,6 +5,8 @@ import { Expert } from '../../api/model/expert';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { UserControllerService, ExpertResourceService } from 'src/app/api';
+import { GeolocationService} from 'src/app/shared/services/geolocation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -16,8 +18,8 @@ export class ProfileComponent implements OnInit {
   user: User;
   favoriteExperts: Expert[];
   
-
-  constructor(private usersservice: UserControllerService, private expertService: ExpertResourceService, private router: Router) {
+  constructor(private usersservice: UserControllerService, private expertService: ExpertResourceService,
+    private geolocation: GeolocationService, private translate: TranslateService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () =>  false;
     this.user = <User>{};
     this.user.address = <Address>{};
@@ -37,7 +39,8 @@ export class ProfileComponent implements OnInit {
     this.router.events.subscribe((emptydata) => {
       this.loadData();
     });
-    this.loadData();
+    this.loadData();  
+  
 
   }
 
@@ -48,7 +51,7 @@ export class ProfileComponent implements OnInit {
       this.favoriteExperts = experts;
     });
   }
-
+  
   saveAddressLocalStorage() {
     localStorage.setItem('country', this.user.address.country);
     localStorage.setItem('city', this.user.address.city);
@@ -56,6 +59,7 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('number', this.user.address.number);
 
   }
+
  
   switchLanguage(lang: string) {
 

@@ -8,6 +8,8 @@ export class GeolocationService {
 
   constructor(private http: HttpClient) { }
 
+  
+
   getLocation(){
   navigator.geolocation.getCurrentPosition((pos) => {
     console.log(pos.coords);
@@ -19,8 +21,10 @@ export class GeolocationService {
       .subscribe((countryData) => {
         console.log(countryData);
         console.log(countryData.address.country_code);
+        localStorage.setItem('language',countryData.address.country_code);
     });
   });
 }
-  
+
+
 }

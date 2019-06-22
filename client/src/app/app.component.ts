@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppStateService } from './shared/services/app-state.service';
 import { AuthService } from './shared/services/auth.service';
+import { User } from './api';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent implements OnInit {
   tokenParam: String;
+
   constructor(
     private activateRoute: ActivatedRoute,
     private authService: AuthService,
@@ -29,4 +31,5 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
 }
