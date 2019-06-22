@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
       if (this.tokenParam != null) {
       localStorage.setItem('token', params['token']);
       this.authService.getLoggedInUser().subscribe(
-        user => {
+         user => {
          this.appStateService.user = user;
         }
       );
