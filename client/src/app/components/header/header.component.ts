@@ -19,17 +19,16 @@ export class HeaderComponent implements OnInit {
     this.state = this.appState;
     translate.setDefaultLang(localStorage.getItem('language'));
    }
-
+   
    switchLanguage(language: string) {
-    this.translate.use(language);
+   this.translate.use(language);
   }
 
   ngOnInit() {
     
   }
   logout() {
-    this.state.user = null;
-    this.appState.user.accessToken = null;
-    this.state = null;
+   this.appState = null;
+   localStorage.removeItem('token');
   }
 }
