@@ -13,6 +13,9 @@ export class AppStateService {
 
   constructor() {}
   get user(): User {
+    if (!this._user.value && localStorage.getItem('user')) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+}
     return this._user.getValue();
   }
   set user(val: User) {
