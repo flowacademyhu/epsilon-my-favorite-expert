@@ -1,11 +1,45 @@
-<div class="masthead">
-    <div class="overlay">
-      <div id="f1_container">
+<ul class="andorCSSAnitaMajdKijavitja">
+  <div>
+    <button (click)="getFavoriteExperts()">Favorite experts</button>
   </div>
-  <div class="flex">
-    <div  *ngFor="let expert of experts">
-      <app-expert  [expert]="expert" [isFavoriteExpert]="isFavoriteExpert(expert)"></app-expert>
-    </div>
-    </div>
+  <div>
+    <button (click)="getAllExperts()">All experts</button>
+  </div>
+  <div>
+    <button (click)="switchToMap()">SWITCH_MAP</button>
+  </div>
+  <div>
+    <button (click)="sortByNameASC()">A-Z</button>
+  </div>
+  <div>
+    <button (click)="sortByNameDESC()">Z-A</button>
+  </div>
+  <div>
+    <button (click)="sortByDistanceASC()">DISTANCE A_Z</button>
+  </div>
+  <div>
+    <button (click)="sortByDistanceDESC()">DISTANCE Z-A</button>
   </div>
   
+</ul>
+
+<input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()">
+
+<div *ngIf="isMapView; else expertList">
+  <app-map [experts]="experts"></app-map>
+</div>
+<ng-template #expertList>
+  <div class="masthead">
+    <div class="overlay">
+      <div id="f1_container"></div>
+      <div class="flex">
+        <div *ngFor="let expert of experts">
+          <app-expert
+            [expert]="expert"
+            [isFavoriteExpert]="isFavoriteExpert(expert)"
+          ></app-expert>
+        </div>
+      </div>
+    </div></div
+></ng-template>
+

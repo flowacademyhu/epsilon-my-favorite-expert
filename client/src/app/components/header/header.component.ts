@@ -30,5 +30,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.state.user = null;
     this.appState.user.accessToken = null;
+    this.state = null;
   }
 }

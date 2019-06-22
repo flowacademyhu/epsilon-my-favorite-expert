@@ -36,7 +36,7 @@ public class Expert {
     private Location location;
 
     @Transient
-    private Double distanceMeter;
+    private Integer distanceMeter;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)

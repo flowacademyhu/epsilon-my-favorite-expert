@@ -20,6 +20,7 @@ import { AddAddressComponent } from './add-address/add-address.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
 
 import { HeaderComponent } from './components/header/header.component';
+import { MapComponent } from './shared/map/map.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { HeaderComponent } from './components/header/header.component';
     AddExpertComponent,
     UserComponent,
     AddAddressComponent,
-    HeaderComponent
+    HeaderComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

@@ -113,7 +113,7 @@ public class ExpertService {
     public List<Expert> setExpertDistance(List<Expert> experts) {
         User user = userService.findByid();
         if (user != null && user.getLocationByAddress() != null) {
-            experts.stream().forEach(expert -> expert.setDistanceMeter(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation())));
+            experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
           // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
         }
         return experts;
@@ -122,7 +122,7 @@ public class ExpertService {
     public Expert setExpertDistance(Expert expert) {
         User user = userService.findByid();
         if (user != null && user.getLocationByAddress() != null) {
-            expert.setDistanceMeter(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()));
+            expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation())));
         }
         return expert;
     }
