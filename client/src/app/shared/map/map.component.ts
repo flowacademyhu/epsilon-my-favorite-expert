@@ -46,19 +46,6 @@ export class MapComponent implements OnInit {
 
   }
 
-  // ngOnChanges() {
-  //   if (this.map !== undefined) {
-  //     this.fillLocations();
-  //     this.locations.forEach((loc) => this.createMarkerExpert(loc));
-      
-  //     this.vectorSource.refresh();
-  //     this.vectorLayer.getSource().refresh();
-  //     this.tileLayer.getSource().refresh();
-  //     this.map.changed();
-  //   }
-  // }
-
-
   fillLocations() {
     this.experts.forEach(expert => {
       let location: ILocation;
