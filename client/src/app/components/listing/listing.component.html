@@ -23,7 +23,10 @@
   
 </ul>
 
-<input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()">
+<input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()" list="expertSuggestions" autofocus>
+<datalist id="expertSuggestions">
+  <option *ngFor="let item of suggestTerm">{{item}}</option>
+</datalist>
 
 <div *ngIf="isMapView; else expertList">
   <app-map [experts]="experts"></app-map>
