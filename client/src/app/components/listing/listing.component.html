@@ -1,13 +1,15 @@
 <ul class="andorCSSAnitaMajdKijavitja">
   <div>
+    <button (click)="switchToMap()">{{'Map' | translate}}</button>
+  </div>
+  <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
+  <div>
     <button (click)="getFavoriteExperts()">{{'Favorite experts' | translate}}</button>
   </div>
   <div>
     <button (click)="getAllExperts()">{{'All experts' | translate}}</button>
   </div>
-  <div>
-    <button (click)="switchToMap()">{{'Map' | translate}}</button>
-  </div>
+ 
   <div>
     <button (click)="sortByNameASC()">A-Z</button>
   </div>
@@ -20,6 +22,7 @@
   <div>
     <button (click)="sortByDistanceDESC()">{{'Distance Z-A'| translate}}</button>
   </div>
+</div>
   
 </ul>
 
