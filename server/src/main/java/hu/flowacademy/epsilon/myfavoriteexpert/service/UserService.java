@@ -17,10 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -126,15 +123,15 @@ public class UserService {
     }
 
     public List<Expert> findAllExperts(UUID userId){
-        Pageable pageable = PageRequest.of(0, 1);
         User user = userRepository.findById(userId).orElse(null);
-        List<Expert> experts = new ArrayList<>();
-        if (user != null) {
+        List<Expert> experts;
+        if (user != null && user.getExperts() != null) {
             experts = user.getExperts().stream()
                     .map(expertid -> expertRepository
-                            .findById(expertid).orElseThrow(RuntimeException::new))
+                            .findById(expertid).orElse(null))
                     .collect(Collectors.toList());
+            return experts;
         }
-        return experts;
+        throw new RuntimeException("ID INVALID");
     }
 }
