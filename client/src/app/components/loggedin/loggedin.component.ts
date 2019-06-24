@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/shared/services/user.service';
-import { ExpertService } from 'src/app/shared/services/expert.service';
+import { ExpertResourceService, UserControllerService } from 'src/app/api';
+import {AppStateService} from 'src/app/shared/services/app-state.service';
 
 @Component({
   selector: 'app-loggedin',
@@ -10,12 +10,12 @@ import { ExpertService } from 'src/app/shared/services/expert.service';
 })
 export class LoggedinComponent implements OnInit {
 
-  constructor(
-    private activateRoute: ActivatedRoute
-  ) { }
-
+  state: any;
+  constructor(private appState: AppStateService, private activatedRoute: ActivatedRoute) {
+    this.state = this.appState;
+   }
   ngOnInit() {
-    this.activateRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe(params => {
       if (params == null) {
         console.log();
       } else {

@@ -47,4 +47,9 @@ public class ExpertResource {
         return expertService.getFavoriteExperts();
     }
 
+    @GetMapping("/customsearch")
+    public List<Expert> findExpertTest(@RequestParam String searchparams) {
+        return expertService.findExpertByParams(searchparams);
+    }
+
 }

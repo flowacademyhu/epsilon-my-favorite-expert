@@ -5,5 +5,12 @@
   "Login": "Login",
   "Logout": "Logout",
   "Profile" : "Profile",
-  "Add expert": "Add expert"
+  "Add expert": "Add expert",
+  "Expert name": "Expert name",
+  "Country": "Country",
+  "City": "City",
+  "Profession": "Profession",
+  "Phone": "Phone",
+  "Add profession": "Add profession",
+  "Search user": "Search user"
 }

@@ -1,6 +1,7 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.controller;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.UserService;
@@ -32,9 +33,11 @@ public class UsersResource {
     public ResponseEntity<User> getById() {
         return ResponseEntity.ok(userService.findByid());
     }
+
     @PostMapping("user/address")
     public ResponseEntity<User> saveAddress(@RequestBody Address address) {
-        return ResponseEntity.ok(userService.saveAddress(address));
+        User user = userService.saveAddress(address);
+        return ResponseEntity.ok(user);
     }
     @PostMapping("user/language")
     public ResponseEntity<User> saveLanguage(@RequestBody String language) {
@@ -58,5 +61,13 @@ public class UsersResource {
         } else {
             return ResponseEntity.ok(userService.deleteExpert(user,expertid));
         }
+    }
+    @GetMapping("/user/search")
+    public List<User> SearchUserWithQuery(@RequestParam String searchparams) {
+        return userService.findBestMatchedUserByName(searchparams);
+    }
+    @GetMapping("/user/expert")
+    public List<Expert> findExpertsByUsers(@RequestParam String searchparams) {
+        return userService.findExpertsByUser(searchparams);
     }
 }

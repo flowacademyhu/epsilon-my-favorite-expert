@@ -1,3 +1,8 @@
+.andorCSSAnitaMajdKijavitja{
+    display: flex;
+    align-content: flex-start;
+    justify-content: flex-start;
+}
 .masthead {
   
   min-height: 500px;

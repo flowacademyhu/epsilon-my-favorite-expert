@@ -3,7 +3,14 @@
   "Intro": "Megbizható szerelőt keresel? Jó helyen jársz!",
   "Connect": "Kapcsolat",
   "Login": "Bejelentkezés",
-  "Logout": "Kiejelntkezés",
+  "Logout": "Kijelentkezés",
   "Profile" : "Profil",
-  "Add expert": "Mester hozzáadása"
+  "Add expert": "Mester hozzáadása",
+  "Expert name": "Szakember neve",
+  "Country": "Ország",
+  "City": "Város",
+  "Profession": "Szakma",
+  "Phone": "Telefonszám",
+  "Add profession": "Szakma hozzáadása",
+  "Search user": "Felhasználó keresése"
 }

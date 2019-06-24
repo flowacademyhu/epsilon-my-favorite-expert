@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Expert } from '../../../api/model/expert';
+import { User } from '../../../api/model/user';
 
 @Component({
   selector: 'app-user',
@@ -7,10 +9,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserComponent implements OnInit {
   @Input()
-  index: any;
+  user: User;
+
+  experts: Expert[] = [];
+
+  showFavorites = false;
+
   constructor() { }
 
   ngOnInit() {
   }
+  }
 
-}
