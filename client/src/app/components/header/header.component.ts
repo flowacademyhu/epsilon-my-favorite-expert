@@ -21,8 +21,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-   this.state = null;
    localStorage.removeItem('token');
+   localStorage.removeItem('user');
+   this.state = undefined;
   }
   ngOnInit() {
   }
