@@ -17,10 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,11 +80,16 @@ public class UserService {
         user.deleteExpert(expertid);
         return userRepository.save(user);
     }
+
     public User saveLanguage(String language) {
         User user = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
         if (user == null) {
             throw new RuntimeException("User not found, id is invalid");
-        } else {
+        }
+        else if(user.getDeletedAt() != null ) {
+            throw new RuntimeException("User not found, id is invalid");
+        }
+        else {
             if(language.equalsIgnoreCase(Language.HU.toString())){
                 user.setLanguage("HU");
             }
@@ -118,5 +120,18 @@ public class UserService {
                     .collect(Collectors.toList());
         }
         return experts;
+    }
+
+    public List<Expert> findAllExperts(UUID userId){
+        User user = userRepository.findById(userId).orElse(null);
+        List<Expert> experts;
+        if (user != null && user.getExperts() != null) {
+            experts = user.getExperts().stream()
+                    .map(expertid -> expertRepository
+                            .findById(expertid).orElse(null))
+                    .collect(Collectors.toList());
+            return experts;
+        }
+        throw new RuntimeException("ID INVALID");
     }
 }

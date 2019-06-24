@@ -47,7 +47,7 @@ public class UsersResource {
     @PutMapping("user/{expertid}")
     public ResponseEntity<User> addExpertToUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
-        if (user != null) {
+        if (user != null && !user.getExperts().contains(expertid)) {
             user.addExpert(expertid);
         }
         return ResponseEntity.ok(userService.save(user));
@@ -69,5 +69,10 @@ public class UsersResource {
     @GetMapping("/user/expert")
     public List<Expert> findExpertsByUsers(@RequestParam String searchparams) {
         return userService.findExpertsByUser(searchparams);
+    }
+    @GetMapping("user/experts/{id}")
+    public List<Expert> findAllExpertOfUser(@PathVariable UUID id) {
+        System.out.println(id);
+        return userService.findAllExperts(id);
     }
 }
