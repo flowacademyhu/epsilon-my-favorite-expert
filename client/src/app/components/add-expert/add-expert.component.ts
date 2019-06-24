@@ -19,9 +19,7 @@ export class AddExpertComponent implements OnInit {
     this.expert.address = <Address>{};
    }
 
-   switchLanguage(language: string) {
-    this.translate.use(language);
-}
+   
   ngOnInit() {
   }
 addProfession() {
