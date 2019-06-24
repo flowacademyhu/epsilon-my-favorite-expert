@@ -1,12 +1,12 @@
 <ul class="andorCSSAnitaMajdKijavitja">
   <div>
-    <button (click)="getFavoriteExperts()">Favorite experts</button>
+    <button (click)="getFavoriteExperts()">{{'Favorite experts' | translate}}</button>
   </div>
   <div>
-    <button (click)="getAllExperts()">All experts</button>
+    <button (click)="getAllExperts()">{{'All experts' | translate}}</button>
   </div>
   <div>
-    <button (click)="switchToMap()">SWITCH_MAP</button>
+    <button (click)="switchToMap()">{{'Map' | translate}}</button>
   </div>
   <div>
     <button (click)="sortByNameASC()">A-Z</button>
@@ -15,10 +15,10 @@
     <button (click)="sortByNameDESC()">Z-A</button>
   </div>
   <div>
-    <button (click)="sortByDistanceASC()">DISTANCE A_Z</button>
+    <button (click)="sortByDistanceASC()">{{'Distance A_Z' | translate}}</button>
   </div>
   <div>
-    <button (click)="sortByDistanceDESC()">DISTANCE Z-A</button>
+    <button (click)="sortByDistanceDESC()">{{'Distance Z-A'| translate}}</button>
   </div>
   
 </ul>
@@ -41,6 +41,7 @@
             [isFavoriteExpert]="isFavoriteExpert(expert)"
           ></app-expert>
         
-    </div></div
-></ng-template>
+    </div>
+    </div>
+  </ng-template>
 

@@ -12,11 +12,11 @@ import { SearchUserComponent } from './components/listing/search-user/search-use
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {pathMatch: 'prefix', path: 'oauth2/redirect', component: LoggedinComponent},
-  {path:  'add', component: AddExpertComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'list-experts', component: ListingComponent},
-  {path: 'add-address', component: AddAddressComponent},
-  {path: 'search-user', component: SearchUserComponent},
+  {path:  'add', component: AddExpertComponent, canActivate: [LoggedinGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [LoggedinGuard]},
+  {path: 'list-experts', component: ListingComponent, canActivate: [LoggedinGuard]},
+  {path: 'add-address', component: AddAddressComponent, canActivate: [LoggedinGuard]},
+  {path: 'search-user', component: SearchUserComponent, canActivate: [LoggedinGuard]},
   {path: '**', component: LoginComponent}
 ];
 @NgModule({

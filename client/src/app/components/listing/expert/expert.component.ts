@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Expert } from '../../../api/model/expert';
 import { UsersResourceService } from '../../../api/api/usersResource.service';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-expert',
@@ -14,7 +15,10 @@ export class ExpertComponent implements OnInit {
 
   @Input()
   isFavoriteExpert: boolean;
-  constructor(private userService: UsersResourceService,private communicationService: CommunicationService) { }
+  constructor(private userService: UsersResourceService,private communicationService: CommunicationService,
+    private translate: TranslateService) {
+      translate.setDefaultLang(localStorage.getItem('language'));
+     }
 
   ngOnInit() {
   }

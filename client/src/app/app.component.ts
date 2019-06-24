@@ -4,6 +4,7 @@ import { AppStateService } from './shared/services/app-state.service';
 import { AuthService } from './shared/services/auth.service';
 import { User } from './api';
 import { UserControllerService } from './api'; 
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,16 @@ import { UserControllerService } from './api';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
   tokenParam: String;
+  user: User;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private authService: AuthService,
     private appStateService: AppStateService,
-    private userService: UserControllerService
+    private userService: UserControllerService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
