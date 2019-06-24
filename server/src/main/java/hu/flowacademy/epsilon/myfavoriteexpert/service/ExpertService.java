@@ -105,7 +105,9 @@ public class ExpertService {
     public List<Expert> findExpertByParams(String searchParams) {
         Pageable pageable = PageRequest.of(0,10);
         searchParams = searchParams.replaceAll("_"," ");
-        var experts = expertRepository.findExpertTest(searchParams,pageable).getContent();
+        String searchPartialInWords = "*" + searchParams.replaceAll(" ","* *").toLowerCase()+ "*";
+        System.out.println(searchPartialInWords);
+        var experts = expertRepository.findExpertTest(searchParams,searchPartialInWords,pageable).getContent();
         experts = setExpertDistance(experts);
         return experts;
     }

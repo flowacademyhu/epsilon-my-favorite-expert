@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExpertResourceService, Expert } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
+import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-listing',
@@ -14,6 +15,7 @@ export class ListingComponent implements OnInit {
   isMapView = false;
   keyWords = '';
   inputCharacterChanges = 0;
+  suggestTerm: String[];
 
   constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
 
@@ -78,11 +80,10 @@ export class ListingComponent implements OnInit {
   keyWordtextChanged() {
     this.inputCharacterChanges++;
     console.log(this.inputCharacterChanges);
-    if (this.inputCharacterChanges % 3 === 0 || this.experts.length === 0) {
     this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
       this.experts = data;
     });
-  }
+    this.searchFromArray(this.experts,this.keyWords);
   }
 
   sortByNameASC() {
@@ -112,6 +113,31 @@ export class ListingComponent implements OnInit {
     if(a.distanceMeter > b.distanceMeter) { return -1; }
     return 0;
     });
+  }
+
+  searchFromArray(experts: Expert[], regex) {
+    this.suggestTerm = [];
+    for (const expert of experts) {
+      if (this.suggestTerm.length >= 3) {
+        return;
+      }
+     this.searchIn(expert.name, regex);
+     for (const profession of expert.profession) {
+      this.searchIn(profession, regex);
+    }
+    if (this.suggestTerm.length >= 3) {
+      return;
+    }
+     this.searchIn(expert.address.country, regex);
+     this.searchIn(expert.address.city,regex);
+     this.searchIn(expert.address.street, regex);
+    }
+  }
+
+  searchIn(field: string, regex: string): void {
+    if (field.toLowerCase().match(regex.toLowerCase())) {
+      this.suggestTerm.push(field);
+    }
   }
 
 }
