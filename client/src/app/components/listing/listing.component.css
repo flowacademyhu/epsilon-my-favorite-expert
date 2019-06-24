@@ -1,7 +1,15 @@
 .andorCSSAnitaMajdKijavitja{
     display: flex;
     align-content: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
+}
+
+.inputField {
+    display: flex;
+    justify-content: center;
+}
+#searchinput {
+    width: 70%;
 }
 .masthead {
   

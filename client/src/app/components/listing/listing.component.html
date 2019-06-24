@@ -25,12 +25,12 @@
 </div>
   
 </ul>
-
+<div class="inputField" *ngIf="!isMapView">
 <input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()" list="expertSuggestions" autofocus>
 <datalist id="expertSuggestions">
   <option *ngFor="let item of suggestTerm">{{item}}</option>
 </datalist>
-
+</div>
 <div *ngIf="isMapView; else expertList">
   <app-map [experts]="experts"></app-map>
 </div>
