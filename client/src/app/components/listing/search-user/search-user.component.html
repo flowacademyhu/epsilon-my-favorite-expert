@@ -13,5 +13,11 @@
   <p>List of users:</p>
 <div *ngFor="let user of users">
   <app-user [user]="user"></app-user>
+  <button (click)="id=user.id" (click)="getExpert()">Favorite experts</button>
+    <div *ngIf="showFavorites===true">
+      <div *ngFor="let expert of experts">
+        <app-expert [expert]="expert"></app-expert>
+      </div>
+    </div>
 </div>
 </div>

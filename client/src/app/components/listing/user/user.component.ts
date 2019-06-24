@@ -11,10 +11,6 @@ export class UserComponent implements OnInit {
   @Input()
   user: User;
 
-  experts: Expert[] = [];
-
-  showFavorites = false;
-
   constructor() { }
 
   ngOnInit() {

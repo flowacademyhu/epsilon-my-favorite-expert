@@ -9,8 +9,11 @@ import { UsersResourceService, ExpertResourceService } from 'src/app/api';
 })
 export class SearchUserComponent implements OnInit {
   users: any[];
+  id: string;
+  username: string;
   experts: any[];
   listOrSearch = false;
+  showFavorites = false;
   constructor(private usersservice: UsersResourceService, private experservice: ExpertResourceService) { }
 
   ngOnInit() {
@@ -23,15 +26,26 @@ export class SearchUserComponent implements OnInit {
     .subscribe((users) => {
       this.users = users;
     });
-    this.experservice.getFavoriteExpertsUsingGET()
-    .subscribe((experts) => {
-      this.experts = experts;
-    });
   }
   listAllUsers() {
     this.listOrSearch = false;
   }
   search() {
     this.listOrSearch = true;
+  }
+  getAllExperts() {
+    if (this.showFavorites === true) {
+      this.showFavorites = false;
+    } else {
+      this.showFavorites = true;
+    }
+  }
+  getExpert() {
+    this.usersservice.findExpertsByUsersUsingGET(this.id)
+    .subscribe((experts) => {
+      this.experts = experts;
+    });
+    console.log(this.id);
+    console.log('helo');
   }
 }
