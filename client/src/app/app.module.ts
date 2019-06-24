@@ -20,6 +20,7 @@ import { AddAddressComponent } from './add-address/add-address.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
 
 import { HeaderComponent } from './components/header/header.component';
+import { SearchUserComponent } from './components/listing/search-user/search-user.component';
 import { MapComponent } from './shared/map/map.component';
 
 
@@ -35,6 +36,7 @@ import { MapComponent } from './shared/map/map.component';
     UserComponent,
     AddAddressComponent,
     HeaderComponent,
+    SearchUserComponent,
     MapComponent
   ],
   imports: [
@@ -50,7 +52,8 @@ import { MapComponent } from './shared/map/map.component';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-})
+}),
+    ReactiveFormsModule
   ],
   providers: [HttpClientModule,
     {provide: HTTP_INTERCEPTORS, useClass: RequestinterceptorService, multi: true}],

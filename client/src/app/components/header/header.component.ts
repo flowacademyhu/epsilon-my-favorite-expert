@@ -10,21 +10,21 @@ import { AppStateService } from 'src/app/shared/services/app-state.service';
 
 
 export class HeaderComponent implements OnInit {
-  state: any = this.appState;
+  state: AppStateService;
   constructor(private translate: TranslateService, private appState: AppStateService) {
-
     translate.setDefaultLang('en');
+    this.state = this.appState;
    }
 
    switchLanguage(language: string) {
-    this.translate.use(language);
+   this.translate.use(language);
   }
 
-  ngOnInit() {
-  }
   logout() {
-    this.state.user = null;
-    this.appState.user.accessToken = null;
-    this.state = null;
+   localStorage.removeItem('token');
+   localStorage.removeItem('user');
+   this.state = undefined;
+  }
+  ngOnInit() {
   }
 }
