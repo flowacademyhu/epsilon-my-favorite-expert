@@ -13,14 +13,14 @@ import { Router } from '@angular/router';
 
 
 export class HeaderComponent implements OnInit {
-  state: any;
   user: User;
 
   constructor(private translate: TranslateService, private appState: AppStateService, private geolocation: GeolocationService,
     private userResource: UsersResourceService,
     private router: Router) {
-    this.state = this.appState;
+    
    }
+   state = this.appState;
    
    switchLanguage(language: string) {
     this.userResource.saveLanguageUsingPOST(language).subscribe((user: User)=>{
