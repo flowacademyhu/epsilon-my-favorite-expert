@@ -69,9 +69,7 @@ export class ListingComponent implements OnInit {
 
   }
 
-  switchLanguage(lang: string) {
-
-  }
+  
 
   switchToMap() {
     this.isMapView = !this.isMapView;

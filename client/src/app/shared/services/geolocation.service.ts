@@ -9,7 +9,7 @@ export class GeolocationService {
 
   location: ILocation;
   constructor(private http: HttpClient) { }
-
+  
   
 
   getLocation(){
@@ -34,4 +34,6 @@ export class GeolocationService {
     });
   });
 }
+
+
 }

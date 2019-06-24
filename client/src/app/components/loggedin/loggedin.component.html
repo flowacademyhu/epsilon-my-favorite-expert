@@ -10,7 +10,9 @@
         </div>
         <div class="card-body">
           <h6>{{user.email}}</h6>
+          <div *ngIf ="!isAddressBlank()">
           <h6>{{user.address.country}}, {{user.address.city}} {{user.address.street}} {{user.address.number}}</h6>
+        </div> 
         </div>
       </div>
       </div>

@@ -23,7 +23,7 @@ export class LoggedinComponent implements OnInit {
 
   @Input()
   expert: Expert;
-
+  
   user: User;
   favoriteExperts: Expert[];
 
@@ -63,10 +63,6 @@ export class LoggedinComponent implements OnInit {
     });
   }
 
-  switchLanguage(lang: string) {
-
-  }
-
   removeFromFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.removeFromFavorite(this.expert);
@@ -93,5 +89,16 @@ export class LoggedinComponent implements OnInit {
         this.experts = data;
       }
     );
+  }
+
+  isAddressBlank():boolean {
+    
+    if (this.user.address == undefined) {
+      return true;
+    }
+    return this.user.address.country == undefined ||
+    this.user.address.city == undefined||
+    this.user.address.street == undefined||
+    this.user.address.number == undefined;
   }
 }

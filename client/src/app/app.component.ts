@@ -5,6 +5,7 @@ import { AuthService } from './shared/services/auth.service';
 import { User } from './api';
 import { UserControllerService } from './api'; 
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from './shared/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private appStateService: AppStateService,
     private userService: UserControllerService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private language: LanguageService
   ) { }
 
   ngOnInit() {
@@ -37,6 +39,9 @@ export class AppComponent implements OnInit {
       );
       }
     });
+
+this.language.getLanguage();
   }
 
+ 
 }
