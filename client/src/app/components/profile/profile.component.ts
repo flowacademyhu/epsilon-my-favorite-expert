@@ -53,9 +53,7 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('city', this.user.address.city);
     localStorage.setItem('street', this.user.address.street);
     localStorage.setItem('number', this.user.address.number);
-
-  }
- 
+  } 
   switchLanguage(lang: string) {
 
   }

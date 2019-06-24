@@ -10,18 +10,20 @@ import { AppStateService } from 'src/app/shared/services/app-state.service';
 
 
 export class HeaderComponent implements OnInit {
+  state: any;
   constructor(private translate: TranslateService, private appState: AppStateService) {
     translate.setDefaultLang('en');
+    this.state = this.appState;
    }
-   state: any = this.appState;
+
    switchLanguage(language: string) {
    this.translate.use(language);
   }
 
-  ngOnInit() {
-  }
   logout() {
    this.appState = null;
    localStorage.removeItem('token');
+  }
+  ngOnInit() {
   }
 }

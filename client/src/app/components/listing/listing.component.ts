@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertResourceService, Expert } from 'src/app/api';
+import { ExpertResourceService, Expert, UserControllerService } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
 
 @Component({
@@ -15,7 +15,9 @@ export class ListingComponent implements OnInit {
   keyWords = '';
   inputCharacterChanges = 0;
 
-  constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
+  constructor(private usersservice: UserControllerService, 
+    private expertService: ExpertResourceService, 
+    private communicationService: CommunicationService) { }
 
   ngOnInit() {
     this.loadData();
@@ -57,7 +59,7 @@ export class ListingComponent implements OnInit {
   isFavoriteExpert(expert: Expert): boolean {
     return !!this.favoriteExpert.find(exp => exp.id === expert.id);
   }
-  addToFavorite(expert : Expert) {
+  addToFavorite(expert: Expert) {
     this.favoriteExpert.push(expert);
     this.isFavoriteExpert(expert);
   }
