@@ -1,0 +1,13 @@
+.navbar{
+    background-color: transparent;
+    
+    font-size: 20px;
+}
+
+.navbar-brand{
+  color:  white !important;
+}
+
+.nav-link{
+    color:  white !important;
+}

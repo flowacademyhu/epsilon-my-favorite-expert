@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '../models/address.model';
-import { UserService } from '../shared/services/user.service';
+import { Address } from '../../app/api/model/address';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model';
+import { User } from '../../app/api/model/user';
+import { UsersResourceService } from '../api';
 
 @Component({
   selector: 'app-add-address',
@@ -12,9 +12,9 @@ import { User } from '../models/user.model';
 export class AddAddressComponent implements OnInit {
 
   address : Address;
-  constructor(private userService: UserService,
+  constructor(private usersService: UsersResourceService,
     private router: Router) { 
-    this.address = new Address();
+    this.address = <Address>{};
   }
 
   ngOnInit() {
@@ -22,13 +22,13 @@ export class AddAddressComponent implements OnInit {
   }
 
   addAddress(){
-    this.userService.addAddress(this.address).subscribe((data:User) => {
+    this.usersService.saveAddressUsingPOST(this.address).subscribe((data:User) => {
       console.log(data);
     });
     this.router.navigate(['profile']);
   }
   fillAddressFields() {
-    const tempAddress = new Address();
+    const tempAddress = <Address>{};
     tempAddress.country = localStorage.getItem('country');
     tempAddress.city = localStorage.getItem('city');
     tempAddress.street = localStorage.getItem('street');
@@ -47,10 +47,6 @@ export class AddAddressComponent implements OnInit {
     this.address.city == undefined||
     this.address.street == undefined||
     this.address.number == undefined;
-  }
-
-  switchLanguage(lang: string) {
-
   }
 
 }

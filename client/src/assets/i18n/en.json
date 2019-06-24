@@ -5,5 +5,26 @@
   "Login": "Login",
   "Logout": "Logout",
   "Profile" : "Profile",
-  "Add expert": "Add expert"
+  "Add expert": "Add expert",
+  "Expert name": "Expert name",
+  "Country": "Country",
+  "City": "City",
+  "Profession": "Profession",
+  "Phone": "Phone",
+  "Add profession": "Add profession",
+  "Search user": "Search user",
+  "List expert": "List expert",
+  "Remove From Favorite": "Remove From Favorite",
+  "Add to Favorite": "Add to Favorite",
+  "Favorite experts": "Favorite experts",
+  "All experts": "All experts",
+  "Map": "Map",
+  "Distance A_Z": "Distance A_Z",
+  "Distance Z-A": "Distance Z_A",
+  "Add address": "Add address",
+  "Address": "Address",
+  "Street": "Street",
+  "Number": "Number"
+  
+
 }

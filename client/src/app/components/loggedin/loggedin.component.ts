@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/shared/services/user.service';
-import { ExpertService } from 'src/app/shared/services/expert.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ExpertResourceService, UserControllerService, User, Expert, Address, UsersResourceService } from 'src/app/api';
+import {AppStateService} from 'src/app/shared/services/app-state.service';
+import { forkJoin } from 'rxjs';
+import { CommunicationService } from 'src/app/shared/services/communication.service';
 
 @Component({
   selector: 'app-loggedin',
@@ -10,21 +12,93 @@ import { ExpertService } from 'src/app/shared/services/expert.service';
 })
 export class LoggedinComponent implements OnInit {
 
-  constructor(
-    private activateRoute: ActivatedRoute
-  ) { }
+  @Input()
+  expert: Expert;
 
+  experts: Expert[] = [];
+  favoriteExpert: Expert[] = [];
+  isMapView = false;
+  keyWords = '';
+  inputCharacterChanges = 0;
+
+  @Input()
+  isFavoriteExpert: boolean;
+  
+  user: User;
+  favoriteExperts: Expert[];
+
+  state: any;
+  expertService: any;
+  constructor(private appState: AppStateService, private activatedRoute: ActivatedRoute, 
+    private userController: UserControllerService, private expertResource: ExpertResourceService, private router: Router, 
+    private communicationService: CommunicationService, private userResources: UsersResourceService) {
+    this.state = this.appState;
+    this.user = <User>{};
+    this.user.address = <Address>{};
+    
+   }
   ngOnInit() {
-    this.activateRoute.queryParams.subscribe(params => {
+    this.router.events.subscribe((emptydata) => {
+      this.loadData();
+    });
+    this.activatedRoute.queryParams.subscribe(params => {
       if (params == null) {
         console.log();
       } else {
         localStorage.setItem('token', params['token']);
       }
     });
+
+   
+    this.loadData();  
+    console.log(this.experts.length);
+    
   }
 
-  switchLanguage(lang: string) {
+  loadData() {
+    forkJoin(this.userController.getCurrentUserUsingGET(), this.expertResource.getFavoriteExpertsUsingGET())
+    .subscribe(([currentUser, experts]) => {
+      this.user = currentUser;
+      this.favoriteExperts = experts;
+    });
+  }
 
+  removeFromFavorite() {
+    this.isFavoriteExpert = !this.isFavoriteExpert;
+   this.communicationService.removeFromFavorite(this.expert);
+   this.userResources.deleteExpertFromUserUsingDELETE(this.expert.id).subscribe((data: any) => {
+        console.log('sikeresen torolve');
+      });
+
+  }
+
+  
+  addToFavorite() {
+    this.isFavoriteExpert = !this.isFavoriteExpert;
+   this.communicationService.addToFavorite(this.expert);
+     this.userResources.addExpertToUserUsingPUT(this.expert.id).subscribe(
+      (data: any) => {
+        console.log('sikeresen hozzaadva a kedvencekhez');
+      }
+    );
+  }
+
+  getFavoriteExperts() {
+    this.expertService.getFavoriteExpertsUsingGET().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
+      }
+    );
+  }
+
+  isAddressBlank():boolean {
+    
+    if (this.user.address == undefined) {
+      return true;
+    }
+    return this.user.address.country == undefined ||
+    this.user.address.city == undefined||
+    this.user.address.street == undefined||
+    this.user.address.number == undefined;
   }
 }
