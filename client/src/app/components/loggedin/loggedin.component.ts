@@ -12,6 +12,12 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 })
 export class LoggedinComponent implements OnInit {
 
+  experts: Expert[] = [];
+  favoriteExpert: Expert[] = [];
+  isMapView = false;
+  keyWords = '';
+  inputCharacterChanges = 0;
+
   @Input()
   isFavoriteExpert: boolean;
 
@@ -32,6 +38,9 @@ export class LoggedinComponent implements OnInit {
     
    }
   ngOnInit() {
+    this.router.events.subscribe((emptydata) => {
+      this.loadData();
+    });
     this.activatedRoute.queryParams.subscribe(params => {
       if (params == null) {
         console.log();
@@ -40,10 +49,10 @@ export class LoggedinComponent implements OnInit {
       }
     });
 
-    this.router.events.subscribe((emptydata) => {
-      this.loadData();
-    });
+   
     this.loadData();  
+    console.log(this.experts.length);
+    
   }
 
   loadData() {
@@ -66,12 +75,22 @@ export class LoggedinComponent implements OnInit {
       });
 
   }
+
+  
   addToFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.addToFavorite(this.expert);
      this.userResources.addExpertToUserUsingPUT(this.expert.id).subscribe(
       (data: any) => {
         console.log('sikeresen hozzaadva a kedvencekhez');
+      }
+    );
+  }
+
+  getFavoriteExperts() {
+    this.expertService.getFavoriteExpertsUsingGET().subscribe(
+      (data: Expert[]) => {
+        this.experts = data;
       }
     );
   }

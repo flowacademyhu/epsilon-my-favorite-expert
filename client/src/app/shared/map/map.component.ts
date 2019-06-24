@@ -25,7 +25,7 @@ import { GeolocationService } from '../services/geolocation.service';
 })
 export class MapComponent implements OnInit {
   @Input()
-  experts: Expert[];
+  experts: Expert[] = [];
 
   map: OlMap;
   vectorSource: OlVectorSource;
@@ -39,7 +39,6 @@ export class MapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
     this.fillLocations();
     this.locations.forEach((loc) => this.createMarkerExpert(loc));
     this.initializeMap();

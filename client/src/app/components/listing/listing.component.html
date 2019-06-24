@@ -29,8 +29,7 @@
   <app-map [experts]="experts"></app-map>
 </div>
 <ng-template #expertList>
-  <div class="masthead">
-    <div class="overlay">
+
       <div id="f1_container"></div>
       <div class="flex">
         <div *ngFor="let expert of experts">
@@ -38,8 +37,7 @@
             [expert]="expert"
             [isFavoriteExpert]="isFavoriteExpert(expert)"
           ></app-expert>
-        </div>
-      </div>
+        
     </div></div
 ></ng-template>
 

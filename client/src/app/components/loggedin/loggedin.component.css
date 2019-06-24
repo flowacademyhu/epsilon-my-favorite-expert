@@ -20,9 +20,9 @@ body{
   .card{
     background-color: #27293d;
     color: white;
-    box-shadow: 0 1px 20px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 20px 20px rgba(202, 21, 178, 0.1);
   }
 
-  .card-header .card-image{
-     
-  }
+
+
+  

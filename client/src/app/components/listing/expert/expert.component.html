@@ -1,36 +1,25 @@
 
-    <div class="bestSnippArea1077 d-flex" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">
-        <div class="col-sm-3 col-4">
-          <div class="bsBox">
-           <div class="dgCard ">
-              <div class="strip-block">
-                <div class="profile-logo">
-                  <img alt="" src="/assets/image/tool1.jpg" />
-                </div>
-                <div class="strip"></div>
-                <div class="short-details">
-                  <blockquote class="logoName">{{ expert.name }}
-                  </blockquote>
-                  <blockquote class="quote">
+      <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-10">
+    <div class="card" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">
+    
+        <div class="card-header">
+                
+                <div class="card-body">
+                  <h3 class="logoName">{{ expert.name }}
+                  </h3>
+                  <h3>
                     {{ expert.phone }}
-                  </blockquote>
-
-                  <blockquote class="quote">
-                    Távolság:{{ expert.distanceMeter }}
-                  </blockquote>
-
-                  <div class="divider">
-                    <blockquote class="quote">
+                  </h3>
+                  <h3>Távolság:{{ expert.distanceMeter }}</h3>
+                    <h3 class="quote">
                       {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
-                    </blockquote>
+                    </h3>
                     <blockquote *ngFor="let prof of expert.profession" class="quote">
                       {{ prof }}
                     </blockquote>
                   </div>
-                </div>
-              </div>
-              <div class="details">
-                <div class="nameBlock">
                   <div *ngIf="isFavoriteExpert">
                   <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
                   <button (click)="removeFromFavorite()" class="round-shape name">Remove From Favorite</button>
@@ -38,15 +27,10 @@
                   <div *ngIf="!isFavoriteExpert">
                   <button (click)="addToFavorite()" class="round-shape name">Add to Favorite</button>
                   
-                </div>
-                  
-                  <div class="divider">
-                    <div class="stick stick1"></div>
-                    <div class="stick stick2"></div>
-                  </div>
-                </div>
+                
               </div>
             </div>
+          </div>
   </div>
   </div>
   </div>    
