@@ -23,9 +23,9 @@ export class AddAddressComponent implements OnInit {
 
   addAddress(){
     this.usersService.saveAddressUsingPOST(this.address).subscribe((data:User) => {
-      console.log(data);
-    });
-    this.router.navigate(['profile']);
+      console.log(data);this.router.navigate(['profile']);
+    },(error)=> {alert("Hibás cím!")});
+    
   }
   fillAddressFields() {
     const tempAddress = <Address>{};

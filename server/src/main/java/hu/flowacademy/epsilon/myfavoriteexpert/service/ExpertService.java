@@ -42,7 +42,12 @@ public class ExpertService {
         var expertid = UUID.randomUUID();
         expert.setId(expertid);
         expert.setCreatedAt(LocalDateTime.now());
-        expert.setLocation(geoCodingService.getGeoCoding(expert.getAddress()));
+        if (expert.getAddress().getCity().length() < 2 || expert.getAddress().getCountry().length() < 2 ||
+                expert.getAddress().getStreet().length() < 2  || Double.isNaN(geoCodingService.getGeoCoding(expert.getAddress()).getLon())) {
+            throw new RuntimeException("address is not valid!!!!!!!!");
+        } else {
+            expert.setLocation(geoCodingService.getGeoCoding(expert.getAddress()));
+        }
 
         User user = userService.findByid();
         user.addExpert(expertid);

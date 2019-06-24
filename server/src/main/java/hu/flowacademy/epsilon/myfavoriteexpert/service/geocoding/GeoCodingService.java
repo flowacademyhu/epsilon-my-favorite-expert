@@ -73,7 +73,10 @@ public class GeoCodingService {
     }
 
     public Long distance(Location startingLoc, Location endLocation) {
-
+        if (startingLoc.getLon() == null || endLocation.getLon() == null) {
+            //return Long.MAX_VALUE;
+            throw new RuntimeException("Location is not valid");
+        }
         final Integer EARTHRADIUS = 6371;
         Double latDistance = Math.toRadians(endLocation.getLat() - startingLoc.getLat());
         Double lonDistance = Math.toRadians(endLocation.getLon() - startingLoc.getLon());
