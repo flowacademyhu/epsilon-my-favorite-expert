@@ -12,6 +12,9 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 })
 export class LoggedinComponent implements OnInit {
 
+  @Input()
+  expert: Expert;
+
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
   isMapView = false;
@@ -20,9 +23,6 @@ export class LoggedinComponent implements OnInit {
 
   @Input()
   isFavoriteExpert: boolean;
-
-  @Input()
-  expert: Expert;
   
   user: User;
   favoriteExperts: Expert[];

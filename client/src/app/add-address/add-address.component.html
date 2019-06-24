@@ -5,27 +5,27 @@
 <div class="col-12 text-center">
   <div class="row justify-content-center align-items-center">
     <form>
-      <h5>Country:</h5>
+      <h5>{{'Country' | translate}}:</h5>
       <input class="form-control"
         type="text"
         name="country"
         [(ngModel)]="address.country"
       />
-      <h5>City:</h5>
+      <h5>{{'City' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="city"
         [(ngModel)]="address.city"
       />
-      <h5>Street:</h5>
+      <h5>{{'Street' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="street"
         [(ngModel)]="address.street"
       />
-      <h5>number:</h5>
+      <h5>{{'Number' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -33,7 +33,7 @@
         [(ngModel)]="address.number"
       />
       <br>
-      <button type="button" name="save" class="btn btn-light" (click)="addAddress()" >Add address</button>
+      <button type="button" name="save" class="btn btn-light" (click)="addAddress()" >{{'Add address' | translate}}</button>
     </form> 
   </div> 
 </div>

@@ -22,5 +22,7 @@
   "Distance A_Z": "Távolság A_Z",
   "Distance Z-A": "Távolság Z_A",
   "Add address": "Cím hozzáadása",
-  "Address": "Cím"
+  "Address": "Cím",
+  "Street": "Utca",
+  "Number": "Házszám"
 }

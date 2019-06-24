@@ -13,11 +13,11 @@ export class LanguageService {
     private userService: UserControllerService) { }
 
   getLanguage(){
-    if(localStorage.getItem('token') == null){
+    if(localStorage.getItem('token') == undefined){
       return this.translate.setDefaultLang(localStorage.getItem('language'));
-    } else if (this.appstate.user$ == null) {
+    } else if (this.appstate.user$ == undefined) {
       this.userService.getCurrentUserUsingGET().subscribe((user)=> {
-        if (user.language == null) {
+        if (user.language == undefined) {
          return this.translate.setDefaultLang(localStorage.getItem('language'));
         } else {
          return  this.translate.setDefaultLang(user.language);

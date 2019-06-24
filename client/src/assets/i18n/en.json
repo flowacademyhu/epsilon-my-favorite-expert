@@ -22,6 +22,9 @@
   "Distance A_Z": "Distance A_Z",
   "Distance Z-A": "Distance Z_A",
   "Add address": "Add address",
-  "Address": "Address"
+  "Address": "Address",
+  "Street": "Street",
+  "Number": "Number"
+  
 
 }

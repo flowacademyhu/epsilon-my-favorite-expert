@@ -5,7 +5,6 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">
-          
           <h5> {{user.name}}</h5>
         </div>
         <div class="card-body">
@@ -13,6 +12,7 @@
           <div *ngIf ="!isAddressBlank()">
           <h6>{{user.address.country}}, {{user.address.city}} {{user.address.street}} {{user.address.number}}</h6>
         </div> 
+        <h6>{{user.language}}</h6>
         </div>
       </div>
       </div>
@@ -28,3 +28,4 @@
   </div>
     </div>
   </div>
+</div>

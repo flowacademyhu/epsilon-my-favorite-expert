@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {
       this.tokenParam = params['token'];
-      if (this.tokenParam != null) {
+      if (this.tokenParam != undefined) {
       localStorage.setItem('token', params['token']);
       this.userService.getCurrentUserUsingGET().subscribe(
          user => {

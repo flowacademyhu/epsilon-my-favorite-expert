@@ -17,7 +17,6 @@ export class ExpertComponent implements OnInit {
   isFavoriteExpert: boolean;
   constructor(private userService: UsersResourceService,private communicationService: CommunicationService,
     private translate: TranslateService) {
-      translate.setDefaultLang(localStorage.getItem('language'));
      }
 
   ngOnInit() {
