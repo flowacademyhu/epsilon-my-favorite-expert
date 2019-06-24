@@ -68,7 +68,12 @@ public class UserService {
             if (address != null) {
                 user.setAddress(address);
                 user.setUpdatedAt(LocalDateTime.now());
-                user.setLocationByAddress(geoCodingService.getGeoCoding(address));
+                if (address.getCity().length() < 2 || address.getCountry().length() < 2 ||
+                        address.getStreet().length() < 2  || Double.isNaN(geoCodingService.getGeoCoding(address).getLon())) {
+                    throw new RuntimeException("address is not valid!!!!!!!!");
+                } else {
+                    user.setLocationByAddress(geoCodingService.getGeoCoding(address));
+                }
             }
         }
         return userRepository.save(user);

@@ -1,50 +1,48 @@
-<div class="masthead">
+<ul class="andorCSSAnitaMajdKijavitja">
+  <div>
+    <button (click)="getFavoriteExperts()">Favorite experts</button>
+  </div>
+  <div>
+    <button (click)="getAllExperts()">All experts</button>
+  </div>
+  <div>
+    <button (click)="switchToMap()">SWITCH_MAP</button>
+  </div>
+  <div>
+    <button (click)="sortByNameASC()">A-Z</button>
+  </div>
+  <div>
+    <button (click)="sortByNameDESC()">Z-A</button>
+  </div>
+  <div>
+    <button (click)="sortByDistanceASC()">DISTANCE A_Z</button>
+  </div>
+  <div>
+    <button (click)="sortByDistanceDESC()">DISTANCE Z-A</button>
+  </div>
+  
+</ul>
+
+<input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()" list="expertSuggestions" autofocus>
+<datalist id="expertSuggestions">
+  <option *ngFor="let item of suggestTerm">{{item}}</option>
+</datalist>
+
+<div *ngIf="isMapView; else expertList">
+  <app-map [experts]="experts"></app-map>
+</div>
+<ng-template #expertList>
+  <div class="masthead">
     <div class="overlay">
-  
-      <div id="f1_container">
-  
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-    <a class="navbar-brand" href="#">{{'Title' | translate}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" routerLink='../profile'>Profil</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink='../add'>Add expert</a>
-        </li>   
-    <li class="nav-item active">
-    <a class="nav-link" href="#">{{'Connect' | translate}}
-    <span class="sr-only">(current)</span>
-    </a>
-    <li class="nav-item">
-    <a class="nav-link" href="#">{{'Logout' | translate}}</a>
-    </li>
-    <li class="nav-item">
-    <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
-    </li>
-    <li class="nav-item">
-    <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
-    </li>
-    <li class="nav-item">
-      <button (click)="getFavoriteExperts()">Favorite experts</button>
-      </li>
-      <li class="nav-item">
-        <button (click)="getAllExperts()">All experts</button>
-        </li>
-    </ul>
-    </div>
-    </div>
-    </nav>
-  </div>
-  <div class="flex">
-    <div  *ngFor="let expert of experts">
-      <app-expert  [expert]="expert" [isFavoriteExpert]="isFavoriteExpert(expert)"></app-expert>
-    </div>
-    </div>
-  </div>
-  
+      <div id="f1_container"></div>
+      <div class="flex">
+        <div *ngFor="let expert of experts">
+          <app-expert
+            [expert]="expert"
+            [isFavoriteExpert]="isFavoriteExpert(expert)"
+          ></app-expert>
+        </div>
+      </div>
+    </div></div
+></ng-template>
+

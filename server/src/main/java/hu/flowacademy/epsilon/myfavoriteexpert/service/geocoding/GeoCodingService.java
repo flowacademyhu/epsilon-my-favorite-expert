@@ -72,15 +72,18 @@ public class GeoCodingService {
 
     }
 
-    public Double distance(Location startingLoc, Location endLocation) {
-
-        final int EARTHRADIUS = 6371;
-        double latDistance = Math.toRadians(endLocation.getLat() - startingLoc.getLat());
-        double lonDistance = Math.toRadians(endLocation.getLon() - startingLoc.getLon());
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+    public Long distance(Location startingLoc, Location endLocation) {
+        if (startingLoc.getLon() == null || endLocation.getLon() == null) {
+            //return Long.MAX_VALUE;
+            throw new RuntimeException("Location is not valid");
+        }
+        final Integer EARTHRADIUS = 6371;
+        Double latDistance = Math.toRadians(endLocation.getLat() - startingLoc.getLat());
+        Double lonDistance = Math.toRadians(endLocation.getLon() - startingLoc.getLon());
+        Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
                 + Math.cos(Math.toRadians(startingLoc.getLat())) * Math.cos(Math.toRadians(endLocation.getLat()))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return EARTHRADIUS * c * 1000;
+        Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return ((Double)(EARTHRADIUS * c * 1000)).longValue();
     }
 }

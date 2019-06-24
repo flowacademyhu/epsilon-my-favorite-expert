@@ -42,7 +42,12 @@ public class ExpertService {
         var expertid = UUID.randomUUID();
         expert.setId(expertid);
         expert.setCreatedAt(LocalDateTime.now());
-        expert.setLocation(geoCodingService.getGeoCoding(expert.getAddress()));
+        if (expert.getAddress().getCity().length() < 2 || expert.getAddress().getCountry().length() < 2 ||
+                expert.getAddress().getStreet().length() < 2  || Double.isNaN(geoCodingService.getGeoCoding(expert.getAddress()).getLon())) {
+            throw new RuntimeException("address is not valid!!!!!!!!");
+        } else {
+            expert.setLocation(geoCodingService.getGeoCoding(expert.getAddress()));
+        }
 
         User user = userService.findByid();
         user.addExpert(expertid);
@@ -105,7 +110,9 @@ public class ExpertService {
     public List<Expert> findExpertByParams(String searchParams) {
         Pageable pageable = PageRequest.of(0,10);
         searchParams = searchParams.replaceAll("_"," ");
-        var experts = expertRepository.findExpertTest(searchParams,pageable).getContent();
+        String searchPartialInWords = "*" + searchParams.replaceAll(" ","* *").toLowerCase()+ "*";
+        System.out.println(searchPartialInWords);
+        var experts = expertRepository.findExpertTest(searchParams,searchPartialInWords,pageable).getContent();
         experts = setExpertDistance(experts);
         return experts;
     }
@@ -113,7 +120,7 @@ public class ExpertService {
     public List<Expert> setExpertDistance(List<Expert> experts) {
         User user = userService.findByid();
         if (user != null && user.getLocationByAddress() != null) {
-            experts.stream().forEach(expert -> expert.setDistanceMeter(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation())));
+            experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
           // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
         }
         return experts;
@@ -122,7 +129,7 @@ public class ExpertService {
     public Expert setExpertDistance(Expert expert) {
         User user = userService.findByid();
         if (user != null && user.getLocationByAddress() != null) {
-            expert.setDistanceMeter(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()));
+            expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation())));
         }
         return expert;
     }

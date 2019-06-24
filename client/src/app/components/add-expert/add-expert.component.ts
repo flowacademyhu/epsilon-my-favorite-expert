@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ExpertService } from 'src/app/shared/services/expert.service';
-import { Expert } from 'src/app/models/expert.model';
-import { Address } from 'src/app/models/address.model';
+import { ExpertResourceService, Expert, Address } from 'src/app/api';
 import { TranslateService } from '@ngx-translate/core';
+
+
 @Component({
   selector: 'app-add-expert',
   templateUrl: './add-expert.component.html',
@@ -12,11 +12,11 @@ export class AddExpertComponent implements OnInit {
   expert: Expert;
   profession: string;
 
-  constructor(private translate: TranslateService, private expertService: ExpertService) {
+  constructor(private translate: TranslateService, private expertService: ExpertResourceService) {
     translate.setDefaultLang('en');
-    this.expert = new Expert();
+    this.expert = <Expert>{};
     this.expert.profession = new Array();
-    this.expert.address = new Address();
+    this.expert.address = <Address>{};
    }
 
    switchLanguage(language: string) {
@@ -30,16 +30,15 @@ addProfession() {
 }
 addExpert() {
     this.expert.profession.push(this.profession);
-    this.expertService.addExpert(this.expert).subscribe((data: any) => {
+    this.expertService.addExpertUsingPOST(this.expert).subscribe((data: any) => {
     console.log(data);
     this.expert.name = '';
-    this.expert.address = new Address();
-    this.expert.created_at = '';
-    this.expert.deleted_at = '';
+    this.expert.address = <Address>{};
+    this.expert.createdAt = new Date();
+    this.expert.deletedAt = null;
     this.expert.phone = '';
     this.profession = '';
     this.expert.profession = new Array();
-    this.expert.phone = '';
-  });
+    },(error)=> alert('Hibás cím!!!'))
 }
 }
