@@ -50,10 +50,10 @@ export class ListingComponent implements OnInit {
       (data: Expert[]) => {
         this.experts = data;
       });
-      this.expertService.getFavoriteExpertsUsingGET().subscribe(
-        (data: Expert[]) => {
-          this.favoriteExpert = data;
-        });
+      // this.expertService.getFavoriteExpertsUsingGET().subscribe(
+      //   (data: Expert[]) => {
+      //     this.favoriteExpert = data;
+      //  });
   }
 
   isFavoriteExpert(expert: Expert): boolean {

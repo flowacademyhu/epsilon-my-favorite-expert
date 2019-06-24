@@ -14,7 +14,7 @@ const routes: Routes = [
   {pathMatch: 'prefix', path: 'oauth2/redirect', component: LoggedinComponent},
   {path:  'add', component: AddExpertComponent, canActivate: [LoggedinGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [LoggedinGuard]},
-  {path: 'list-experts', component: ListingComponent},
+  {path: 'list-experts', component: ListingComponent, canActivate: [LoggedinGuard]},
   {path: 'add-address', component: AddAddressComponent, canActivate: [LoggedinGuard]},
   {path: 'search-user', component: SearchUserComponent, canActivate: [LoggedinGuard]},
   {path: '**', component: LoginComponent}
