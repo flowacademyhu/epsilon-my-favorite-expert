@@ -9,21 +9,24 @@ import { UsersResourceService, UserControllerService } from 'src/app/api';
 })
 export class LanguageService {
 
-  constructor(private location: GeolocationService, private appstate: AppStateService, private translate: TranslateService,
+  constructor( private appstate: AppStateService, private translate: TranslateService,
     private userService: UserControllerService) { }
 
-  getLanguage(){
-    if(localStorage.getItem('token') == undefined){
-      return this.translate.setDefaultLang(localStorage.getItem('language'));
-    } else if (this.appstate.user$ == undefined) {
-      this.userService.getCurrentUserUsingGET().subscribe((user)=> {
-        if (user.language == undefined) {
-         return this.translate.setDefaultLang(localStorage.getItem('language'));
-        } else {
-         return  this.translate.setDefaultLang(user.language);
-        }
-      })
-    }
+  // getLanguage(){
+  //   if(localStorage.getItem('token') == undefined){
+  //     return this.translate.setDefaultLang(localStorage.getItem('language'));
+  //   } else if (this.appstate.user$ == undefined) {
+  //     this.userService.getCurrentUserUsingGET().subscribe((user)=> {
+  //       if (user.language == undefined) {
+  //        return this.translate.setDefaultLang(localStorage.getItem('language'));
+  //       } else {
+  //        return  this.translate.setDefaultLang(user.language);
+  //       }
+  //     })
+  //   }
+  // }
+  setLanguage(language: string) {
+    this.translate.setDefaultLang(language);
   }
 
 }

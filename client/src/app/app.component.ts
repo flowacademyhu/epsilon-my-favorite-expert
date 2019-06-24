@@ -6,6 +6,7 @@ import { User } from './api';
 import { UserControllerService } from './api'; 
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './shared/services/language.service';
+import { GeolocationService } from './shared/services/geolocation.service';
 
 @Component({
   selector: 'app-root',
@@ -20,28 +21,55 @@ export class AppComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private authService: AuthService,
-    private appStateService: AppStateService,
+    private appState: AppStateService,
     private userService: UserControllerService,
     private translate: TranslateService,
-    private language: LanguageService
+    private language: LanguageService,
+    private geolocation: GeolocationService
   ) { }
 
   ngOnInit() {
+    this.translate.setDefaultLang('en');
     this.activateRoute.queryParams.subscribe(params => {
       this.tokenParam = params['token'];
-      if (this.tokenParam != undefined) {
-      localStorage.setItem('token', params['token']);
-      this.userService.getCurrentUserUsingGET().subscribe(
-         user => {
-         this.appStateService.user = user;
-         localStorage.setItem('user', JSON.stringify(user));
+      // van token localstorageba
+      console.log('localstorage getitem'+localStorage.getItem('token')+ !!localStorage.getItem('token'));
+      console.log('tokenparam'+ !!this.tokenParam);
+      if (!!localStorage.getItem('token') || !!this.tokenParam) {
+        if (!!this.tokenParam) {
+          localStorage.setItem('token', params['token']);
         }
-      );
+        this.getCurrentUser();
+      // nincs token localstorageba
+      } else {
+        if (!!this.tokenParam) {
+          localStorage.setItem('token', params['token']);
+        } else {
+          this.geolocation.getLocation();
+        }
+
       }
     });
 
-this.language.getLanguage();
   }
 
- 
+  getCurrentUser() {
+    this.userService.getCurrentUserUsingGET().subscribe(
+      user => {
+      this.appState.user = user;
+      localStorage.setItem('user', JSON.stringify(user));
+      if (!!user && !!user.language) {
+        console.log(user);
+        console.log(user.language);
+        this.translate.use(user.language.toLowerCase());
+      //  this.language.setLanguage(user.language.toLowerCase());
+      //  console.log('beallitottam a nyelvet a user tabla alapjan');
+      } else {
+        this.geolocation.getLocation();
+      }
+     }
+   );
+  }
+
 }
+

@@ -50,8 +50,7 @@ export class LoggedinComponent implements OnInit {
     });
 
    
-    this.loadData();  
-    console.log(this.experts.length);
+    this.loadData();
     
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ILocation } from 'src/app/ilocation';
+import { LanguageService } from './language.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,7 @@ import { ILocation } from 'src/app/ilocation';
 export class GeolocationService {
 
   location: ILocation;
-  constructor(private http: HttpClient) { }
-  
-  
+  constructor(private http: HttpClient, private language: LanguageService) { }
 
   getLocation(){
   navigator.geolocation.getCurrentPosition((pos) => {
@@ -30,7 +29,9 @@ export class GeolocationService {
       .subscribe((countryData) => {
         console.log(countryData);
         console.log(countryData.address.country_code);
-        localStorage.setItem('language',countryData.address.country_code);
+        const lang : string = countryData.address.country_code;
+        localStorage.setItem('language', lang);
+        this.language.setLanguage(lang.toLowerCase());
     });
   });
 }
