@@ -124,4 +124,17 @@ public class UserService {
         }
         return experts;
     }
+
+    public List<Expert> findAllExperts(UUID userId){
+        Pageable pageable = PageRequest.of(0, 1);
+        User user = userRepository.findById(userId).orElse(null);
+        List<Expert> experts = new ArrayList<>();
+        if (user != null) {
+            experts = user.getExperts().stream()
+                    .map(expertid -> expertRepository
+                            .findById(expertid).orElseThrow(RuntimeException::new))
+                    .collect(Collectors.toList());
+        }
+        return experts;
+    }
 }
