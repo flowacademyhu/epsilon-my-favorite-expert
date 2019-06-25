@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ExpertResourceService, Expert, Address } from 'src/app/api';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-expert',
@@ -10,6 +11,10 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./add-expert.component.css']
 })
 export class AddExpertComponent implements OnInit {
+  @ViewChild('myForm')
+  addExpertForm: NgForm;
+  input: ElementRef;
+
   expert: Expert;
   profession: string;
   showAlert = false;
@@ -41,6 +46,7 @@ addExpert() {
     this.expert.phone = '';
     this.profession = '';
     this.expert.profession = new Array();
+    this.addExpertForm.reset();
     }, (error) => {
       setTimeout(() => this.staticAlertClosed = true, 4000);
       this._success.subscribe((message) => this.successMessage = message);
@@ -49,5 +55,6 @@ addExpert() {
     this.showAlert = true;
     this.staticAlertClosed = false;
   });
+  
 }
 }

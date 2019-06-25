@@ -5,13 +5,14 @@
 <div class="row align-items-center">
 <div class="col-12 text-center">
   <div class="row justify-content-center align-items-center">
-    <form>
+    <form #myForm="ngForm">
       <div *ngIf="showAlert">
         <br>
         <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true"><h5>{{'Invalid address' | translate}}</h5></ngb-alert>
       </div>
       <h5>{{ "Expert name" | translate}}:</h5>
-      <input class="form-control"
+      <input 
+        class="form-control"
         type="text"
         name="name"
         #RefName="ngModel"
@@ -56,9 +57,9 @@
         name="number"
         #RefNumber="ngModel"
         [(ngModel)]="expert.address.number"
-        minlength=4 maxlength=25 required>
+        minlength=1 maxlength=15 required>
         <div *ngIf="RefNumber.invalid && RefNumber.touched">
-          <h6>{{'required' | translate}}</h6></div>
+          <h6>{{'requiredNumber' | translate}}</h6></div>
       <h5>{{ "Profession" | translate}}:</h5>
       <input
         class="form-control"
@@ -89,7 +90,7 @@
         <div *ngIf="RefPhone.invalid && RefPhone.touched">
           <h6>{{'required' | translate}}</h6></div>
       <button type="button" name="save" class="btn btn-light" (click)="addExpert()">{{ "Add expert" | translate}}</button>
-      
+
     </form> 
     
   </div> 

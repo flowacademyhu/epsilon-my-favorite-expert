@@ -41,9 +41,9 @@
         name="number"
         #RefNumber="ngModel"
         [(ngModel)]="address.number"
-        minlength=4 maxlength=15 required>
+        minlength=1 maxlength=15 required>
         <div *ngIf="RefNumber.invalid && RefNumber.touched">
-          <p>{{'required' | translate}}</p></div>
+          <p>{{'requiredNumber' | translate}}</p></div>
       <br>
       <button type="button" name="save" class="btn btn-light" (click)="addAddress()" >{{'Add address' | translate}}</button>
       <div *ngIf="showAlert">
