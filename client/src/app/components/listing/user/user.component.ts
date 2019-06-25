@@ -12,9 +12,9 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 export class UserComponent implements OnInit {
   @Input()
   user: User;
-  
+
   @Input()
-  isFriend : boolean;
+  isFriend: boolean;
 
   @Output() sendUserExperts = new EventEmitter<Expert[]>();
 
@@ -24,6 +24,7 @@ export class UserComponent implements OnInit {
     private communicationService: CommunicationService) { }
 
   ngOnInit() {
+
   }
 
   getExperts() {
