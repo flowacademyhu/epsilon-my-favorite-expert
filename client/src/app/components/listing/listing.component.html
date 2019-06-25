@@ -1,13 +1,15 @@
 <ul class="andorCSSAnitaMajdKijavitja">
   <div>
-    <button (click)="getFavoriteExperts()">Favorite experts</button>
+    <button (click)="switchToMap()">{{'Map' | translate}}</button>
+  </div>
+  <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
+  <div>
+    <button (click)="getFavoriteExperts()">{{'Favorite experts' | translate}}</button>
   </div>
   <div>
-    <button (click)="getAllExperts()">All experts</button>
+    <button (click)="getAllExperts()">{{'All experts' | translate}}</button>
   </div>
-  <div>
-    <button (click)="switchToMap()">SWITCH_MAP</button>
-  </div>
+ 
   <div>
     <button (click)="sortByNameASC()">A-Z</button>
   </div>
@@ -15,25 +17,25 @@
     <button (click)="sortByNameDESC()">Z-A</button>
   </div>
   <div>
-    <button (click)="sortByDistanceASC()">DISTANCE A_Z</button>
+    <button (click)="sortByDistanceASC()">{{'Distance A_Z' | translate}}</button>
   </div>
   <div>
-    <button (click)="sortByDistanceDESC()">DISTANCE Z-A</button>
+    <button (click)="sortByDistanceDESC()">{{'Distance Z-A'| translate}}</button>
   </div>
+</div>
   
 </ul>
-
+<div class="inputField" *ngIf="!isMapView">
 <input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()" list="expertSuggestions" autofocus>
 <datalist id="expertSuggestions">
   <option *ngFor="let item of suggestTerm">{{item}}</option>
 </datalist>
-
+</div>
 <div *ngIf="isMapView; else expertList">
   <app-map [experts]="experts"></app-map>
 </div>
 <ng-template #expertList>
-  <div class="masthead">
-    <div class="overlay">
+
       <div id="f1_container"></div>
       <div class="flex">
         <div *ngFor="let expert of experts">
@@ -41,8 +43,8 @@
             [expert]="expert"
             [isFavoriteExpert]="isFavoriteExpert(expert)"
           ></app-expert>
-        </div>
-      </div>
-    </div></div
-></ng-template>
+        
+    </div>
+    </div>
+  </ng-template>
 

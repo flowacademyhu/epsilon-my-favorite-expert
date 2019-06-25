@@ -17,8 +17,6 @@ public interface UserRepository extends ElasticsearchCrudRepository<User, UUID> 
 
     Boolean existsByEmail(String email);
 
-
-
     @Query("{\"function_score\": {\"query\": {\"multi_match\": {\"query\": \"?0\",\"type\": \"best_fields\", \"fields\": [\"name\"],\"fuzziness\" : \"auto\"} }}}")
     Page<User> findBestMatchesUser(String params, Pageable pageable);
 

@@ -10,15 +10,14 @@ import { GeolocationService } from 'src/app/shared/services/geolocation.service'
 export class LoginComponent implements OnInit {
   
   constructor(private translate: TranslateService, private geolocation: GeolocationService) {
-    translate.setDefaultLang('en');
+    
    }
 
-   switchLanguage(language: string) {
-    this.translate.use(language);
-}
+  
 
   ngOnInit() {
-    this.geolocation.getLocation();
+   
+
   }
 
 }

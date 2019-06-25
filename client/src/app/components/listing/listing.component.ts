@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertResourceService, Expert, UserControllerService } from 'src/app/api';
+import { ExpertResourceService, Expert } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
 import { Profile } from 'selenium-webdriver/firefox';
 
@@ -17,9 +17,7 @@ export class ListingComponent implements OnInit {
   inputCharacterChanges = 0;
   suggestTerm: String[];
 
-  constructor(private usersservice: UserControllerService, 
-    private expertService: ExpertResourceService, 
-    private communicationService: CommunicationService) { }
+  constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
 
   ngOnInit() {
     this.loadData();
@@ -52,16 +50,16 @@ export class ListingComponent implements OnInit {
       (data: Expert[]) => {
         this.experts = data;
       });
-      // this.expertService.getFavoriteExpertsUsingGET().subscribe(
-      //   (data: Expert[]) => {
-      //     this.favoriteExpert = data;
-      //  });
+      this.expertService.getFavoriteExpertsUsingGET().subscribe(
+        (data: Expert[]) => {
+          this.favoriteExpert = data;
+        });
   }
 
   isFavoriteExpert(expert: Expert): boolean {
     return !!this.favoriteExpert.find(exp => exp.id === expert.id);
   }
-  addToFavorite(expert: Expert) {
+  addToFavorite(expert : Expert) {
     this.favoriteExpert.push(expert);
     this.isFavoriteExpert(expert);
   }
@@ -71,9 +69,7 @@ export class ListingComponent implements OnInit {
 
   }
 
-  switchLanguage(lang: string) {
-
-  }
+  
 
   switchToMap() {
     this.isMapView = !this.isMapView;

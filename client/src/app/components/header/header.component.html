@@ -1,40 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-light navbar-fixed-top">
-  <div class="container">
-     <a class="navbar-brand" >{{'Title' | translate}}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarResponsive">
-  <ul class="navbar-nav ml-auto navbar-right">
-  <li class="nav-item">
-  <a class="nav-link" href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect" *ngIf="!(state.user$ | async)">{{'Login' | translate:user}}</a>
-  </li>
+  <!--Új header-->
 
-  <ng-container *ngIf="(state.user$ | async)">
-    <li class="nav-item">
-    <a class="nav-link" [routerLink]="'/profile'">{{'Profile' | translate}}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/add'">{{'Add expert' | translate}}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/list-experts'">{{'List expert' | translate}}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="'/search-user'">{{'Search user' | translate}}</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="''" (click)="logout()">{{'Logout' | translate}}</a>
-    </li>
-  </ng-container>  
-  <li class="nav-item">
-  <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
-  </li>
-  <li class="nav-item">
-  <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
-  </li>
-  </ul>
-  </div>
-  </div>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Favorite Expert</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item active" *ngIf="!(state.user$ | async)">
+          <a
+            class="nav-link"
+            href="http://localhost:8080/oauth2/authorize/google?redirect_uri=http://localhost:4200/oauth2/redirect"
+            >{{'Login' | translate}}<span class="sr-only">(current)</span></a
+          >
+        </li>
+        <li class="nav-item" *ngIf="(state.user$ | async)">
+          <a class="nav-link"  [routerLink]="'/profile'">{{'Profile' | translate}}</a>
+        </li>
+        <li class="nav-item" *ngIf="(state.user$ | async)">
+          <a class="nav-link"  [routerLink]="'/add'">{{'Add expert' | translate}}</a>
+        </li>
+        <li class="nav-item" *ngIf="(state.user$ | async)">
+          <a class="nav-link"  [routerLink]="'/list-experts'">{{'List expert' | translate}}</a>
+        </li>
+        <li class="nav-item" *ngIf="(state.user$ | async)">
+          <a class="nav-link"  [routerLink]="''" (click)="logout()">{{'Logout' | translate}}</a>
+        </li>
+        <li class="nav-item">
+          <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
+          </li>
+          <li class="nav-item">
+          <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
+          </li>
+          
+         
+      </ul>
+    </div>
   </nav>
-  

@@ -12,5 +12,17 @@
   "Profession": "Szakma",
   "Phone": "Telefonszám",
   "Add profession": "Szakma hozzáadása",
-  "Search user": "Felhasználó keresése"
+  "Search user": "Felhasználó keresése",
+  "List expert": "Szakemberek listázása",
+  "Remove From Favorite": "Törlés a kedvencek közül",
+  "Add to Favorite": "Hozzáadás a kedvencekhez",
+  "Favorite experts": "Kedvenc szakember",
+  "All experts": "Összes szakember",
+  "Map": "Térkép",
+  "Distance A_Z": "Távolság A_Z",
+  "Distance Z-A": "Távolság Z_A",
+  "Add address": "Cím hozzáadása",
+  "Address": "Cím",
+  "Street": "Utca",
+  "Number": "Házszám"
 }

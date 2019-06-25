@@ -6,7 +6,8 @@
 	padding: 0;
 	border: 0;
 	box-sizing: border-box;
-	font-family: 'Fredoka One', cursive;
+    font-family: Poppins,sans-serif;
+    
 }
 .bestSnippArea1077 {
     margin: 0 auto;
@@ -142,7 +143,6 @@
     display: block;
     width: 100%;
     font-weight: lighter;
-    font-style: italic;
     padding: .5rem;
 }
 
@@ -193,7 +193,6 @@
     width: 80%;
     margin: .4rem .4rem .8rem;
     line-height: 1.5;
-    font-weight: lighter;
     text-align: center;
     word-spacing: 1px;
     color: #eee;
