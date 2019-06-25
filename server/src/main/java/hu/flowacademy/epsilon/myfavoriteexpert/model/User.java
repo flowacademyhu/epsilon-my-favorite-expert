@@ -38,9 +38,9 @@ public class User {
 
     private Provider providers;
 
-    private List<UUID> followers;
+    private List<UUID> followers= new ArrayList<>();
 
-    private List<UUID> followed_by;
+    private List<UUID> followed_by= new ArrayList<>();
 
     private List<UUID> experts = new ArrayList<>();
 
@@ -72,6 +72,26 @@ public class User {
     public void deleteExpert(UUID expertid) {
         if (experts.contains(expertid)) {
             experts.remove(expertid);
+        }
+    }
+    public void addFollower(UUID followerid) {
+        if (!followers.contains(followerid)) {
+            followers.add(followerid);
+        }
+    }
+    public void deleteFollower(UUID followerid) {
+        if (followers.contains(followerid)) {
+            followers.remove(followerid);
+        }
+    }
+    public void addFollowedBy(UUID followerid) {
+        if (!followed_by.contains(followerid)) {
+            followed_by.add(followerid);
+        }
+    }
+    public void deleteFollowedBy(UUID followerid) {
+        if (followed_by.contains(followerid)) {
+            followed_by.remove(followerid);
         }
     }
 }
