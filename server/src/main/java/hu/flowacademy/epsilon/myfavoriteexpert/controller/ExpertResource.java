@@ -56,4 +56,9 @@ public class ExpertResource {
 //        return expertService.getFollowerByExperts();
 //    }
 
+    @GetMapping("/all-followers-expert")
+    public List<Expert> findAllFollowersExperts() {
+        return expertService.findAllFollowersExperts();
+    }
+
 }
