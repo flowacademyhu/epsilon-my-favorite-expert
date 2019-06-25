@@ -38,20 +38,16 @@ export class LoggedinComponent implements OnInit {
     
    }
   ngOnInit() {
+    this.loadData();
     this.router.events.subscribe((emptydata) => {
       this.loadData();
     });
     this.activatedRoute.queryParams.subscribe(params => {
-      if (params == null) {
-        console.log();
-      } else {
+      if (!!params == null) {
         localStorage.setItem('token', params['token']);
       }
     });
 
-   
-    this.loadData();
-    
   }
 
   loadData() {
@@ -71,33 +67,13 @@ export class LoggedinComponent implements OnInit {
 
   }
 
-  
-  addToFavorite() {
-    this.isFavoriteExpert = !this.isFavoriteExpert;
-   this.communicationService.addToFavorite(this.expert);
-     this.userResources.addExpertToUserUsingPUT(this.expert.id).subscribe(
-      (data: any) => {
-        console.log('sikeresen hozzaadva a kedvencekhez');
-      }
-    );
-  }
-
-  getFavoriteExperts() {
-    this.expertService.getFavoriteExpertsUsingGET().subscribe(
-      (data: Expert[]) => {
-        this.experts = data;
-      }
-    );
-  }
-
   isAddressBlank():boolean {
-    
-    if (this.user.address == undefined) {
+    if (!this.user.address) {
       return true;
     }
-    return this.user.address.country == undefined ||
-    this.user.address.city == undefined||
-    this.user.address.street == undefined||
-    this.user.address.number == undefined;
+    return !this.user.address.country ||
+    !this.user.address.city ||
+    !this.user.address.street ||
+    !this.user.address.number;
   }
 }
