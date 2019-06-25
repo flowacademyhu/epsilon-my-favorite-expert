@@ -38,15 +38,19 @@ export class UserComponent implements OnInit {
     })
     }
     addFriend() {
-      //TODO isFriend bolean
+      this.isFriend = !this.isFriend;
       this.communicationService.addFriend(this.user);
       //TODO add in server
+      this.userResource.addFollowerToUserUsingPUT(this.user.id);
     }
 
     removeFriend() {
       //TODO isFriend bolean
+      this.isFriend = !this.isFriend;
+
       this.communicationService.removeFriend(this.user);
       //TODO remove in server
+      this.userResource.deleteFollowerFromUserUsingDELETE(this.user.id);
 
     }
   }
