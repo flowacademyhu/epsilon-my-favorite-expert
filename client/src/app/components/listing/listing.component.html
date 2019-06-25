@@ -1,50 +1,91 @@
 <ul class="andorCSSAnitaMajdKijavitja">
   <div>
-    <button (click)="switchToMap()">{{'Map' | translate}}</button>
+    <button (click)="switchToMap()">{{ "Map" | translate }}</button>
   </div>
   <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
-  <div>
-    <button (click)="getFavoriteExperts()">{{'Favorite experts' | translate}}</button>
+    <div>
+      <button (click)="getFavoriteExperts()">
+        {{ "Favorite experts" | translate }}
+      </button>
+    </div>
+    <div>
+      <button (click)="getAllExperts()">{{ "All experts" | translate }}</button>
+    </div>
+
+    <div>
+      <button (click)="sortByNameASC()">A-Z</button>
+    </div>
+    <div>
+      <button (click)="sortByNameDESC()">Z-A</button>
+    </div>
+    <div>
+      <button (click)="sortByDistanceASC()">
+        {{ "Distance A_Z" | translate }}
+      </button>
+    </div>
+    <div>
+      <button (click)="sortByDistanceDESC()">
+        {{ "Distance Z-A" | translate }}
+      </button>
+    </div>
   </div>
-  <div>
-    <button (click)="getAllExperts()">{{'All experts' | translate}}</button>
-  </div>
- 
-  <div>
-    <button (click)="sortByNameASC()">A-Z</button>
-  </div>
-  <div>
-    <button (click)="sortByNameDESC()">Z-A</button>
-  </div>
-  <div>
-    <button (click)="sortByDistanceASC()">{{'Distance A_Z' | translate}}</button>
-  </div>
-  <div>
-    <button (click)="sortByDistanceDESC()">{{'Distance Z-A'| translate}}</button>
-  </div>
-</div>
-  
 </ul>
 <div class="inputField" *ngIf="!isMapView">
-<input id="searchinput" type="text" name="find" [(ngModel)]="keyWords" (ngModelChange)="keyWordtextChanged()" list="expertSuggestions" autofocus>
-<datalist id="expertSuggestions">
-  <option *ngFor="let item of suggestTerm">{{item}}</option>
-</datalist>
+  <input
+    id="searchinput"
+    type="text"
+    name="find"
+    [(ngModel)]="keyWords"
+    (ngModelChange)="keyWordtextChanged()"
+    list="expertSuggestions"
+    autofocus
+  />
+  <datalist id="expertSuggestions">
+    <option *ngFor="let item of suggestTerm">{{ item }}</option>
+  </datalist>
 </div>
 <div *ngIf="isMapView; else expertList">
   <app-map [experts]="experts"></app-map>
 </div>
 <ng-template #expertList>
-
-      <div id="f1_container"></div>
-      <div class="flex">
-        <div *ngFor="let expert of experts">
-          <app-expert
-            [expert]="expert"
-            [isFavoriteExpert]="isFavoriteExpert(expert)"
-          ></app-expert>
-        
+  <div class="displayData">
+    <div class="expertList">
+      <div *ngFor="let expert of experts">
+        <app-expert
+          [expert]="expert"
+          [isFavoriteExpert]="isFavoriteExpert(expert)"
+        ></app-expert>
+      </div>
     </div>
+    
+      <!-- <div>
+        <p>asd</p>
+        <p>asdsaaa</p>
+      </div>
+      <div>
+          <p>asd</p>
+          <p>asdsaaa</p>
+        </div> -->
+        <div class="userList">
+          <br>
+          <div>
+          <button (click)="getAllUser()">ALL USER</button>
+          <button (click)="getFriends()">FRIENDS</button>
+        </div>
+        <div class="searchinputForUsers">
+            <input
+            id="searchinputForUsers"
+            type="text"
+            name="findUsers"
+            [(ngModel)]="keyWordsUserSearch"
+            (ngModelChange)="userKeyWordtextChanged()"
+            list="expertSuggestions"
+            autofocus
+          />
+        </div>
+        <div *ngFor="let user of users">
+            <app-user [user]="user" [isFriend]="isFriend(user)" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
+          </div>
     </div>
-  </ng-template>
-
+  </div>
+</ng-template>

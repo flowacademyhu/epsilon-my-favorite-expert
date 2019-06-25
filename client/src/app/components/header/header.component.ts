@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   }
   logout() {
-   this.appState = undefined;
+   this.appState.user = null;
    localStorage.removeItem('token');
   localStorage.clear();
   console.log(localStorage.getItem('token'));

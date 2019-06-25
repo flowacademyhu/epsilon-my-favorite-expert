@@ -1,19 +1,27 @@
-<div class="card" style="width: 18rem;">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{user.name}}</li>
-    <li class="list-group-item">{{user.email}}</li>
-    <button>Favorite experts</button>
-    <div *ngIf="showFavorites===true">
-      <div *ngFor="let fav of experts">
-        {{fav.name}}
-        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header">Header</div>
-          <div class="card-body">
-            <h5 class="card-title">Primary card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+    <div class="col-12">
+<div class="card" [ngClass]="{friend: isFriend}">             
+        <div class="card-body">
+          <div class="userPicture">
+              <img class="col-10" alt="profile picture" [src]="user.imageUrl" />
           </div>
-        </div>
-      </div>
-    </div>
-  </ul>
+          <br>
+          <div class="logoName">{{ user.name}}
+          </div>
+         
+          
+            
+            
+          </div>
+          
+          
+          <button (click)="getExperts()" class="round-shape name">Experts</button>
+          <button (click)="commonExperts()" class="round-shape name">COMMON EXPERTS</button>
+          <div *ngIf="isFriend;else notFriend">
+            <button (click)="removeFriend()" class="round-shape name">Remove Friend</button>
+            </div>
+            <ng-template #notFriend>
+          <button (click)="addFriend()" class="round-shape name">Add friend</button>            
+            </ng-template>
+  </div>
 </div>

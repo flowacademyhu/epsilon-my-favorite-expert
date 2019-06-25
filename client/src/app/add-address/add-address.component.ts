@@ -40,7 +40,12 @@ export class AddAddressComponent implements OnInit {
     });
   }
   fillAddressFields() {
-    const tempAddress = <Address>{};
+    let tempAddress : Address = {
+      city: '',
+      country: '',
+      street: '',
+      number: ''
+    };
     tempAddress.country = localStorage.getItem('country');
     tempAddress.city = localStorage.getItem('city');
     tempAddress.street = localStorage.getItem('street');
@@ -52,13 +57,13 @@ export class AddAddressComponent implements OnInit {
   }
 
   isAddressBlank(address: Address):boolean {
-    if (this.address == undefined) {
+    if (!address) {
       return true;
     }
-    return this.address.country == undefined ||
-    this.address.city == undefined||
-    this.address.street == undefined||
-    this.address.number == undefined;
+    return !address.country &&
+    !address.city&&
+    !address.street&&
+    !address.number;
   }
 
 }
