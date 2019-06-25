@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertResourceService, Expert } from 'src/app/api';
+import { ExpertResourceService, Expert, User, UsersResourceService } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
 import { Profile } from 'selenium-webdriver/firefox';
 
@@ -12,12 +12,15 @@ import { Profile } from 'selenium-webdriver/firefox';
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
+  users: User[] = [];
   isMapView = false;
   keyWords = '';
   inputCharacterChanges = 0;
   suggestTerm: String[];
 
-  constructor(private expertService: ExpertResourceService, private communicationService: CommunicationService) { }
+  constructor(private expertService: ExpertResourceService,
+     private communicationService: CommunicationService,
+     private userService: UsersResourceService) { }
 
   ngOnInit() {
     this.loadData();
@@ -50,10 +53,13 @@ export class ListingComponent implements OnInit {
       (data: Expert[]) => {
         this.experts = data;
       });
-      this.expertService.getFavoriteExpertsUsingGET().subscribe(
+    this.expertService.getFavoriteExpertsUsingGET().subscribe(
         (data: Expert[]) => {
           this.favoriteExpert = data;
-        });
+      });
+    this.userService.getAllUsingGET1().subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
 
   isFavoriteExpert(expert: Expert): boolean {

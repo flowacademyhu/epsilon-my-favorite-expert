@@ -58,14 +58,22 @@
       </div>
     </div>
     <div class="userList">
-      <div>
+      <!-- <div>
         <p>asd</p>
         <p>asdsaaa</p>
       </div>
       <div>
           <p>asd</p>
           <p>asdsaaa</p>
-        </div>
+        </div> -->
+        <div *ngFor="let user of users">
+            <!-- <app-expert
+              [expert]="expert"
+              [isFavoriteExpert]="isFavoriteExpert(expert)"
+            ></app-expert> -->
+            <app-user [user]="user"></app-user>
+            <!-- <p>{{user.email}}</p> -->
+          </div>
     </div>
   </div>
 </ng-template>
