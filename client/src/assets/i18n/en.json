@@ -27,5 +27,6 @@
   "Number": "Number",
   "Invalid address": "Invalid address!",
   "required": "Required field! Atleast 4 max 25 characters needed!",
-  "requiredNumber": "Required field! Atleast 1 max 15 characters needed!"
+  "requiredNumber": "Required field! Atleast 1 max 15 characters needed!",
+  "requiredLong": "Required field! Atleast 4 max 45 characters needed!"
 }

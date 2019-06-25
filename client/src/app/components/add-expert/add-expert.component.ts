@@ -55,6 +55,5 @@ addExpert() {
     this.showAlert = true;
     this.staticAlertClosed = false;
   });
-  
 }
 }

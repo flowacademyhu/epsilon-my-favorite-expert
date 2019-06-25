@@ -31,9 +31,9 @@
         name="street"
         #RefStreet="ngModel"
         [(ngModel)]="address.street"
-        minlength=4 maxlength=15 required>
+        minlength=4 maxlength=45 required>
         <div *ngIf="RefStreet.invalid && RefStreet.touched">
-          <p>{{'required' | translate}}</p></div>
+          <p>{{'requiredLong' | translate}}</p></div>
       <h5>{{'Number' | translate}}:</h5>
       <input
         class="form-control"
