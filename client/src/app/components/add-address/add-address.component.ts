@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '../../app/api/model/address';
+import { Address } from '../../../app/api/model/address';
 import { Router } from '@angular/router';
-import { User } from '../../app/api/model/user';
-import { UsersResourceService } from '../api';
+import { User } from '../../../app/api/model/user';
+import { UsersResourceService } from '../../api';
 
 @Component({
   selector: 'app-add-address',

@@ -1,0 +1,42 @@
+<!-- Full Page Image Header with Vertically Centered Content -->
+<div class="masthead">
+  <div class="container">
+  <div class="row align-items-center">
+  <div class="col-12 text-center">
+    <div class="row justify-content-center align-items-center">
+      <form>
+        <h5>Country:</h5>
+        <input class="form-control"
+          type="text"
+          name="country"
+          [(ngModel)]="address.country"
+        />
+        <h5>City:</h5>
+        <input
+          class="form-control"
+          type="text"
+          name="city"
+          [(ngModel)]="address.city"
+        />
+        <h5>Street:</h5>
+        <input
+          class="form-control"
+          type="text"
+          name="street"
+          [(ngModel)]="address.street"
+        />
+        <h5>Number:</h5>
+        <input
+          class="form-control"
+          type="text"
+          name="number"
+          [(ngModel)]="address.number"
+        />
+        <br>
+        <button type="button" name="save" class="btn btn-light" (click)="addAddress()" >Add address</button>
+      </form> 
+    </div> 
+  </div>
+  </div>
+  </div>
+  </div>
