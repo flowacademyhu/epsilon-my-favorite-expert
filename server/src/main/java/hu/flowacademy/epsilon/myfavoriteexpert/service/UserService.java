@@ -1,5 +1,6 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
+import com.google.common.collect.Lists;
 import hu.flowacademy.epsilon.myfavoriteexpert.exception.UserNotAuthenticatedExeption;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
@@ -17,10 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -130,5 +128,26 @@ public class UserService {
             return experts;
         }
         throw new RuntimeException("ID INVALID");
+    }
+    public List<Expert> findUsersExpertsIntersection(UUID id1) {
+        User user1 = userRepository.findById(id1).orElse(null);
+        User user2 = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
+        Set<Expert> experts1 = new HashSet<>();
+        Set<Expert> experts2;
+        List<Expert> expertsIntersection = new ArrayList<>();
+        if (user1 != null && user1.getExperts() != null && user2 != null && user2.getExperts() != null) {
+            experts1 = user1.getExperts().stream()
+                    .map(expertid -> expertRepository
+                            .findById(expertid).orElse(null))
+                    .collect(Collectors.toSet());
+            experts2 = user2.getExperts().stream()
+                    .map(expertid -> expertRepository
+                            .findById(expertid).orElse(null))
+                    .collect(Collectors.toSet());
+            experts1.retainAll(experts2);
+            expertsIntersection = Lists.newArrayList(experts1);
+        }
+
+        return expertsIntersection;
     }
 }
