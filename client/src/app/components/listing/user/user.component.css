@@ -29,3 +29,7 @@ button {
 .userPicture {
   max-width: 90% !important;
 }
+
+.friend {
+  background-color: #363d80;
+}

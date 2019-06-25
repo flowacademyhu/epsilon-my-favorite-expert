@@ -1,6 +1,6 @@
 
     <div class="col-12">
-<div class="card">             
+<div class="card" [ngClass]="{friend: isFriend}">             
         <div class="card-body">
           <div class="userPicture">
               <img class="col-10" alt="profile picture" [src]="user.imageUrl" />
@@ -17,5 +17,11 @@
           
           <button (click)="getExperts()" class="round-shape name">Experts</button>
           <button (click)="commonExperts()" class="round-shape name">COMMON EXPERTS</button>
+          <div *ngIf="isFriend;else notFriend">
+            <button (click)="removeFriend()" class="round-shape name">Remove Friend</button>
+            </div>
+            <ng-template #notFriend>
+          <button (click)="addFriend()" class="round-shape name">Add friend</button>            
+            </ng-template>
   </div>
 </div>
