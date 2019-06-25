@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expert } from '../../../api/model/expert';
 import { UsersResourceService, User } from 'src/app/api';
+import { CommunicationService } from 'src/app/shared/services/communication.service';
 
 
 @Component({
@@ -11,12 +12,16 @@ import { UsersResourceService, User } from 'src/app/api';
 export class UserComponent implements OnInit {
   @Input()
   user: User;
+  
+  @Input()
+  isFriend : boolean;
 
   @Output() sendUserExperts = new EventEmitter<Expert[]>();
 
   showFavorites = false;
 
-  constructor(private userResource: UsersResourceService) { }
+  constructor(private userResource: UsersResourceService,
+    private communicationService: CommunicationService) { }
 
   ngOnInit() {
   }
@@ -32,7 +37,21 @@ export class UserComponent implements OnInit {
       this.sendUserExperts.next(experts);
     })
     }
-  }
+    addFriend() {
+      this.isFriend = !this.isFriend;
+      this.communicationService.addFriend(this.user);
+      //TODO add in server
+      this.userResource.addFollowerToUserUsingPUT(this.user.id);
+    }
 
-  
+    removeFriend() {
+      //TODO isFriend bolean
+      this.isFriend = !this.isFriend;
+
+      this.communicationService.removeFriend(this.user);
+      //TODO remove in server
+      this.userResource.deleteFollowerFromUserUsingDELETE(this.user.id);
+
+    }
+  }
 
