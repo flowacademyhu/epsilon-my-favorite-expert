@@ -119,4 +119,16 @@ public class UserService {
         }
         return experts;
     }
+    public List<Expert> findAllExperts(UUID userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        List<Expert> experts;
+        if (user != null && user.getExperts() != null) {
+            experts = user.getExperts().stream()
+                    .map(expertid -> expertRepository
+                            .findById(expertid).orElse(null))
+                    .collect(Collectors.toList());
+            return experts;
+        }
+        throw new RuntimeException("ID INVALID");
+    }
 }

@@ -70,4 +70,9 @@ public class UsersResource {
     public List<Expert> findExpertsByUsers(@RequestParam String searchparams) {
         return userService.findExpertsByUser(searchparams);
     }
+    @GetMapping("user/experts/{id}")
+    public List<Expert> findAllExpertOfUser(@PathVariable UUID id) {
+        System.out.println(id);
+        return userService.findAllExperts(id);
+    }
 }
