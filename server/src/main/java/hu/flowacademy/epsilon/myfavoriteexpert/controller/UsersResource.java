@@ -103,4 +103,9 @@ public class UsersResource {
             return ResponseEntity.ok(userService.deleteFollower(user,followerid));
         }
     }
+    @GetMapping("/user/followers")
+    public List<User> findFollowersByUsers() {
+        return userService.findFollowersByUser();
+    }
+
 }

@@ -164,4 +164,13 @@ public class UserService {
 
         return expertsIntersection;
     }
+    public List<User> findFollowersByUser() {
+        var followers = findByid()
+                .getFollowers()
+                .stream()
+                .map(followerid -> userRepository.findById(followerid).get())
+                .collect(Collectors.toList());
+        return followers;
+    }
+
 }
