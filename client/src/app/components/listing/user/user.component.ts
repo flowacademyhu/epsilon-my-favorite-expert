@@ -28,7 +28,9 @@ export class UserComponent implements OnInit {
     }
     commonExperts() {
     // TODO FIND COMMON EXPERTS
-    
+    this.userResource.findUsersExpertsUnionUsingGET(this.user.id).subscribe((experts: Expert[])=> {
+      this.sendUserExperts.next(experts);
+    })
     }
   }
 
