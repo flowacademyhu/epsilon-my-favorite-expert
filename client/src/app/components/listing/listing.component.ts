@@ -181,4 +181,10 @@ export class ListingComponent implements OnInit {
   isFriend(user: User) {
     return !!this.friends.find(friend => friend.id === user.id);
   }
+
+  getAllFriendsExperts() {
+    this.expertService.findAllFollowersExpertsUsingGET().subscribe((expert: Expert[]) => {
+      this.experts = expert;
+    });
+  }
 }
