@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expert } from '../../../api/model/expert';
 import { UsersResourceService } from 'src/app/api';
+
 
 @Component({
   selector: 'app-user',
@@ -11,6 +12,7 @@ export class UserComponent implements OnInit {
   @Input()
   user: any;
 
+  @Output() sendUserExperts = new EventEmitter<Expert[]>();
 
   showFavorites = false;
 
@@ -21,9 +23,9 @@ export class UserComponent implements OnInit {
 
   getExperts() {
     // TODO LIST ALL FAVORITE EXPERTS
-    this.userResource.findExpertsByUsersUsingGET(this.user.id).subscribe((experts: Expert[]) => {
-      
-    }) 
+    this.userResource.findExpertsByUsersUsingGET(this.user.name).subscribe((experts: Expert[]) => {
+      this.sendUserExperts.next(experts);
+    });
 
     }
   }

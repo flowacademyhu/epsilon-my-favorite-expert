@@ -73,7 +73,7 @@
               [expert]="expert"
               [isFavoriteExpert]="isFavoriteExpert(expert)"
             ></app-expert> -->
-            <app-user [user]="user"></app-user>
+            <app-user [user]="user" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
             <!-- <p>{{user.email}}</p> -->
           </div>
     </div>

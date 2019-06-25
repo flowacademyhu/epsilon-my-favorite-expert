@@ -144,4 +144,8 @@ export class ListingComponent implements OnInit {
     }
   }
 
+  handleIncomingExperts(experts: Expert[]) {
+    this.experts = experts;
+  }
+
 }
