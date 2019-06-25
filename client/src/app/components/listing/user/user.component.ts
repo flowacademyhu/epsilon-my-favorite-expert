@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Expert } from '../../../api/model/expert';
+import { UsersResourceService } from 'src/app/api';
 
 @Component({
   selector: 'app-user',
@@ -10,16 +11,22 @@ export class UserComponent implements OnInit {
   @Input()
   user: any;
 
-  experts: Expert[] = [];
 
   showFavorites = false;
 
-  constructor() { }
+  constructor(private userResource: UsersResourceService) { }
 
   ngOnInit() {
-   
   }
- 
+
+  getExperts() {
+    // TODO LIST ALL FAVORITE EXPERTS
+    this.userResource.findExpertsByUsersUsingGET(this.user.id).subscribe((experts: Expert[]) => {
+      
+    }) 
+
+    }
   }
+
   
 
