@@ -3,6 +3,8 @@ import { Address } from '../../app/api/model/address';
 import { Router } from '@angular/router';
 import { User } from '../../app/api/model/user';
 import { UsersResourceService } from '../api';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-address',
@@ -10,7 +12,10 @@ import { UsersResourceService } from '../api';
   styleUrls: ['./add-address.component.css']
 })
 export class AddAddressComponent implements OnInit {
-
+  showAlert = false;
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage: string;
   address : Address;
   constructor(private usersService: UsersResourceService,
     private router: Router) { 
@@ -22,10 +27,17 @@ export class AddAddressComponent implements OnInit {
   }
 
   addAddress(){
-    this.usersService.saveAddressUsingPOST(this.address).subscribe((data:User) => {
+    this.usersService.saveAddressUsingPOST(this.address).subscribe((data: User) => {
       console.log(data);this.router.navigate(['profile']);
-    },(error)=> {alert("Hibás cím!")});
-    
+    }, (error) => {
+      setTimeout(() => this.staticAlertClosed = true, 4000);
+      this._success.subscribe((message) => this.successMessage = message);
+      this._success.pipe(
+      debounceTime(5000)
+    );
+      this.showAlert = true;
+      this.staticAlertClosed = false;
+    });
   }
   fillAddressFields() {
     const tempAddress = <Address>{};

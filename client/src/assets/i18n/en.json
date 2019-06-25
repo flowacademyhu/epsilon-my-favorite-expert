@@ -24,7 +24,7 @@
   "Add address": "Add address",
   "Address": "Address",
   "Street": "Street",
-  "Number": "Number"
-  
-
+  "Number": "Number",
+  "Invalid address": "Invalid address!",
+  "required": "Required field! Atleast 4 max 15 characters needed!"
 }

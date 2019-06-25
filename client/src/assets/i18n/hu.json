@@ -24,5 +24,7 @@
   "Add address": "Cím hozzáadása",
   "Address": "Cím",
   "Street": "Utca",
-  "Number": "Házszám"
+  "Number": "Házszám",
+  "Invalid address": "Hibás cím!",
+  "required": "Kötelező mező! Minimum 4 maximum 15 betű szükséges!"
 }

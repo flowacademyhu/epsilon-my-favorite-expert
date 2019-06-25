@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ExpertResourceService, Expert, Address } from 'src/app/api';
 import { TranslateService } from '@ngx-translate/core';
-
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-expert',
@@ -11,15 +12,18 @@ import { TranslateService } from '@ngx-translate/core';
 export class AddExpertComponent implements OnInit {
   expert: Expert;
   profession: string;
+  showAlert = false;
+  successMessage: string;
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
 
   constructor(private translate: TranslateService, private expertService: ExpertResourceService) {
-    
+
     this.expert = <Expert>{};
     this.expert.profession = new Array();
     this.expert.address = <Address>{};
    }
 
-   
   ngOnInit() {
   }
 addProfession() {
@@ -37,6 +41,13 @@ addExpert() {
     this.expert.phone = '';
     this.profession = '';
     this.expert.profession = new Array();
-    },(error)=> alert('Hibás cím!!!'))
+    }, (error) => {
+      setTimeout(() => this.staticAlertClosed = true, 4000);
+      this._success.subscribe((message) => this.successMessage = message);
+      this._success.pipe(
+      debounceTime(5000));
+    this.showAlert = true;
+    this.staticAlertClosed = false;
+  });
 }
 }

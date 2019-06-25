@@ -9,31 +9,47 @@
       <input class="form-control"
         type="text"
         name="country"
+        #RefCountry="ngModel"
         [(ngModel)]="address.country"
-      />
+        minlength=4 maxlength=15 required>
+        <div *ngIf="RefCountry.invalid && RefCountry.touched">
+          <p>{{'required' | translate}}</p></div>
       <h5>{{'City' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="city"
+        #RefCity="ngModel"
         [(ngModel)]="address.city"
-      />
+        minlength=4 maxlength=15 required>
+        <div *ngIf="RefCity.invalid && RefCity.touched">
+          <p>{{'required' | translate}}</p></div>
       <h5>{{'Street' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="street"
+        #RefStreet="ngModel"
         [(ngModel)]="address.street"
-      />
+        minlength=4 maxlength=15 required>
+        <div *ngIf="RefStreet.invalid && RefStreet.touched">
+          <p>{{'required' | translate}}</p></div>
       <h5>{{'Number' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="number"
+        #RefNumber="ngModel"
         [(ngModel)]="address.number"
-      />
+        minlength=4 maxlength=15 required>
+        <div *ngIf="RefNumber.invalid && RefNumber.touched">
+          <p>{{'required' | translate}}</p></div>
       <br>
       <button type="button" name="save" class="btn btn-light" (click)="addAddress()" >{{'Add address' | translate}}</button>
+      <div *ngIf="showAlert">
+        <br>
+        <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{'Invalid address' | translate}}</ngb-alert>
+      </div>
     </form> 
   </div> 
 </div>
