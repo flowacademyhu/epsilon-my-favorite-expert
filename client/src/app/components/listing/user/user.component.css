@@ -1,0 +1,31 @@
+body{
+  background-color: #1e1e2f;
+  font-family: Poppins,sans-serif;
+
+}
+
+
+.nav-link{
+    color:  white !important;
+}
+
+.card{
+  background-color: #27293d;
+  color: white;
+  box-shadow: 0 1px 20px 20px rgba(202, 21, 178, 0.1);
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.favoriteExpert {
+  background-color: #363d80;
+}
+button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.userPicture {
+  max-width: 90% !important;
+}
