@@ -19,13 +19,18 @@ body{
   margin-bottom: 20px;
 }
 
+
 .favoriteExpert {
   background-color: #363d80;
 }
-button {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
+
 .userPicture {
   max-width: 90% !important;
+}
+
+.btn{
+  background-color: rgb(151, 39, 151);
+  color: white ;
+  border-radius: 25px 25px 25px 25px;
+  margin-top: 20px;
 }

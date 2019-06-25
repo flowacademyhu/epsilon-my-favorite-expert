@@ -20,6 +20,12 @@ body{
 }
 
 .favoriteExpert {
-  background-color: #363d80;
+  background-color: tomato;
 }
 
+.btn {
+  background-color: rgb(151, 39, 151) ;
+  color: white ;
+ 
+  border-radius: 25px 25px 25px 25px;
+}

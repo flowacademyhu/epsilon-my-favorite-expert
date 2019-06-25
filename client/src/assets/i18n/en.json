@@ -25,5 +25,9 @@
   "Address": "Address",
   "Street": "Street",
   "Number": "Number",
-  "Search user": "Search user"
+  "Experts": "Experts",
+  "Common Experts": "Common Experts",
+  "All users": "All users",
+  "Friends": "Friends",
+  "Search": "Search"
 }

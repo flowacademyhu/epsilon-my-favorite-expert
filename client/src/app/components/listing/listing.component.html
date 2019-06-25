@@ -1,30 +1,30 @@
 <ul class="andorCSSAnitaMajdKijavitja">
   <div>
-    <button (click)="switchToMap()">{{ "Map" | translate }}</button>
+    <button class="button" (click)="switchToMap()">{{ "Map" | translate }}</button>
   </div>
   <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
     <div>
-      <button (click)="getFavoriteExperts()">
+      <button class="button" (click)="getFavoriteExperts()">
         {{ "Favorite experts" | translate }}
       </button>
     </div>
     <div>
-      <button (click)="getAllExperts()">{{ "All experts" | translate }}</button>
+      <button class="button" (click)="getAllExperts()">{{ "All experts" | translate }}</button>
     </div>
 
     <div>
-      <button (click)="sortByNameASC()">A-Z</button>
+      <button class="button" (click)="sortByNameASC()">A-Z</button>
     </div>
     <div>
-      <button (click)="sortByNameDESC()">Z-A</button>
+      <button class="button" (click)="sortByNameDESC()">Z-A</button>
     </div>
     <div>
-      <button (click)="sortByDistanceASC()">
+      <button class="button" (click)="sortByDistanceASC()">
         {{ "Distance A_Z" | translate }}
       </button>
     </div>
     <div>
-      <button (click)="sortByDistanceDESC()">
+      <button class="button" (click)="sortByDistanceDESC()">
         {{ "Distance Z-A" | translate }}
       </button>
     </div>
@@ -69,8 +69,8 @@
         <div class="userList">
           <br>
           <div>
-          <button (click)="getAllUser()">ALL USER</button>
-          <button (click)="getFriends()">FRIENDS</button>
+          <button class="btn" (click)="getAllUser()">{{'All users' | translate}}</button>
+          <button class="btn" (click)="getFriends()">{{'Friends' | translate}}</button>
         </div>
         <div class="searchinputForUsers">
             <input

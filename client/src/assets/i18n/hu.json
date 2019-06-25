@@ -5,7 +5,7 @@
   "Login": "Bejelentkezés",
   "Logout": "Kijelentkezés",
   "Profile" : "Profil",
-  "Add expert": "Mester hozzáadása",
+  "Add expert": "Szakember hozzáadása",
   "Expert name": "Szakember neve",
   "Country": "Ország",
   "City": "Város",
@@ -24,6 +24,11 @@
   "Add address": "Cím hozzáadása",
   "Address": "Cím",
   "Street": "Utca",
-  "Number": "Házszám"
+  "Number": "Házszám",
+  "Experts": "Szakemberek",
+  "Common Experts": "Közös szakemberek",
+  "All users": "Összes felhasználó",
+  "Friends": "Barátok",
+  "Search": "Keresés"
  
 }
