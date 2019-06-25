@@ -76,7 +76,18 @@
       background-color: orange;
   }  */
 
-  .flex{
+  .expertList{
+      max-width: 80%;
       display: flex;
       flex-wrap: wrap;
+  }
+
+  .displayData {
+      display: flex;
+      align-content: space-between;
+  }
+  .userList {
+      display: flex;
+      flex-direction: row;
+      
   }
