@@ -22,11 +22,12 @@ export class UserComponent implements OnInit {
   }
 
   getExperts() {
-    // TODO LIST ALL FAVORITE EXPERTS
-    this.userResource.findExpertsByUsersUsingGET(this.user.name).subscribe((experts: Expert[]) => {
+    this.userResource.findAllExpertOfUserUsingGET(this.user.id).subscribe((experts: Expert[]) => {
       this.sendUserExperts.next(experts);
     });
-
+    }
+    commonExperts() {
+    // TODO FIND COMMON EXPERTS
     }
   }
 

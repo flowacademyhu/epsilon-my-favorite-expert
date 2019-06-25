@@ -22,3 +22,7 @@ body{
 .favoriteExpert {
   background-color: #363d80;
 }
+button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

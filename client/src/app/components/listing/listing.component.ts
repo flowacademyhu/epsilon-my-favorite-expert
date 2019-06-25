@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExpertResourceService, Expert, User, UsersResourceService } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
-import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-listing',
@@ -15,6 +14,7 @@ export class ListingComponent implements OnInit {
   users: User[] = [];
   isMapView = false;
   keyWords = '';
+  keyWordsUserSearch = '';
   inputCharacterChanges = 0;
   suggestTerm: String[];
 
@@ -57,9 +57,7 @@ export class ListingComponent implements OnInit {
         (data: Expert[]) => {
           this.favoriteExpert = data;
       });
-    this.userService.getAllUsingGET1().subscribe((users: User[]) => {
-      this.users = users;
-    });
+    this.getAllUser();
   }
 
   isFavoriteExpert(expert: Expert): boolean {
@@ -148,4 +146,16 @@ export class ListingComponent implements OnInit {
     this.experts = experts;
   }
 
+  getAllUser() {
+    this.userService.getAllUsingGET1().subscribe((users: User[]) => {
+      this.users = users;
+    });
+  }
+  getFriends() {
+    this.users = [];
+  }
+
+  userKeyWordtextChanged() {
+    
+  }
 }

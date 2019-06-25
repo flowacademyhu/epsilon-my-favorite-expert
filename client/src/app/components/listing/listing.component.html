@@ -67,7 +67,22 @@
           <p>asdsaaa</p>
         </div> -->
         <div class="userList">
-
+          <br>
+          <div>
+          <button (click)="getAllUser()">ALL USER</button>
+          <button (click)="getFriends()">FRIENDS</button>
+        </div>
+        <div class="searchinputForUsers">
+            <input
+            id="searchinputForUsers"
+            type="text"
+            name="findUsers"
+            [(ngModel)]="keyWordsUserSearch"
+            (ngModelChange)="userKeyWordtextChanged()"
+            list="expertSuggestions"
+            autofocus
+          />
+        </div>
         <div *ngFor="let user of users">
             <!-- <app-expert
               [expert]="expert"
