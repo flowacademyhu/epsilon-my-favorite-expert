@@ -41,7 +41,9 @@ export class UserComponent implements OnInit {
       this.isFriend = !this.isFriend;
       this.communicationService.addFriend(this.user);
       //TODO add in server
-      this.userResource.addFollowerToUserUsingPUT(this.user.id);
+      this.userResource.addFollowerToUserUsingPUT(this.user.id).subscribe((user: User) => {
+        this.user = user;
+      });
     }
 
     removeFriend() {
@@ -50,7 +52,9 @@ export class UserComponent implements OnInit {
 
       this.communicationService.removeFriend(this.user);
       //TODO remove in server
-      this.userResource.deleteFollowerFromUserUsingDELETE(this.user.id);
+      this.userResource.deleteFollowerFromUserUsingDELETE(this.user.id).subscribe(() => {
+        
+      });
 
     }
   }
