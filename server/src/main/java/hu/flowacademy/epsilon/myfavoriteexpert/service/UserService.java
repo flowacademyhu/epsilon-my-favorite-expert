@@ -50,7 +50,7 @@ public class UserService {
     }
 
     public List<User> find() {
-        return userRepository.findAll(Pageable.unpaged()).getContent();
+        return userRepository.findByIdNot(getCurrentUserId(),Pageable.unpaged()).getContent();
     }
 
     public User findByid() {

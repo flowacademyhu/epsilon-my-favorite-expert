@@ -157,9 +157,16 @@ export class ListingComponent implements OnInit {
     this.userService.getAllUsingGET1().subscribe((users: User[]) => {
       this.users = users;
     });
+    this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
+      this.friends = friends;
+    });
   }
   getFriends() {
-    this.users = this.friends;
+    this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
+      this.users = friends;
+      console.log('frindek' + this.users.length);
+    });
+    //this.users = this.friends;
   }
 
   userKeyWordtextChanged() {
