@@ -75,4 +75,8 @@ public class UsersResource {
         System.out.println(id);
         return userService.findAllExperts(id);
     }
+    @GetMapping("user/expertsintersect")
+    public List<Expert> findUsersExpertsUnion( @RequestParam UUID id) {
+        return userService.findUsersExpertsIntersection(id);
+    }
 }
