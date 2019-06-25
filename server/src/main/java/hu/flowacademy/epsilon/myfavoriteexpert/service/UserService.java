@@ -173,4 +173,10 @@ public class UserService {
         return followers;
     }
 
+    public Integer countLikes(UUID id) {
+        List<User> users = userRepository.numberOfLikes(id);
+        int likes = users.size();
+        return likes;
+    }
+
 }
