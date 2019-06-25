@@ -45,7 +45,5 @@ export class SearchUserComponent implements OnInit {
     .subscribe((experts) => {
       this.experts = experts;
     });
-    console.log(this.id);
-    console.log('helo');
   }
 }
