@@ -47,7 +47,7 @@ public class UsersResource {
     @PutMapping("user/{expertid}")
     public ResponseEntity<User> addExpertToUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
-        if (user != null) {
+        if (user != null && !user.getExperts().contains(expertid)) {
             user.addExpert(expertid);
         }
         return ResponseEntity.ok(userService.save(user));
