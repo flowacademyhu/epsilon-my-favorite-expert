@@ -84,12 +84,7 @@
           />
         </div>
         <div *ngFor="let user of users">
-            <!-- <app-expert
-              [expert]="expert"
-              [isFavoriteExpert]="isFavoriteExpert(expert)"
-            ></app-expert> -->
             <app-user [user]="user" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
-            <!-- <p>{{user.email}}</p> -->
           </div>
     </div>
   </div>

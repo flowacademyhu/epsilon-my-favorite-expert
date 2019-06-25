@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Expert } from '../../../api/model/expert';
-import { UsersResourceService } from 'src/app/api';
+import { UsersResourceService, User } from 'src/app/api';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { UsersResourceService } from 'src/app/api';
 })
 export class UserComponent implements OnInit {
   @Input()
-  user: any;
+  user: User;
 
   @Output() sendUserExperts = new EventEmitter<Expert[]>();
 
@@ -28,6 +28,7 @@ export class UserComponent implements OnInit {
     }
     commonExperts() {
     // TODO FIND COMMON EXPERTS
+    
     }
   }
 

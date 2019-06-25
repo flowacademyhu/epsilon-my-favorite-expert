@@ -26,3 +26,6 @@ button {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+.userPicture {
+  max-width: 90% !important;
+}

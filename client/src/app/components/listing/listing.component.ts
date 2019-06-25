@@ -85,7 +85,7 @@ export class ListingComponent implements OnInit {
     this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
       this.experts = data;
     });
-    this.searchFromArray(this.experts,this.keyWords);
+    this.searchFromArray(this.experts, this.keyWords);
   }
 
   sortByNameASC() {
@@ -156,6 +156,11 @@ export class ListingComponent implements OnInit {
   }
 
   userKeyWordtextChanged() {
-    
+    if(this.keyWordsUserSearch === '') {
+      this.getAllUser();
+    }
+    this.userService.searchUserWithQueryUsingGET(this.keyWordsUserSearch.replace(' ', '_')).subscribe((data: User[]) => {
+      this.users = data;
+    });
   }
 }
