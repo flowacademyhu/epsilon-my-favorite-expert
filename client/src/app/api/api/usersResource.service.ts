@@ -161,48 +161,6 @@ export class UsersResourceService {
     }
 
     /**
-     * countLikes
-     * 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public countLikesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public countLikesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public countLikesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public countLikesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // authentication (JWT) required
-        if (this.configuration.apiKeys["Authorization"]) {
-            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-
-        return this.httpClient.get<string>(`${this.basePath}/user/likes`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * deleteExpertFromUser
      * 
      * @param expertid expertid
