@@ -20,7 +20,6 @@ export class ExpertComponent implements OnInit {
      }
 
   ngOnInit() {
-    console.log('hello!');
   }
 
   removeFromFavorite() {
@@ -33,7 +32,7 @@ export class ExpertComponent implements OnInit {
   }
   addToFavorite() {
     this.isFavoriteExpert = !this.isFavoriteExpert;
-    this.communicationService.addToFavorite(this.expert);
+   this.communicationService.addToFavorite(this.expert);
      this.userService.addExpertToUserUsingPUT(this.expert.id).subscribe(
       (data: any) => {
         console.log('sikeresen hozzaadva a kedvencekhez');

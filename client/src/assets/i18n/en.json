@@ -29,5 +29,11 @@
   "Common Experts": "Common Experts",
   "All users": "All users",
   "Friends": "Friends",
-  "Search": "Search"
+  "Search": "Search",
+  "Invalid address": "Invalid address!",
+  "required": "Required field! Atleast 4 max 25 characters needed!",
+  "requiredNumber": "Required field! Atleast 1 max 15 characters needed!",
+  "requiredLong": "Required field! Atleast 4 max 45 characters needed!",
+  "Add friend": "Add friend",
+  "Remove Friend": "Remove Friend"
 }

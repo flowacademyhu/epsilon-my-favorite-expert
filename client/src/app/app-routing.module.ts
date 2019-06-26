@@ -5,7 +5,7 @@ import { LoggedinComponent } from './components/loggedin/loggedin.component';
 import { AddExpertComponent } from './components/add-expert/add-expert.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ListingComponent } from './components/listing/listing.component';
-import { AddAddressComponent } from './add-address/add-address.component';
+import { AddAddressComponent } from './components/add-address/add-address.component';
 import { LoggedinGuard } from './shared/guard/loggedinguard.service';
 import { SearchUserComponent } from './components/listing/search-user/search-user.component';
 

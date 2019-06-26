@@ -27,6 +27,7 @@ export class SearchUserComponent implements OnInit {
       this.users = users;
     });
   }
+
   listAllUsers() {
     this.listOrSearch = false;
   }

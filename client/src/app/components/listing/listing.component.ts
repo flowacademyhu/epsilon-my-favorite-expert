@@ -70,7 +70,7 @@ export class ListingComponent implements OnInit {
   isFavoriteExpert(expert: Expert): boolean {
     return !!this.favoriteExpert.find(exp => exp.id === expert.id);
   }
-  addToFavorite(expert: Expert) {
+  addToFavorite(expert : Expert) {
     this.favoriteExpert.push(expert);
     this.isFavoriteExpert(expert);
   }
@@ -180,5 +180,11 @@ export class ListingComponent implements OnInit {
 
   isFriend(user: User) {
     return !!this.friends.find(friend => friend.id === user.id);
+  }
+
+  getAllFriendsExperts() {
+    this.expertService.findAllFollowersExpertsUsingGET().subscribe((expert: Expert[]) => {
+      this.experts = expert;
+    });
   }
 }
