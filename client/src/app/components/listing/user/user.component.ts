@@ -16,6 +16,12 @@ export class UserComponent implements OnInit {
   @Input()
   isFriend: boolean;
 
+  @Input()
+  isUserCommonFilterActive: boolean;
+
+  @Input()
+  isUserFavoriteFilterActive: boolean;
+
   @Output() sendUserExperts = new EventEmitter<Expert[]>();
 
   showFavorites = false;
@@ -26,17 +32,28 @@ export class UserComponent implements OnInit {
   ngOnInit() {
 
   }
+  ngOnChanges() {
+    if (this.isUserCommonFilterActive) {
+      this.commonExperts();
+    }
+    if (this.isUserFavoriteFilterActive) {
+      this.getExperts();
+    }
+  }
 
   getExperts() {
     this.userResource.findAllExpertOfUserUsingGET(this.user.id).subscribe((experts: Expert[]) => {
       this.sendUserExperts.next(experts);
     });
+    this.communicationService.userExpert(this.user);
     }
     commonExperts() {
     // TODO FIND COMMON EXPERTS
     this.userResource.findUsersExpertsUnionUsingGET(this.user.id).subscribe((experts: Expert[])=> {
       this.sendUserExperts.next(experts);
-    })
+    });
+    this.communicationService.commonFilter(this.user);
+
     }
     addFriend() {
       this.isFriend = !this.isFriend;

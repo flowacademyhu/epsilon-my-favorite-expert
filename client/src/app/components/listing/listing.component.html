@@ -2,6 +2,9 @@
   <div>
     <button (click)="switchToMap()">{{ "Map" | translate }}</button>
   </div>
+  <div>
+    <button (click)="clearFilters()">clear filters</button>
+  </div>
   <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
     <div>
       <button (click)="getFavoriteExperts()">
@@ -84,7 +87,7 @@
           />
         </div>
         <div *ngFor="let user of users">
-            <app-user [user]="user" [isFriend]="isFriend(user)" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
+            <app-user [isUserFavoriteFilterActive]="isUserFriendsFiltered(user)" [isUserCommonFilterActive]="isUserCommonButtonFiltered(user)" [user]="user" [isFriend]="isFriend(user)" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
           </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ export enum FilterOrder {
 export enum FilterType {
   ALL = 'ALL',
   FAVORITE = 'FAVORITE',
-  USERS = 'USERS',
+  USERSFAVORITE = 'USERSFAVORITE',
   COMMON = 'USERS',
   ALL_FRIENDS_FAVORITE = 'ALL_FRIENDS_FAVORITE'
 }
@@ -26,6 +26,7 @@ export class Filter {
     public userSearchValue?: string,
     public order?: FilterOrder,
     public type?: FilterType,
+    public userid?: string
   ) {
   }
 }
@@ -47,6 +48,8 @@ export class ListingComponent implements OnInit {
   inputCharacterChanges = 0;
   suggestTerm: String[];
   private filter: Filter = new Filter(false);
+  isUserFavoriteFilterActive: boolean = false;
+  isUserCommonFilterActive: boolean = false;
 
   constructor(private expertService: ExpertResourceService,
      private communicationService: CommunicationService,
@@ -57,13 +60,11 @@ export class ListingComponent implements OnInit {
     this.communicationService.addExpertSubject.subscribe(
       (expert: Expert) => {
         this.favoriteExpert.push(expert);
-        console.log('favoriteExpert added');
       }
     );
     this.communicationService.removeExpertSubject.subscribe(
       (expert: Expert) => {
         this.favoriteExpert = this.favoriteExpert.filter(obj => obj !== expert);
-        console.log('favoriteExpert removed');
       }
     );
     this.communicationService.addFriendSubject.subscribe((user: User) => {
@@ -71,6 +72,18 @@ export class ListingComponent implements OnInit {
     });
     this.communicationService.removeFriendSubject.subscribe( (user: User) => {
       this.friends = this.friends.filter(friend => friend.id != user.id);
+    });
+    this.communicationService.commonFilterSubject.subscribe((user: User) => {
+      // TODO MENTES
+      this.filter.userid = user.id;
+      this.filter.type = FilterType.COMMON;
+      this.storeFilters();
+    });
+    this.communicationService.userExpertFilterSubject.subscribe((user: User) => {
+      // TODO MENTES
+      this.filter.userid = user.id;
+      this.filter.type = FilterType.USERSFAVORITE;
+      this.storeFilters();
     });
     this.loadFilters();
   }
@@ -88,7 +101,7 @@ export class ListingComponent implements OnInit {
       this.keyWordtextChanged(); // TODO: meghivja-e az elozo sor a change-et?
     }
     if (this.filter.userSearchValue) {
-      this.keyWords = this.filter.userSearchValue;
+      this.keyWordsUserSearch = this.filter.userSearchValue;
       this.userKeyWordtextChanged(); // TODO: meghivja-e az elozo sor a change-et?
     }
     switch (this.filter.type) {
@@ -100,20 +113,43 @@ export class ListingComponent implements OnInit {
         break;
       case FilterType.COMMON:
         // TODO userben van, prop binding kell, kell egy event binding is, ami jelzi, hogy visszajott az adat
+        this.isUserCommonFilterActive = true;
         break;
       case FilterType.FAVORITE:
         this.getFavoriteExperts();
         break;
-      case FilterType.USERS:
+      case FilterType.USERSFAVORITE:
         // TODO: userben van
+        this.isUserFavoriteFilterActive = true;
         break;
       default:
         break;
     }
     if (this.filter.mapView) {
-      this.switchToMap();
+      this.loadMap();
     }
   }
+  loadMap() {
+    this.isMapView = true;
+    console.log('AAAAAAAAAAA mapView' + this.isMapView);
+  }
+
+  isUserCommonButtonFiltered(user: User) {
+    if (!!this.isUserCommonFilterActive) {
+    return user.id === this.filter.userid;
+    } else {
+      return false;
+    }
+  }
+
+  isUserFriendsFiltered(user: User) {
+    if (!!this.isUserFavoriteFilterActive) {
+    return user.id === this.filter.userid;
+    } else {
+      return false;
+    }
+  }
+
 
   private sortByFiler() {
     switch (this.filter.order) {
@@ -181,7 +217,7 @@ export class ListingComponent implements OnInit {
 
   switchToMap() {
     this.isMapView = !this.isMapView;
-    this.filter.mapView = true;
+    this.filter.mapView = this.isMapView;
     this.storeFilters();
   }
 
@@ -271,9 +307,9 @@ export class ListingComponent implements OnInit {
     });
   }
   getFriends() {
+   
     this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
       this.users = friends;
-      console.log('frindek' + this.users.length);
     });
     //this.users = this.friends;
   }
@@ -298,6 +334,11 @@ export class ListingComponent implements OnInit {
       this.experts = expert;
       this.sortByFiler();
     });
+  }
+
+  clearFilters() {
+    localStorage.removeItem('filters');
+    this.ngOnInit();
   }
 
 }
