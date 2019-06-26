@@ -43,7 +43,9 @@ public class ExpertService {
         var expertid = UUID.randomUUID();
         expert.setId(expertid);
         expert.setCreatedAt(LocalDateTime.now());
-        if (expert.getAddress().getCity().length() < 2 || expert.getAddress().getCountry().length() < 2 ||
+        Address address = expert.getAddress();
+        Double lon = geoCodingService.getGeoCoding(expert.getAddress()).getLon();
+        if (address.getCity().length() < 2 || expert.getAddress().getCountry().length() < 2 ||
                 expert.getAddress().getStreet().length() < 2  || Double.isNaN(geoCodingService.getGeoCoding(expert.getAddress()).getLon())) {
             throw new RuntimeException("address is not valid!!!!!!!!");
         } else {

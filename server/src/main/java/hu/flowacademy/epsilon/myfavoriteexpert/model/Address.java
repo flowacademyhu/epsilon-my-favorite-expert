@@ -1,5 +1,6 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
