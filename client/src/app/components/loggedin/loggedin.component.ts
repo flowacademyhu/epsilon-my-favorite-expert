@@ -16,7 +16,7 @@ export class LoggedinComponent implements OnInit {
   @Input()
   expert: Expert;
 
-  mapZoom = 12;
+  mapZoom = 6;
   
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
