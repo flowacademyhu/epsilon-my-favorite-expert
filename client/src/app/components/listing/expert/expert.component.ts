@@ -20,7 +20,6 @@ export class ExpertComponent implements OnInit {
      }
 
   ngOnInit() {
-    console.log(this.expert);
   }
 
   removeFromFavorite() {
