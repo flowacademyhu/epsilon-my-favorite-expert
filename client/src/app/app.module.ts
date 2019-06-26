@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/listing/user/user.component';
 import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
-import { AddAddressComponent } from './add-address/add-address.component';
+import { AddAddressComponent } from './components/add-address/add-address.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
 
 import { HeaderComponent } from './components/header/header.component';

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '../../app/api/model/address';
+import { Address } from '../../../app/api/model/address';
 import { Router } from '@angular/router';
-import { User } from '../../app/api/model/user';
-import { UsersResourceService } from '../api';
+import { User } from '../../api/model/user';
+import { UsersResourceService } from '../../api';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -40,7 +40,7 @@ export class AddAddressComponent implements OnInit {
     });
   }
   fillAddressFields() {
-    let tempAddress : Address = {
+    let tempAddress: Address = {
       city: '',
       country: '',
       street: '',
