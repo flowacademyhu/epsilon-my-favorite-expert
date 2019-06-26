@@ -19,6 +19,7 @@ export interface Expert {
     deletedAt?: Date;
     distanceMeter?: number;
     id?: string;
+    likes?: number;
     location?: Location;
     name?: string;
     phone?: string;
