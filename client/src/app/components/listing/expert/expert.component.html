@@ -1,32 +1,32 @@
     
-          <div class="row">
-            <div class="col-12 col-md-10">
-    <div class="card" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">             
-                <div class="card-body">
-                  <div class="logoName">{{ expert.name}}
-                  </div>
-                  <div>
-                    {{ expert.phone }}
-                  </div>
-                  <div>{{'Distance' | translate}} {{ expert.distanceMeter }}</div>
-                    <div class="quote">
-                      {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
-                    </div>
-                    <div *ngFor="let prof of expert.profession" class="quote">
-                      {{ prof }}
-                    </div>
-                    <div class="quote">
-                      {{expert.likes}}
-                    </div>
-                  </div>
-                  <div *ngIf="isFavoriteExpert">
-                  <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
-                  <button (click)="removeFromFavorite()" class="round-shape name">{{'Remove From Favorite' | translate}}</button>
-                  </div>
-                  <div *ngIf="!isFavoriteExpert">
-                  <button (click)="addToFavorite()" class="round-shape name">{{'Add to Favorite' | translate}}</button>
-            </div>
-          </div>
-  </div>
-  </div>
+    <div class="row">
+      <div class="col-12 col-md-10">
+        <div class="card" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">             
+          <div class="card-body">
+              <div class="logoName">{{ expert.name}}
+              </div>
+              <div>
+                {{ expert.phone }}
+              </div>
+              <div>{{'Distance' | translate}} {{ expert.distanceMeter }}</div>
+              <div class="quote">
+                {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
+              </div>
+              <div *ngFor="let prof of expert.profession" class="quote">
+                {{ prof }}
+              </div>
+              <div class="quote">
+                {{expert.likes}}
+              </div>
+              </div>
+              <div *ngIf="isFavoriteExpert">
+              <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
+              <button (click)="removeFromFavorite()" class="round-shape name">{{'Remove From Favorite' | translate}}</button>
+              </div>
+              <div *ngIf="!isFavoriteExpert">
+              <button (click)="addToFavorite()" class="round-shape name">{{'Add to Favorite' | translate}}</button>
+              </div>
+        </div>
+      </div>
+    </div>
  
