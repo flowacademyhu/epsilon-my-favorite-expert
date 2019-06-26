@@ -29,5 +29,14 @@
   "required": "Required field! Atleast 4 max 25 characters needed!",
   "requiredNumber": "Required field! Atleast 1 max 15 characters needed!",
   "requiredLong": "Required field! Atleast 4 max 45 characters needed!",
-  "disctance": "Distance"
+  "Distance": "Distance",
+  "Search": "Search",
+  "All users": "All users",
+  "List of users": "List of users",
+  "Friends": "Friends",
+  "House number": "House number",
+  "My friends experts": "Show my friends' experts",
+  "Experts": "Experts",
+  "Remove Friend": "Remove Friend",
+  "Add Friend": "Add Friend"
 }

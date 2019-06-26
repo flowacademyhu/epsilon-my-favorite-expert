@@ -1,7 +1,7 @@
 
 <div>
-    <button>Search</button>
-    <button>All users</button>
+    <button>{{'Search' | translate}}</button>
+    <button>{{'All users' | translate}}</button>
 </div>
 <div class="flex" *ngIf="listOrSearch===false">
     <form class="form-inline waves-light" mdbWavesEffect>
@@ -11,7 +11,7 @@
     </form>
 </div>
 <div class="flex" *ngIf="listOrSearch===true">
-    <p>List of users:</p>
+    <p>{{'List of users' | translate}}</p>
   <div *ngFor="let user of users">
     <app-user [user]="user"></app-user>
   </div> 
