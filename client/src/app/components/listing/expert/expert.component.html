@@ -1,7 +1,6 @@
-
-      
+    
           <div class="row">
-            <div class="col-12 col-md-10 ">
+            <div class="col ">
     <div class="card" [ngClass]="{favoriteExpert: isFavoriteExpert, notFavoriteExpert: !isFavoriteExpert}">             
                 <div class="card-body">
                   <div class="logoName">{{ expert.name}}
@@ -9,7 +8,7 @@
                   <div>
                     {{ expert.phone }}
                   </div>
-                  <div>Távolság:{{ expert.distanceMeter }}</div>
+                  <div>{{'Distance' | translate}} {{ expert.distanceMeter }}</div>
                     <div class="quote">
                       {{ expert.address.country}}, {{ expert.address.city }} {{ expert.address.street }} {{ expert.address.number }}
                     </div>

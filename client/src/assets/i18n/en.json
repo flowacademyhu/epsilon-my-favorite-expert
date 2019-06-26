@@ -36,5 +36,10 @@
   "requiredLong": "Required field! Atleast 4 max 45 characters needed!",
   "Add friend": "Add friend",
   "Remove Friend": "Remove Friend",
-  "distance": "Distance"
+  "Distance": "Distance",
+  "List of users": "List of users",
+  "House number": "House number",
+  "My friends experts": "My friends' experts",
+  "Add Friend": "Add Friend",
+  "Clear filters": "Clear filters"
 }

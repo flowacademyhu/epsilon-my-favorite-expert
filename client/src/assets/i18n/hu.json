@@ -13,10 +13,10 @@
   "Phone": "Telefonszám",
   "Add profession": "Szakma hozzáadása",
   "Search user": "Felhasználó keresése",
-  "List expert": "Szakemberek listázása",
+  "List expert": "Szakemberek listája",
   "Remove From Favorite": "Törlés a kedvencek közül",
   "Add to Favorite": "Hozzáadás a kedvencekhez",
-  "Favorite experts": "Kedvenc szakember",
+  "Favorite experts": "Kedvenc szakemberek",
   "All experts": "Összes szakember",
   "Map": "Térkép",
   "Distance A_Z": "Távolság A_Z",
@@ -35,5 +35,11 @@
   "required": "Kötelező mező! Minimum 4 maximum 25 betű szükséges!",
   "requiredNumber": "Kötelező mező! Minimum 1 maximum 15 betű szükséges!",
   "requiredLong": "Kötelező mező! Minimum 4 maximum 45 betű szükséges!",
-  "distance": "Távolság"
+  "Distance": "Távolság",
+  "List of users": "Felhasználók listája",
+  "House number": "Házszám",
+  "My friends experts": "Barátaim szakijai",
+  "Remove Friend": "Barát eltávolítása",
+  "Add Friend": "Barát hozzáadása",
+  "Clear filters": "Szűrők törlése"
 }
