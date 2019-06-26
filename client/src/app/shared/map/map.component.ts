@@ -27,6 +27,9 @@ export class MapComponent implements OnInit {
   @Input()
   experts: Expert[] = [];
 
+  @Input()
+  mapZoom: number;
+
   map: OlMap;
   vectorSource: OlVectorSource;
   vectorLayer: OlVectorLayer;
@@ -105,12 +108,12 @@ export class MapComponent implements OnInit {
     if (localStorage.getItem('locationLat') == null || localStorage.getItem('locationLon') == null ) {
       this.view = new OlView({
             center: fromLonLat([19.03991, 47.49801]),
-            zoom: 15
-        });
+            zoom: this.mapZoom
+        });//zoom 15 volt
       } else {
         this.view = new OlView({
           center: fromLonLat([+localStorage.getItem('locationLon'), +localStorage.getItem('locationLat')]),
-          zoom: 15
+          zoom: this.mapZoom
       });
       }
     this.map = new OlMap({

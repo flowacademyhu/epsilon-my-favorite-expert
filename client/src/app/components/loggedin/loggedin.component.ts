@@ -11,10 +11,13 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
   styleUrls: ['./loggedin.component.css']
 })
 export class LoggedinComponent implements OnInit {
-
+  
+  isFavoriteExpertLoaded = false;
   @Input()
   expert: Expert;
 
+  mapZoom = 12;
+  
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
   isMapView = false;
@@ -54,6 +57,9 @@ export class LoggedinComponent implements OnInit {
     .subscribe(([currentUser, experts]) => {
       this.user = currentUser;
       this.favoriteExperts = experts;
+      console.log('favoriteExpertLength' + experts.length);
+      console.log('isFavoriteExpertLoaded' + this.isFavoriteExpertLoaded);
+      this.isFavoriteExpertLoaded = true;
     });
   }
 

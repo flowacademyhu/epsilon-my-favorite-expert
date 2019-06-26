@@ -38,6 +38,8 @@ export class Filter {
 })
 
 export class ListingComponent implements OnInit {
+  isExpertListLoaded = false;
+  isFilterApplied = false;
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
   users: User[] = [];
@@ -50,12 +52,14 @@ export class ListingComponent implements OnInit {
   private filter: Filter = new Filter(false);
   isUserFavoriteFilterActive: boolean = false;
   isUserCommonFilterActive: boolean = false;
+  mapZoom = 15;
 
   constructor(private expertService: ExpertResourceService,
      private communicationService: CommunicationService,
      private userService: UsersResourceService) { }
 
   ngOnInit() {
+    this.filter = new Filter(false);
     this.loadData();
     this.communicationService.addExpertSubject.subscribe(
       (expert: Expert) => {
@@ -128,6 +132,7 @@ export class ListingComponent implements OnInit {
     if (this.filter.mapView) {
       this.loadMap();
     }
+    this.isFilterApplied = true;
   }
   loadMap() {
     this.isMapView = true;
@@ -197,6 +202,7 @@ export class ListingComponent implements OnInit {
         this.experts = experts;
         this.favoriteExpert = favoriteExperts;
         this.sortByFiler();
+        this.isExpertListLoaded = true;
       });
 
     this.getAllUser();

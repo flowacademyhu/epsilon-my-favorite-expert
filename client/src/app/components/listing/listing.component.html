@@ -47,9 +47,11 @@
     <option *ngFor="let item of suggestTerm">{{ item }}</option>
   </datalist>
 </div>
-<div *ngIf="isMapView; else expertList">
-  <app-map [experts]="experts"></app-map>
-</div>
+  <div *ngIf="isMapView && isExpertListLoaded; else expertList">
+<ng-container>
+    <app-map [experts]="experts" [mapZoom]="mapZoom"></app-map>
+  </ng-container>
+  </div>
 <ng-template #expertList>
   <div class="displayData">
     <div class="expertList">
@@ -60,8 +62,8 @@
         ></app-expert>
       </div>
     </div>
-    
-      <!-- <div>
+
+    <!-- <div>
         <p>asd</p>
         <p>asdsaaa</p>
       </div>
@@ -69,26 +71,34 @@
           <p>asd</p>
           <p>asdsaaa</p>
         </div> -->
-        <div class="userList">
-          <br>
-          <div>
-          <button (click)="getAllUser()">{{'All users' | translate}}</button>
-          <button (click)="getFriends()">{{'Friends' | translate}}</button>
-          <button (click)="getAllFriendsExperts()">{{'My friends experts' | translate}}</button>
-        </div>
-        <div class="searchinputForUsers">
-            <input
-            id="searchinputForUsers"
-            type="text"
-            name="findUsers"
-            [(ngModel)]="keyWordsUserSearch"
-            (ngModelChange)="userKeyWordtextChanged()"
-            list="expertSuggestions"
-          />
-        </div>
-        <div *ngFor="let user of users">
-            <app-user [isUserFavoriteFilterActive]="isUserFriendsFiltered(user)" [isUserCommonFilterActive]="isUserCommonButtonFiltered(user)" [user]="user" [isFriend]="isFriend(user)" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
-          </div>
+    <div class="userList">
+      <br />
+      <div>
+        <button (click)="getAllUser()">{{ "All users" | translate }}</button>
+        <button (click)="getFriends()">{{ "Friends" | translate }}</button>
+        <button (click)="getAllFriendsExperts()">
+          {{ "My friends experts" | translate }}
+        </button>
+      </div>
+      <div class="searchinputForUsers">
+        <input
+          id="searchinputForUsers"
+          type="text"
+          name="findUsers"
+          [(ngModel)]="keyWordsUserSearch"
+          (ngModelChange)="userKeyWordtextChanged()"
+          list="expertSuggestions"
+        />
+      </div>
+      <div *ngFor="let user of users">
+        <app-user
+          [isUserFavoriteFilterActive]="isUserFriendsFiltered(user)"
+          [isUserCommonFilterActive]="isUserCommonButtonFiltered(user)"
+          [user]="user"
+          [isFriend]="isFriend(user)"
+          (sendUserExperts)="handleIncomingExperts($event)"
+        ></app-user>
+      </div>
     </div>
   </div>
 </ng-template>
