@@ -2,6 +2,9 @@
   <div>
     <button (click)="switchToMap()">{{ "Map" | translate }}</button>
   </div>
+  <div>
+    <button (click)="clearFilters()">clear filters</button>
+  </div>
   <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
     <div>
       <button (click)="getFavoriteExperts()">

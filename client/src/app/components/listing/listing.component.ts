@@ -336,5 +336,10 @@ export class ListingComponent implements OnInit {
     });
   }
 
+  clearFilters() {
+    localStorage.removeItem('filters');
+    this.ngOnInit();
+  }
+
 }
 
