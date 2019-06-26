@@ -52,4 +52,9 @@ public class ExpertResource {
         return expertService.findExpertByParams(searchparams);
     }
 
+    @GetMapping("/all-followers-expert")
+    public List<Expert> findAllFollowersExperts() {
+        return expertService.findAllFollowersExperts();
+    }
+
 }

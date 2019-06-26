@@ -5,48 +5,71 @@
 <div class="row align-items-center">
 <div class="col-12 text-center">
   <div class="row justify-content-center align-items-center">
-    <form>
+    <form #myForm="ngForm">
+      <div *ngIf="showAlert">
+        <br>
+        <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true"><h5>{{'Invalid address' | translate}}</h5></ngb-alert>
+      </div>
       <h5>{{ "Expert name" | translate}}:</h5>
-      <input class="form-control"
+      <input 
+        class="form-control"
         type="text"
         name="name"
+        #RefName="ngModel"
         [(ngModel)]="expert.name"
-      />
+        minlength=4 maxlength=25 required>
+        <div *ngIf="RefName.invalid && RefName.touched">
+          <h6>{{'required' | translate}}</h6></div>
       <h5>{{ "Country" | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="country"
+        #RefCountry="ngModel"
         [(ngModel)]="expert.address.country"
-      />
+        minlength=4 maxlength=25 required>
+        <div *ngIf="RefCountry.invalid && RefCountry.touched">
+          <h6>{{'required' | translate}}</h6></div>
       <h5>{{ "City" | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="city"
+        #RefCity="ngModel"
         [(ngModel)]="expert.address.city" 
-      />
+        minlength=4 maxlength=25 required>
+        <div *ngIf="RefCity.invalid && RefCity.touched">
+          <h6>{{'required' | translate}}</h6></div>
       <h5>{{ "Street" | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="street"
+        #RefStreet="ngModel"
         [(ngModel)]="expert.address.street"
-      />
+        minlength=4 maxlength=45 required>
+        <div *ngIf="RefStreet.invalid && RefStreet.touched">
+          <h6>{{'requiredLong' | translate}}</h6></div>
       <h5>{{ "Number" | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="number"
+        #RefNumber="ngModel"
         [(ngModel)]="expert.address.number"
-      />
+        minlength=1 maxlength=15 required>
+        <div *ngIf="RefNumber.invalid && RefNumber.touched">
+          <h6>{{'requiredNumber' | translate}}</h6></div>
       <h5>{{ "Profession" | translate}}:</h5>
       <input
         class="form-control"
         type="text"
         name="profession"
+        #RefProfession="ngModel"
         [(ngModel)]="profession"
-      />
+        minlength=4 maxlength=25 required>
+        <div *ngIf="RefProfession.invalid && RefProfession.touched">
+          <h6>{{'required' | translate}}</h6></div>
       <button type="button" name="saveProfession" class="btn btn-light" 
       (click)="addProfession()">{{ "Add profession" | translate}}</button>
       <div *ngIf="expert.profession.length > 0">
@@ -61,9 +84,13 @@
         class="form-control"
         type="text"
         name="phone"
+        #RefPhone="ngModel"
         [(ngModel)]="expert.phone"
-      />
+        minlength=4 maxlength=25 required>
+        <div *ngIf="RefPhone.invalid && RefPhone.touched">
+          <h6>{{'required' | translate}}</h6></div>
       <button type="button" name="save" class="btn btn-light" (click)="addExpert()">{{ "Add expert" | translate}}</button>
+
     </form> 
     
   </div> 

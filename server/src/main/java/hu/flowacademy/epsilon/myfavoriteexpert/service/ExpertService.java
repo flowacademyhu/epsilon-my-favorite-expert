@@ -1,5 +1,6 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
+import com.google.common.collect.Lists;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
@@ -14,9 +15,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+=======
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+>>>>>>> feature/sandbox_V2
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -115,12 +121,31 @@ public class ExpertService {
         return experts;
     }
 
+    public List<Expert> findAllFollowersExperts() {
+        var experts = userService.findFollowersByUser().stream()
+                .flatMap(follower -> follower.getExperts().stream()
+                        .map(expertId -> expertRepository.
+                                findById(expertId).orElse(null)))
+                .collect(Collectors.toSet());
+        experts = setExpertDistance(experts);
+        return Lists.newArrayList(experts);
+    }
+
     public List<Expert> setExpertDistanceAndLikes(List<Expert> experts) {
         User user = userService.findByid();
             experts.stream().forEach(expert -> setLikes(expert));
         if (user != null && user.getLocationByAddress() != null) {
             experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
           // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
+        }
+        return experts;
+    }
+
+    public Set<Expert> setExpertDistance(Set<Expert> experts) {
+        User user = userService.findByid();
+        if (user != null && user.getLocationByAddress() != null) {
+            experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
+            // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
         }
         return experts;
     }

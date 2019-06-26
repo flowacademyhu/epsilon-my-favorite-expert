@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -16,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './components/listing/user/user.component';
 import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
-import { AddAddressComponent } from './add-address/add-address.component';
+import { AddAddressComponent } from './components/add-address/add-address.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
 
 import { HeaderComponent } from './components/header/header.component';
@@ -46,6 +47,9 @@ import { MapComponent } from './shared/map/map.component';
     ReactiveFormsModule,
     ApiModule.forRoot(getConfig),
     FormsModule,
+    NgbModule,
+    NgbAlertModule,
+    NgbPaginationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
