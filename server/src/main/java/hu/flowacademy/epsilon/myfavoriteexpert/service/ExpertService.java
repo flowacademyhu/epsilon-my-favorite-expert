@@ -14,11 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -77,7 +75,7 @@ public class ExpertService {
 
     public List<Expert> find() {
         var experts = expertRepository.findAll(Pageable.unpaged()).getContent();
-        experts =  setExpertDistance(experts);
+        experts =  setExpertDistanceAndLikes(experts);
         return experts;
     }
 
@@ -104,7 +102,7 @@ public class ExpertService {
                 .stream()
                 .map(expertid -> expertRepository.findById(expertid).get())
                 .collect(Collectors.toList());
-        return setExpertDistance(experts);
+        return setExpertDistanceAndLikes(experts);
     }
 
     public List<Expert> findExpertByParams(String searchParams) {
@@ -113,12 +111,13 @@ public class ExpertService {
         String searchPartialInWords = "*" + searchParams.replaceAll(" ","* *").toLowerCase()+ "*";
         System.out.println(searchPartialInWords);
         var experts = expertRepository.findExpertTest(searchParams,searchPartialInWords,pageable).getContent();
-        experts = setExpertDistance(experts);
+        experts = setExpertDistanceAndLikes(experts);
         return experts;
     }
 
-    public List<Expert> setExpertDistance(List<Expert> experts) {
+    public List<Expert> setExpertDistanceAndLikes(List<Expert> experts) {
         User user = userService.findByid();
+            experts.stream().forEach(expert -> setLikes(expert));
         if (user != null && user.getLocationByAddress() != null) {
             experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
           // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
@@ -128,9 +127,19 @@ public class ExpertService {
 
     public Expert setExpertDistance(Expert expert) {
         User user = userService.findByid();
+        expert = setLikes(expert);
         if (user != null && user.getLocationByAddress() != null) {
             expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation())));
         }
         return expert;
     }
+    public Expert setLikes(Expert expert) {
+        expert.setLikes(userRepository.countByExperts(expert.getId()));
+        return expert;
+    }
+
+
+
+
+
 }

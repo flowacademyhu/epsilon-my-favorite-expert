@@ -108,8 +108,4 @@ public class UsersResource {
         return userService.findFollowersByUser();
     }
 
-    @GetMapping("user/likes")
-    public Integer countLikes(@RequestParam UUID id) {
-        return userService.countLikes(id);
-    }
 }
