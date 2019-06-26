@@ -27,16 +27,15 @@ export class LoggedinComponent implements OnInit {
   user: User;
   favoriteExperts: Expert[];
 
-  state: any;
   expertService: any;
   constructor(private appState: AppStateService, private activatedRoute: ActivatedRoute, 
     private userController: UserControllerService, private expertResource: ExpertResourceService, private router: Router, 
     private communicationService: CommunicationService, private userResources: UsersResourceService) {
-    this.state = this.appState;
     this.user = <User>{};
     this.user.address = <Address>{};
     
    }
+   state = this.appState;
   ngOnInit() {
     this.loadData();
     this.router.events.subscribe((emptydata) => {
