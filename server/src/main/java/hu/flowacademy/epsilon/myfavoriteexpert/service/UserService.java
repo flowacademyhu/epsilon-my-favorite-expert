@@ -58,6 +58,11 @@ public class UserService {
         return userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
     }
 
+    public User findFollowerByid(UUID id) {
+
+        return userRepository.findById(id).orElse(null);
+    }
+
     public User saveAddress(Address address) {
         User user = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
         if (user == null) {
@@ -81,6 +86,14 @@ public class UserService {
         user.deleteExpert(expertid);
         return userRepository.save(user);
     }
+    public User deleteFollower(User user, UUID followerid) {
+        user.deleteFollower(followerid);
+        User follower = findFollowerByid(followerid);
+        follower.deleteFollowedBy(user.getId());
+        userRepository.save(follower);
+        return userRepository.save(user);
+    }
+
 
     public User saveLanguage(String language) {
         User user = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
@@ -155,4 +168,13 @@ public class UserService {
 
         return expertsIntersection;
     }
+    public List<User> findFollowersByUser() {
+        var followers = findByid()
+                .getFollowers()
+                .stream()
+                .map(followerid -> userRepository.findById(followerid).get())
+                .collect(Collectors.toList());
+        return followers;
+    }
+
 }

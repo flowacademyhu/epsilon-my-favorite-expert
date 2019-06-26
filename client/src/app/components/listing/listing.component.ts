@@ -12,6 +12,7 @@ export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
   users: User[] = [];
+  friends: User[] = [];
   isMapView = false;
   keyWords = '';
   keyWordsUserSearch = '';
@@ -36,6 +37,12 @@ export class ListingComponent implements OnInit {
         console.log('favoriteExpert removed');
       }
     );
+    this.communicationService.addFriendSubject.subscribe((user: User) => {
+      this.friends.push(user);
+    });
+    this.communicationService.removeFriendSubject.subscribe( (user: User) => {
+      this.friends = this.friends.filter(friend => friend.id != user.id);
+    });
   }
 
   getFavoriteExperts() {
@@ -150,9 +157,16 @@ export class ListingComponent implements OnInit {
     this.userService.getAllUsingGET1().subscribe((users: User[]) => {
       this.users = users;
     });
+    this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
+      this.friends = friends;
+    });
   }
   getFriends() {
-    this.users = [];
+    this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
+      this.users = friends;
+      console.log('frindek' + this.users.length);
+    });
+    //this.users = this.friends;
   }
 
   userKeyWordtextChanged() {
@@ -162,5 +176,9 @@ export class ListingComponent implements OnInit {
     this.userService.searchUserWithQueryUsingGET(this.keyWordsUserSearch.replace(' ', '_')).subscribe((data: User[]) => {
       this.users = data;
     });
+  }
+
+  isFriend(user: User) {
+    return !!this.friends.find(friend => friend.id === user.id);
   }
 }

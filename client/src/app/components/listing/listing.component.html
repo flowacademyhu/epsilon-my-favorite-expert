@@ -80,11 +80,10 @@
             [(ngModel)]="keyWordsUserSearch"
             (ngModelChange)="userKeyWordtextChanged()"
             list="expertSuggestions"
-            autofocus
           />
         </div>
         <div *ngFor="let user of users">
-            <app-user [user]="user" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
+            <app-user [user]="user" [isFriend]="isFriend(user)" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
           </div>
     </div>
   </div>
