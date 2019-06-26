@@ -15,13 +15,13 @@
           </div>
           
           
-          <button (click)="getExperts()" class="round-shape name">Experts</button>
-          <button (click)="commonExperts()" class="round-shape name">COMMON EXPERTS</button>
+          <button (click)="getExperts()" class="round-shape name">{{'Experts' | translate}}</button>
+          <button (click)="commonExperts()" class="round-shape name">{{'All experts' | translate}}</button>
           <div *ngIf="isFriend;else notFriend">
-            <button (click)="removeFriend()" class="round-shape name">Remove Friend</button>
+            <button (click)="removeFriend()" class="round-shape name">{{'Remove Friend' | translate}}</button>
             </div>
             <ng-template #notFriend>
-          <button (click)="addFriend()" class="round-shape name">Add friend</button>            
+          <button (click)="addFriend()" class="round-shape name">{{'Add Friend' | translate}}</button>            
             </ng-template>
   </div>
 </div>
