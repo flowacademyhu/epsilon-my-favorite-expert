@@ -38,6 +38,9 @@ public class Expert {
     @Transient
     private Integer distanceMeter;
 
+    @Transient
+    private Integer likes;
+
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt;

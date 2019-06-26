@@ -1,6 +1,7 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.repository;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+import org.elasticsearch.action.search.SearchResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.List;
 
 @Repository
 public interface UserRepository extends ElasticsearchCrudRepository<User, UUID> {
@@ -25,4 +27,8 @@ public interface UserRepository extends ElasticsearchCrudRepository<User, UUID> 
 
     Page<User> findByIdNot(UUID id, Pageable pageable);
 
+//    @Query("{\"match\":{\"experts\": \"?0\"}}")
+//    List<User> numberOfLikes(UUID id);
+
+    Integer countByExperts(UUID id);
 }

@@ -7,9 +7,9 @@
     <form #myForm="ngForm">
       <div *ngIf="showAlert">
         <br>
-        <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true"><h5>{{'Invalid address' | translate}}</h5></ngb-alert>
+        <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true"><h5>{{ 'Invalid address' | translate}}</h5></ngb-alert>
       </div>
-      <h5>{{ "Expert name" | translate}}:</h5>
+      <h5>{{ 'Expert name' | translate}}:</h5>
       <input 
         class="form-control"
         type="text"
@@ -18,8 +18,8 @@
         [(ngModel)]="expert.name"
         minlength=4 maxlength=25 required>
         <div *ngIf="RefName.invalid && RefName.touched">
-          <h6>{{'required' | translate}}</h6></div>
-      <h5>{{ "Country" | translate}}:</h5>
+          <h6>{{ 'required' | translate}}</h6></div>
+      <h5>{{ 'Country' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -28,8 +28,8 @@
         [(ngModel)]="expert.address.country"
         minlength=4 maxlength=25 required>
         <div *ngIf="RefCountry.invalid && RefCountry.touched">
-          <h6>{{'required' | translate}}</h6></div>
-      <h5>{{ "City" | translate}}:</h5>
+          <h6>{{ 'required' | translate}}</h6></div>
+      <h5>{{ 'City' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -39,7 +39,7 @@
         minlength=4 maxlength=25 required>
         <div *ngIf="RefCity.invalid && RefCity.touched">
           <h6>{{'required' | translate}}</h6></div>
-      <h5>{{ "Street" | translate}}:</h5>
+      <h5>{{ 'Street' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -48,8 +48,8 @@
         [(ngModel)]="expert.address.street"
         minlength=4 maxlength=45 required>
         <div *ngIf="RefStreet.invalid && RefStreet.touched">
-          <h6>{{'requiredLong' | translate}}</h6></div>
-      <h5>{{ "Number" | translate}}:</h5>
+          <h6>{{ 'requiredLong' | translate}}</h6></div>
+      <h5>{{ 'Number' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -58,8 +58,8 @@
         [(ngModel)]="expert.address.number"
         minlength=1 maxlength=15 required>
         <div *ngIf="RefNumber.invalid && RefNumber.touched">
-          <h6>{{'requiredNumber' | translate}}</h6></div>
-      <h5>{{ "Profession" | translate}}:</h5>
+          <h6>{{ 'requiredNumber' | translate}}</h6></div>
+      <h5>{{ 'Profession' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -70,7 +70,7 @@
         <div *ngIf="RefProfession.invalid && RefProfession.touched">
           <h6>{{'required' | translate}}</h6></div>
       <button type="button" name="saveProfession" class="btn btn-light" 
-      (click)="addProfession()">{{ "Add profession" | translate}}</button>
+      (click)="addProfession()">{{ 'Add profession' | translate}}</button>
       <div *ngIf="expert.profession.length > 0">
       <div *ngFor="let prof of expert.profession">
         <p id="paragraph">
@@ -78,7 +78,7 @@
         </p>
       </div>
     </div>
-      <h5>{{ "Phone" | translate}}:</h5>
+      <h5>{{ 'Phone' | translate}}:</h5>
       <input
         class="form-control"
         type="text"
@@ -87,8 +87,8 @@
         [(ngModel)]="expert.phone"
         minlength=4 maxlength=25 required>
         <div *ngIf="RefPhone.invalid && RefPhone.touched">
-          <h6>{{'required' | translate}}</h6></div>
-      <button type="button" name="save" class="btn btn-light" (click)="addExpert()">{{ "Add expert" | translate}}</button>
+          <h6>{{ 'required' | translate}}</h6></div>
+      <button type="button" name="save" class="btn btn-light" (click)="addExpert()">{{ 'Add expert' | translate}}</button>
 
     </form> 
     
