@@ -11,3 +11,11 @@
 .nav-link{
     color:  white !important;
 }
+
+button, html [type=button] {
+  -webkit-appearance: button;
+}
+
+.navbar-toggler:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}

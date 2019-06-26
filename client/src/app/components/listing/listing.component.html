@@ -1,38 +1,50 @@
-<ul class="andorCSSAnitaMajdKijavitja">
-  <div>
-    <button (click)="switchToMap()">{{ "Map" | translate }}</button>
-  </div>
-  <div>
-    <button (click)="clearFilters()">clear filters</button>
-  </div>
-  <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
-    <div>
-      <button (click)="getFavoriteExperts()">
-        {{ "Favorite experts" | translate }}
-      </button>
-    </div>
-    <div>
-      <button (click)="getAllExperts()">{{ "All experts" | translate }}</button>
-    </div>
+<div class=" ">
+  <div class="row">
+    <div class="col-12">
+      <ul class="andorCSSAnitaMajdKijavitja">
+        <div>
+          <button class="button" (click)="switchToMap()">
+            {{ "Map" | translate }}
+          </button>
+        </div>
+        <div>
+          <button class="button" (click)="clearFilters()">
+            {{ "Clear filters" | translate }}
+          </button>
+        </div>
+        <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
+          <div>
+            <button class="button" (click)="getFavoriteExperts()">
+              {{ "Favorite experts" | translate }}
+            </button>
+          </div>
+          <div>
+            <button class="button" (click)="getAllExperts()">
+              {{ "All experts" | translate }}
+            </button>
+          </div>
 
-    <div>
-      <button (click)="sortByNameASC()">A-Z</button>
-    </div>
-    <div>
-      <button (click)="sortByNameDESC()">Z-A</button>
-    </div>
-    <div>
-      <button (click)="sortByDistanceASC()">
-        {{ "Distance A_Z" | translate }}
-      </button>
-    </div>
-    <div>
-      <button (click)="sortByDistanceDESC()">
-        {{ "Distance Z-A" | translate }}
-      </button>
+          <div>
+            <button class="button" (click)="sortByNameASC()">A-Z</button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByNameDESC()">Z-A</button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByDistanceASC()">
+              {{ "Distance A_Z" | translate }}
+            </button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByDistanceDESC()">
+              {{ "Distance Z-A" | translate }}
+            </button>
+          </div>
+        </div>
+      </ul>
     </div>
   </div>
-</ul>
+</div>
 <div class="inputField" *ngIf="!isMapView">
   <input
     id="searchinput"
@@ -47,11 +59,11 @@
     <option *ngFor="let item of suggestTerm">{{ item }}</option>
   </datalist>
 </div>
-  <div *ngIf="isMapView && isExpertListLoaded; else expertList">
-<ng-container>
+<div *ngIf="isMapView && isExpertListLoaded; else expertList">
+  <ng-container>
     <app-map [experts]="experts" [mapZoom]="mapZoom"></app-map>
   </ng-container>
-  </div>
+</div>
 <ng-template #expertList>
   <div class="displayData">
     <div class="expertList">
@@ -74,9 +86,13 @@
     <div class="userList">
       <br />
       <div>
-        <button (click)="getAllUser()">{{ "All users" | translate }}</button>
-        <button (click)="getFriends()">{{ "Friends" | translate }}</button>
-        <button (click)="getAllFriendsExperts()">
+        <button class="btn" (click)="getAllUser()">
+          {{ "All users" | translate }}
+        </button>
+        <button class="btn" (click)="getFriends()">
+          {{ "Friends" | translate }}
+        </button>
+        <button class="btn" (click)="getAllFriendsExperts()">
           {{ "My friends experts" | translate }}
         </button>
       </div>

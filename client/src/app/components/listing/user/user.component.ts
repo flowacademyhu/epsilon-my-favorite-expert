@@ -12,7 +12,6 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 export class UserComponent implements OnInit {
   @Input()
   user: User;
-
   @Input()
   isFriend: boolean;
 
@@ -25,12 +24,12 @@ export class UserComponent implements OnInit {
   @Output() sendUserExperts = new EventEmitter<Expert[]>();
 
   showFavorites = false;
+  
 
   constructor(private userResource: UsersResourceService,
     private communicationService: CommunicationService) { }
 
   ngOnInit() {
-
   }
   ngOnChanges() {
     if (this.isUserCommonFilterActive) {

@@ -1,4 +1,4 @@
-
+<div class="row">
     <div class="col-12">
 <div class="card" [ngClass]="{friend: isFriend}">             
         <div class="card-body">
@@ -8,20 +8,17 @@
           <br>
           <div class="logoName">{{ user.name}}
           </div>
-         
-          
-            
-            
           </div>
           
           
-          <button (click)="getExperts()" class="round-shape name">{{'Experts' | translate}}</button>
-          <button (click)="commonExperts()" class="round-shape name">{{'All experts' | translate}}</button>
+          <button class="btn" (click)="getExperts()">{{'Experts' | translate}}</button>
+          <button class="btn" (click)="commonExperts()">{{'Common experts' | translate}}</button>
           <div *ngIf="isFriend;else notFriend">
-            <button (click)="removeFriend()" class="round-shape name">{{'Remove Friend' | translate}}</button>
+            <button class="btn" (click)="removeFriend()">{{'Unsubscribe' | translate}}</button>
             </div>
             <ng-template #notFriend>
-          <button (click)="addFriend()" class="round-shape name">{{'Add Friend' | translate}}</button>            
+          <button class="btn" (click)="addFriend()">{{'Subscribe' | translate}}</button>            
             </ng-template>
   </div>
+</div>
 </div>
