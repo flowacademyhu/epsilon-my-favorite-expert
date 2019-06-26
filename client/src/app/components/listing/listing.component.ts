@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ExpertResourceService, Expert, UserControllerService } from 'src/app/api';
+import { ExpertResourceService, Expert, User, UsersResourceService } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
-import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-listing',
@@ -12,14 +11,17 @@ import { Profile } from 'selenium-webdriver/firefox';
 export class ListingComponent implements OnInit {
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
+  users: User[] = [];
+  friends: User[] = [];
   isMapView = false;
   keyWords = '';
+  keyWordsUserSearch = '';
   inputCharacterChanges = 0;
   suggestTerm: String[];
 
-  constructor(private usersservice: UserControllerService, 
-    private expertService: ExpertResourceService, 
-    private communicationService: CommunicationService) { }
+  constructor(private expertService: ExpertResourceService,
+     private communicationService: CommunicationService,
+     private userService: UsersResourceService) { }
 
   ngOnInit() {
     this.loadData();
@@ -35,6 +37,12 @@ export class ListingComponent implements OnInit {
         console.log('favoriteExpert removed');
       }
     );
+    this.communicationService.addFriendSubject.subscribe((user: User) => {
+      this.friends.push(user);
+    });
+    this.communicationService.removeFriendSubject.subscribe( (user: User) => {
+      this.friends = this.friends.filter(friend => friend.id != user.id);
+    });
   }
 
   getFavoriteExperts() {
@@ -52,16 +60,17 @@ export class ListingComponent implements OnInit {
       (data: Expert[]) => {
         this.experts = data;
       });
-      // this.expertService.getFavoriteExpertsUsingGET().subscribe(
-      //   (data: Expert[]) => {
-      //     this.favoriteExpert = data;
-      //  });
+    this.expertService.getFavoriteExpertsUsingGET().subscribe(
+        (data: Expert[]) => {
+          this.favoriteExpert = data;
+      });
+    this.getAllUser();
   }
 
   isFavoriteExpert(expert: Expert): boolean {
     return !!this.favoriteExpert.find(exp => exp.id === expert.id);
   }
-  addToFavorite(expert: Expert) {
+  addToFavorite(expert : Expert) {
     this.favoriteExpert.push(expert);
     this.isFavoriteExpert(expert);
   }
@@ -71,9 +80,7 @@ export class ListingComponent implements OnInit {
 
   }
 
-  switchLanguage(lang: string) {
-
-  }
+  
 
   switchToMap() {
     this.isMapView = !this.isMapView;
@@ -85,7 +92,7 @@ export class ListingComponent implements OnInit {
     this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
       this.experts = data;
     });
-    this.searchFromArray(this.experts,this.keyWords);
+    this.searchFromArray(this.experts, this.keyWords);
   }
 
   sortByNameASC() {
@@ -142,4 +149,42 @@ export class ListingComponent implements OnInit {
     }
   }
 
+  handleIncomingExperts(experts: Expert[]) {
+    this.experts = experts;
+  }
+
+  getAllUser() {
+    this.userService.getAllUsingGET1().subscribe((users: User[]) => {
+      this.users = users;
+    });
+    this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
+      this.friends = friends;
+    });
+  }
+  getFriends() {
+    this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
+      this.users = friends;
+      console.log('frindek' + this.users.length);
+    });
+    //this.users = this.friends;
+  }
+
+  userKeyWordtextChanged() {
+    if(this.keyWordsUserSearch === '') {
+      this.getAllUser();
+    }
+    this.userService.searchUserWithQueryUsingGET(this.keyWordsUserSearch.replace(' ', '_')).subscribe((data: User[]) => {
+      this.users = data;
+    });
+  }
+
+  isFriend(user: User) {
+    return !!this.friends.find(friend => friend.id === user.id);
+  }
+
+  getAllFriendsExperts() {
+    this.expertService.findAllFollowersExpertsUsingGET().subscribe((expert: Expert[]) => {
+      this.experts = expert;
+    });
+  }
 }

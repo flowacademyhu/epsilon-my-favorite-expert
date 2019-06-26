@@ -1,32 +1,13 @@
 .navbar{
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    height: 80px;
-     
-    border-color: #fff;
-    background-color:orange;   
-    }    
+    background-color: transparent;
     
-.container{
-    margin: 0%;
-    padding: 0%;
-    width: 0%;
-}
-
-.font-weight-light{
-font-size: 40px;
-font-weight: bold;
-}
-
-.btn{
-   margin-right: 15px;
-}
-
-a.nav-link{
-    color: #fff !important;
+    font-size: 20px;
 }
 
 .navbar-brand{
-    color: #fff;
-    padding: 10px;
+  color:  white !important;
+}
+
+.nav-link{
+    color:  white !important;
 }

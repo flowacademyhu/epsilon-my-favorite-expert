@@ -1,23 +1,18 @@
+
 <div>
-  <button (click)="listAllUsers()">Search</button>
-  <button (click)="search()" (click)="getAllUsers()">All users</button>
+    <button>Search</button>
+    <button>All users</button>
 </div>
 <div class="flex" *ngIf="listOrSearch===false">
-  <form class="form-inline waves-light" mdbWavesEffect>
-      <div class="md-form mt-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      </div>
-  </form>
+    <form class="form-inline waves-light" mdbWavesEffect>
+        <div class="md-form mt-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        </div>
+    </form>
 </div>
 <div class="flex" *ngIf="listOrSearch===true">
-  <p>List of users:</p>
-<div *ngFor="let user of users">
-  <app-user [user]="user"></app-user>
-  <button (click)="id=user.id" (click)="getExpert()">Favorite experts</button>
-    <div *ngIf="showFavorites===true">
-      <div *ngFor="let expert of experts">
-        <app-expert [expert]="expert"></app-expert>
-      </div>
-    </div>
-</div>
+    <p>List of users:</p>
+  <div *ngFor="let user of users">
+    <app-user [user]="user"></app-user>
+  </div> 
 </div>

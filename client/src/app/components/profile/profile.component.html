@@ -26,13 +26,13 @@
                 <div class="details">
                   <div *ngIf="isAddressBlank(); else Address">
                     <a routerLink="../add-address" class="round-shape name">
-                      Add address
+                      {{'Add address' | translate}}
                     </a>
                   </div>
                   <ng-template #Address>
                     <div class="nameBlock">
                       <a routerLink="../add-address" (click)="saveAddressLocalStorage()" class="round-shape name">
-                        Address
+                        {{'Address' | translate}}
                       </a>
                       <div class="divider">
                         <blockquote class="quote">
@@ -47,6 +47,9 @@
                         <blockquote class="quote">
                           {{ user.address.number }}
                         </blockquote>
+                        <blockquote class="quote">
+                          {{ user.language }}
+                        </blockquote>
                       </div>
                     </div>
                   </ng-template>
@@ -54,7 +57,7 @@
                 <div class="details">
                   <div class="nameBlock">
                     <a routerLink="../list-experts" class="round-shape name">
-                      Favorite experts
+                      {{'Favorite experts' | translate}}
                     </a>
                     <div class="divider">
                       <!-- <div *ngFor="let expert of favoriteExperts">

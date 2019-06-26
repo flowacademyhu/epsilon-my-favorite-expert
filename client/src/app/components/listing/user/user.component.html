@@ -1,6 +1,27 @@
-<div class="card" style="width: 18rem;">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{user.name}}</li>
-    <li class="list-group-item">{{user.email}}</li>
-  </ul>
+
+    <div class="col-12">
+<div class="card" [ngClass]="{friend: isFriend}">             
+        <div class="card-body">
+          <div class="userPicture">
+              <img class="col-10" alt="profile picture" [src]="user.imageUrl" />
+          </div>
+          <br>
+          <div class="logoName">{{ user.name}}
+          </div>
+         
+          
+            
+            
+          </div>
+          
+          
+          <button (click)="getExperts()" class="round-shape name">Experts</button>
+          <button (click)="commonExperts()" class="round-shape name">COMMON EXPERTS</button>
+          <div *ngIf="isFriend;else notFriend">
+            <button (click)="removeFriend()" class="round-shape name">Remove Friend</button>
+            </div>
+            <ng-template #notFriend>
+          <button (click)="addFriend()" class="round-shape name">Add friend</button>            
+            </ng-template>
+  </div>
 </div>

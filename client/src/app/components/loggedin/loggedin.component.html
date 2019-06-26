@@ -1,15 +1,31 @@
-    <!-- Full Page Image Header with Vertically Centered Content -->
-    <header class="masthead {
-      background: rgba(0, 0, 0, 0.5);
-    }">
-    <div class="container h-100">
-    <div class="row h-100 align-items-center">
-    <div class="col-12 text-center">
- 
-  <!-- Full Page Image Header with Vertically Centered Content -->
-  <header class="masthead">
-  <div class="container h-100">
-  <div class="row h-100 align-items-center">
-  <div class="col-12 text-center">
-    <h1 translate></h1>
-  <p class="lead">Welcome</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <!--profile card-->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+          <h5> {{user.name}}</h5>
+        </div>
+        <div class="card-body">
+          <h6>{{user.email}}</h6>
+          <div *ngIf ="!isAddressBlank()">
+          <h6>{{user.address.country}}, {{user.address.city}} {{user.address.street}} {{user.address.number}}</h6>
+        </div> 
+        <h6>{{user.language}}</h6>
+        </div>
+      </div>
+      </div>
+      <!--profile card-->
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card">
+      <div class="card-body">
+        <div>
+          <app-map [experts]="favoriteExpert"></app-map>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>

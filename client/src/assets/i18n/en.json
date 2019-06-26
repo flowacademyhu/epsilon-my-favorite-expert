@@ -12,5 +12,21 @@
   "Profession": "Profession",
   "Phone": "Phone",
   "Add profession": "Add profession",
-  "Search user": "Search user"
+  "Search user": "Search user",
+  "List expert": "List expert",
+  "Remove From Favorite": "Remove From Favorite",
+  "Add to Favorite": "Add to Favorite",
+  "Favorite experts": "Favorite experts",
+  "All experts": "All experts",
+  "Map": "Map",
+  "Distance A_Z": "Distance A_Z",
+  "Distance Z-A": "Distance Z_A",
+  "Add address": "Add address",
+  "Address": "Address",
+  "Street": "Street",
+  "Number": "Number",
+  "Invalid address": "Invalid address!",
+  "required": "Required field! Atleast 4 max 25 characters needed!",
+  "requiredNumber": "Required field! Atleast 1 max 15 characters needed!",
+  "requiredLong": "Required field! Atleast 4 max 45 characters needed!"
 }

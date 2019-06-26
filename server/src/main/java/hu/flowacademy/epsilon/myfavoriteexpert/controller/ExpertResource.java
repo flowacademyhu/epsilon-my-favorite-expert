@@ -51,5 +51,14 @@ public class ExpertResource {
     public List<Expert> findExpertTest(@RequestParam String searchparams) {
         return expertService.findExpertByParams(searchparams);
     }
+//    @GetMapping("/followers")
+//    public List<Expert> getFollowerExperts() {
+//        return expertService.getFollowerByExperts();
+//    }
+
+    @GetMapping("/all-followers-expert")
+    public List<Expert> findAllFollowersExperts() {
+        return expertService.findAllFollowersExperts();
+    }
 
 }

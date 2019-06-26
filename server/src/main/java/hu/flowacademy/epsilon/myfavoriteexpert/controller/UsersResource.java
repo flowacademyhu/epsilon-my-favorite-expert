@@ -47,7 +47,7 @@ public class UsersResource {
     @PutMapping("user/{expertid}")
     public ResponseEntity<User> addExpertToUser(@PathVariable UUID expertid) {
         User user = userService.findByid();
-        if (user != null && !user.getExperts().contains(expertid)) {
+        if (user != null) {
             user.addExpert(expertid);
         }
         return ResponseEntity.ok(userService.save(user));
@@ -75,4 +75,37 @@ public class UsersResource {
         System.out.println(id);
         return userService.findAllExperts(id);
     }
+    @GetMapping("user/expertsintersect")
+    public List<Expert> findUsersExpertsUnion( @RequestParam UUID id) {
+        return userService.findUsersExpertsIntersection(id);
+    }
+    @PutMapping("user/follow")
+    public ResponseEntity<User> addFollowerToUser(@RequestParam UUID followerid) {
+        User user = userService.findByid();
+        User follower = userService.findFollowerByid(followerid);
+        UUID userid= user.getId();
+        if (user != null && follower!= null) {
+            user.addFollower(followerid);
+            follower.addFollowedBy(userid);
+        }
+        userService.save(follower);
+        return ResponseEntity.ok(userService.save(user));
+    }
+
+    @DeleteMapping("user/follow")
+    public ResponseEntity<User> deleteFollowerFromUser(@RequestParam UUID followerid) {
+        User user = userService.findByid();
+        User follower = userService.findFollowerByid(followerid);
+        if (user == null && follower == null) {
+            throw new RuntimeException("User or follower not found");
+        } else {
+            userService.deleteFollower(follower, user.getId());
+            return ResponseEntity.ok(userService.deleteFollower(user,followerid));
+        }
+    }
+    @GetMapping("/user/followers")
+    public List<User> findFollowersByUsers() {
+        return userService.findFollowersByUser();
+    }
+
 }
