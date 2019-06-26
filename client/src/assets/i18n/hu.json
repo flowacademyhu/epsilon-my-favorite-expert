@@ -17,7 +17,7 @@
   "Remove From Favorite": "Törlés a kedvencek közül",
   "Add to Favorite": "Hozzáadás a kedvencekhez",
   "Favorite experts": "Kedvenc szakemberek",
-  "All experts": "Összes szakember",
+  "Common experts": "Közös szakemberek",
   "Map": "Térkép",
   "Distance A_Z": "Távolság A_Z",
   "Distance Z-A": "Távolság Z_A",
@@ -41,5 +41,8 @@
   "My friends experts": "Barátaim szakijai",
   "Remove Friend": "Barát eltávolítása",
   "Add Friend": "Barát hozzáadása",
-  "Clear filters": "Szűrők törlése"
+  "Clear filters": "Szűrők törlése",
+  "Subscribed users experts": "Feliratkozásaim szakijai",
+  "Subscribe": "Követés",
+  "Unsubscribe": "Leiratkozás"
 }

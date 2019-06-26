@@ -9,13 +9,15 @@
           <div class="logoName">{{ user.name}}
           </div>
           </div>
+          
+          
           <button class="btn" (click)="getExperts()">{{'Experts' | translate}}</button>
-          <button class="btn" (click)="commonExperts()">{{'Common Experts' | translate}}</button>
+          <button class="btn" (click)="commonExperts()">{{'Common experts' | translate}}</button>
           <div *ngIf="isFriend;else notFriend">
-            <button class="btn" (click)="removeFriend()">{{'Remove Friend' | translate}}</button>
+            <button class="btn" (click)="removeFriend()">{{'Unsubscribe' | translate}}</button>
             </div>
             <ng-template #notFriend>
-          <button class="btn" (click)="addFriend()">{{'Add friend' | translate}}</button>            
+          <button class="btn" (click)="addFriend()">{{'Subscribe' | translate}}</button>            
             </ng-template>
   </div>
 </div>

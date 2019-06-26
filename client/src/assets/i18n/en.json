@@ -17,7 +17,7 @@
   "Remove From Favorite": "Remove From Favorite",
   "Add to Favorite": "Add to Favorite",
   "Favorite experts": "Favorite experts",
-  "All experts": "All experts",
+  "Common experts": "Common experts",
   "Map": "Map",
   "Distance A_Z": "Distance A_Z",
   "Distance Z-A": "Distance Z_A",
@@ -41,5 +41,8 @@
   "House number": "House number",
   "My friends experts": "My friends' experts",
   "Add Friend": "Add Friend",
-  "Clear filters": "Clear filters"
+  "Clear filters": "Clear filters",
+  "Subscribed users experts": "Subscribed users' experts",
+  "Unsubscribe": "Unsubscribe",
+  "Subscribe": "Subscribe"
 }
