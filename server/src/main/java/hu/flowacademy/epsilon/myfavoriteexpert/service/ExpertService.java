@@ -54,7 +54,7 @@ public class ExpertService {
         user.addExpert(expertid);
 
         userService.save(user);
-        expert= setExpertDistance(expert);
+        expert= setExpertDistanceAndLikes(expert);
         return expertRepository.save(expert);
 
     }
@@ -70,7 +70,7 @@ public class ExpertService {
     public Expert findById(UUID id) {
         Expert expert = expertRepository.findById(id).orElse(null);
         if (expert != null) {
-            return setExpertDistance(expert);
+            return setExpertDistanceAndLikes(expert);
         }
         throw new RuntimeException("expert does not exist!");
     }
@@ -124,7 +124,7 @@ public class ExpertService {
                         .map(expertId -> expertRepository.
                                 findById(expertId).orElse(null)))
                 .collect(Collectors.toSet());
-        experts = setExpertDistance(experts);
+        experts = setExpertDistanceAndLikes(experts);
         return Lists.newArrayList(experts);
     }
 
@@ -138,8 +138,9 @@ public class ExpertService {
         return experts;
     }
 
-    public Set<Expert> setExpertDistance(Set<Expert> experts) {
+    public Set<Expert> setExpertDistanceAndLikes(Set<Expert> experts) {
         User user = userService.findByid();
+        experts.stream().forEach(expert -> setLikes(expert));
         if (user != null && user.getLocationByAddress() != null) {
             experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
             // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
@@ -147,7 +148,7 @@ public class ExpertService {
         return experts;
     }
 
-    public Expert setExpertDistance(Expert expert) {
+    public Expert setExpertDistanceAndLikes(Expert expert) {
         User user = userService.findByid();
         expert = setLikes(expert);
         if (user != null && user.getLocationByAddress() != null) {
