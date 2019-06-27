@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import hu.flowacademy.epsilon.myfavoriteexpert.service.geocoding.Location;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.Instant;
 import java.util.UUID;
+
 @Data
 @Document(indexName = "expert", type = "default")
 public class Expert {

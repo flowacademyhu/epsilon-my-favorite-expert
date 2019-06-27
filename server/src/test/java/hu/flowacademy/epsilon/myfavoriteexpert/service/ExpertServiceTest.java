@@ -20,8 +20,12 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -48,15 +52,19 @@ public class ExpertServiceTest {
     @Mock
     private GeoCodingService geoCodingService;
 
+    Expert expert;
+    UUID id = UUID.randomUUID();
 
     @Before
     public void setup() {
-        Expert expert = new Expert();
+        expert = new Expert();
+        expert.setId(id);
         expert.setAddress(getAddress());
         when(userService.findByid()).thenReturn(new User());
-        when(userRepository.save(any(User.class))).thenReturn(new User());
+        //when(userRepository.save(any(User.class))).thenReturn(new User);
         when(expertRepository.save(any(Expert.class))).thenReturn(expert);
         when(geoCodingService.getGeoCoding(expert.getAddress())).thenReturn(Location.builder().lat(3.14).lon(2.73).build());
+
     }
 
     private Address getAddress() {
@@ -68,31 +76,43 @@ public class ExpertServiceTest {
         return address;
     }
 
+//            .address(getAddress())
+//            .name("Kovács Béla")
+//            .phone("+36302040608")
+//            .profession(List.of("ács","lakatos"))
+//            .build();
+
     @Test
     public void whensaveExpert_ExpertShouldReturn() {
-        Address address = getAddress();
+        Expert expertSaved = expertService.save(this.expert);
+        assertEquals(expert, expertSaved);
+    }
 
-        Expert expertToBeSaved = new Expert();
-
-        expertToBeSaved.setAddress(address);
-        expertToBeSaved.setId(UUID.randomUUID());
-        Expert expertSaved = expertService.save(expertToBeSaved);
-
-        assertEquals(expertToBeSaved, expertSaved);
+    @Test(expected = RuntimeException.class)
+    public void whenSaveExpertWithoutAddress_ShouldThrowException() {
+        Expert expert1 = new Expert();
+        expertService.save(expert1);
+    }
+    @Test
+    public void whenFindById_ShouldReturnExpert() {
+        when(expertRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(expert));
+        Expert expert1 = expertService.findById(id);
+        assertEquals(expert1, expert);
+    }
+    @Test(expected = RuntimeException.class)
+    public void whenFindById_ShouldReturnNull(){
+        UUID idtest = UUID.randomUUID();
+        Expert expert1 = expertService.findById(idtest);
+        assertEquals(expert1, expert);
     }
 //    @Test
-//    public void whenfindById_ExpertShouldReturn() {
+//    public void whenFind_ShouldReturnExperts() {
 //
-//        UUID id = UUID.randomUUID();
-//        Expert expertToBeSaved = new Expert();
-//        Address address = new Address();
-//        expertToBeSaved.setAddress(address);
-//
-//        expertToBeSaved.setId(id);
-//        Expert expertSaved = expertService.save(expertToBeSaved);
-//
-//        assertEquals(id, expertSaved.getId());
+//        List<Expert> listTest = new ArrayList<>();
+//        listTest.add(expert);
+//        when(expertRepository.findAll(Pageable.unpaged()).getContent()).thenReturn(listTest);
+//        List<Expert> list = expertService.find();
+//        assertEquals(list, listTest);
 //    }
-
 
 }

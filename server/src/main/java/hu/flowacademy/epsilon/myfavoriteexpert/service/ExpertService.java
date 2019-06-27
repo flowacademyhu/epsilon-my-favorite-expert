@@ -69,7 +69,7 @@ public class ExpertService {
         expertRepository.save(expert);
     }
 
-    public Expert findById(UUID id) {
+    public Expert findById(UUID id){
         Expert expert = expertRepository.findById(id).orElse(null);
         if (expert != null) {
             return setExpertDistanceAndLikes(expert);
