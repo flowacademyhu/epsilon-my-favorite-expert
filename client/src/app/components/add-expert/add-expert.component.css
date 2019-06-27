@@ -1,6 +1,40 @@
 h5{
   color: white;
 }
-h6 {
+small {
   color: red;
 }
+input {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+.ng-untouched {
+  min-height: 100%;
+  max-height: 100%;
+}
+.ng-dirty {
+   min-height: 100%;
+   max-height: 100%;
+}
+.ng-touched {
+  min-height: 100%;
+  max-height: 100%;
+}
+.ng-invalid {
+  min-height: 100%;
+  max-height: 100%;
+}
+.ng-pristine {
+ min-height: 100%;
+ max-height: 100%;
+}
+.ng-valid {
+  min-height: 100%;
+  max-height: 100%;
+ }
+
+ .fix-height {
+   height: 20px;
+ }
