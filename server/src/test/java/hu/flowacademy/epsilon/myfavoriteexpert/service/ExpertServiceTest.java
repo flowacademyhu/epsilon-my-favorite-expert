@@ -105,14 +105,11 @@ public class ExpertServiceTest {
         Expert expert1 = expertService.findById(idtest);
         assertEquals(expert1, expert);
     }
-//    @Test
-//    public void whenFind_ShouldReturnExperts() {
-//
-//        List<Expert> listTest = new ArrayList<>();
-//        listTest.add(expert);
-//        when(expertRepository.findAll(Pageable.unpaged()).getContent()).thenReturn(listTest);
-//        List<Expert> list = expertService.find();
-//        assertEquals(list, listTest);
-//    }
 
+    @Test
+    public void setLikes_ShouldReturnExpert() {
+        expert.setLikes(2);
+        Integer num = 2;
+        assertEquals(num, expert.getLikes());
+    }
 }
