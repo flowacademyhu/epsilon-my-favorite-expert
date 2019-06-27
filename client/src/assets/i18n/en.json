@@ -18,7 +18,7 @@
   "Add to Favorite": "Add to Favorite",
   "Favorite experts": "Favorite experts",
   "Common experts": "Common favorite experts",
-  "Map": "Map",
+  "Map": "Map view",
   "Distance A_Z": "Distance A-Z",
   "Distance Z-A": "Distance Z-A",
   "Add address": "Add address",
@@ -44,5 +44,7 @@
   "Clear filters": "Clear filters",
   "Unsubscribe": "Unfollow",
   "Subscribe": "Follow",
-  "All experts": "All experts"
+  "All experts": "All experts",
+  "Order A-Z": "Order A-Z",
+  "Order Z-A": "Order Z-A"
 }

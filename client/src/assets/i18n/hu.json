@@ -18,7 +18,7 @@
   "Add to Favorite": "Hozzáadás a kedvencekhez",
   "Favorite experts": "Kedvenc szakemberek",
   "Common experts": "Kedvenc szakembereink",
-  "Map": "Térkép",
+  "Map": "Térkép nézet",
   "Distance A_Z": "Távolság A-Z",
   "Distance Z-A": "Távolság Z-A",
   "Add address": "Cím hozzáadása",
@@ -43,5 +43,7 @@
   "Clear filters": "Szűrők törlése",
   "Subscribe": "Követés",
   "Unsubscribe": "Leiratkozás",
-  "All experts": "Összes szakember"
+  "All experts": "Összes szakember",
+  "Order A-Z": "Rendezés A-Z",
+  "Order Z-A": "Rendezés Z-A"
 }

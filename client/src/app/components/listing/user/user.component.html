@@ -12,7 +12,9 @@
           
           
           <button class="btn" (click)="getExperts()">{{'Experts' | translate}}</button>
+          <br>
           <button class="btn" (click)="commonExperts()">{{'Common experts' | translate}}</button>
+          <br>
           <div *ngIf="isFriend;else notFriend">
             <button class="btn" (click)="removeFriend()">{{'Unsubscribe' | translate}}</button>
             </div>
