@@ -134,6 +134,7 @@ public class UserService {
         }
         return experts;
     }
+
     public List<Expert> findAllExperts(UUID userId) {
         User user = userRepository.findById(userId).orElse(null);
         List<Expert> experts;
@@ -147,6 +148,7 @@ public class UserService {
         }
         throw new RuntimeException("ID INVALID");
     }
+
     public List<Expert> findUsersExpertsIntersection(UUID id1) {
         User user1 = userRepository.findById(id1).orElse(null);
         User user2 = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);

@@ -1,7 +1,9 @@
 package hu.flowacademy.epsilon.myfavoriteexpert.service;
 
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
+import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.User;
+import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.UserRepository;
 import hu.flowacademy.epsilon.myfavoriteexpert.security.UserPrincipal;
 import org.junit.Before;
@@ -18,13 +20,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import static org.junit.Assert.assertEquals;
 
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -37,6 +42,8 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private ExpertRepository expertRepository;
 
     @Mock
     private SecurityContext mockSecurityContext;
@@ -52,12 +59,20 @@ public class UserServiceTest {
         user.setAddress(getAddress());
         UserPrincipal userPrincipal = UserPrincipal.create(user);
 
+        UUID expertId = UUID.randomUUID();
+        Expert expert = new Expert();
+        expert.setId(expertId);
+
+        user.addExpert(expert.getId());
+
         Authentication auth = new UsernamePasswordAuthenticationToken(userPrincipal, null);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         when(userRepository.save(any(User.class))).thenReturn(user);
-
+        when(userRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(user));
+        when(expertRepository.findById(expertId)).thenReturn(java.util.Optional.of(expert));
     }
+
 
     private Address getAddress() {
         Address address = new Address();
@@ -84,8 +99,53 @@ public class UserServiceTest {
         userTest.setAddress(getAddress());
         assertEquals(userTest.getAddress().toString(), user.getAddress().toString());
     }
+
     @Test
     public void deleteExpert_ShouldReturnUser() {
+        UUID id = UUID.randomUUID();
+        UUID id2 = UUID.randomUUID();
+        user.addExpert(id);
+        user.addExpert(id2);
+
+        user.deleteExpert(id);
+        assertEquals(user.getExperts().isEmpty(), false);
+    }
+    @Test
+    public void addFollower_ShouldReturnFollower() {
+        UUID id1 = UUID.randomUUID();
+        UUID id2 = UUID.randomUUID();
+        user.addFollower(id1);
+        user.addFollower(id2);
+
+        assertEquals(user.getFollowers().contains(id1), true);
+        assertEquals(user.getFollowers().contains(id2), true);
+    }
+    @Test
+    public void deleteFollower_ShouldReturnUser() {
+        UUID id1 = UUID.randomUUID();
+        UUID id2 = UUID.randomUUID();
+        user.addFollower(id1);
+        user.addFollower(id2);
+        user.deleteFollower(id1);
+
+        assertFalse(user.getFollowers().contains(id1));
+        assertTrue(user.getFollowers().contains(id2));
+    }
+
+    @Test
+    public void saveLanguageHU_ShouldReturnUser() {
+        user = userService.saveLanguage("HU");
+        assertEquals(user.getLanguage(), "HU");
+    }
+    @Test
+    public void saveLanguageEN_ShouldReturnUser() {
+        user = userService.saveLanguage("EN");
+        assertEquals(user.getLanguage(), "EN");
+    }
+    @Test
+    public void findAllExperts_ShouldReturnExpertList() {
+        List<Expert> listOfExperts = userService.findAllExperts(id);
+
 
     }
 

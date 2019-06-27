@@ -76,12 +76,6 @@ public class ExpertServiceTest {
         return address;
     }
 
-//            .address(getAddress())
-//            .name("Kovács Béla")
-//            .phone("+36302040608")
-//            .profession(List.of("ács","lakatos"))
-//            .build();
-
     @Test
     public void whensaveExpert_ExpertShouldReturn() {
         Expert expertSaved = expertService.save(this.expert);
