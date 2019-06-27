@@ -7,11 +7,7 @@
             {{ "Map" | translate }}
           </button>
         </div>
-        <div>
-          <button class="button" (click)="clearFilters()">
-            {{ "Clear filters" | translate }}
-          </button>
-        </div>
+        
         <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
           <div>
             <button class="button" (click)="getFavoriteExperts()">
@@ -40,6 +36,11 @@
               {{ "Distance Z-A" | translate }}
             </button>
           </div>
+        </div>
+        <div>
+          <button class="button" (click)="clearFilters()">
+            {{ "Clear filters" | translate }}
+          </button>
         </div>
       </ul>
     </div>
