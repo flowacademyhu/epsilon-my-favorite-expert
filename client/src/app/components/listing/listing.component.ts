@@ -181,6 +181,7 @@ export class ListingComponent implements OnInit {
 
   getFavoriteExperts() {
     this.filter.type = FilterType.FAVORITE;
+    this.filter.userid = undefined;
     this.storeFilters();
     this.expertService.getFavoriteExpertsUsingGET().subscribe(
       (data: Expert[]) => {
@@ -190,6 +191,7 @@ export class ListingComponent implements OnInit {
     );
   }
   getAllExperts() {
+    this.filter.userid = undefined;
     this.filter.type = FilterType.ALL;
     this.storeFilters();
     this.loadData();
