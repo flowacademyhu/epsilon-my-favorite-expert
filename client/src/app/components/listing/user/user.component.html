@@ -5,20 +5,19 @@
           <div class="userPicture">
               <img class="col-10" alt="profile picture" [src]="user.imageUrl" />
           </div>
-          <br>
           <div class="logoName">{{ user.name}}
           </div>
           </div>
           
           
           <button class="btn" (click)="getExperts()">{{'Experts' | translate}}</button>
-          <br>
+          
           <button class="btn" (click)="commonExperts()">{{'Common experts' | translate}}</button>
-          <br>
+          
           <div *ngIf="isFriend;else notFriend">
             <button class="btn" (click)="removeFriend()">{{'Unsubscribe' | translate}}</button>
             </div>
-            <ng-template #notFriend>
+            <ng-template class="addFriendButton" #notFriend>
           <button class="btn" (click)="addFriend()">{{'Subscribe' | translate}}</button>            
             </ng-template>
   </div>

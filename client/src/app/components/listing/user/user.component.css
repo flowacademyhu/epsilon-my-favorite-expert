@@ -29,8 +29,12 @@ body{
   color: white ;
   border-radius: 25px 25px 25px 25px;
   margin-top: 20px;
+  min-width: 100%;
 } 
 
 .friend {
   background-color: tomato;
+}
+.addFriendButton {
+  min-width: 100%;
 }
