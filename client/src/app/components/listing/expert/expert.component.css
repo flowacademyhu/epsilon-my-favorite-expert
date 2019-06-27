@@ -17,9 +17,28 @@ body{
   margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
+  max-width: 300px;
+  max-height: 300px;
+  min-height: 300px;
+  border: 10px;
+  border-color: #6ed3cf;
 }
 
 .favoriteExpert {
-  background-color: #363d80;
+  background-color: tomato;
 }
 
+.btn {
+  background-color: rgb(151, 39, 151) ;
+  color: white ;
+ 
+  border-radius: 25px 25px 25px 25px;
+  
+}
+
+.IsfavoriteButton {
+ margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%; 
+}

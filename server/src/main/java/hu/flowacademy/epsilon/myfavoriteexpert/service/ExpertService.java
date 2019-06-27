@@ -114,7 +114,6 @@ public class ExpertService {
         Pageable pageable = PageRequest.of(0,10);
         searchParams = searchParams.replaceAll("_"," ");
         String searchPartialInWords = "*" + searchParams.replaceAll(" ","* *").toLowerCase()+ "*";
-        System.out.println(searchPartialInWords);
         var experts = expertRepository.findExpertTest(searchParams,searchPartialInWords,pageable).getContent();
         experts = setExpertDistanceAndLikes(experts);
         return experts;
@@ -135,7 +134,6 @@ public class ExpertService {
             experts.stream().forEach(expert -> setLikes(expert));
         if (user != null && user.getLocationByAddress() != null) {
             experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
-          // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
         }
         return experts;
     }
@@ -145,7 +143,6 @@ public class ExpertService {
         experts.stream().forEach(expert -> setLikes(expert));
         if (user != null && user.getLocationByAddress() != null) {
             experts.stream().forEach(expert -> expert.setDistanceMeter(Math.round(geoCodingService.distance(user.getLocationByAddress(),expert.getLocation()))));
-            // experts = experts.stream().sorted(Comparator.comparingDouble(Expert::getDistanceMeter)).collect(Collectors.toList());
         }
         return experts;
     }

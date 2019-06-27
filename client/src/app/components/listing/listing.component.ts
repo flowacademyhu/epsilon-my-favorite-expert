@@ -1,6 +1,35 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExpertResourceService, Expert, User, UsersResourceService } from 'src/app/api';
 import { CommunicationService } from 'src/app/shared/services/communication.service';
+import { forkJoin } from 'rxjs';
+
+
+export enum FilterOrder {
+  ASC = 'ASC',
+  DESC = 'DESC',
+  DIST_ASC = 'DIST_ASC',
+  DIST_DESC = 'DIST_DESC'
+}
+
+export enum FilterType {
+  ALL = 'ALL',
+  FAVORITE = 'FAVORITE',
+  USERSFAVORITE = 'USERSFAVORITE',
+  COMMON = 'USERS',
+  ALL_FRIENDS_FAVORITE = 'ALL_FRIENDS_FAVORITE'
+}
+
+export class Filter {
+  constructor(
+    public mapView: boolean,
+    public expertSearchValue?: string,
+    public userSearchValue?: string,
+    public order?: FilterOrder,
+    public type?: FilterType,
+    public userid?: string
+  ) {
+  }
+}
 
 @Component({
   selector: 'app-listing',
@@ -9,6 +38,8 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
 })
 
 export class ListingComponent implements OnInit {
+  isExpertListLoaded = false;
+  isFilterApplied = false;
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
   users: User[] = [];
@@ -18,23 +49,26 @@ export class ListingComponent implements OnInit {
   keyWordsUserSearch = '';
   inputCharacterChanges = 0;
   suggestTerm: String[];
+  private filter: Filter = new Filter(false);
+  isUserFavoriteFilterActive: boolean = false;
+  isUserCommonFilterActive: boolean = false;
+  mapZoom = 15;
 
   constructor(private expertService: ExpertResourceService,
      private communicationService: CommunicationService,
      private userService: UsersResourceService) { }
 
   ngOnInit() {
+    this.filter = new Filter(false);
     this.loadData();
     this.communicationService.addExpertSubject.subscribe(
       (expert: Expert) => {
         this.favoriteExpert.push(expert);
-        console.log('favoriteExpert added');
       }
     );
     this.communicationService.removeExpertSubject.subscribe(
       (expert: Expert) => {
         this.favoriteExpert = this.favoriteExpert.filter(obj => obj !== expert);
-        console.log('favoriteExpert removed');
       }
     );
     this.communicationService.addFriendSubject.subscribe((user: User) => {
@@ -43,27 +77,135 @@ export class ListingComponent implements OnInit {
     this.communicationService.removeFriendSubject.subscribe( (user: User) => {
       this.friends = this.friends.filter(friend => friend.id != user.id);
     });
+    this.communicationService.commonFilterSubject.subscribe((user: User) => {
+      // TODO MENTES
+      this.filter.userid = user.id;
+      this.filter.type = FilterType.COMMON;
+      this.storeFilters();
+    });
+    this.communicationService.userExpertFilterSubject.subscribe((user: User) => {
+      // TODO MENTES
+      this.filter.userid = user.id;
+      this.filter.type = FilterType.USERSFAVORITE;
+      this.storeFilters();
+    });
+    this.loadFilters();
+  }
+
+  private loadFilters() {
+    if (localStorage.getItem('filters')) {
+      this.filter = JSON.parse(localStorage.getItem('filters'));
+      this.processFilters();
+    }
+  }
+
+  private processFilters() {
+    if (this.filter.expertSearchValue) {
+      this.keyWords = this.filter.expertSearchValue;
+      this.keyWordtextChanged(); // TODO: meghivja-e az elozo sor a change-et?
+    }
+    if (this.filter.userSearchValue) {
+      this.keyWordsUserSearch = this.filter.userSearchValue;
+      this.userKeyWordtextChanged(); // TODO: meghivja-e az elozo sor a change-et?
+    }
+    switch (this.filter.type) {
+      case FilterType.ALL:
+        this.getAllExperts();
+        break;
+      case FilterType.ALL_FRIENDS_FAVORITE:
+        this.getAllFriendsExperts();
+        break;
+      case FilterType.COMMON:
+        // TODO userben van, prop binding kell, kell egy event binding is, ami jelzi, hogy visszajott az adat
+        this.isUserCommonFilterActive = true;
+        break;
+      case FilterType.FAVORITE:
+        this.getFavoriteExperts();
+        break;
+      case FilterType.USERSFAVORITE:
+        // TODO: userben van
+        this.isUserFavoriteFilterActive = true;
+        break;
+      default:
+        break;
+    }
+    if (this.filter.mapView) {
+      this.loadMap();
+    }
+    this.isFilterApplied = true;
+  }
+  loadMap() {
+    this.isMapView = true;
+  }
+
+  isUserCommonButtonFiltered(user: User) {
+    if (!!this.isUserCommonFilterActive) {
+    return user.id === this.filter.userid;
+    } else {
+      return false;
+    }
+  }
+
+  isUserFriendsFiltered(user: User) {
+    if (!!this.isUserFavoriteFilterActive) {
+    return user.id === this.filter.userid;
+    } else {
+      return false;
+    }
+  }
+
+
+  private sortByFiler() {
+    switch (this.filter.order) {
+      case FilterOrder.ASC:
+        this.sortByNameASC();
+        break;
+      case FilterOrder.DESC:
+        this.sortByNameDESC();
+        break;
+      case FilterOrder.DIST_ASC:
+        this.sortByDistanceASC();
+        break;
+      case FilterOrder.DIST_DESC:
+        this.sortByDistanceDESC();
+        break;
+      default:
+        break;
+    }
+  }
+
+  private storeFilters() {
+    localStorage.setItem('filters', JSON.stringify(this.filter));
   }
 
   getFavoriteExperts() {
+    this.filter.type = FilterType.FAVORITE;
+    this.filter.userid = undefined;
+    this.storeFilters();
     this.expertService.getFavoriteExpertsUsingGET().subscribe(
       (data: Expert[]) => {
         this.experts = data;
+        this.sortByFiler();
       }
     );
   }
   getAllExperts() {
+    this.filter.userid = undefined;
+    this.filter.type = FilterType.ALL;
+    this.storeFilters();
     this.loadData();
   }
   loadData() {
-    this.expertService.getAllUsingGET().subscribe(
-      (data: Expert[]) => {
-        this.experts = data;
+    forkJoin(this.expertService.getAllUsingGET(),
+    this.expertService.getFavoriteExpertsUsingGET())
+    .subscribe(
+      ([experts, favoriteExperts]) => {
+        this.experts = experts;
+        this.favoriteExpert = favoriteExperts;
+        this.sortByFiler();
+        this.isExpertListLoaded = true;
       });
-    this.expertService.getFavoriteExpertsUsingGET().subscribe(
-        (data: Expert[]) => {
-          this.favoriteExpert = data;
-      });
+
     this.getAllUser();
   }
 
@@ -80,15 +222,16 @@ export class ListingComponent implements OnInit {
 
   }
 
-  
-
   switchToMap() {
     this.isMapView = !this.isMapView;
+    this.filter.mapView = this.isMapView;
+    this.storeFilters();
   }
 
   keyWordtextChanged() {
+    this.filter.expertSearchValue = this.keyWords;
+    this.storeFilters();
     this.inputCharacterChanges++;
-    console.log(this.inputCharacterChanges);
     this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
       this.experts = data;
     });
@@ -96,6 +239,8 @@ export class ListingComponent implements OnInit {
   }
 
   sortByNameASC() {
+    this.filter.order = FilterOrder.ASC;
+    this.storeFilters();
     this.experts.sort((a,b) => {
       if(a.name < b.name) { return -1; }
     if(a.name > b.name) { return 1; }
@@ -103,6 +248,8 @@ export class ListingComponent implements OnInit {
     });
   }
   sortByNameDESC() {
+    this.filter.order = FilterOrder.DESC;
+    this.storeFilters();
     this.experts.sort((a,b) => {
       if(a.name < b.name) { return 1; }
     if(a.name > b.name) { return -1; }
@@ -110,6 +257,8 @@ export class ListingComponent implements OnInit {
     });
   }
   sortByDistanceASC() {
+    this.filter.order = FilterOrder.DIST_ASC;
+    this.storeFilters();
     this.experts.sort((a,b) => {
       if(a.distanceMeter < b.distanceMeter) { return -1; }
     if(a.distanceMeter > b.distanceMeter) { return 1; }
@@ -117,6 +266,8 @@ export class ListingComponent implements OnInit {
     });
   }
   sortByDistanceDESC() {
+    this.filter.order = FilterOrder.DIST_DESC;
+    this.storeFilters();
     this.experts.sort((a,b) => {
       if(a.distanceMeter < b.distanceMeter) { return 1; }
     if(a.distanceMeter > b.distanceMeter) { return -1; }
@@ -162,14 +313,16 @@ export class ListingComponent implements OnInit {
     });
   }
   getFriends() {
+   
     this.userService.findFollowersByUsersUsingGET().subscribe((friends: User[]) => {
       this.users = friends;
-      console.log('frindek' + this.users.length);
     });
     //this.users = this.friends;
   }
 
   userKeyWordtextChanged() {
+    this.filter.userSearchValue = this.keyWordsUserSearch;
+    this.storeFilters();
     if(this.keyWordsUserSearch === '') {
       this.getAllUser();
     }
@@ -185,6 +338,14 @@ export class ListingComponent implements OnInit {
   getAllFriendsExperts() {
     this.expertService.findAllFollowersExpertsUsingGET().subscribe((expert: Expert[]) => {
       this.experts = expert;
+      this.sortByFiler();
     });
   }
+
+  clearFilters() {
+    localStorage.removeItem('filters');
+    this.ngOnInit();
+  }
+
 }
+

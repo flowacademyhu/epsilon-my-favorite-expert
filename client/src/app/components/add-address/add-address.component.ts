@@ -28,7 +28,6 @@ export class AddAddressComponent implements OnInit {
 
   addAddress(){
     this.usersService.saveAddressUsingPOST(this.address).subscribe((data: User) => {
-      console.log(data);this.router.navigate(['profile']);
     }, (error) => {
       setTimeout(() => this.staticAlertClosed = true, 4000);
       this._success.subscribe((message) => this.successMessage = message);

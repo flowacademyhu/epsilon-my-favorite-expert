@@ -1,27 +1,25 @@
-
+<div class="row">
     <div class="col-12">
 <div class="card" [ngClass]="{friend: isFriend}">             
         <div class="card-body">
           <div class="userPicture">
               <img class="col-10" alt="profile picture" [src]="user.imageUrl" />
           </div>
-          <br>
           <div class="logoName">{{ user.name}}
           </div>
-         
-          
-            
-            
           </div>
           
           
-          <button (click)="getExperts()" class="round-shape name">Experts</button>
-          <button (click)="commonExperts()" class="round-shape name">COMMON EXPERTS</button>
+          <button class="btn" (click)="getExperts()">{{'Experts' | translate}}</button>
+          
+          <button class="btn" (click)="commonExperts()">{{'Common experts' | translate}}</button>
+          
           <div *ngIf="isFriend;else notFriend">
-            <button (click)="removeFriend()" class="round-shape name">Remove Friend</button>
+            <button class="btn" (click)="removeFriend()">{{'Unsubscribe' | translate}}</button>
             </div>
-            <ng-template #notFriend>
-          <button (click)="addFriend()" class="round-shape name">Add friend</button>            
+            <ng-template class="addFriendButton" #notFriend>
+          <button class="btn" (click)="addFriend()">{{'Subscribe' | translate}}</button>            
             </ng-template>
   </div>
+</div>
 </div>

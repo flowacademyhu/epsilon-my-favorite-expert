@@ -1,35 +1,51 @@
-<ul class="andorCSSAnitaMajdKijavitja">
-  <div>
-    <button (click)="switchToMap()">{{ "Map" | translate }}</button>
-  </div>
-  <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
-    <div>
-      <button (click)="getFavoriteExperts()">
-        {{ "Favorite experts" | translate }}
-      </button>
-    </div>
-    <div>
-      <button (click)="getAllExperts()">{{ "All experts" | translate }}</button>
-    </div>
+<div class=" ">
+  <div class="row">
+    <div class="col-12">
+      <ul class="listingCSS">
+        <div>
+          <button class="button" (click)="switchToMap()">
+            {{ "Map" | translate }}
+          </button>
+        </div>
+        
+        <div class="listingCSS" *ngIf="!isMapView">
+          <div>
+            <button class="button" (click)="getFavoriteExperts()">
+              {{ "Favorite experts" | translate }}
+            </button>
+          </div>
+          <div>
+            <button class="button" (click)="getAllExperts()">
+              {{ "All experts" | translate }}
+            </button>
+          </div>
 
-    <div>
-      <button (click)="sortByNameASC()">A-Z</button>
-    </div>
-    <div>
-      <button (click)="sortByNameDESC()">Z-A</button>
-    </div>
-    <div>
-      <button (click)="sortByDistanceASC()">
-        {{ "Distance A_Z" | translate }}
-      </button>
-    </div>
-    <div>
-      <button (click)="sortByDistanceDESC()">
-        {{ "Distance Z-A" | translate }}
-      </button>
+          <div>
+            <button class="button" (click)="sortByNameASC()">{{ "Order A-Z" | translate }}</button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByNameDESC()">{{ "Order Z-A" | translate }}</button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByDistanceASC()">
+              {{ "Distance A_Z" | translate }}
+            </button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByDistanceDESC()">
+              {{ "Distance Z-A" | translate }}
+            </button>
+          </div>
+        </div>
+        <div>
+          <button class="button" (click)="clearFilters()">
+            {{ "Clear filters" | translate }}
+          </button>
+        </div>
+      </ul>
     </div>
   </div>
-</ul>
+</div>
 <div class="inputField" *ngIf="!isMapView">
   <input
     id="searchinput"
@@ -44,8 +60,10 @@
     <option *ngFor="let item of suggestTerm">{{ item }}</option>
   </datalist>
 </div>
-<div *ngIf="isMapView; else expertList">
-  <app-map [experts]="experts"></app-map>
+<div *ngIf="isMapView && isExpertListLoaded; else expertList">
+  <ng-container>
+    <app-map [experts]="experts" [mapZoom]="mapZoom"></app-map>
+  </ng-container>
 </div>
 <ng-template #expertList>
   <div class="displayData">
@@ -57,8 +75,8 @@
         ></app-expert>
       </div>
     </div>
-    
-      <!-- <div>
+
+    <!-- <div>
         <p>asd</p>
         <p>asdsaaa</p>
       </div>
@@ -66,26 +84,38 @@
           <p>asd</p>
           <p>asdsaaa</p>
         </div> -->
-        <div class="userList">
-          <br>
-          <div>
-          <button (click)="getAllUser()">ALL USER</button>
-          <button (click)="getFriends()">FRIENDS</button>
-          <button (click)="getAllFriendsExperts()"> Get Friends experts</button>
-        </div>
-        <div class="searchinputForUsers">
-            <input
-            id="searchinputForUsers"
-            type="text"
-            name="findUsers"
-            [(ngModel)]="keyWordsUserSearch"
-            (ngModelChange)="userKeyWordtextChanged()"
-            list="expertSuggestions"
-          />
-        </div>
-        <div *ngFor="let user of users">
-            <app-user [user]="user" [isFriend]="isFriend(user)" (sendUserExperts)="handleIncomingExperts($event)"></app-user>
-          </div>
+    <div class="userList">
+      <br />
+      <div>
+        <button class="btn" (click)="getAllUser()">
+          {{ "All users" | translate }}
+        </button>
+        <button class="btn" (click)="getFriends()">
+          {{ "Friends" | translate }}
+        </button>
+        <button class="btn" (click)="getAllFriendsExperts()">
+          {{ "My friends experts" | translate }}
+        </button>
+      </div>
+      <div class="searchinputForUsers">
+        <input
+          id="searchinputForUsers"
+          type="text"
+          name="findUsers"
+          [(ngModel)]="keyWordsUserSearch"
+          (ngModelChange)="userKeyWordtextChanged()"
+          list="expertSuggestions"
+        />
+      </div>
+      <div *ngFor="let user of users">
+        <app-user
+          [isUserFavoriteFilterActive]="isUserFriendsFiltered(user)"
+          [isUserCommonFilterActive]="isUserCommonButtonFiltered(user)"
+          [user]="user"
+          [isFriend]="isFriend(user)"
+          (sendUserExperts)="handleIncomingExperts($event)"
+        ></app-user>
+      </div>
     </div>
   </div>
 </ng-template>

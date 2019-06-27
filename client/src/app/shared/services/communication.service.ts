@@ -12,6 +12,9 @@ export class CommunicationService {
   public removeExpertSubject = new Subject<Expert>();
   public addFriendSubject = new Subject<User>();
   public removeFriendSubject = new Subject<User>();
+  public commonFilterSubject = new Subject<User>();
+  public userExpertFilterSubject = new Subject<User>();
+
   constructor() { }
 
   public addToFavorite(expert: Expert) {
@@ -27,4 +30,13 @@ export class CommunicationService {
   public removeFriend(user: User) {
     this.removeFriendSubject.next(user);
   }
+
+  public commonFilter(user: User) {
+    this.commonFilterSubject.next(user);
+  }
+
+  public userExpert(user: User) {
+    this.userExpertFilterSubject.next(user);
+  }
+
 }

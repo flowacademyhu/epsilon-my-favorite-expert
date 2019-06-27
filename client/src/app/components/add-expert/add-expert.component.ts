@@ -14,7 +14,6 @@ export class AddExpertComponent implements OnInit {
   @ViewChild('myForm')
   addExpertForm: NgForm;
   input: ElementRef;
-
   expert: Expert;
   profession: string;
   showAlert = false;
@@ -23,7 +22,6 @@ export class AddExpertComponent implements OnInit {
   staticAlertClosed = false;
 
   constructor(private translate: TranslateService, private expertService: ExpertResourceService) {
-
     this.expert = <Expert>{};
     this.expert.profession = new Array();
     this.expert.address = <Address>{};
@@ -34,11 +32,11 @@ export class AddExpertComponent implements OnInit {
 addProfession() {
   this.expert.profession.push(this.profession);
   this.profession = '';
+  this.addExpertForm.controls['profession'].markAsUntouched();
 }
 addExpert() {
     this.expert.profession.push(this.profession);
     this.expertService.addExpertUsingPOST(this.expert).subscribe((data: any) => {
-    console.log(data);
     this.expert.name = '';
     this.expert.address = <Address>{};
     this.expert.createdAt = new Date();
@@ -54,6 +52,7 @@ addExpert() {
       debounceTime(5000));
     this.showAlert = true;
     this.staticAlertClosed = false;
+    this.expert.profession = [];
   });
 }
 }

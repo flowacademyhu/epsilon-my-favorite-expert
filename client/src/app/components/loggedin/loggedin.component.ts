@@ -11,10 +11,13 @@ import { CommunicationService } from 'src/app/shared/services/communication.serv
   styleUrls: ['./loggedin.component.css']
 })
 export class LoggedinComponent implements OnInit {
-
+  
+  isFavoriteExpertLoaded = false;
   @Input()
   expert: Expert;
 
+  mapZoom = 6;
+  
   experts: Expert[] = [];
   favoriteExpert: Expert[] = [];
   isMapView = false;
@@ -54,6 +57,7 @@ export class LoggedinComponent implements OnInit {
     .subscribe(([currentUser, experts]) => {
       this.user = currentUser;
       this.favoriteExperts = experts;
+      this.isFavoriteExpertLoaded = true;
     });
   }
 
@@ -61,7 +65,6 @@ export class LoggedinComponent implements OnInit {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.removeFromFavorite(this.expert);
    this.userResources.deleteExpertFromUserUsingDELETE(this.expert.id).subscribe((data: any) => {
-        console.log('sikeresen torolve');
       });
 
   }
