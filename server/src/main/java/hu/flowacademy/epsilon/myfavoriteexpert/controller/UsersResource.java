@@ -91,14 +91,14 @@ public class UsersResource {
     }
 
     @DeleteMapping("user/follow")
-    public ResponseEntity<User> deleteFollowerFromUser(@RequestParam UUID followerId) {
+    public ResponseEntity<User> deleteFollowerFromUser(@RequestParam UUID followerid) {
         User user = userService.findByid();
-        User follower = userService.findFollowerByid(followerId);
+        User follower = userService.findFollowerByid(followerid);
         if (follower == null) {
             throw new RuntimeException("Follower not found");
         } else {
             userService.deleteFollower(follower, user.getId());
-            return ResponseEntity.ok(userService.deleteFollower(user,followerId));
+            return ResponseEntity.ok(userService.deleteFollower(user,followerid));
         }
     }
     @GetMapping("/user/followers")
