@@ -34,6 +34,9 @@ public class UserService {
     @Autowired
     private ExpertRepository expertRepository;
 
+    @Autowired
+    private ExpertService expertService;
+
     public UserPrincipal getCurrentUser() {
         return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
                 .map(Authentication::getPrincipal)
@@ -139,6 +142,7 @@ public class UserService {
                     .map(expertid -> expertRepository
                             .findById(expertid).orElse(null))
                     .collect(Collectors.toList());
+            experts = expertService.setExpertDistanceAndLikes(experts);
             return experts;
         }
         throw new RuntimeException("ID INVALID");
@@ -159,6 +163,7 @@ public class UserService {
                             .findById(expertid).orElse(null))
                     .collect(Collectors.toSet());
             experts1.retainAll(experts2);
+            experts1 = expertService.setExpertDistanceAndLikes(experts1);
             expertsIntersection = Lists.newArrayList(experts1);
         }
 
