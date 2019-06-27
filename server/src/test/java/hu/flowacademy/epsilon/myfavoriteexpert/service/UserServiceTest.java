@@ -142,12 +142,7 @@ public class UserServiceTest {
         user = userService.saveLanguage("EN");
         assertEquals(user.getLanguage(), "EN");
     }
-    @Test
-    public void findAllExperts_ShouldReturnExpertList() {
-        List<Expert> listOfExperts = userService.findAllExperts(id);
 
-
-    }
 
 
 }
