@@ -16,6 +16,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,10 +52,16 @@ public class UserServiceTest {
     private ExpertRepository expertRepository;
 
     @Mock
+    private ExpertService expertService;
+
+    @Mock
     private SecurityContext mockSecurityContext;
 
     User user;
     UUID id = UUID.randomUUID();
+
+    Expert expert = new Expert();
+    UUID expertId;
 
     @Mock
     private GeoCodingService geoCodingService;
@@ -67,7 +76,7 @@ public class UserServiceTest {
         UUID expertId = UUID.randomUUID();
         Expert expert = new Expert();
         expert.setId(expertId);
-
+        this.expertId= expertId;
         user.addExpert(expert.getId());
 
         Authentication auth = new UsernamePasswordAuthenticationToken(userPrincipal, null);
@@ -75,7 +84,8 @@ public class UserServiceTest {
 
         when(userRepository.save(any(User.class))).thenReturn(user);
         when(userRepository.findById(id)).thenReturn(java.util.Optional.ofNullable(user));
-       // when(expertRepository.findById(expertId)).thenReturn(java.util.Optional.of(expert));
+        when(expertRepository.findById(expertId)).thenReturn(java.util.Optional.of(expert));
+        when(expertService.setExpertDistanceAndLikes(any(Expert.class))).thenReturn(this.expert);
 
     }
 
@@ -166,7 +176,53 @@ public class UserServiceTest {
         assertEquals(userService.saveLanguage("EN"), testUser);
     }
 
+    @Test
+    public void findAllExpert_ShouldReturnEmptyList() {
+        user.setExperts(new ArrayList<>());
+        expert.setId(UUID.randomUUID());
+        user.addExpert(expert.getId());
+        assertEquals(userService.findAllExperts(user.getId()),List.of());
+    }
 
+    @Test()
+    public void findAllFollowers_ShouldReturnOneFollower() {
+        user.setFollowers(List.of(id));
+        assertEquals(userService.findFollowersByUser(),List.of(user));
+    }
+
+    @Test
+    public void findUserIntersection_ShouldReturnTheSameExpert() {
+        assertEquals(userService.findUsersExpertsIntersection(user.getId()),List.of());
+    }
+
+   @Test
+    public void findExpertByUserShouldReturnEmptyArray() {
+       Pageable pageable = PageRequest.of(0,1);
+       when(userRepository.findExpertsByUser("A",pageable)).thenReturn(Page.empty());
+       assertEquals(userService.findExpertsByUser("A"),List.of());
+   }
+
+   @Test
+    public void findExpertByUser_ShouldReturnExpert() {
+       Pageable pageable = PageRequest.of(0,1);
+       expert.setId(expertId);
+       when(userRepository.findExpertsByUser("B",pageable)).thenReturn(new PageImpl<>(List.of(user)));
+       assertEquals(userService.findExpertsByUser("B"),List.of(expert));
+   }
+
+   @Test
+    public void findBestMatchedUserByName_ShouldReturnListOf() {
+       Pageable pageable = PageRequest.of(0,1);
+       expert.setId(expertId);
+       when(userRepository.findBestMatchesUser("B",pageable)).thenReturn(new PageImpl<>(List.of(user)));
+       assertEquals(userService.findBestMatchedUserByName("B"),List.of(user));
+   }
+
+   @Test
+    public void findAllUser_ShouldReturnListOf() {
+       when(userRepository.findByIdNot(user.getId(),Pageable.unpaged())).thenReturn(new PageImpl<>(List.of()));
+        assertEquals(userService.find(),List.of());
+   }
 
 
 
