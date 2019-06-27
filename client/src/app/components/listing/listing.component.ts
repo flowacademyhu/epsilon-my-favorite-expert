@@ -136,7 +136,6 @@ export class ListingComponent implements OnInit {
   }
   loadMap() {
     this.isMapView = true;
-    console.log('AAAAAAAAAAA mapView' + this.isMapView);
   }
 
   isUserCommonButtonFiltered(user: User) {
@@ -233,7 +232,6 @@ export class ListingComponent implements OnInit {
     this.filter.expertSearchValue = this.keyWords;
     this.storeFilters();
     this.inputCharacterChanges++;
-    console.log(this.inputCharacterChanges);
     this.expertService.findExpertTestUsingGET(this.keyWords.replace(' ', '_')).subscribe((data: Expert[]) => {
       this.experts = data;
     });

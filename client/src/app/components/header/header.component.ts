@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
    
    switchLanguage(language: string) {
     this.userResource.saveLanguageUsingPOST(language).subscribe((user: User)=>{
-      console.log(user.language)
     });
    this.translate.use(language);
   }
@@ -36,7 +35,6 @@ export class HeaderComponent implements OnInit {
    this.appState.user = null;
    localStorage.removeItem('token');
   localStorage.clear();
-  console.log(localStorage.getItem('token'));
     this.router.navigate((['']));
   }
 }

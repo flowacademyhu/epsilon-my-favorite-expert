@@ -32,9 +32,6 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('en');
     this.activateRoute.queryParams.subscribe(params => {
       this.tokenParam = params['token'];
-      // van token localstorageba
-      console.log('localstorage getitem'+localStorage.getItem('token')+ !!localStorage.getItem('token'));
-      console.log('tokenparam'+ !!this.tokenParam);
       if (!!localStorage.getItem('token') || !!this.tokenParam) {
         if (!!this.tokenParam) {
           localStorage.setItem('token', params['token']);
@@ -59,8 +56,6 @@ export class AppComponent implements OnInit {
       this.appState.user = user;
       localStorage.setItem('user', JSON.stringify(user));
       if (!!user && !!user.language) {
-        console.log(user);
-        console.log(user.language);
         this.translate.use(user.language.toLowerCase());
       //  this.language.setLanguage(user.language.toLowerCase());
       //  console.log('beallitottam a nyelvet a user tabla alapjan');

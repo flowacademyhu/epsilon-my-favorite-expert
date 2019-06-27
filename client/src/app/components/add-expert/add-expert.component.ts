@@ -37,7 +37,6 @@ addProfession() {
 addExpert() {
     this.expert.profession.push(this.profession);
     this.expertService.addExpertUsingPOST(this.expert).subscribe((data: any) => {
-    console.log(data);
     this.expert.name = '';
     this.expert.address = <Address>{};
     this.expert.createdAt = new Date();
