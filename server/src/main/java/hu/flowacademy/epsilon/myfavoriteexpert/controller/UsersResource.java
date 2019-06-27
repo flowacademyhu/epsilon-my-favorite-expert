@@ -83,7 +83,7 @@ public class UsersResource {
         User user = userService.findByid();
         User follower = userService.findFollowerByid(followerid);
         if (user != null && follower!= null) {
-            user.addFollower(user.getId());
+            user.addFollower(follower.getId());
             follower.addFollowedBy(user.getId());
         }
         userService.save(follower);
