@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +9,15 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoginComponent implements OnInit {
   
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en');
+  constructor(private translate: TranslateService, private geolocation: GeolocationService) {
+    
    }
 
-   switchLanguage(language: string) {
-    this.translate.use(language);
-}
+  
 
   ngOnInit() {
+   
+
   }
 
 }

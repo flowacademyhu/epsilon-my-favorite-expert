@@ -1,0 +1,40 @@
+body{
+  background-color: #1e1e2f;
+  font-family: Poppins,sans-serif;
+
+}
+
+.card{
+  background-color: #27293d;
+  color: white;
+  box-shadow: 0 1px 20px 20px rgba(202, 21, 178, 0.1);
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+
+
+.favoriteExpert {
+  background-color: #363d80;
+}
+
+.userPicture {
+  max-width: 90% !important;
+}
+
+.btn{
+  background-color: rgb(151, 39, 151);
+  color: white ;
+  border-radius: 25px 25px 25px 25px;
+  margin-top: 20px;
+  min-width: 100%;
+} 
+
+.friend {
+  background-color: tomato;
+}
+.addFriendButton {
+  min-width: 100%;
+}

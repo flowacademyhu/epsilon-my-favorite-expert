@@ -1,2 +1,25 @@
-{{index.fullname}}
-{{index.street}}
+<div class="row">
+    <div class="col-12">
+<div class="card" [ngClass]="{friend: isFriend}">             
+        <div class="card-body">
+          <div class="userPicture">
+              <img class="col-10" alt="profile picture" [src]="user.imageUrl" />
+          </div>
+          <div class="logoName">{{ user.name}}
+          </div>
+          </div>
+          
+          
+          <button class="btn" (click)="getExperts()">{{'Experts' | translate}}</button>
+          
+          <button class="btn" (click)="commonExperts()">{{'Common experts' | translate}}</button>
+          
+          <div *ngIf="isFriend;else notFriend">
+            <button class="btn" (click)="removeFriend()">{{'Unsubscribe' | translate}}</button>
+            </div>
+            <ng-template class="addFriendButton" #notFriend>
+          <button class="btn" (click)="addFriend()">{{'Subscribe' | translate}}</button>            
+            </ng-template>
+  </div>
+</div>
+</div>

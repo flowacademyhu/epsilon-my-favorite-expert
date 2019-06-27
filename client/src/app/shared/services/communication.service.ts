@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Expert } from 'src/app/models/expert.model';
+import { Expert } from '../../api/model/expert';
+import { User } from 'src/app/api';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,11 @@ export class CommunicationService {
 
   public addExpertSubject = new Subject<Expert>();
   public removeExpertSubject = new Subject<Expert>();
+  public addFriendSubject = new Subject<User>();
+  public removeFriendSubject = new Subject<User>();
+  public commonFilterSubject = new Subject<User>();
+  public userExpertFilterSubject = new Subject<User>();
+
   constructor() { }
 
   public addToFavorite(expert: Expert) {
@@ -17,4 +23,20 @@ export class CommunicationService {
   public removeFromFavorite(expert: Expert) {
     this.removeExpertSubject.next(expert);
   }
+
+  public addFriend(user: User) {
+    this.addFriendSubject.next(user);
+  }
+  public removeFriend(user: User) {
+    this.removeFriendSubject.next(user);
+  }
+
+  public commonFilter(user: User) {
+    this.commonFilterSubject.next(user);
+  }
+
+  public userExpert(user: User) {
+    this.userExpertFilterSubject.next(user);
+  }
+
 }
