@@ -147,27 +147,24 @@ public class UserService {
         }
         throw new RuntimeException("ID INVALID");
     }
-    public List<Expert> findUsersExpertsIntersection(UUID id1) {
-        User user1 = userRepository.findById(id1).orElse(null);
-        User user2 = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
-        Set<Expert> experts1 = new HashSet<>();
-        Set<Expert> experts2;
-        List<Expert> expertsIntersection = new ArrayList<>();
-        if (user1 != null && user1.getExperts() != null && user2 != null && user2.getExperts() != null) {
-            experts1 = user1.getExperts().stream()
+    public List<Expert> findUsersExpertsIntersection(UUID id) {
+        User otherUser = userRepository.findById(id).orElse(null);
+        User currentUser = userRepository.findById(getCurrentUserId()).orElseThrow(RuntimeException::new);
+        if (otherUser != null && otherUser.getExperts() != null && currentUser != null && currentUser.getExperts() != null) {
+            var experts1 = otherUser.getExperts().stream()
                     .map(expertid -> expertRepository
                             .findById(expertid).orElse(null))
                     .collect(Collectors.toSet());
-            experts2 = user2.getExperts().stream()
+            var experts2 = currentUser.getExperts().stream()
                     .map(expertid -> expertRepository
                             .findById(expertid).orElse(null))
                     .collect(Collectors.toSet());
             experts1.retainAll(experts2);
             experts1 = expertService.setExpertDistanceAndLikes(experts1);
-            expertsIntersection = Lists.newArrayList(experts1);
+            return Lists.newArrayList(experts1);
         }
 
-        return expertsIntersection;
+        return List.of();
     }
     public List<User> findFollowersByUser() {
         var followers = findByid()

@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 @Service
 public class GeoCodingService {
     private final String BASE_URI = "https://nominatim.openstreetmap.org/search?";
+    private final Integer EARTH_RADIUS = 6371;
 
     public Location getGeoCoding(Address address) {
         HttpClient client = HttpClientBuilder.create().build();
@@ -74,16 +75,15 @@ public class GeoCodingService {
 
     public Long distance(Location startingLoc, Location endLocation) {
         if (startingLoc.getLon() == null || endLocation.getLon() == null) {
-            //return Long.MAX_VALUE;
             throw new RuntimeException("Location is not valid");
         }
-        final Integer EARTHRADIUS = 6371;
+
         Double latDistance = Math.toRadians(endLocation.getLat() - startingLoc.getLat());
         Double lonDistance = Math.toRadians(endLocation.getLon() - startingLoc.getLon());
         Double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
                 + Math.cos(Math.toRadians(startingLoc.getLat())) * Math.cos(Math.toRadians(endLocation.getLat()))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         Double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return ((Double)(EARTHRADIUS * c * 1000)).longValue();
+        return ((Double)(EARTH_RADIUS * c * 1000)).longValue();
     }
 }
