@@ -1,46 +1,28 @@
-.masthead {
-    height: 100vh;
-    min-height: 500px;
-    background-image: url('src/assets/image/background4.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    font-family: 'Fredoka One', cursive;
-    font-size: 30px;
-    color: #fff;
-   
-    opacity: 0.9;
-    
-    }
-    
-    .navbar{
-    font-family: 'Fredoka One', cursive;
-    background-color:orange;
-    font-size: 20px;
-    height: 80px;
-    box-shadow: 0 20px 10px 5px black;
-    }
-    
-    .font-weight-light{
-    font-size: 60px;
-    font-weight: bold
-    }
+body{
+    background-color: #1e1e2f;
+    font-family: Poppins,sans-serif;
+  }
+  
+  .navbar{
+      background-color: transparent;
+      
+      font-size: 20px;
+  }
+  
+  .navbar-brand{
+    color:  white !important;
+  }
+  
+  .nav-link{
+      color:  white !important;
+  }
+  
+  .card{
+    background-color: #27293d;
+    color: white;
+    box-shadow: 0 1px 20px 20px rgba(202, 21, 178, 0.1);
+  }
 
-    .card-body{
-        background-color: orange;
-    }
 
-    .card{
-        border-color: black;
-        font-size: 20px;
-        box-shadow: 0 20px 10px 5px black;
-        color: black;
-    }
 
-    .btn{
-       margin-right: 15px
-    }
-
-    .py-5{
-        background-color: orange;
-    }
+  

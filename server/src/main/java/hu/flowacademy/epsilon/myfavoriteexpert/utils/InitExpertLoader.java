@@ -3,9 +3,11 @@ package hu.flowacademy.epsilon.myfavoriteexpert.utils;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Address;
 import hu.flowacademy.epsilon.myfavoriteexpert.model.Expert;
 import hu.flowacademy.epsilon.myfavoriteexpert.repository.ExpertRepository;
+import hu.flowacademy.epsilon.myfavoriteexpert.service.ExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -19,11 +21,15 @@ import java.util.UUID;
 public class InitExpertLoader implements CommandLineRunner {
 
     @Autowired
+    private ExpertService expertService;
+
+    @Autowired
     private ExpertRepository expertRepository;
 
     @Override
     public void run(String... args) throws Exception {
 
+        if (expertRepository.findAll(Pageable.unpaged()).getContent().isEmpty()) {
         InputStream input = new ClassPathResource(
                 "expertloader.txt").getInputStream();
         try (BufferedReader reader = new BufferedReader(
@@ -46,8 +52,9 @@ public class InitExpertLoader implements CommandLineRunner {
                 expert.setAddress(address);
 
 
-                expertRepository.save(expert);
+                expertService.saveInitExpert(expert);
             });
+        }
 
         }
     }

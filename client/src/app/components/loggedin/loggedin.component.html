@@ -1,56 +1,39 @@
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-    <a class="navbar-brand" href="#">{{'Title' | translate }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" routerLink='../../profile'>Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink='../../add'>Add expert</a>
-        </li>   
-    <li class="nav-item active">
-    <a class="nav-link" href="#">{{'Connect' | translate }}
-    <span class="sr-only">(current)</span>
-    </a>
-    <li class="nav-item">
-    <a class="nav-link" href="#">{{'Logout' | translate }}</a>
-    </li>
-    
-    <li class="nav-item">
-    <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
-    </li>
-    <li class="nav-item">
-    <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
-    </li>
-    </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <!--profile card-->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <h5>{{ user.name }}</h5>
+          </div>
+          <div class="card-body">
+            <h6>{{ user.email }}</h6>
+            <div *ngIf="!isAddressBlank()">
+              <h6>
+                {{ user.address.country }}, {{ user.address.city }}
+                {{ user.address.street }} {{ user.address.number }}
+              </h6>
+            </div>
+            <h6>{{ user.language }}</h6>
+          </div>
+        </div>
+      </div>
+      <!--profile card-->
     </div>
+    <div class="col-12 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div *ngIf="isFavoriteExpertLoaded">
+            <ng-container>
+              <app-map
+                [experts]="favoriteExperts"
+                [mapZoom]="mapZoom"
+              ></app-map>
+            </ng-container>
+          </div>
+        </div>
+      </div>
     </div>
-    </nav>
-    
-    <!-- Full Page Image Header with Vertically Centered Content -->
-    <header class="masthead {
-      background: rgba(0, 0, 0, 0.5);
-    }">
-    <div class="container h-100">
-    <div class="row h-100 align-items-center">
-    <div class="col-12 text-center">
- 
-  <!-- Full Page Image Header with Vertically Centered Content -->
-  <header class="masthead">
-  <div class="container h-100">
-  <div class="row h-100 align-items-center">
-  <div class="col-12 text-center">
-    <h1 translate></h1>
-  <p class="lead">Welcome</p>
-  <ul>
-      
-  </ul>
   </div>
-  </div>
-  </div>
-  </header>
+</div>

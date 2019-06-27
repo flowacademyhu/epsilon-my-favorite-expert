@@ -1,0 +1,21 @@
+.navbar{
+    background-color: transparent;
+    
+    font-size: 20px;
+}
+
+.navbar-brand{
+  color:  white !important;
+}
+
+.nav-link{
+    color:  white !important;
+}
+
+button, html [type=button] {
+  -webkit-appearance: button;
+}
+
+.navbar-toggler:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}

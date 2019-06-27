@@ -10,13 +10,17 @@
  * Do not edit the class manually.
  */
 import { Address } from './address';
+import { Location } from './location';
 
 
 export interface Expert { 
     address?: Address;
     createdAt?: Date;
     deletedAt?: Date;
+    distanceMeter?: number;
     id?: string;
+    likes?: number;
+    location?: Location;
     name?: string;
     phone?: string;
     profession?: Array<string>;

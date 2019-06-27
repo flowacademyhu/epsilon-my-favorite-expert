@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { Address } from '../model/address';
+import { Expert } from '../model/expert';
 import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -106,6 +107,60 @@ export class UsersResourceService {
     }
 
     /**
+     * addFollowerToUser
+     * 
+     * @param followerid followerid
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addFollowerToUserUsingPUT(followerid: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public addFollowerToUserUsingPUT(followerid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public addFollowerToUserUsingPUT(followerid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public addFollowerToUserUsingPUT(followerid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (followerid === null || followerid === undefined) {
+            throw new Error('Required parameter followerid was null or undefined when calling addFollowerToUserUsingPUT.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (followerid !== undefined && followerid !== null) {
+            queryParameters = queryParameters.set('followerid', <any>followerid);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.put<User>(`${this.basePath}/user/follow`,
+            null,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * deleteExpertFromUser
      * 
      * @param expertid expertid
@@ -144,6 +199,254 @@ export class UsersResourceService {
 
         return this.httpClient.delete<User>(`${this.basePath}/user/${encodeURIComponent(String(expertid))}`,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * deleteFollowerFromUser
+     * 
+     * @param followerid followerid
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteFollowerFromUserUsingDELETE(followerid: string, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public deleteFollowerFromUserUsingDELETE(followerid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public deleteFollowerFromUserUsingDELETE(followerid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public deleteFollowerFromUserUsingDELETE(followerid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (followerid === null || followerid === undefined) {
+            throw new Error('Required parameter followerid was null or undefined when calling deleteFollowerFromUserUsingDELETE.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (followerid !== undefined && followerid !== null) {
+            queryParameters = queryParameters.set('followerid', <any>followerid);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.delete<User>(`${this.basePath}/user/follow`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findAllExpertOfUser
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findAllExpertOfUserUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
+    public findAllExpertOfUserUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
+    public findAllExpertOfUserUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
+    public findAllExpertOfUserUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling findAllExpertOfUserUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<Expert>>(`${this.basePath}/user/experts/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findExpertsByUsers
+     * 
+     * @param searchparams searchparams
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
+    public findExpertsByUsersUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (searchparams === null || searchparams === undefined) {
+            throw new Error('Required parameter searchparams was null or undefined when calling findExpertsByUsersUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (searchparams !== undefined && searchparams !== null) {
+            queryParameters = queryParameters.set('searchparams', <any>searchparams);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<Expert>>(`${this.basePath}/user/expert`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findFollowersByUsers
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findFollowersByUsersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public findFollowersByUsersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public findFollowersByUsersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public findFollowersByUsersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<User>>(`${this.basePath}/user/followers`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findUsersExpertsUnion
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findUsersExpertsUnionUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Expert>>;
+    public findUsersExpertsUnionUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Expert>>>;
+    public findUsersExpertsUnionUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Expert>>>;
+    public findUsersExpertsUnionUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling findUsersExpertsUnionUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (id !== undefined && id !== null) {
+            queryParameters = queryParameters.set('id', <any>id);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<Expert>>(`${this.basePath}/user/expertsintersect`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -332,6 +635,59 @@ export class UsersResourceService {
         return this.httpClient.post<User>(`${this.basePath}/user/language`,
             language,
             {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * SearchUserWithQuery
+     * 
+     * @param searchparams searchparams
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'body', reportProgress?: boolean): Observable<Array<User>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<User>>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<User>>>;
+    public searchUserWithQueryUsingGET(searchparams: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (searchparams === null || searchparams === undefined) {
+            throw new Error('Required parameter searchparams was null or undefined when calling searchUserWithQueryUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (searchparams !== undefined && searchparams !== null) {
+            queryParameters = queryParameters.set('searchparams', <any>searchparams);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (JWT) required
+        if (this.configuration.apiKeys["Authorization"]) {
+            headers = headers.set('Authorization', this.configuration.apiKeys["Authorization"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Array<User>>(`${this.basePath}/user/search`,
+            {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -1,10 +1,10 @@
-Csúri László;gázvezeték szerelő;+36303304880;Magyarország; Szeged;Fő utca; 4
-Nagy Márton;szobafestő;+36202233145;Magyarország; Szeged;Béke utca; 19
-Kiss Béla;ács;+36209642634;Magyarország; Szeged;Felszabadulás utca; 26
-Kovács András;mindenes;+36708352167;Magyarország; Szeged;Szőlő utca; 75
-Tülkös József Márton;kárpitos;+36705623491;Magyarország; Szeged;Kossuth utca; 31
-Szabó Imre;hentes;+36304382763;Magyarország; Szeged;Mars tér; 2
-Sass Ádám;közjegyző;+367083526743;Magyarország; Szeged;Széchenyi tér; 7
-Kiss Tünde;tolmács;+36306743826;Magyarország; Szeged;Tímár utca; 21
-Orosz Nóra;fodrász;+36703526732;Magyarország; Szeged;Nemestakács utca; 3
-Nagy Izabella;kozmetikus;+36205374982;Magyarország; Szeged;Bécsi körút; 6
+Csúri László;gázvezeték szerelő;+36303304880;Magyarország;Szeged;Tárogató utca;12
+Nagy Márton;szobafestő;+36202233145;Magyarország;Szeged;Kenyérgyári út;19
+Kiss Béla;ács;+36209642634;Magyarország;Szeged;Kátay utca;24
+Kovács András;mindenes;+36708352167;Magyarország;Budapest;Hegyalja út;13
+Tülkös József Márton;kárpitos;+36705623491;Magyarország;Budapest;Lajos utca;160
+Szabó Imre;hentes;+36304382763;Magyarország;Budapest;Bécsi út;223
+Sass Ádám;közjegyző;+367083526743;Magyarország;Debrecen;Péterfia utca;30
+Kiss Tünde;tolmács;+36306743826;Magyarország;Debrecen;Karabély utca;3
+Orosz Nóra;fodrász;+36703526732;Magyarország;Debrecen;Balaton utca;127
+Nagy Izabella;kozmetikus;+36205374982;Magyarország;Szeged;Makai út;204

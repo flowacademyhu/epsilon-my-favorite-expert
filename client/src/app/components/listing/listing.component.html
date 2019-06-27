@@ -1,50 +1,121 @@
-<div class="masthead">
-    <div class="overlay">
-  
-      <div id="f1_container">
-  
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-    <a class="navbar-brand" href="#">{{'Title' | translate}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" routerLink='../profile'>Profil</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink='../add'>Add expert</a>
-        </li>   
-    <li class="nav-item active">
-    <a class="nav-link" href="#">{{'Connect' | translate}}
-    <span class="sr-only">(current)</span>
-    </a>
-    <li class="nav-item">
-    <a class="nav-link" href="#">{{'Logout' | translate}}</a>
-    </li>
-    <li class="nav-item">
-    <input type="image" src="/assets/image/hungary.svg" (click)="switchLanguage('hu')" class="btn" />
-    </li>
-    <li class="nav-item">
-    <input type="image" src="/assets/image/english.svg" (click)="switchLanguage('en')" class="btn" />
-    </li>
-    <li class="nav-item">
-      <button (click)="getFavoriteExperts()">Favorite experts</button>
-      </li>
-      <li class="nav-item">
-        <button (click)="getAllExperts()">All experts</button>
-        </li>
-    </ul>
-    </div>
-    </div>
-    </nav>
-  </div>
-  <div class="flex">
-    <div  *ngFor="let expert of experts">
-      <app-expert  [expert]="expert" [isFavoriteExpert]="isFavoriteExpert(expert)"></app-expert>
-    </div>
+<div class=" ">
+  <div class="row">
+    <div class="col-12">
+      <ul class="listingCSS">
+        <div>
+          <button class="button" (click)="switchToMap()">
+            {{ "Map" | translate }}
+          </button>
+        </div>
+        
+        <div class="listingCSS" *ngIf="!isMapView">
+          <div>
+            <button class="button" (click)="getFavoriteExperts()">
+              {{ "Favorite experts" | translate }}
+            </button>
+          </div>
+          <div>
+            <button class="button" (click)="getAllExperts()">
+              {{ "All experts" | translate }}
+            </button>
+          </div>
+
+          <div>
+            <button class="button" (click)="sortByNameASC()">{{ "Order A-Z" | translate }}</button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByNameDESC()">{{ "Order Z-A" | translate }}</button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByDistanceASC()">
+              {{ "Distance A_Z" | translate }}
+            </button>
+          </div>
+          <div>
+            <button class="button" (click)="sortByDistanceDESC()">
+              {{ "Distance Z-A" | translate }}
+            </button>
+          </div>
+        </div>
+        <div>
+          <button class="button" (click)="clearFilters()">
+            {{ "Clear filters" | translate }}
+          </button>
+        </div>
+      </ul>
     </div>
   </div>
-  
+</div>
+<div class="inputField" *ngIf="!isMapView">
+  <input
+    id="searchinput"
+    type="text"
+    name="find"
+    [(ngModel)]="keyWords"
+    (ngModelChange)="keyWordtextChanged()"
+    list="expertSuggestions"
+    autofocus
+  />
+  <datalist id="expertSuggestions">
+    <option *ngFor="let item of suggestTerm">{{ item }}</option>
+  </datalist>
+</div>
+<div *ngIf="isMapView && isExpertListLoaded; else expertList">
+  <ng-container>
+    <app-map [experts]="experts" [mapZoom]="mapZoom"></app-map>
+  </ng-container>
+</div>
+<ng-template #expertList>
+  <div class="displayData">
+    <div class="expertList">
+      <div *ngFor="let expert of experts">
+        <app-expert
+          [expert]="expert"
+          [isFavoriteExpert]="isFavoriteExpert(expert)"
+        ></app-expert>
+      </div>
+    </div>
+
+    <!-- <div>
+        <p>asd</p>
+        <p>asdsaaa</p>
+      </div>
+      <div>
+          <p>asd</p>
+          <p>asdsaaa</p>
+        </div> -->
+    <div class="userList">
+      <br />
+      <div>
+        <button class="btn" (click)="getAllUser()">
+          {{ "All users" | translate }}
+        </button>
+        <button class="btn" (click)="getFriends()">
+          {{ "Friends" | translate }}
+        </button>
+        <button class="btn" (click)="getAllFriendsExperts()">
+          {{ "My friends experts" | translate }}
+        </button>
+      </div>
+      <div class="searchinputForUsers">
+        <input
+          id="searchinputForUsers"
+          type="text"
+          name="findUsers"
+          [(ngModel)]="keyWordsUserSearch"
+          (ngModelChange)="userKeyWordtextChanged()"
+          list="expertSuggestions"
+        />
+      </div>
+      <div *ngFor="let user of users">
+        <app-user
+          [isUserFavoriteFilterActive]="isUserFriendsFiltered(user)"
+          [isUserCommonFilterActive]="isUserCommonButtonFiltered(user)"
+          [user]="user"
+          [isFriend]="isFriend(user)"
+          (sendUserExperts)="handleIncomingExperts($event)"
+        ></app-user>
+      </div>
+    </div>
+  </div>
+</ng-template>
