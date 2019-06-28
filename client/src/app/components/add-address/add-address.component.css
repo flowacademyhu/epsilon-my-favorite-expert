@@ -4,3 +4,10 @@ h5{
 p{
     color: red;
 }
+small {
+    color: red;
+  }
+.fix-height {
+    height: 20px;
+  }
+  

@@ -1,18 +1,14 @@
 <div class=" ">
   <div class="row">
     <div class="col-12">
-      <ul class="andorCSSAnitaMajdKijavitja">
+      <ul class="listingCSS">
         <div>
           <button class="button" (click)="switchToMap()">
             {{ "Map" | translate }}
           </button>
         </div>
-        <div>
-          <button class="button" (click)="clearFilters()">
-            {{ "Clear filters" | translate }}
-          </button>
-        </div>
-        <div class="andorCSSAnitaMajdKijavitja" *ngIf="!isMapView">
+        
+        <div class="listingCSS" *ngIf="!isMapView">
           <div>
             <button class="button" (click)="getFavoriteExperts()">
               {{ "Favorite experts" | translate }}
@@ -25,10 +21,10 @@
           </div>
 
           <div>
-            <button class="button" (click)="sortByNameASC()">A-Z</button>
+            <button class="button" (click)="sortByNameASC()">{{ "Order A-Z" | translate }}</button>
           </div>
           <div>
-            <button class="button" (click)="sortByNameDESC()">Z-A</button>
+            <button class="button" (click)="sortByNameDESC()">{{ "Order Z-A" | translate }}</button>
           </div>
           <div>
             <button class="button" (click)="sortByDistanceASC()">
@@ -40,6 +36,11 @@
               {{ "Distance Z-A" | translate }}
             </button>
           </div>
+        </div>
+        <div>
+          <button class="button" (click)="clearFilters()">
+            {{ "Clear filters" | translate }}
+          </button>
         </div>
       </ul>
     </div>

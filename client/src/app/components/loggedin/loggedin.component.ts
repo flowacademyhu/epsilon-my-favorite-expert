@@ -57,8 +57,6 @@ export class LoggedinComponent implements OnInit {
     .subscribe(([currentUser, experts]) => {
       this.user = currentUser;
       this.favoriteExperts = experts;
-      console.log('favoriteExpertLength' + experts.length);
-      console.log('isFavoriteExpertLoaded' + this.isFavoriteExpertLoaded);
       this.isFavoriteExpertLoaded = true;
     });
   }
@@ -67,7 +65,6 @@ export class LoggedinComponent implements OnInit {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.removeFromFavorite(this.expert);
    this.userResources.deleteExpertFromUserUsingDELETE(this.expert.id).subscribe((data: any) => {
-        console.log('sikeresen torolve');
       });
 
   }

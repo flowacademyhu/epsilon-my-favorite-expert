@@ -29,8 +29,12 @@ body{
   color: white ;
   border-radius: 25px 25px 25px 25px;
   margin-top: 20px;
+  min-width: 100%;
 } 
 
 .friend {
-  background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+  background-color: tomato;
+}
+.addFriendButton {
+  min-width: 100%;
 }

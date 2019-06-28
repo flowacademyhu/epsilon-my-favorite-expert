@@ -19,11 +19,11 @@
                         &#11088; {{expert.likes}}
                     </div>
                   </div>
-                  <div *ngIf="isFavoriteExpert">
+                  <div class="IsfavoriteButton" *ngIf="isFavoriteExpert">
                   <!-- <a href="#" class="round-shape name"> Add to favorite </a> -->
                   <button class="btn" (click)="removeFromFavorite()">{{'Remove From Favorite' | translate}}</button>
                   </div>
-                  <div *ngIf="!isFavoriteExpert">
+                  <div class="IsfavoriteButton" *ngIf="!isFavoriteExpert">
                   <button class="btn" (click)="addToFavorite()">{{'Add to Favorite' | translate}}</button>
             </div>
           </div>
