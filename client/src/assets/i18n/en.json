@@ -42,9 +42,12 @@
   "My friends experts": "My friends' experts",
   "Add Friend": "Add Friend",
   "Clear filters": "Clear filters",
-  "Unsubscribe": "Unfollow",
-  "Subscribe": "Follow",
+  "Subscribed users experts": "Subscribed users' experts",
+  "Unsubscribe": "Unsubscribe",
+  "Subscribe": "Subscribe",
+  "Are you looking for a responsible handyman? You are in the right place. Browse your friends favorite experts and find ones suits you the best.": "Are you looking for a responsible handyman? You are in the right place. Browse your friends favorite experts and find ones suits you the best.",
   "All experts": "All experts",
   "Order A-Z": "Order A-Z",
-  "Order Z-A": "Order Z-A"
+  "Order Z-A": "Order Z-A",
+  "Valid input": "Valid input"
 }

@@ -16,7 +16,8 @@ export class AddAddressComponent implements OnInit {
   private _success = new Subject<string>();
   staticAlertClosed = false;
   successMessage: string;
-  address : Address;
+  address: Address;
+  navigate = false;
   constructor(private usersService: UsersResourceService,
     private router: Router) { 
     this.address = <Address>{};
@@ -26,9 +27,12 @@ export class AddAddressComponent implements OnInit {
     this.fillAddressFields();
   }
 
-  addAddress(){
+  addAddress() {
     this.usersService.saveAddressUsingPOST(this.address).subscribe((data: User) => {
-    }, (error) => {
+    this.router.navigate(['/profile']);
+    },
+    (error) => {
+      this.navigate = false;
       setTimeout(() => this.staticAlertClosed = true, 4000);
       this._success.subscribe((message) => this.successMessage = message);
       this._success.pipe(

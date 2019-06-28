@@ -8,44 +8,56 @@
         <h5>{{'Country' | translate}}:</h5>
         <input class="form-control"
           type="text"
+          size="25"
           name="country"
           #RefCountry="ngModel"
           [(ngModel)]="address.country"
           minlength=4 maxlength=15 required>
-          <div *ngIf="RefCountry.invalid && RefCountry.touched">
-            <p>{{'required' | translate}}</p></div>
+          <div class="fix-height">
+              <div class="heightsetup" *ngIf="RefCountry.invalid && RefCountry.touched">
+                <small>{{'required' | translate}}</small></div>
+          </div>
         <h5>{{'City' | translate}}:</h5>
         <input
           class="form-control"
           type="text"
+          size="25"
           name="city"
           #RefCity="ngModel"
           [(ngModel)]="address.city"
           minlength=4 maxlength=15 required>
-          <div *ngIf="RefCity.invalid && RefCity.touched">
-            <p>{{'required' | translate}}</p></div>
+          <div class="fix-height">
+            <div class="heightsetup" *ngIf="RefCity.invalid && RefCity.touched">
+              <small>{{'required' | translate}}</small></div>
+        </div>
         <h5>{{'Street' | translate}}:</h5>
         <input
           class="form-control"
           type="text"
+          size="25"
           name="street"
           #RefStreet="ngModel"
           [(ngModel)]="address.street"
           minlength=4 maxlength=45 required>
-          <div *ngIf="RefStreet.invalid && RefStreet.touched">
-            <p>{{'requiredLong' | translate}}</p></div>
+          <div class="fix-height">
+            <div class="heightsetup" *ngIf="RefStreet.invalid && RefStreet.touched">
+              <small>{{'requiredLong' | translate}}</small></div>
+        </div>
         <h5>{{'House number' | translate}}:</h5>
         <input
           class="form-control"
           type="text"
+          size="25"
           name="number"
           #RefNumber="ngModel"
           [(ngModel)]="address.number"
           minlength=1 maxlength=15 required>
-          <div *ngIf="RefNumber.invalid && RefNumber.touched">
-            <p>{{'requiredNumber' | translate}}</p></div>
+          <div class="fix-height">
+            <div class="heightsetup" *ngIf="RefNumber.invalid && RefNumber.touched">
+              <small>{{'requiredNumber' | translate}}</small></div>
+        </div>
         <br>
-        <button type="button" name="save" class="btn btn-light" (click)="addAddress()" >{{'Add address' | translate}}</button>
+        <button type="button" name="save" class="btn btn-light" (click)="addAddress()">{{'Add address' | translate}}</button>
         <div *ngIf="showAlert">
           <br>
           <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{'Invalid address' | translate}}</ngb-alert>
