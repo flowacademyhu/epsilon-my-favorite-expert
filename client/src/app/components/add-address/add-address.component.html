@@ -57,7 +57,7 @@
               <small>{{'requiredNumber' | translate}}</small></div>
         </div>
         <br>
-        <button type="button" name="save" class="btn btn-light" (click)="addAddress()" routerLink="/profile">{{'Add address' | translate}}</button>
+        <button type="button" name="save" class="btn btn-light" (click)="addAddress()">{{'Add address' | translate}}</button>
         <div *ngIf="showAlert">
           <br>
           <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{'Invalid address' | translate}}</ngb-alert>
