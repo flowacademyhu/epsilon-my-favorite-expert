@@ -92,7 +92,7 @@
       <div *ngIf="expert.profession.length > 0">
       <div *ngFor="let prof of expert.profession">
         <p id="paragraph">
-         - {{prof}}
+         {{prof}}
         </p>
       </div>
     </div>
@@ -106,7 +106,7 @@
         [(ngModel)]="expert.phone"
         minlength=4 maxlength=25 required>
         <div class="fix-height">
-            <div class="heightsetup" *ngIf="RefPhone.invalid && RefPhone.touched; else spacek">
+            <div class="heightsetup" *ngIf="RefPhone.invalid && RefPhone.touched">
               <small>{{'required' | translate}}</small></div>
         </div>
       <button type="button" name="save" class="btn btn-light" (click)="addExpert()">{{ 'Add expert' | translate}}</button>

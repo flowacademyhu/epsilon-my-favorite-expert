@@ -4,6 +4,9 @@ h5{
 small {
   color: red;
 }
+p {
+  color: white;
+}
 input {
   min-width: 100%;
   max-width: 100%;
