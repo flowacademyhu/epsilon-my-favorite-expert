@@ -1,16 +1,10 @@
-body{
-  background-color: #1e1e2f;
-  font-family: Poppins,sans-serif;
-
-}
-
 
 .nav-link{
     color:  white !important;
 }
 
 .card{
-  background-color: #27293d;
+  background-color: #1F3044;
   color: white;
   box-shadow: 0 1px 20px 20px rgba(202, 21, 178, 0.1);
   margin-top: 20px;
@@ -20,12 +14,12 @@ body{
   max-width: 300px;
   max-height: 300px;
   min-height: 300px;
-  border: 10px;
-  border-color: #6ed3cf;
+ 
 }
 
 .favoriteExpert {
-  background-color: tomato;
+  border-color: tomato !important;
+  border-width: 3px !important;
 }
 
 .btn {
@@ -34,3 +28,4 @@ body{
  
   border-radius: 25px 25px 25px 25px;
 }
+

@@ -1,0 +1,22 @@
+img{
+    border-radius: 50%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    width: 60%;
+    
+}
+
+p{
+    color: white;
+    font-size: 30px;
+    font-family: Poppins,sans-serif;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    
+}

@@ -4,6 +4,7 @@
     <a class="navbar-brand" href="#">Favorite Expert</a>
     <button
       class="navbar-toggler"
+      (click)="toggleNavbar = !toggleNavbar" 
       type="button"
       data-toggle="collapse"
       data-target="#navbarNav"
@@ -13,7 +14,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="toggleNavbar">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item active" *ngIf="!(state.user$ | async)">
           <a
