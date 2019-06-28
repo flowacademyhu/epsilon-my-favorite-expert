@@ -19,7 +19,7 @@ import { RequestinterceptorService } from './requestinterceptor.service';
 import { FormsModule } from '@angular/forms';
 import { AddAddressComponent } from './components/add-address/add-address.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
-
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchUserComponent } from './components/listing/search-user/search-user.component';
 import { MapComponent } from './shared/map/map.component';
@@ -45,6 +45,7 @@ import { MapComponent } from './shared/map/map.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbCollapseModule,
     ApiModule.forRoot(getConfig),
     FormsModule,
     NgbModule,

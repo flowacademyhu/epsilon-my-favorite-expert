@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   user: User;
 
+  toggleNavbar = true;
+
   constructor(private translate: TranslateService, private appState: AppStateService, private geolocation: GeolocationService,
     private userResource: UsersResourceService,
     private router: Router) {
