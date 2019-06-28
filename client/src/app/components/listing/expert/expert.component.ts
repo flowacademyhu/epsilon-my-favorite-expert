@@ -26,7 +26,6 @@ export class ExpertComponent implements OnInit {
     this.isFavoriteExpert = !this.isFavoriteExpert;
    this.communicationService.removeFromFavorite(this.expert);
    this.userService.deleteExpertFromUserUsingDELETE(this.expert.id).subscribe((data: any) => {
-        console.log('sikeresen torolve');
       });
 
   }
@@ -35,7 +34,6 @@ export class ExpertComponent implements OnInit {
    this.communicationService.addToFavorite(this.expert);
      this.userService.addExpertToUserUsingPUT(this.expert.id).subscribe(
       (data: any) => {
-        console.log('sikeresen hozzaadva a kedvencekhez');
       }
     );
   }

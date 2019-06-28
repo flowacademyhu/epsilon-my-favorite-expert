@@ -27,8 +27,5 @@ public interface UserRepository extends ElasticsearchCrudRepository<User, UUID> 
 
     Page<User> findByIdNot(UUID id, Pageable pageable);
 
-//    @Query("{\"match\":{\"experts\": \"?0\"}}")
-//    List<User> numberOfLikes(UUID id);
-
     Integer countByExperts(UUID id);
 }
